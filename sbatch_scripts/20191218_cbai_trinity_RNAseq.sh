@@ -71,10 +71,10 @@ R2_list=$(echo "${R2_array[@]}" | tr " " ",")
 
 # Run Trinity
 ${trinity_dir}/Trinity \
---trimmomatic \
 --seqType fq \
 --max_memory 500G \
 --CPU ${threads} \
+--SS_lib_type RF \
 --left \
 "${R1_list}" \
 --right \
