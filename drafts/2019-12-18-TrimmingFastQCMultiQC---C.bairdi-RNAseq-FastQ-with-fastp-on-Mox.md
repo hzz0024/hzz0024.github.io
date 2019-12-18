@@ -172,3 +172,16 @@ Took ~40 minutes to complete:
 Output folder:
 
 - [20191218_cbai_fastp_RNAseq_trimming](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_fastp_RNAseq_trimming)
+
+
+MultiQC Report (HTML):
+
+- [20191218_cbai_fastp_RNAseq_trimming/multiqc_report.html](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_fastp_RNAseq_trimming/multiqc_report.html)
+
+
+Overall, the data looks fine. There's a high degree of sequence duplication, but this is expected when dealing with RNAseq libraries.
+
+One really nice aspect of using [fastp](https://github.com/OpenGene/fastp) is that it generates HTML reports for each file trimmed, and the reports include before and after data/plots. There's almost no need for FastQC. With that said, MultiQC only doesn't recognize the [fastp](https://github.com/OpenGene/fastp) reports, but _does_ recognize the FastQC reports. Have the aggregated report of all files that MultiQC is _very_ nice for looking at all the data at one time.
+
+
+Will proceed with Trinity _de novo_ assembly.
