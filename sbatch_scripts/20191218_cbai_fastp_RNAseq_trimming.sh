@@ -79,7 +79,6 @@ do
 done
 
 # Create list of fastq files used in analysis
-## Uses parameter substitution to strip leading path from filename
 for fastq in *.gz
 do
   echo "${fastq}" >> fastq.list.txt
