@@ -87,6 +87,7 @@ done
 # Run fastp on files
 for index in "${!fastq_array_R1[@]}"
 do
+	timestamp=$(date +%Y%m%d%M%S)
   R1_sample_name=$(echo "${R1_names_array[index]}")
 	R2_sample_name=$(echo "${R2_names_array[index]}")
 	${fastp} \
@@ -94,8 +95,8 @@ do
 	--in2 "${fastq_array_R2[index]}" \
 	--detect_adapter_for_pe \
 	--thread ${threads} \
-	--out1 "${R1_sample_name}".fastp-trim.fq.gz \
-	--out2 "${R2_sample_name}".fastp-trim.fq.gz
+	--out1 "${R1_sample_name}".fastp-trim.${timestamp}.fq.gz \
+	--out2 "${R2_sample_name}".fastp-trim.${timestamp}.fq.gz
 	# Remove original FastQ files
 	rm "${fastq_array_R1[index]}" "${fastq_array_R2[index]}"
 done
