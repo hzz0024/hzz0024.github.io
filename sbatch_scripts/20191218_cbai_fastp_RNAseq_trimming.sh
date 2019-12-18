@@ -42,10 +42,6 @@ echo "${PATH}" | tr : \\n
 # Set number of CPUs to use
 threads=27
 
-# Input/output/directories
-
-fastq_dir=/gscratch/srlab/sam/data/C_bairdi/RNAseq
-
 # Paths to programs
 fastp=/gscratch/srlab/programs/fastp-0.20.0/fastp
 
