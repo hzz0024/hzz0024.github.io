@@ -15,7 +15,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=samwhite@uw.edu
 ## Specify the working directory for this job
-#SBATCH --workdir=gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAseq
+#SBATCH --chdir=/gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAseq
 
 # Exit script if a command fails
 set -e
@@ -71,7 +71,7 @@ R1_list=$(echo "${R1_array[@]}" | tr " " ",")
 R2_list=$(echo "${R2_array[@]}" | tr " " ",")
 
 
-# Run Trinity
+# Run Trinity using "stranded" setting (--SS_lib_type)
 ${trinity_dir}/Trinity \
 --seqType fq \
 --max_memory 500G \
