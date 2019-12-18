@@ -84,7 +84,7 @@ do
   echo "${fastq}" >> fastq.list.txt
 done
 
-# Run fastp on files and trim set number of nucleotides from 5' end of reads
+# Run fastp on files
 for index in "${!fastq_array_R1[@]}"
 do
   R1_sample_name=$(echo "${R1_names_array[index]}")
