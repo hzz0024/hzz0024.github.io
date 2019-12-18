@@ -75,10 +75,8 @@ ${trinity_dir}/Trinity \
 --max_memory 500G \
 --CPU ${threads} \
 --SS_lib_type RF \
---left \
-"${R1_list}" \
---right \
-"${R2_list}"
+--left "${R1_list}" \
+--right "${R2_list}"
 
 # Assembly stats
 ${trinity_dir}/util/TrinityStats.pl trinity_out_dir/Trinity.fasta \
