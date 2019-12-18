@@ -12,7 +12,30 @@ tags:
 categories:
   - Miscellaneous
 ---
+Grace/Steven asked me to generate a _de novo_ transcriptome assembly of our current _C.bairdi_ RNAseq data in [this GitHub issue](https://github.com/RobertsLab/resources/issues/808). As part of that, I needed to quality trim the data first. Although I could automate this as part of the transcriptome assembly (Trinity has Trimmomatic built-in), I would be unable to view the post-trimming results until after the assembly was completed. So, I opted to do the trimming step separately, to evaluate the data prior to assembly.
 
+Trimming was performed using [fastp (v0.20.0)](https://github.com/OpenGene/fastp) on Mox.
+
+I used the following Bash script to initiate file transfer to Mox and then call the SBATCH script for trimming:
+
+
+- [20191218_cbai_RNAseq_rsync.sh](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_fastp_RNAseq_trimming/20191218_cbai_RNAseq_rsync.sh)
+
+```shell
+#!/bin/bash
+
+## Script to transfer C.bairdi RNAseq files and then run SBATCH script for fastp trimming.
+
+# Exit script if any command fails
+set -e
+
+# Transfer files
+rsync -av --progress owl:/volume1/web/nightingales/C_bairdi/*.gz .
+
+# Run SBATCH script to begin fastp trimming
+sbatch 20191218_cbai_fastp_RNAseq_trimming.sh
+
+```
 
 
 SBATCH script (GitHub):
