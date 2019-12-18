@@ -37,6 +37,8 @@ echo "${PATH}" | tr : \\n
 reads_dir=/gscratch/scrubbed/samwhite/outputs/20191218_cbai_fastp_RNAseq_trimming
 threads=27
 assembly_stats=assembly_stats.txt
+timestamp=$(date +%Y%m%d)
+fasta_name="${timestamp}.C_bairdi.Trinity.fasta"
 
 # Paths to programs
 trinity_dir="/gscratch/srlab/programs/trinityrnaseq-v2.9.0"
@@ -78,15 +80,18 @@ ${trinity_dir}/Trinity \
 --left "${R1_list}" \
 --right "${R2_list}"
 
+# Rename generic assembly FastA
+mv trinity_out_dir/Trinity.fasta trinity_out_dir/${fasta_name}
+
 # Assembly stats
-${trinity_dir}/util/TrinityStats.pl trinity_out_dir/Trinity.fasta \
+${trinity_dir}/util/TrinityStats.pl trinity_out_dir/${fasta_name} \
 > ${assembly_stats}
 
 # Create gene map files
 ${trinity_dir}/util/support_scripts/get_Trinity_gene_to_trans_map.pl \
-trinity_out_dir/Trinity.fasta \
-> trinity_out_dir/Trinity.fasta.gene_trans_map
+trinity_out_dir/${fasta_name} \
+> trinity_out_dir/${fasta_name}.gene_trans_map
 
 # Create FastA index
 ${samtools} faidx \
-trinity_out_dir/Trinity.fasta
+trinity_out_dir/${fasta_name}
