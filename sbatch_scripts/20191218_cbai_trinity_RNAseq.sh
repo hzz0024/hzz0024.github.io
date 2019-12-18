@@ -40,7 +40,7 @@ assembly_stats=assembly_stats.txt
 
 # Paths to programs
 trinity_dir="/gscratch/srlab/programs/trinityrnaseq-v2.9.0"
-samtools="/gscratch/srlab/programs/samtools-1.9/samtools"
+samtools="/gscratch/srlab/programs/samtools-1.10/samtools"
 
 
 ## Inititalize arrays
