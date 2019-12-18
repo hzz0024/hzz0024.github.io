@@ -165,6 +165,10 @@ done
 
 #### RESULTS
 
+Took ~40 minutes to complete:
+
+![screencap of fastp runtime on Mox](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20191218_cbai_fastp_RNAseq_trimming_runtime.png?raw=true)
+
 Output folder:
 
 - [20191218_cbai_fastp_RNAseq_trimming](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_fastp_RNAseq_trimming)
