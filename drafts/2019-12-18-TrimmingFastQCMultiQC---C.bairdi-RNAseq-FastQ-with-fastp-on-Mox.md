@@ -167,4 +167,4 @@ done
 
 Output folder:
 
-- []()
+- [20191218_cbai_fastp_RNAseq_trimming](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_fastp_RNAseq_trimming)
