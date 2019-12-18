@@ -42,6 +42,9 @@ echo "${PATH}" | tr : \\n
 # Set number of CPUs to use
 threads=27
 
+# Input/output files
+trimmed_checksums=trimmed_fastq_checksums.md5
+
 # Paths to programs
 fastp=/gscratch/srlab/programs/fastp-0.20.0/fastp
 
@@ -95,8 +98,14 @@ do
 	--in2 "${fastq_array_R2[index]}" \
 	--detect_adapter_for_pe \
 	--thread ${threads} \
-	--out1 "${R1_sample_name}".fastp-trim.${timestamp}.fq.gz \
-	--out2 "${R2_sample_name}".fastp-trim.${timestamp}.fq.gz
+	--out1 "${R1_sample_name}".fastp-trim."${timestamp}".fq.gz \
+	--out2 "${R2_sample_name}".fastp-trim."${timestamp}".fq.gz
+
+	# Generate md5 checksums for newly trimmed files
+	{
+		md5sum "${R1_sample_name}".fastp-trim."${timestamp}".fq.gz
+		md5sum "${R2_sample_name}".fastp-trim."${timestamp}".fq.gz
+	} >> "${trimmed_checksums}"
 	# Remove original FastQ files
 	rm "${fastq_array_R1[index]}" "${fastq_array_R2[index]}"
 done
