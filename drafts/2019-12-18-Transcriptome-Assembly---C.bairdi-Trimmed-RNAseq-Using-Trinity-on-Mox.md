@@ -124,6 +124,10 @@ trinity_out_dir/${fasta_name}
 
 #### RESULTS
 
+This ran relatively quickly (~14hrs), but the Mox email system appeared to be significantly delayed (~8rs difference between email notifications and actual start/stop times of the job):
+
+![screencap of C.bai trinity runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20191218_cbai_trinity_RNAseq_runtime.png?raw=true)
+
 Output folder:
 
 - []()
