@@ -35,20 +35,24 @@ printf "%0.s-" {1..10}
 echo "${PATH}" | tr : \\n
 } >> system_path.log
 
-
+# Set workind directory as current directory
 wd="$(pwd)"
+
+# Capture date as YYYYMMDD
+timestamp=$(date +%Y%m%d)
+
+# Set input file locations and species designation
 trinity_fasta="/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20191218.C_bairdi.Trinity.fasta"
 trinity_gene_map="/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20191218.C_bairdi.Trinity.fasta.gene_trans_map"
-
 species="cbai"
-timestamp=$(date +%Y%m%d)
+
+
 
 # Paths to input/output files
 blastp_out_dir="${wd}/blastp_out"
 transdecoder_out_dir="${wd}/Trinity.fasta.transdecoder_dir"
 pfam_out_dir="${wd}/pfam_out"
 blastp_out="${blastp_out_dir}/${timestamp}.${species}.blastp.outfmt6"
-
 pfam_out="${pfam_out_dir}/${timestamp}.${species}.pfam.domtblout"
 lORFs_pep="${transdecoder_out_dir}/longest_orfs.pep"
 pfam_db="/gscratch/srlab/programs/Trinotate-v3.1.1/admin/Pfam-A.hmm"
