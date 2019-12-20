@@ -46,11 +46,14 @@ trinity_fasta="/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20191218.C_baird
 trinity_gene_map="/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20191218.C_bairdi.Trinity.fasta.gene_trans_map"
 species="cbai"
 
+# Capture trinity file name
+trinity_fasta_name=${trinity_fasta##*/}
+
 
 
 # Paths to input/output files
 blastp_out_dir="${wd}/blastp_out"
-transdecoder_out_dir="${wd}/Trinity.fasta.transdecoder_dir"
+transdecoder_out_dir="${wd}/${trinity_fasta_name}.transdecoder_dir"
 pfam_out_dir="${wd}/pfam_out"
 blastp_out="${blastp_out_dir}/${timestamp}.${species}.blastp.outfmt6"
 pfam_out="${pfam_out_dir}/${timestamp}.${species}.pfam.domtblout"
