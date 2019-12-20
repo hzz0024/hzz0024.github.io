@@ -38,6 +38,8 @@ echo "${PATH}" | tr : \\n
 
 wd="$(pwd)"
 trinity_fasta="/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20191218.C_bairdi.Trinity.fasta"
+trinity_gene_map="/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20191218.C_bairdi.Trinity.fasta.gene_trans_map"
+
 species="cbai"
 timestamp=$(date +%Y%m%d)
 
@@ -69,7 +71,9 @@ mkdir "${pfam_out_dir}"
 
 # Extract long open reading frames
 "${transdecoder_lORFs}" \
+--gene_trans_map "${trinity_gene_map}" \
 -t "${trinity_fasta}"
+
 # Run blastp on long ORFs
 "${blastp}" \
 -query "${lORFs_pep}" \
