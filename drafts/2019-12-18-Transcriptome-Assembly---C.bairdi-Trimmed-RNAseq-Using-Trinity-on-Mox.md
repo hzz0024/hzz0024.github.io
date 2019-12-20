@@ -130,4 +130,60 @@ This ran relatively quickly (~14hrs), but the Mox email system appeared to be si
 
 Output folder:
 
-- []()
+- [20191218_cbai_trinity_RNAseq/](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_trinity_RNAseq/)
+
+Trinity FastA:
+
+- [20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta)
+
+Trinity FastA index (via `samtools`):
+
+- [20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta.fai](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta.fai)
+
+Trinity gene trans map:
+
+- [20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta.gene_trans_map](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta.gene_trans_map)
+
+Trinity assembly stats (txt):
+
+- [20191218_cbai_trinity_RNAseq/assembly_stats.txt](https://gannet.fish.washington.edu/Atumefaciens/20191218_cbai_trinity_RNAseq/assembly_stats.txt)
+
+```
+
+
+################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':	110785
+Total trinity transcripts:	313589
+Percent GC: 46.11
+
+########################################
+Stats based on ALL transcript contigs:
+########################################
+
+	Contig N10: 4395
+	Contig N20: 3382
+	Contig N30: 2773
+	Contig N40: 2337
+	Contig N50: 1961
+
+	Median contig length: 689
+	Average contig: 1146.98
+	Total assembled bases: 359680329
+
+
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+
+	Contig N10: 4529
+	Contig N20: 3430
+	Contig N30: 2780
+	Contig N40: 2276
+	Contig N50: 1821
+
+	Median contig length: 405
+	Average contig: 882.36
+	Total assembled bases: 97752083
+```
