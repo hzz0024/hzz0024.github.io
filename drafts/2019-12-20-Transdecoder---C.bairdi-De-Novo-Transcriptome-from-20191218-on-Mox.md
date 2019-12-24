@@ -23,4 +23,20 @@ Took ~2days to run:
 
 Output folder:
 
-- []()
+- [20191220_cbai_transdecoder/](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder/)
+
+Protein FastA:
+
+- [20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.pep](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.pep)
+
+Coding Sequence FastA:
+
+- [20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.cds](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.cds)
+
+BED file:
+
+- [20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.bed](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.bed)
+
+GFF
+
+- [0191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.gff3](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.gff3)
