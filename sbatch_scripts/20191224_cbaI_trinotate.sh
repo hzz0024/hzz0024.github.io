@@ -37,6 +37,8 @@ wd="$(pwd)"
 timestamp=$(date +%Y%m%d)
 species="cbai"
 
+prefix="${timestamp}.${species}.trinotate"
+
 
 ## Paths to input/output files
 
@@ -49,11 +51,11 @@ trinity_fasta="gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAseq/t
 trinity_gene_map="${trinity_out_dir}/"
 
 # Output files
-rnammer_out="${rnammer_out_dir}/Trinity.fasta.rnammer.gff"
-signalp_out="${signalp_out_dir}/signalp.out"
-tmhmm_out="${tmhmm_out_dir}/tmhmm.out"
+rnammer_out="${rnammer_out_dir}/${prefix}.Trinity.fasta.rnammer.gff"
+signalp_out="${signalp_out_dir}/${prefix}.signalp.out"
+tmhmm_out="${tmhmm_out_dir}/${prefix}.tmhmm.out"
 
-trinotate_report="${wd}/trinotate_annotation_report.txt"
+trinotate_report="${wd}/${prefix}_annotation_report.txt"
 
 
 ## New folders for working directory
@@ -159,4 +161,4 @@ report \
 --Trinotate_xls "${trinotate_report}" \
 -G \
 --include_ancestral_terms \
-> go_annotations.txt
+> ${prefix}.go_annotations.txt
