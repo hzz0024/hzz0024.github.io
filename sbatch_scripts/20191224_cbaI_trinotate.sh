@@ -34,22 +34,18 @@ echo "${PATH}" | tr : \\n
 
 
 wd="$(pwd)"
+timestamp=$(date +%Y%m%d)
+species="cbai"
 
 
-# Paths to input/output files
-## Non-working directory locations
-blastp_out_dir="gscratch/scrubbed/samwhite/outputs/20191220_cbai_transdecoder/blastp_out"
-blastx_out_dir=""
-pfam_out_dir="/gscratch/scrubbed/samwhite/outputs/20191220_cbai_transdecoder/pfam_out"
-trinity_out_dir="gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAseq/trinity_out_dir"
-transdecoder_out_dir="/gscratch/scrubbed/samwhite/outputs/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder_dir"
+## Paths to input/output files
 
 # Input files
-blastp_out="${blastp_out_dir}/"
-blastx_out="${blastx_out_dir}/"
-pfam_out="${pfam_out_dir}/"
-lORFs_pep="${transdecoder_out_dir}/longest_orfs.pep"
-trinity_fasta="${trinity_out_dir}/"
+blastp_out="gscratch/scrubbed/samwhite/outputs/20191220_cbai_transdecoder/blastp_out/20191220.cbai.blastp.outfmt6"
+blastx_out="/gscratch/scrubbed/samwhite/outputs/20191224_cbai_blastx_outfmt-11/20191224-20191218.C_bairdi.Trinity.fasta.blastx.asn"
+pfam_out="/gscratch/scrubbed/samwhite/outputs/20191220_cbai_transdecoder/pfam_out/20191220.cbai.pfam.domtblout"
+lORFs_pep="/gscratch/scrubbed/samwhite/outputs/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder_dir/longest_orfs.pep"
+trinity_fasta="gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta"
 trinity_gene_map="${trinity_out_dir}/"
 
 # Output files
