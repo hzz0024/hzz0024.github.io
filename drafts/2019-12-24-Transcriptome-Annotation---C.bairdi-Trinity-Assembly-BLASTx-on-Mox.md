@@ -25,4 +25,8 @@ This took a bit over 17hrs to complete:
 
 Output folder:
 
-- []()
+- [20191224_cbai_blastx_outfmt-11/](https://gannet.fish.washington.edu/Atumefaciens/20191224_cbai_blastx_outfmt-11/)
+
+BLASTx output (ASN):
+
+- [20191224_cbai_blastx_outfmt-11/20191224-20191218.C_bairdi.Trinity.fasta.blastx.asn](https://gannet.fish.washington.edu/Atumefaciens/20191224_cbai_blastx_outfmt-11/20191224-20191218.C_bairdi.Trinity.fasta.blastx.asn) (1.9GB)
