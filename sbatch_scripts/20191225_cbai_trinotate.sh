@@ -45,6 +45,11 @@ prefix="${timestamp}.${species}.trinotate"
 
 ## Paths to input/output files
 
+## New folders for working directory
+rnammer_out_dir="${wd}/RNAmmer_out"
+signalp_out_dir="${wd}/signalp_out"
+tmhmm_out_dir="${wd}/tmhmm_out"
+
 # Input files
 blastp_out="gscratch/scrubbed/samwhite/outputs/20191220_cbai_transdecoder/blastp_out/20191220.cbai.blastp.outfmt6"
 blastx_out="/gscratch/scrubbed/samwhite/outputs/20191224_cbai_blastx_outfmt-11/20191224-20191218.C_bairdi.Trinity.fasta.blastx.asn"
@@ -57,16 +62,7 @@ trinity_gene_map="gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAse
 rnammer_out="${rnammer_out_dir}/${prefix}.Trinity.fasta.rnammer.gff"
 signalp_out="${signalp_out_dir}/${prefix}.signalp.out"
 tmhmm_out="${tmhmm_out_dir}/${prefix}.tmhmm.out"
-
 trinotate_report="${wd}/${prefix}_annotation_report.txt"
-
-
-## New folders for working directory
-rnammer_out_dir="${wd}/RNAmmer_out"
-signalp_out_dir="${wd}/signalp_out"
-tmhmm_out_dir="${wd}/tmhmm_out"
-
-
 
 # Paths to programs
 rnammer_dir="/gscratch/srlab/programs/RNAMMER-1.2"
