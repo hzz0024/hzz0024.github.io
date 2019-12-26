@@ -30,3 +30,7 @@ Output folder:
 BLASTx output (ASN):
 
 - [20191224_cbai_blastx_outfmt-11/20191224-20191218.C_bairdi.Trinity.fasta.blastx.asn](https://gannet.fish.washington.edu/Atumefaciens/20191224_cbai_blastx_outfmt-11/20191224-20191218.C_bairdi.Trinity.fasta.blastx.asn) (1.9GB)
+
+This BLASTx file will be used for complete transcriptome annotation using Trinotate.
+
+BLAST is also capable of converting the ASN output format into any other BLAST output format (e.g. format 6), so having BLAST results in ASN format provides a bit more flexibility. However, conversion from ASN to another BLAST output format does take a while.
