@@ -12,7 +12,7 @@ tags:
 categories:
   - Miscellaneous
 ---
-
+In preparation for complete transcriptome annotation of the [_C.bairdi_ _de novo_ assembly fro 20191218](https://robertslab.github.io/sams-notebook/2019/12/18/Transcriptome-Assembly-C.bairdi-Trimmed-RNAseq-Using-Trinity-on-Mox.html), I needed to run BLASTx. The assembly was BLASTed against the SwissProt database that comes with [Trinotate](https://github.com/Trinotate/Trinotate.github.io/wiki)
 
 SBATCH script (GitHub):
 
