@@ -161,9 +161,9 @@ report \
 --Trinotate_xls "${trinotate_report}" \
 -G \
 --include_ancestral_terms \
-> ${prefix}.go_annotations.txt
+> "${prefix}".go_annotations.txt
 
 # Make transcript features annotation map
 "${trinotate_features}" \
 "${trinotate_report}" \
-> ${prefix}.annotation_feature_map.txt
+> "${prefix}".annotation_feature_map.txt
