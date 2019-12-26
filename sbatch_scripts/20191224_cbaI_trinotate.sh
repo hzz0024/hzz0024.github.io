@@ -48,7 +48,7 @@ blastx_out="/gscratch/scrubbed/samwhite/outputs/20191224_cbai_blastx_outfmt-11/2
 pfam_out="/gscratch/scrubbed/samwhite/outputs/20191220_cbai_transdecoder/pfam_out/20191220.cbai.pfam.domtblout"
 lORFs_pep="/gscratch/scrubbed/samwhite/outputs/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder_dir/longest_orfs.pep"
 trinity_fasta="gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta"
-trinity_gene_map="${trinity_out_dir}/"
+trinity_gene_map="gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta.gene_trans_map"
 
 # Output files
 rnammer_out="${rnammer_out_dir}/${prefix}.Trinity.fasta.rnammer.gff"
