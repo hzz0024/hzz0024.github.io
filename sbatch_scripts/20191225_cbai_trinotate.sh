@@ -17,6 +17,9 @@
 ## Specify the working directory for this job
 #SBATCH --chdir=/gscratch/scrubbed/samwhite/outputs/20191225_cbai_trinotate
 
+# Exit script if any command fails
+set -e
+
 # Load Python Mox module for Python module availability
 
 module load intel-python3_2017
