@@ -76,6 +76,7 @@ trinotate_dir="/gscratch/srlab/programs/Trinotate-v3.1.1"
 trinotate="${trinotate_dir}/Trinotate"
 trinotate_rnammer="${trinotate_dir}/util/rnammer_support/RnammerTranscriptome.pl"
 trinotate_GO="${trinotate_dir}/util/extract_GO_assignments_from_Trinotate_xls.pl"
+trinotate_features="${trinotate_dir}/util/Trinotate_get_feature_name_encoding_attributes.pl"
 pfam_db="${trinotate_dir}/admin/Pfam-A.hmm"
 sp_db="${trinotate_dir}/admin/uniprot_sprot.pep"
 trinotate_sqlite_db="Trinotate.sqlite"
@@ -162,3 +163,8 @@ report \
 -G \
 --include_ancestral_terms \
 > ${prefix}.go_annotations.txt
+
+# Make transcript features annotation map
+"${trinotate_features}" \
+"${trinotate_report}" \
+> ${prefix}.annotation_feature_map.txt
