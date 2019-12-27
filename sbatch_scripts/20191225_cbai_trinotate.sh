@@ -59,7 +59,7 @@ trinity_fasta="/gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAseq/
 trinity_gene_map="/gscratch/scrubbed/samwhite/outputs/20191218_cbai_trinity_RNAseq/trinity_out_dir/20191218.C_bairdi.Trinity.fasta.gene_trans_map"
 
 # Output files
-rnammer_out="${rnammer_out_dir}/${prefix}.Trinity.fasta.rnammer.gff"
+rnammer_out="${rnammer_out_dir}/20191218.C_bairdi.Trinity.fasta.rnammer.gff"
 signalp_out="${signalp_out_dir}/${prefix}.signalp.out"
 tmhmm_out="${tmhmm_out_dir}/${prefix}.tmhmm.out"
 trinotate_report="${wd}/${prefix}_annotation_report.txt"
