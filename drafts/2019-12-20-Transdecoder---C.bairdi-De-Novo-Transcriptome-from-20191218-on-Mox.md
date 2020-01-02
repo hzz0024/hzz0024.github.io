@@ -134,3 +134,23 @@ mkdir "${pfam_out_dir}"
 Output folder:
 
 - [20191220_cbai_transdecoder](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder)
+
+
+Here are the output files, of various formats, with all ORFs identified:
+
+
+BED file:
+
+- [20191218.C_bairdi.Trinity.fasta.transdecoder.bed](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.bed)
+
+Coding Sequences file (FastA):
+
+- [20191218.C_bairdi.Trinity.fasta.transdecoder.cds](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.cds)
+
+GFF file:
+
+- [20191218.C_bairdi.Trinity.fasta.transdecoder.gff3](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.gff3)
+
+Peptides file (FastA):
+
+- [20191218.C_bairdi.Trinity.fasta.transdecoder.pep](https://gannet.fish.washington.edu/Atumefaciens/20191220_cbai_transdecoder/20191218.C_bairdi.Trinity.fasta.transdecoder.pep)
