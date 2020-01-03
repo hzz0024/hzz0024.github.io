@@ -131,15 +131,15 @@ After running DIAMOND, the output files were "MEGANized" to add taxonomy/functio
 
 Used the following taxonomy mapping files available from the [MEGAN6 Download Page](https://software-ab.informatik.uni-tuebingen.de/download/megan6/welcome.html):
 
-- (Protein accession to NCBI-taxonomy mapping file)[http://ab.inf.uni-tuebingen.de/data/software/megan6/download/prot_acc2tax-Jul2019X1.abin.zip]
+- [Protein accession to NCBI-taxonomy mapping file](http://ab.inf.uni-tuebingen.de/data/software/megan6/download/prot_acc2tax-Jul2019X1.abin.zip)
 
-- (Protein accession to InterPro mapping file)[http://ab.inf.uni-tuebingen.de/data/software/megan6/download/acc2interpro-Jul2019X.abin.zip]
+- [Protein accession to InterPro mapping file](http://ab.inf.uni-tuebingen.de/data/software/megan6/download/acc2interpro-Jul2019X.abin.zip)
 
-- (Protein accession to eggNOG mapping file)[http://ab.inf.uni-tuebingen.de/data/software/megan6/download/acc2eggnog-Jul2019X.abin.zip]
+- [Protein accession to eggNOG mapping file](http://ab.inf.uni-tuebingen.de/data/software/megan6/download/acc2eggnog-Jul2019X.abin.zip)
 
 MEGANIZER script (GitHub):
 
-- (20191007_metagenomics_meganizer.sh)[https://github.com/RobertsLab/sams-notebook/blob/master/bash_scripts/20191007_metagenomics_meganizer.sh]
+- [20191007_metagenomics_meganizer.sh](https://github.com/RobertsLab/sams-notebook/blob/master/bash_scripts/20191007_metagenomics_meganizer.sh)
 
 ```shell
 #!/bin/bash
