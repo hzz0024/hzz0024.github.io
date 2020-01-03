@@ -12,7 +12,7 @@ tags:
 categories:
   - Miscellaneous
 ---
-In preparation for complete transcriptome annotation of the [_C.bairdi_ _de novo_ assembly fro 20191218](https://robertslab.github.io/sams-notebook/2019/12/18/Transcriptome-Assembly-C.bairdi-Trimmed-RNAseq-Using-Trinity-on-Mox.html), I needed to run BLASTx. The assembly was BLASTed against the SwissProt database that comes with [Trinotate](https://github.com/Trinotate/Trinotate.github.io/wiki)
+In preparation for complete transcriptome annotation of the [_C.bairdi_ _de novo_ assembly fro 20191218](https://robertslab.github.io/sams-notebook/2019/12/18/Transcriptome-Assembly-C.bairdi-Trimmed-RNAseq-Using-Trinity-on-Mox.html), I needed to run BLASTx. The assembly was BLASTed against the SwissProt database that comes with [Trinotate](https://github.com/Trinotate/Trinotate.github.io/wiki). Initial BLAST output format selected was format 11 (i.e. ASN format), as this allows for simple conversion between different formats later on, if desired.
 
 SBATCH script (GitHub):
 
@@ -87,6 +87,15 @@ This took a bit over 17hrs to complete:
 
 ![cbai blastx runtime screencap](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20191224_cbai_blastx_outfmt-11_runtime.png?raw=true)
 
+I also realized, after the fact, that I need output format 6 to use in Trinotate, so I performed the formate conversion with the following command:
+
+```shell
+/gscratch/srlab/programs/ncbi-blast-2.8.1+/bin/blast_formatter \
+-archive 20191224-20191218.C_bairdi.Trinity.fasta.blastx.asn \
+-outfmt 6 \
+-out 20191224-20191218.C_bairdi.Trinity.fasta.blastx.outfmt6
+```
+
 Output folder:
 
 - [20191224_cbai_blastx_outfmt-11/](https://gannet.fish.washington.edu/Atumefaciens/20191224_cbai_blastx_outfmt-11/)
@@ -95,6 +104,10 @@ BLASTx output (ASN):
 
 - [20191224_cbai_blastx_outfmt-11/20191224-20191218.C_bairdi.Trinity.fasta.blastx.asn](https://gannet.fish.washington.edu/Atumefaciens/20191224_cbai_blastx_outfmt-11/20191224-20191218.C_bairdi.Trinity.fasta.blastx.asn) (1.9GB)
 
+BLASTx output (format 6):
+
+- [20191224-20191218.C_bairdi.Trinity.fasta.blastx.outfmt6](https://gannet.fish.washington.edu/Atumefaciens/20191224_cbai_blastx_outfmt-11/20191224-20191218.C_bairdi.Trinity.fasta.blastx.outfmt6)
+
 This BLASTx file will be used for complete transcriptome annotation using Trinotate.
 
-BLAST is also capable of converting the ASN output format into any other BLAST output format (e.g. format 6), so having BLAST results in ASN format provides a bit more flexibility. However, conversion from ASN to another BLAST output format does take a while.
+BLAST is also capable of converting the ASN output format into any other BLAST output format (e.g. format 6), so having BLAST results in ASN format provides a bit more flexibility. However, conversion from ASN to another BLAST output format requires the BLAST database to exist in the same location as the initial BLAST! Thus, if using the ASN output format (i.e. format 11), it is imperative that the BLAST database is in the same directory as the output file! To illustrate this, I can now only convert between formats by running this on Mox and using the BLAST database located here: `/gscratch/srlab/programs/Trinotate-v3.1.1/admin/uniprot_sprot.pep`. This greatly hinders portability and reproducibility.
