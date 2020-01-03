@@ -1,6 +1,6 @@
 #!/bin/bash
 ## Job Name
-#SBATCH --job-name=metagenomics_DIAMOND
+#SBATCH --job-name=cbai_blastx_DIAMOND
 ## Allocation Definition
 #SBATCH --account=coenv
 #SBATCH --partition=coenv
@@ -45,7 +45,7 @@ echo "${PATH}" | tr : \\n
 
 
 # Program paths
-diamond=/gscratch/srlab/programs/diamond-0.9.26/diamond
+diamond=/gscratch/srlab/programs/diamond-0.9.29/diamond
 
 # DIAMOND NCBI nr database
 dmnd=/gscratch/srlab/blastdbs/ncbi-nr-20190925/nr.dmnd
