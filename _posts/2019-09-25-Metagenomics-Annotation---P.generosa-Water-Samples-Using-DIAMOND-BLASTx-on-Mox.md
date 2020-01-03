@@ -163,9 +163,9 @@ for daa in *.daa
 do
   ${meganizer} \
   --in "${daa}" \
-	--acc2taxa ${prot_acc2tax} \
-	--acc2interpro2go ${acc2interpro} \
-	--acc2eggnog ${acc2eggnog}
+  --acc2taxa ${prot_acc2tax} \
+  --acc2interpro2go ${acc2interpro} \
+  --acc2eggnog ${acc2eggnog}
 done
 ```
 
