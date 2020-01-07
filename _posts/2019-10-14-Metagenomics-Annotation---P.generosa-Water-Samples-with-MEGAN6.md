@@ -27,16 +27,19 @@ Both of these were particularly annoying because the analysis took multiple _day
 
 However, these issues may have ended up being serendipitous, as it led me to read deeper into the MEGAN community forum and get a better understanding of how MEGAN works; particularly how it handles paired end sequencing data.
 
-As such, I determined only one pair (and only one pair) of Meganized DAA files should be imported and processed at a time. Each pair took ~ 2 - 3 days to generate the expected RMA6 file. Each RMA6 file was generally very large (~40GB), however, the `MG3` RMA6 file is significantly smaller than the others (~24GB):
+As such, I determined only one pair (and only one pair) of Meganized DAA files should be imported and processed at a time. Each pair took ~2 - 3 days to generate the expected RMA6 file. Each RMA6 file was generally very large (~40GB), however, the `MG3` RMA6 file is significantly smaller than the others (~24GB):
 
 ![screencap of RMA6 file sizes](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20191014_metagenomics_MEGAN6_filesize-01.png?raw=true)
 
 RMA6 files were generated using the "Import from BLAST", selecting each pair of DAA files, and applying the default Naive LCA settings. Used the following mapping files:
 
-Taxonomy: prot_acc2tax-Jul2019X1.abin
-EggNog: acc2eggnog-Jul2019X.abin
-InterPro2GO: acc2interpro-Jul2019X.abin
-SEED: acc2seed-May2015XX.abin
+Taxonomy: `prot_acc2tax-Jul2019X1.abin`
+
+EggNog: `acc2eggnog-Jul2019X.abin`
+
+InterPro2GO: `acc2interpro-Jul2019X.abin`
+
+SEED: `acc2seed-May2015XX.abin`
 
 
 ---
