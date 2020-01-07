@@ -22,4 +22,4 @@ categories:
 
 Output folder:
 
-- []()
+- [20200103_cbai_diamond_blastx/](https://gannet.fish.washington.edu/Atumefaciens/20200103_cbai_diamond_blastx/)
