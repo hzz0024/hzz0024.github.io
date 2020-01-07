@@ -17,6 +17,10 @@ categories:
 
 #### RESULTS
 
+This took ~6hr to run (which was faster than I expected):
+
+![screencap of Trinotate runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20191225_cbai_trinotate_runtime.png?raw=true)
+
 Output folder:
 
 - [20191225_cbai_trinotate/](https://gannet.fish.washington.edu/Atumefaciens/20191225_cbai_trinotate/)
