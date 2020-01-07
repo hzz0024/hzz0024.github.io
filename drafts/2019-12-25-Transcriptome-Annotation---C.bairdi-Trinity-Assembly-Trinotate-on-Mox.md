@@ -202,10 +202,23 @@ Output folder:
 - [20191225_cbai_trinotate/](https://gannet.fish.washington.edu/Atumefaciens/20191225_cbai_trinotate/)
 
 
+Annotation feature map. [This can be used to update Trinity-based gene expression matrices like so](https://github.com/trinityrnaseq/trinityrnaseq/wiki/Functional-Annotation-of-Transcripts):
+
+```${TRINITY_HOME}/Analysis/DifferentialExpression/rename_matrix_feature_identifiers.pl```
+
 - [20200104.cbai.trinotate.annotation_feature_map.txt](https://gannet.fish.washington.edu/Atumefaciens/20191225_cbai_trinotate/20200104.cbai.trinotate.annotation_feature_map.txt)
+
+Annotation report (CSV)
 
 - [20200104.cbai.trinotate_annotation_report.txt](https://gannet.fish.washington.edu/Atumefaciens/20191225_cbai_trinotate/20200104.cbai.trinotate_annotation_report.txt)
 
+Gene ontology (GO) annotations (TXT)
+
 - [20200104.cbai.trinotate.go_annotations.txt](https://gannet.fish.washington.edu/Atumefaciens/20191225_cbai_trinotate/20200104.cbai.trinotate.go_annotations.txt)
 
+SQlite database:
+
 - [Trinotate.sqlite](https://gannet.fish.washington.edu/Atumefaciens/20191225_cbai_trinotate/Trinotate.sqlite)
+
+
+It should be remembered that the assembly was generated from infected/uninfected crabs, so there will be crab and _Hematodinium_ sequences present.
