@@ -13,7 +13,13 @@ tags:
 categories:
   - Miscellaneous
 ---
+Although I previously [annotated](https://robertslab.github.io/sams-notebook/2019/12/25/Transcriptome-Annotation-C.bairdi-Trinity-Assembly-Trinotate-on-Mox.html) our [_C.bairdi_ transcriptome from 20191218](https://robertslab.github.io/sams-notebook/2019/12/18/Transcriptome-Assembly-C.bairdi-Trimmed-RNAseq-Using-Trinity-on-Mox.html), I realized that the assembly and annotations were combine infected/uninfected samples, possibly making separating crab/_Hematodinium_ sequences a bit more difficult.
 
+I also realized that the MEGAN6 software that I'd previously used for metagenomic taxonomic classification can actually extract sequencing reads. So, I decided to run all of our Tanner crab RNAseq reads through the MEGAN6 process. At the end, I'll separate out reads, based on taxonomy, and then generate "clean" _de novo_ assemblies of Tanner crab and _Hematodinium_!
+
+To start this process, the trimmed reads need to be annotated using DIAMOND BLASTx. Then, the DIAMOND output files need to be "meganized" for importing to MEGAN6.
+
+DIAMOND BLASTx took place on Mox, while "meganization" took place on my lab computer (`swoose`); this is due to the way that MEGAN6 uses Java - it doesn't properly on Mox.
 
 SBATCH script (GitHub):
 
@@ -158,9 +164,9 @@ Output folder:
 - [20200103_cbai_diamond_blastx/](https://gannet.fish.washington.edu/Atumefaciens/20200103_cbai_diamond_blastx/)
 
 
+Now that this is complete, I will proceed with using importing into MEGAN6, to create `rma6` file and then separately extract crab reads and _Hematodinium_ reads. These will then be used to generate "clean" transcriptome assemblies for Tanner crab and _Hematodinium_.
 
-
-Here's the full list of output DIAMOND `daa` files and their sizes (note: they're _huge_ files):
+Here's the full list of MEGANIZED DIAMOND `daa` files and their sizes (note: they're _huge_ files):
 
 - [304428_S1_L001_R1_001.blastx.daa](https://gannet.fish.washington.edu/Atumefaciens/20200103_cbai_diamond_blastx/304428_S1_L001_R1_001.blastx.daa) (56GB)
 
