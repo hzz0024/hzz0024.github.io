@@ -19,6 +19,8 @@ categories:
 #### RESULTS
 
 
+![NanoDrop results from C.bairdi 201002558-2729 gDNA](https://github.com/RobertsLab/sams-notebook/blob/master/images/20200109_nanodrop_cbai_gDNA_20102558-2729.PNG?raw=true)
+
 GeneRuler HighRange Ladder (ThermoFisher):
 
 ![GeneRuler HighRange Ladder](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ThermoFisher_GeneRuler_HighRange_DNALadder_50ug.png?raw=true)
