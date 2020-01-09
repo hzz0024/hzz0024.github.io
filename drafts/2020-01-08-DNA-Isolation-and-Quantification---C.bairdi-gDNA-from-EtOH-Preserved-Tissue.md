@@ -13,7 +13,9 @@ categories:
   - Miscellaneous
 ---
 
+_C.bairdi_ ethanol-preserved sample sheet from Pam Jensen (GoogleSheets):
 
+- [Sample info 4 Steven etal 112719](https://drive.google.com/file/d/0B2S_90rPaQMzTU5NenBFcG1kLVdxa1AyR2FDcjMzWHJZN1J3/view?usp=sharing)
 
 ---
 
