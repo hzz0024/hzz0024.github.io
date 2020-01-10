@@ -20,11 +20,13 @@ _C.bairdi_ ethanol-preserved sample sheet from Pam Jensen (GoogleSheets):
 
 I performed four separate isolations using 50mg of tissue. Samples were "ground" <sup>*</sup> in liquid nitrogen (LN2) with ceramic mortar/pestle and then processed using the E.Z.N.A. Mollusc DNA Kit according to the manufacturer's protocol, with the following notes/changes:
 
-- Used Proteinase K (18mg/mL; ThermoFisher) instead of that supplied by kit. Kit Proteinase K was moldy (!); the kit is nearly four years old...
+- Used ThermoFisher Proteinase K (18mg/mL) instead of that supplied by kit. Kit Proteinase K was moldy (!); the kit is nearly four years old...
 
 - Lysed tissue for 1hr.
 
 - Eluted with 200uL for each sample and pooled for final total volume of ~800uL.
+
+Sample was quantified on the Robert Lab Qubit 3.0 using the DNA Broad Range assay, using 1uL of sample.
 
 
 <sup>*</sup> _The tissue did not powder as one would expect when grinding in liquid nitrogen. Instead, despite all utensils being pre-chilled with LN2 and tissue being actively ground under LN2, the tissue became a frozen paste that adhered to the pestle. I've never experienced this before, but I also have not attempted to grind ethanol-preserved tissue in LN2 before._
@@ -36,3 +38,8 @@ I performed four separate isolations using 50mg of tissue. Samples were "ground"
 Qubit data (Google Sheet):
 
 - [20200108_qubit_crab_gDNA](https://docs.google.com/spreadsheets/d/1uEK8OYpvxVyI2iQGFXTm60wQDonN2kcCy0Kg70kU8-c/edit?usp=sharing)
+
+
+Yield is very good: ~51ng/uL * 800uL = 40ug
+
+Will run sample on gel and NanoDrop to evalute gDNA integrity/quality.
