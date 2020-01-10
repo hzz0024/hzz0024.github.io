@@ -11,7 +11,9 @@ tags:
 categories:
   - Miscellaneous
 ---
+I isolated _C.bairdi_ gDNA yesterday (20200108) and now want to get an idea if it's any good (i.e. no contaminants, high molecule weight).
 
+I loaded ~100ng (2uL) of the `_C.bairdi_ 20102558-2729 gDNA` sample, along with two molecular weight markers (see RESULTS below) on a 0.8% agarose, 1x low TAE gel with ethidium bromide. Gel was run for 1.5hrs at 75V.
 
 
 ---
