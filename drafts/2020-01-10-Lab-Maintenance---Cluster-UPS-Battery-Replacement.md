@@ -9,3 +9,26 @@ tags:
 categories:
   - Miscellaneous
 ---
+Replaced the batteries on one of the APC uninterruptable power supplies (UPS) on our local server cabinet.
+
+Bad battery indicator light:
+
+![APC UPS bad battery indicator light](https://github.com/RobertsLab/sams-notebook/blob/master/images/20200110_ups_replacement_01.jpg?raw=true)
+
+---
+
+Battery module drawer removed and opened:
+
+![opened battery module](https://github.com/RobertsLab/sams-notebook/blob/master/images/20200110_ups_replacement_02.jpg?raw=true)
+
+---
+
+New batteries are in:
+
+![new batteries installed](https://github.com/RobertsLab/sams-notebook/blob/master/images/20200110_ups_replacement_03.jpg?raw=true)
+
+---
+
+UPS powered back on, indicating good batteries:
+
+![UPS showing good batteries](https://github.com/RobertsLab/sams-notebook/blob/master/images/20200110_ups_replacement_03.jpg?raw=true)
