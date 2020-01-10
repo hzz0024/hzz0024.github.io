@@ -12,10 +12,22 @@ tags:
 categories:
   - Miscellaneous
 ---
+I isolated gDNA from ethanol-preserved _C.bairdi_ muscle tissue from sample 20102558-2729 (SPNO-ReferenceNO). This sample was chosen as it had `0` in the `SMEAR_result` and `BCS_PCR_results` columns, indicating it should be free of _Hematodinium_. See the sample spreadsheet linked below for more info.
 
 _C.bairdi_ ethanol-preserved sample sheet from Pam Jensen (GoogleSheets):
 
 - [Sample info 4 Steven etal 112719](https://drive.google.com/file/d/0B2S_90rPaQMzTU5NenBFcG1kLVdxa1AyR2FDcjMzWHJZN1J3/view?usp=sharing)
+
+I performed four separate isolations using 50mg of tissue. Samples were "ground" <sup>*</sup> in liquid nitrogen (LN2) with ceramic mortar/pestle and then processed using the E.Z.N.A. Mollusc DNA Kit according to the manufacturer's protocol, with the following notes/changes:
+
+- Used Proteinase K (18mg/mL; ThermoFisher) instead of that supplied by kit. Kit Proteinase K was moldy (!); the kit is nearly four years old...
+
+- Lysed tissue for 1hr.
+
+- Eluted with 200uL for each sample and pooled for final total volume of ~800uL.
+
+
+<sup>*</sup> _The tissue did not powder as one would expect when grinding in liquid nitrogen. Instead, despite all utensils being pre-chilled with LN2 and tissue being actively ground under LN2, the tissue became a frozen paste that adhered to the pestle. I've never experienced this before, but I also have not attempted to grind ethanol-preserved tissue in LN2 before._
 
 ---
 
