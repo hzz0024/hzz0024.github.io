@@ -51,7 +51,8 @@ do
 	--acc2taxa ${prot_acc2tax} \
 	--acc2interpro2go ${acc2interpro} \
 	--acc2eggnog ${acc2eggnog} \
-  --out "${sample_name}".daa2rma.rma6
+  --out "${sample_name}".daa2rma.rma6 \
+  2>&1 | tee --append daa2rm_log.txt
 done
 
 # Caputure end "time"
