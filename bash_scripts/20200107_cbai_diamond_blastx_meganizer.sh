@@ -39,14 +39,19 @@ done
 
 # Capture start "time"
 start=${SECONDS}
-for daa in *.daa
+for index in "${!daa_array_R1[@]}"
 do
+  sample_name=$(echo "${daa_array_R1[index]}" | awk -F "_" '{print $1}')
+
+  # Run daa2rma with paired option
   ${meganizer} \
-  --in "${daa}" \
+  --paired \
+  --in "${daa_array_R1[index]}" "${daa_array_R2[index]}" \
 	--threads "${threads}" \
 	--acc2taxa ${prot_acc2tax} \
 	--acc2interpro2go ${acc2interpro} \
-	--acc2eggnog ${acc2eggnog}
+	--acc2eggnog ${acc2eggnog} \
+  --out "${sample_name}".daa2rma.rma6
 done
 
 # Caputure end "time"
