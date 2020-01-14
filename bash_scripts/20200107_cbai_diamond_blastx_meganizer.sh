@@ -61,4 +61,10 @@ end=${SECONDS}
 runtime=$((end-start))
 
 # Print MEGANIZER runtime, in seconds
-echo "Runtime was: ${runtime} seconds"
+
+{
+  echo ""
+  echo "---------------------"
+  echo ""
+  echo "Total runtime was: ${runtime} seconds"
+} >> daa2rm_log.txt
