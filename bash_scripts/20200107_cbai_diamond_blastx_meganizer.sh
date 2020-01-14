@@ -17,6 +17,24 @@ acc2eggnog=/home/sam/data/databases/MEGAN/acc2eggnog-Jul2019X.abin
 # Variables
 threads=20
 
+## Inititalize arrays
+daa_array_R1=()
+daa_array_R2=()
+
+
+# Create array of DAA R1 files
+for daa in *R1*.daa
+do
+  daa_array_R1+=("${daa}")
+done
+
+# Create array of DAA R2 files
+for daa in *R2*.daa
+do
+  daa_array_R2+=("${daa}")
+done
+
+
 ## Run MEGANIZER
 
 # Capture start "time"
