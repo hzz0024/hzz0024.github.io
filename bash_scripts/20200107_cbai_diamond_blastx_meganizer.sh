@@ -7,7 +7,7 @@
 # http://ab.inf.uni-tuebingen.de/data/software/megan6/download/
 
 # Program path
-meganizer=/home/sam/programs/megan/tools/daa-meganizer
+meganizer=/home/sam/programs/megan/tools/daa2rma
 
 # MEGAN mapping files
 prot_acc2tax=/home/sam/data/databases/MEGAN/prot_acc2tax-Jul2019X1.abin
