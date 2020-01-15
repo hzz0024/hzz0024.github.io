@@ -17,8 +17,6 @@ prot_acc2tax=/home/sam/data/databases/MEGAN/prot_acc2tax-Jul2019X1.abin
 acc2interpro=/home/sam/data/databases/MEGAN/acc2interpro-Jul2019X.abin
 acc2eggnog=/home/sam/data/databases/MEGAN/acc2eggnog-Jul2019X.abin
 
-# Variables
-threads=20
 
 ## Inititalize arrays
 daa_array_R1=()
@@ -50,7 +48,6 @@ do
   ${meganizer} \
   --paired \
   --in "${daa_array_R1[index]}" "${daa_array_R2[index]}" \
-	--threads "${threads}" \
 	--acc2taxa ${prot_acc2tax} \
 	--acc2interpro2go ${acc2interpro} \
 	--acc2eggnog ${acc2eggnog} \
