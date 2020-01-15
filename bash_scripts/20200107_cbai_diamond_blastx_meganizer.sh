@@ -6,6 +6,9 @@
 # Requires MEGAN mapping files from:
 # http://ab.inf.uni-tuebingen.de/data/software/megan6/download/
 
+# Exit script if any command fails
+set -e
+
 # Program path
 meganizer=/home/sam/programs/megan/tools/daa2rma
 
