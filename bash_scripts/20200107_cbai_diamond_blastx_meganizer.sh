@@ -52,7 +52,7 @@ do
 	--acc2interpro2go ${acc2interpro} \
 	--acc2eggnog ${acc2eggnog} \
   --out "${sample_name}".daa2rma.rma6 \
-  2>&1 | tee --append daa2rm_log.txt
+  2>&1 | tee --append daa2rma_log.txt
 done
 
 # Caputure end "time"
@@ -67,4 +67,4 @@ runtime=$((end-start))
   echo "---------------------"
   echo ""
   echo "Total runtime was: ${runtime} seconds"
-} >> daa2rm_log.txt
+} >> daa2rma_log.txt
