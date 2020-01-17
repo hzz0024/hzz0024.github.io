@@ -49,3 +49,8 @@ Isolated DNA from the following samples:
 Qubit results (Google Sheet):
 
 - [20200117_qubit_cbai_DNA](https://docs.google.com/spreadsheets/d/12pVDjM5EkiPHdcILZBhZsn9m4ftXfVy8SC5rUr9zySM/edit?usp=sharing)
+
+
+Samples were stored at -80<sup>o</sup>C in:
+
+[Rack 6, 4, 1](http://b.link/srlab-80C) in [C.bairdi gDNA Box #1]()
