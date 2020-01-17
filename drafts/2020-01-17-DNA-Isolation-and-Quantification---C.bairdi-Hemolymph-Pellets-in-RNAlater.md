@@ -45,3 +45,7 @@ Isolated DNA from the following samples:
 ---
 
 #### RESULTS
+
+Qubit results (Google Sheet):
+
+- [20200117_qubit_cbai_DNA](https://docs.google.com/spreadsheets/d/12pVDjM5EkiPHdcILZBhZsn9m4ftXfVy8SC5rUr9zySM/edit?usp=sharing)
