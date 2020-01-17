@@ -44,3 +44,7 @@ Isolated RNA from the following samples:
 ---
 
 #### RESULTS
+
+Qubit results (Google Sheet):
+
+- [20200117_qubit_cbai_RNA](https://docs.google.com/spreadsheets/d/1e4jrYEv5deHTEYwihof7CRzfuP8hArA8qCwRXtLjPEQ/edit?usp=sharing)
