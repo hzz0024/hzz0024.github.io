@@ -6,16 +6,14 @@ tags:
   - Chionoecetes bairdi
   - Tanner crab
   - DNA
-  -  DNA isolation
+  - DNA isolation
   - DNA quantification
   - Qubit
 categories:
   - Miscellaneous
 ---
 
-
-
-Isolated DNA from the following samples:
+Isolated DNA from the following 23 samples:
 
 -  6128_112_9
 -  6204_114_9
@@ -42,6 +40,20 @@ Isolated DNA from the following samples:
 -  6190_256_12
 
 
+Isolated DNA using the [Quick DNA/RNA Microprep Kit](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ZymoResearch_quick-dna-rna_microprep_plus_kit_20190411.pdf) (ZymoResearch; PDF) according to the manufacturer's protocol for liquids/cells in RNAlater.
+
+- Used 35uL from each RNAlater/hemocyte slurry.
+
+- Mixed with equal volume of H<sub>2</sub>O (35uL).
+
+- Retained DNA on the Zymo-Spin IC-XM columns for isolation after RNA isolation.
+
+- DNA was eluted in 15uL H<sub>2</sub>O
+
+DNA was quantified on the Roberts Lab Qubit 3.0 using the 1x DNA High Sensitivity Assay (Invitrogen), using 2uL of each sample.
+
+Two samples were too concentrated, so those two samples were re-quantified using 1uL of sample.
+
 ---
 
 #### RESULTS
@@ -50,6 +62,7 @@ Qubit results (Google Sheet):
 
 - [20200117_qubit_cbai_DNA](https://docs.google.com/spreadsheets/d/12pVDjM5EkiPHdcILZBhZsn9m4ftXfVy8SC5rUr9zySM/edit?usp=sharing)
 
+Got DNA from all samples, despite the fact that [I didn't get any RNA from them...]()
 
 Samples were stored at -80<sup>o</sup>C in:
 
