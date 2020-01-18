@@ -14,7 +14,7 @@ categories:
 TL;DR - Recovered absolutely no RNA from any sample! However, [I did recover DNA from each sample]().
 
 
-Isolated RNA from the following samples:
+Isolated RNA from the following 23 hemolymph pellet samples:
 
 -  6128_112_9
 -  6204_114_9
@@ -40,6 +40,19 @@ Isolated RNA from the following samples:
 -  6204_252_12
 -  6190_256_12
 
+Isolated RNA using the [Quick DNA/RNA Microprep Kit](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ZymoResearch_quick-dna-rna_microprep_plus_kit_20190411.pdf) (ZymoResearch; PDF) according to the manufacturer's protocol for liquids/cells in RNAlater.
+
+- Used 35uL from each RNAlater/hemocyte slurry.
+
+- Mixed with equal volume of H<sub>2</sub>O (35uL).
+
+- Retained DNA on the Zymo-Spin IC-XM columns for isolation after RNA isolation.
+
+- Performed on-column DNase step.
+
+- RNA was eluted in 15uL H<sub>2</sub>O
+
+RNA was quantified on the Roberts Lab Qubit 3.0 using the RNA High Sensitivity Assay (Invitrogen), using 2uL of each sample.
 
 ---
 
