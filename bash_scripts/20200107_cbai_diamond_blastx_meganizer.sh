@@ -19,20 +19,32 @@ acc2eggnog=/home/sam/data/databases/MEGAN/acc2eggnog-Jul2019X.abin
 
 
 ## Inititalize arrays
-l001_array=()
-l002_array=()
+l001_array_R1=()
+l001_array_R2=()
+l002_array_R1=()
+l002_array_R2=()
 daa_array_R1=()
 daa_array_R2=()
 
 # Create arrays for sequencing lanes
-for daa in *L001*
+for daa in *L001_R1*
 do
-  l001_array+=("${daa}")
+  l001_array_R1+=("${daa}")
 done
 
-for daa in *L002*
+for daa in *L001_R2*
 do
-  l002_array+=("${daa}")
+  l001_array_R2+=("${daa}")
+done
+
+for daa in *l002_array_R1*
+do
+  l002_array_R1+=("${daa}")
+done
+
+for daa in *l002_array_R2*
+do
+  l002_array_R2+=("${daa}")
 done
 
 # Create array of DAA R1 files
