@@ -64,6 +64,18 @@ do
     cat "${l001_array_R2[index]}"
     cat "${l002_array_R2[index]}"
   } >> "${sample_name}"_R2.blastx.cat.daa
+
+  # Log concatenations
+
+  (
+  echo "Joining these two R1 files:"
+  echo ""
+  echo "${l001_array_R1[index]} and ${l002_array_R1[index]}"
+  echo "--------------------"
+  echo "Joining these two R2 files:"
+  echo "${l001_array_R2[index]} and ${l002_array_R2[index]}"
+  echo "--------------------"
+  ) >> daa_concatenation_log.txt
 done
 
 # Create array of DAA R1 files
