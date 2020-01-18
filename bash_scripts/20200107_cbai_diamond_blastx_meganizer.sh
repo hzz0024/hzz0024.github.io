@@ -52,9 +52,9 @@ for index in "${!daa_array_R1[@]}"
 do
   sample_name=$(echo "${daa_array_R1[index]}" | awk -F "_" '{print $1}')
   {
-    cat ${daa_array_R1[index]}
-    cat ${daa_array_R2[index]}
-  } >> ${sample_name}.blastx.cat.daa
+    cat "${daa_array_R1[index]}"
+    cat "${daa_array_R2[index]}"
+  } >> "${sample_name}".blastx.cat.daa
 done
 
 ## Run MEGANIZER
