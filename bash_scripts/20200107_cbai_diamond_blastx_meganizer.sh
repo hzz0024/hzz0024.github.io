@@ -37,12 +37,12 @@ do
   l001_array_R2+=("${daa}")
 done
 
-for daa in *l002_array_R1*
+for daa in *L002_array_R1*
 do
   l002_array_R1+=("${daa}")
 done
 
-for daa in *l002_array_R2*
+for daa in *L002_array_R2*
 do
   l002_array_R2+=("${daa}")
 done
