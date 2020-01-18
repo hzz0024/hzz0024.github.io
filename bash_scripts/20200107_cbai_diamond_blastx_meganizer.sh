@@ -47,6 +47,18 @@ do
   l002_array_R2+=("${daa}")
 done
 
+
+
+# Concatenate R1 and R2 DAA files
+for index in "${!l001_array[@]}"
+do
+  sample_name=$(echo "${l001_array[index]}" | awk -F "_" '{print $1}')
+  {
+    cat "${l001_array[index]}"
+    cat "${l002_array[index]}"
+  } >> "${sample_name}".blastx.cat.daa
+done
+
 # Create array of DAA R1 files
 for daa in *R1*.cat.daa
 do
@@ -57,16 +69,6 @@ done
 for daa in *R2*.cat.daa
 do
   daa_array_R2+=("${daa}")
-done
-
-# Concatenate R1 and R2 DAA files
-for index in "${!l001_array[@]}"
-do
-  sample_name=$(echo "${l001_array[index]}" | awk -F "_" '{print $1}')
-  {
-    cat "${l001_array[index]}"
-    cat "${l002_array[index]}"
-  } >> "${sample_name}".blastx.cat.daa
 done
 
 ## Run MEGANIZER
