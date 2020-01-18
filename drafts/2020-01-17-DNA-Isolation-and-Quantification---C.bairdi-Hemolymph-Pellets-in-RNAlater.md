@@ -66,4 +66,4 @@ Got DNA from all samples, despite the fact that [I didn't get any RNA from them.
 
 Samples were stored at -80<sup>o</sup>C in:
 
-[Rack 6, 4, 1](http://b.link/srlab-80C) in [C.bairdi gDNA Box #1]()
+[Rack 6, 4, 1](http://b.link/srlab-80C) in [C.bairdi gDNA Box #1](https://docs.google.com/spreadsheets/d/1D09mPvwDReuUNR36p_BrlrNfev_Ko1F83W4EKdAO6bk/edit?usp=sharing)
