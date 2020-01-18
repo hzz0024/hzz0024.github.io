@@ -57,13 +57,13 @@ do
   {
     cat "${l001_array_R1[index]}"
     cat "${l002_array_R1[index]}"
-  } >> "${sample_name}"R1_.blastx.cat.daa
+  } >> "${sample_name}"_R1.blastx.cat.daa
 
   # Concatenate R2 DAA files
   {
     cat "${l001_array_R2[index]}"
     cat "${l002_array_R2[index]}"
-  } >> "${sample_name}"R2_.blastx.cat.daa
+  } >> "${sample_name}"_R2.blastx.cat.daa
 done
 
 # Create array of DAA R1 files
