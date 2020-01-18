@@ -50,13 +50,20 @@ done
 
 
 # Concatenate R1 and R2 DAA files
-for index in "${!l001_array[@]}"
+for index in "${!l001_array_R1[@]}"
 do
-  sample_name=$(echo "${l001_array[index]}" | awk -F "_" '{print $1}')
+  sample_name=$(echo "${l001_array_R1[index]}" | awk -F "_" '{print $1}')
+  #  Concatenate R1 DAA files
   {
-    cat "${l001_array[index]}"
-    cat "${l002_array[index]}"
-  } >> "${sample_name}".blastx.cat.daa
+    cat "${l001_array_R1[index]}"
+    cat "${l002_array_R1[index]}"
+  } >> "${sample_name}"R1_.blastx.cat.daa
+
+  # Concatenate R2 DAA files
+  {
+    cat "${l001_array_R2[index]}"
+    cat "${l002_array_R2[index]}"
+  } >> "${sample_name}"R2_.blastx.cat.daa
 done
 
 # Create array of DAA R1 files
