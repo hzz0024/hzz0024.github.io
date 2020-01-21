@@ -159,6 +159,10 @@ echo "Runtime was: ${runtime} seconds"
 
 #### RESULTS
 
+Runtime was just a bit over one day:
+
+![DIAMOND BLASTx runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200103_cbai_diamond_blastx_runtime.png?raw=true)
+
 Output folder:
 
 - [20200103_cbai_diamond_blastx/](https://gannet.fish.washington.edu/Atumefaciens/20200103_cbai_diamond_blastx/)
