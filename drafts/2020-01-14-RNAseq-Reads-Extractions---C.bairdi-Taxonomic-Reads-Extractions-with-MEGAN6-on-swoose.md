@@ -48,14 +48,25 @@ NOTE: This will take a long time _and_ will require a significant amount of disk
 
 After that has completed, use the MEGAN6 GUI to "Open" the RMA6 file. Once the file loads, you will get a nice looking taxonomic tree! From here, you can select any part of the taxonomic tree by right-clicking on the desired taxonomy and "Extract reads...". Here, you have the option to include "Summarized reads". This option allows you to extract just the reads that are part of the exact classification you've selected or all those within and "below" the classification you've selected (i.e. summarized reads).
 
+Extracted reads will be generated as FastA files.
+
 Example:
 
 If you select _Arthropoda_ and _do not_ check the box for "Summarized Reads" you will _only get reads classified as Arthropoda_! You will not get any reads with more specific taxonomies. However, if you select _Arthropoda_ and you _do_ check the box for "Summarized Reads", you will get all reads classified as _Arthropoda_ _AND_ all reads in more specific taxonomic classifications, down to the species level.
+
+
 
 ---
 
 #### RESULTS
 
+I put the RMA6 files in [the original DIAMOND BLASTx/meganization folder from 20200103](https://robertslab.github.io/sams-notebook/2020/01/03/Transcriptome-Annotation-C.bairdi-Using-DIAMOND-BLASTx-on-Mox-and-MEGAN6-Meganizer.html), as it seemed to make most sense organizational-wise to keep those together.
+
 Output folder:
 
-- []()
+- [20200103_cbai_diamond_blastx/](https://gannet.fish.washington.edu/Atumefaciens/20200103_cbai_diamond_blastx/)
+
+
+I put the extracted reads (FastA) here:
+
+- [20200114_cbai_MEGAN_read_extractions/](https://gannet.fish.washington.edu/Atumefaciens/20200114_cbai_MEGAN_read_extractions/)
