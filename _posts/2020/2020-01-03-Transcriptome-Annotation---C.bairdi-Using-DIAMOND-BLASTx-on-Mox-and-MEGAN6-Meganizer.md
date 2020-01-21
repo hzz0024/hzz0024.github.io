@@ -159,7 +159,7 @@ echo "Runtime was: ${runtime} seconds"
 
 #### RESULTS
 
-Runtime was just a bit over one day:
+Runtime was just a bit over two days (but, it sat in the queue for a full day before being able to run):
 
 ![DIAMOND BLASTx runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200103_cbai_diamond_blastx_runtime.png?raw=true)
 
