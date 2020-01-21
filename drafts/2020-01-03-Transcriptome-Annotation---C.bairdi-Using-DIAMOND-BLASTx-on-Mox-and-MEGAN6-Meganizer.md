@@ -19,7 +19,7 @@ I also realized that the MEGAN6 software that I'd previously used for metagenomi
 
 To start this process, the trimmed reads need to be annotated using DIAMOND BLASTx. Then, the DIAMOND output files need to be "meganized" for importing to MEGAN6.
 
-DIAMOND BLASTx took place on Mox, while "meganization" took place on my lab computer (`swoose`); this is due to the way that MEGAN6 uses Java - it doesn't properly on Mox.
+DIAMOND BLASTx took place on Mox, while "meganization" took place on my lab computer (`swoose`); this is due to the way that MEGAN6 uses Java - it doesn't run properly on Mox.
 
 SBATCH script (GitHub):
 
