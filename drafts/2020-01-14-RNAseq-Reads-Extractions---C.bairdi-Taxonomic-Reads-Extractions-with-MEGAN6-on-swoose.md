@@ -70,3 +70,36 @@ Output folder:
 I put the extracted reads (FastA) here:
 
 - [20200114_cbai_MEGAN_read_extractions/](https://gannet.fish.washington.edu/Atumefaciens/20200114_cbai_MEGAN_read_extractions/)
+
+
+#### Taxonomic Trees
+
+##### 304428
+
+![304428 MEGAN6 taxonomic tree](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200103_cbai_diamond_blastx_MEGAN_import_304428.png?raw=true)
+
+---
+
+##### 329774
+
+![329774 MEGAN6 taxonomic tree](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200103_cbai_diamond_blastx_MEGAN_import_329774.png?raw=true)
+
+---
+
+##### 329775
+
+![329775 MEGAN6 taxonomic tree](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200103_cbai_diamond_blastx_MEGAN_import_329775.png?raw=true)
+
+---
+
+##### 329776
+
+![329776 MEGAN6 taxonomic tree](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200103_cbai_diamond_blastx_MEGAN_import_329776.png?raw=true)
+
+---
+
+##### 329777
+
+![329777 MEGAN6 taxonomic tree](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200103_cbai_diamond_blastx_MEGAN_import_329777.png?raw=true)
+
+---
