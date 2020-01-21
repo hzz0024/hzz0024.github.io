@@ -54,7 +54,11 @@ Example:
 
 If you select _Arthropoda_ and _do not_ check the box for "Summarized Reads" you will _only get reads classified as Arthropoda_! You will not get any reads with more specific taxonomies. However, if you select _Arthropoda_ and you _do_ check the box for "Summarized Reads", you will get all reads classified as _Arthropoda_ _AND_ all reads in more specific taxonomic classifications, down to the species level.
 
+I will extract reads from two phyla:
 
+- _Arthropoda_ (for crabs)
+
+- _Alveolata_ (for _Hematodinium_)
 
 ---
 
@@ -70,6 +74,9 @@ Output folder:
 I put the extracted reads (FastA) here:
 
 - [20200114_cbai_MEGAN_read_extractions/](https://gannet.fish.washington.edu/Atumefaciens/20200114_cbai_MEGAN_read_extractions/)
+
+
+One good thing to see was that the samples that were considered "uninfected" (based on PCR/qPCR data) had no reads classified as _Alveolata_ (see samples 329775 and 329777 below).
 
 
 #### Taxonomic Trees
