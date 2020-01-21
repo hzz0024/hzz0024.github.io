@@ -46,7 +46,11 @@ This will initiate the import process and will create a special MEGAN file: RMA6
 NOTE: This will take a long time _and_ will require a significant amount of disk space! The final files aren't ridiculously large, but the intermediate file that gets generated quickly becomes extremely large (i.e. hundreds of GB)!
 
 
+After that has completed, use the MEGAN6 GUI to "Open" the RMA6 file. Once the file loads, you will get a nice looking taxonomic tree! From here, you can select any part of the taxonomic tree by right-clicking on the desired taxonomy and "Extract reads...". Here, you have the option to include "Summarized reads". This option allows you to extract just the reads that are part of the exact classification you've selected or all those within and "below" the classification you've selected (i.e. summarized reads).
 
+Example:
+
+If you select _Arthropoda_ and _do not_ check the box for "Summarized Reads" you will _only get reads classified as Arthropoda_! You will not get any reads with more specific taxonomies. However, if you select _Arthropoda_ and you _do_ check the box for "Summarized Reads", you will get all reads classified as _Arthropoda_ _AND_ all reads in more specific taxonomic classifications, down to the species level.
 
 ---
 
