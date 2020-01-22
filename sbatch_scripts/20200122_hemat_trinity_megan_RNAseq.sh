@@ -74,7 +74,7 @@ R2_list=$(echo "${R2_array[@]}" | tr " " ",")
 # Run Trinity using "stranded" setting (--SS_lib_type)
 ${trinity_dir}/Trinity \
 --seqType fq \
---max_memory 500G \
+--max_memory 120G \
 --CPU ${threads} \
 --SS_lib_type RF \
 --left "${R1_list}" \
