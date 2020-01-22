@@ -41,7 +41,7 @@ Here's a brief rundown of the approach:
 
 2. Use list with `seqtk` program to pull out corresponding FastQ reads from the trimmed FastQ R1 and R2 files.
 
-The entire procedure is documented in a Jupyter Notebook below. 
+The entire procedure is documented in a Jupyter Notebook below.
 
 Jupyter notebook (GitHub):
 
@@ -52,6 +52,6 @@ Jupyter notebook (GitHub):
 
 Output folders:
 
-- [20200121.C_bairdi_megan_reads](https://gannet.fish.washington.edu/Atumefaciens/20200121.C_bairdi_megan_reads/)
+- [20200122.C_bairdi_megan_reads](https://gannet.fish.washington.edu/Atumefaciens/20200122.C_bairdi_megan_reads/)
 
-- [20200121.Hematodinium_megan_reads/](https://gannet.fish.washington.edu/Atumefaciens/20200121.Hematodinium_megan_reads/)
+- [20200122.Hematodinium_megan_reads/](https://gannet.fish.washington.edu/Atumefaciens/20200122.Hematodinium_megan_reads/)
