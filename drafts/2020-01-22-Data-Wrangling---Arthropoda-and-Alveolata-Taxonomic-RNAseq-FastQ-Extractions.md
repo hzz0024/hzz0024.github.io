@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Data Wrangling - Arthropoda and Alveolata Taxonomic RNAseq FastQ Extractions
-date: '2020-01-21 13:45'
+date: '2020-01-22 13:45'
 tags:
   - arthropoda
   - alveolata
