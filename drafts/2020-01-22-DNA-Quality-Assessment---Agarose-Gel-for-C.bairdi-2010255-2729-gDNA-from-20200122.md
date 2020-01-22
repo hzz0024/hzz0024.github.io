@@ -13,9 +13,31 @@ tags:
 categories:
   - Miscellaneous
 ---
+Earlier today, [I isolated gDNA from _C.bairdi_ 20102558-2729 ethanol-preserved muscle tissue using the Quick DNA/RNA MicroPrep Plus Kit (ZymoResearch)]() and prepared the tissue in three different ways to see how they would compare:
 
+Ran 10uL of each sample on a 0.8% agarose, 1x low TAE gel with ethidium bromide.
+
+Used the GeneRuler DNA Ladder Mix (ThermoFisher) as ladder.
 
 
 ---
 
 #### RESULTS
+
+Ladder:
+
+![ThermoFisher GeneRuler DNA Ladder Mix](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ThermoFisher_OgeneRuler_DNA_Ladder_Mix_F100439.jpg?raw=true)
+
+---
+
+From left to right, gel was loaded:
+
+- Ladder
+
+- "damp" sample prep
+
+- "dry" sample prep
+
+- "minced" sample prep
+
+![]()
