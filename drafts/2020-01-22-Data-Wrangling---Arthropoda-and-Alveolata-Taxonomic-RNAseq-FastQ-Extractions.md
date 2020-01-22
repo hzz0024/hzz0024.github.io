@@ -55,3 +55,6 @@ Output folders:
 - [20200122.C_bairdi_megan_reads](https://gannet.fish.washington.edu/Atumefaciens/20200122.C_bairdi_megan_reads/)
 
 - [20200122.Hematodinium_megan_reads/](https://gannet.fish.washington.edu/Atumefaciens/20200122.Hematodinium_megan_reads/)
+
+
+We now have to distinct sets of RNAseq reads to create separate transcriptome assemblies from _C.bairdi_ (_Arhtropoda_) and _Hematodinium_ (_Alveolata_)! Will get _de novo_ assemblies with Trinity going on Mox.
