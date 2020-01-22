@@ -23,6 +23,8 @@ categories:
 
 #### RESULTS
 
-Output folder:
+Output folders:
 
-- []()
+- [20200121.C_bairdi_megan_reads](https://gannet.fish.washington.edu/Atumefaciens/20200121.C_bairdi_megan_reads/)
+
+- [20200121.Hematodinium_megan_reads/](https://gannet.fish.washington.edu/Atumefaciens/20200121.Hematodinium_megan_reads/)
