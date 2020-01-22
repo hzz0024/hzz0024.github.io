@@ -16,11 +16,36 @@ tags:
 categories:
   - Miscellaneous
 ---
+After using MEGAN6 to [extract _Arthropoda_ and _Alveolata_ reads from our RNAseq data on 20200114](https://robertslab.github.io/sams-notebook/2020/01/14/RNAseq-Reads-Extractions-C.bairdi-Taxonomic-Reads-Extractions-with-MEGAN6-on-swoose.html), I realized that the FastA headers were incomplete and did not distinguish between paired reads. Here's an example:
 
+R1 FastQ header:
+
+`@A00147:37:HG2WLDMXX:1:1101:5303:1000 1:N:0:AGGCGAAG+AGGCGAAG`
+
+R2 FastQ header:
+
+`@A00147:37:HG2WLDMXX:1:1101:5303:1000 2:N:0:AGGCGAAG+AGGCGAAG`
+
+However, the reads extracted via MEGAN have FastA headers like this:
+
+>A00147:37:HG2WLDMXX:1:1101:5303:1000
+SEQUENCE1
+>A00147:37:HG2WLDMXX:1:1101:5303:1000
+SEQUENCE2
+
+Those are a set of paired reads, but there's no way to distinguish between R1/R2. This may not be an issue, but I'm not sure how downstream programs (i.e. Trinity) will handle duplicate FastA IDs as inputs. To avoid any headaches, I've decided to parse out the corresponding FastQ reads which have the full header info.
+
+Here's a brief rundown of the approach:
+
+1. Create list of unique read headers from MEGAN6 FastA files.
+
+2. Use list with `seqtk` program to pull out corresponding FastQ reads from the trimmed FastQ R1 and R2 files.
+
+The entire procedure is documented in a Jupyter Notebook below. 
 
 Jupyter notebook (GitHub):
 
-- [20200121_swoose_cbai_megan_read_extractions.ipynb](https://github.com/RobertsLab/code/blob/master/notebooks/sam/20200121_swoose_cbai_megan_read_extractions.ipynb)
+- [20200122_swoose_cbai_megan_read_extractions.ipynb](https://github.com/RobertsLab/code/blob/master/notebooks/sam/20200122_swoose_cbai_megan_read_extractions.ipynb)
 ---
 
 #### RESULTS
