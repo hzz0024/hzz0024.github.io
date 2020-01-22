@@ -34,11 +34,11 @@ echo "${PATH}" | tr : \\n
 } >> system_path.log
 
 # User-defined variables
-reads_dir=/gscratch/scrubbed/samwhite/outputs/20191218_cbai_fastp_RNAseq_trimming
+reads_dir=/gscratch/srlab/sam/data/C_bairdi/RNAseq
 threads=27
 assembly_stats=assembly_stats.txt
 timestamp=$(date +%Y%m%d)
-fasta_name="${timestamp}.C_bairdi.Trinity.fasta"
+fasta_name="${timestamp}.C_bairdi.megan.Trinity.fasta"
 
 # Paths to programs
 trinity_dir="/gscratch/srlab/programs/trinityrnaseq-v2.9.0"
@@ -54,14 +54,14 @@ R1_list=""
 R2_list=""
 
 # Create array of fastq R1 files
-R1_array=(${reads_dir}/*_R1_*.gz)
+R1_array=(${reads_dir}/*_R1.fq)
 
 # Create array of fastq R2 files
-R2_array=(${reads_dir}/*_R2_*.gz)
+R2_array=(${reads_dir}/*_R2.fq)
 
 # Create list of fastq files used in analysis
 ## Uses parameter substitution to strip leading path from filename
-for fastq in ${reads_dir}/*.gz
+for fastq in ${reads_dir}/*.fq
 do
   echo "${fastq##*/}" >> fastq.list.txt
 done
