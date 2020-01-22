@@ -8,7 +8,7 @@
 ## Nodes
 #SBATCH --nodes=1
 ## Walltime (days-hours:minutes:seconds format)
-#SBATCH --time=30-00:00:00
+#SBATCH --time=10-00:00:00
 ## Memory per node
 #SBATCH --mem=120G
 ##turn on e-mail notification
@@ -38,7 +38,7 @@ reads_dir=/gscratch/srlab/sam/data/C_bairdi/RNAseq
 threads=27
 assembly_stats=assembly_stats.txt
 timestamp=$(date +%Y%m%d)
-fasta_name="${timestamp}.C_bairdi.megan.Trinity.fasta"
+fasta_name="${timestamp}.hemat.megan.Trinity.fasta"
 
 # Paths to programs
 trinity_dir="/gscratch/srlab/programs/trinityrnaseq-v2.9.0"
