@@ -23,6 +23,11 @@ So, to test out whether or not the degradation was due to the inherent age/prese
 
 - minced: where the damp sample was minced with a razor blade and incubate in 300uL of 1x DNA/RNA Shield with 30uL PK Digestion Buffer and 15uL of Proteinase K solution at 55<sup>o</sup>C for 5hrs.
 
+The remainder of the manufacturer's protocol was followed.
+
+Samples were eluted in 30uL of H<sub>2</sub>O.
+
+Samples were quantified on the Roberts Lab Qubit 3.0 using 1uL of each sample with the 1x dsDNA High Sensitivity Assay.
 
 ---
 
