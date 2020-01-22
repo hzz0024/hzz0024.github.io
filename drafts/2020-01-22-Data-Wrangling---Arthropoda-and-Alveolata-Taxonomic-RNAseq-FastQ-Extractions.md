@@ -28,10 +28,12 @@ R2 FastQ header:
 
 However, the reads extracted via MEGAN have FastA headers like this:
 
+```
 >A00147:37:HG2WLDMXX:1:1101:5303:1000
 SEQUENCE1
 >A00147:37:HG2WLDMXX:1:1101:5303:1000
 SEQUENCE2
+```
 
 Those are a set of paired reads, but there's no way to distinguish between R1/R2. This may not be an issue, but I'm not sure how downstream programs (i.e. Trinity) will handle duplicate FastA IDs as inputs. To avoid any headaches, I've decided to parse out the corresponding FastQ reads which have the full header info.
 
