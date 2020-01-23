@@ -15,7 +15,7 @@ tags:
 categories:
   - Miscellaneous
 ---
-Ran a _de novo_ assembly using [the extracted reads classfied under _Alveolata_ from 20200122].(https://robertslab.github.io/sams-notebook/2020/01/22/Data-Wrangling-Arthropoda-and-Alveolata-Taxonomic-RNAseq-FastQ-Extractions.html) The assembly was performed with Trinity on Mox.
+Ran a _de novo_ assembly using [the extracted reads classified under _Alveolata_ from 20200122].(https://robertslab.github.io/sams-notebook/2020/01/22/Data-Wrangling-Arthropoda-and-Alveolata-Taxonomic-RNAseq-FastQ-Extractions.html) The assembly was performed with Trinity on Mox.
 
 
 SBATCH script (GitHub):
