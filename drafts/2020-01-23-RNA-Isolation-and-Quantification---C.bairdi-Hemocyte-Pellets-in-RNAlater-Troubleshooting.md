@@ -2,7 +2,7 @@
 layout: post
 title: RNA Isolation and Quantification - C.bairdi Hemocyte Pellets in RNAlater Troubleshooting
 date: '2020-01-23 09:59'
-tags: 
+tags:
   - Chionoecetes bairdi
   - Tanner crab
   - RNA
@@ -10,7 +10,7 @@ tags:
   - Quick DNA-RNA Microprep
   - Qubit3.0
   - Qubit hsRNA assay
-categories: 
+categories:
   - Miscellaneous
 ---
 
@@ -19,8 +19,3 @@ categories:
 ---
 
 #### RESULTS
-
-Output folder:
-
-- []()
-
