@@ -51,7 +51,7 @@ fasta=/gscratch/srlab/sam/data/Hematodinium/transcriptomes/20200122.hemat.megan.
 
 # Strip leading path and extensions
 no_path=$(echo "${fastq##*/}")
-no_ext=$(echo "${no_path%%.*}")
+no_ext=$(echo "${no_path%.*}")
 
 # Run DIAMOND with blastx
 # Output format 6 produces a standard BLAST tab-delimited file

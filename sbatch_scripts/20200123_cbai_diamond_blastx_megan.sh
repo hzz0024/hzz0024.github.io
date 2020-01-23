@@ -51,7 +51,7 @@ fasta=/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20200122.C_bairdi.megan.T
 
 # Strip leading path and extensions
 no_path=$(echo "${fastq##*/}")
-no_ext=$(echo "${no_path%%.*}")
+no_ext=$(echo "${no_path%.*}")
 
 # Run DIAMOND with blastx
 # Output format 6 produces a standard BLAST tab-delimited file
