@@ -126,4 +126,58 @@ trinity_out_dir/${fasta_name}
 
 Output folder:
 
-- []()
+- [20200122_hemat_trinity_megan_RNAseq](https://gannet.fish.washington.edu/Atumefaciens/20200122_hemat_trinity_megan_RNAseq/)
+
+Assembly (FastA; 20MB):
+
+- [20200122_hemat_trinity_megan_RNAseq/trinity_out_dir/20200122.hemat.megan.Trinity.fasta](https://gannet.fish.washington.edu/Atumefaciens/20200122_hemat_trinity_megan_RNAseq/trinity_out_dir/20200122.hemat.megan.Trinity.fasta)
+
+FastA Index (FAI):
+
+- [20200122_hemat_trinity_megan_RNAseq/trinity_out_dir/20200122.hemat.megan.Trinity.fasta.fai](https://gannet.fish.washington.edu/Atumefaciens/20200122_hemat_trinity_megan_RNAseq/trinity_out_dir/20200122.hemat.megan.Trinity.fasta.fai)
+
+Trinity Gene Trans Map (txt):
+
+- [20200122_hemat_trinity_megan_RNAseq/trinity_out_dir/20200122.hemat.megan.Trinity.fasta.gene_trans_map](https://gannet.fish.washington.edu/Atumefaciens/20200122_hemat_trinity_megan_RNAseq/trinity_out_dir/20200122.hemat.megan.Trinity.fasta.gene_trans_map)
+
+Assembly Stats (txt):
+
+- [20200122_hemat_trinity_megan_RNAseq/assembly_stats.txt](https://gannet.fish.washington.edu/Atumefaciens/20200122_hemat_trinity_megan_RNAseq/assembly_stats.txt)
+
+```shell
+################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':	13835
+Total trinity transcripts:	19699
+Percent GC: 53.41
+
+########################################
+Stats based on ALL transcript contigs:
+########################################
+
+	Contig N10: 3563
+	Contig N20: 2593
+	Contig N30: 2037
+	Contig N40: 1708
+	Contig N50: 1440
+
+	Median contig length: 744
+	Average contig: 1010.81
+	Total assembled bases: 19912002
+
+
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+
+	Contig N10: 3195
+	Contig N20: 2333
+	Contig N30: 1880
+	Contig N40: 1576
+	Contig N50: 1312
+
+	Median contig length: 635
+	Average contig: 899.16
+	Total assembled bases: 12439838
+```
