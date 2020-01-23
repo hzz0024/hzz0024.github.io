@@ -39,3 +39,17 @@ RNA was quantified on the Roberts Lab Qubit 3.0 using the RNA High Sensitivity A
 ---
 
 #### RESULTS
+
+Qubit restuls (Google Sheet):
+
+- [20200123_qubit_cbai_RNA](https://docs.google.com/spreadsheets/d/1Ka90NEt3kHtSU0dSBCZYAiQQL-u3O5c1Y56rqG-Luz8/edit?usp=sharing)
+
+| Sample ID  | [RNA] (ng/uL) | Total (ng) |
+|------------|---------------|------------|
+| 6128_112_9 | 17.1          | 222.3      |
+| 6204_114_9 | 5.37          | 69.81      |
+| 6141_123_9 | 13.1          | 170.3      |
+| 6245_126_9 | 17.2          | 223.6      |
+
+
+Well, well, well! The isolation worked this time! Not sure what went wrong last time. Ugh. However, I'm stoked that things worked and will now plow ahead with the remainder of the samples (again)!
