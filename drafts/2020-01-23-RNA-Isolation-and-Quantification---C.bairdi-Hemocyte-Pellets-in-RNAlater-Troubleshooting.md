@@ -13,8 +13,28 @@ tags:
 categories:
   - Miscellaneous
 ---
+[After the failure to obtain RNA from _any_ _C.bairdi_ hemocytes pellets (out of 24 samples processed) on 20200117](https://robertslab.github.io/sams-notebook/2020/01/17/RNA-Isolation-and-Quantification-C.bairdi-Hemolymph-Pellets-in-RNAlater.html), I decided to isolate RNA from just a subset of that group to determine if I screwed something up last time or something. Also, I am testing two different preparations of the kit-supplied DNase I: one Kaitlyn prepped and a fresh preparation that I made. Admittedly, I'm not doing the "proper" testing by trying the different DNase preps on the same exact sample, but it'll do. I just want to see if I get some RNA from these samples this time...
 
+Isolated RNA from the following 4 hemolymph pellet samples:
 
+- 6128_112_9 (Kaitlyn DNase)
+- 6204_114_9 (Kaitlyn DNase)
+- 6141_123_9 (Sam DNase)
+- 6245_126_9 (Sam DNase)
+
+Isolated RNA using the [Quick DNA/RNA Microprep Kit](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ZymoResearch_quick-dna-rna_microprep_plus_kit_20190411.pdf) (ZymoResearch; PDF) according to the manufacturer's protocol for liquids/cells in RNAlater.
+
+- Used 35uL from each RNAlater/hemocyte slurry.
+
+- Mixed with equal volume of H<sub>2</sub>O (35uL).
+
+- Retained DNA on the Zymo-Spin IC-XM columns for isolation after RNA isolation.
+
+- Performed on-column DNase step.
+
+- RNA was eluted in 15uL H<sub>2</sub>O
+
+RNA was quantified on the Roberts Lab Qubit 3.0 using the RNA High Sensitivity Assay (Invitrogen), using 2uL of each sample.
 
 ---
 
