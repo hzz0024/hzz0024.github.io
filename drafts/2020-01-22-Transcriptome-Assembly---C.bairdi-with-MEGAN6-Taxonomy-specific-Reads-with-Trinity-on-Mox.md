@@ -125,4 +125,60 @@ trinity_out_dir/${fasta_name}
 
 Output folder:
 
-- []()
+- [20200122_cbai_trinity_megan_RNAseq/](https://gannet.fish.washington.edu/Atumefaciens/20200122_cbai_trinity_megan_RNAseq/)
+
+Assembly (FastA; 20MB):
+
+- [20200122_cbai_trinity_megan_RNAseq/trinity_out_dir/20200122.C_bairdi.megan.Trinity.fasta](https://gannet.fish.washington.edu/Atumefaciens/20200122_cbai_trinity_megan_RNAseq/trinity_out_dir/20200122.C_bairdi.megan.Trinity.fasta)
+
+FastA Index (FAI):
+
+- [20200122_cbai_trinity_megan_RNAseq/trinity_out_dir/20200122.C_bairdi.megan.Trinity.fasta.fai](https://gannet.fish.washington.edu/Atumefaciens/20200122_cbai_trinity_megan_RNAseq/trinity_out_dir/20200122.C_bairdi.megan.Trinity.fasta.fai)
+
+Trinity Gene Trans Map (txt):
+
+- [20200122_cbai_trinity_megan_RNAseq/trinity_out_dir/20200122.C_bairdi.megan.Trinity.fasta.gene_trans_map](https://gannet.fish.washington.edu/Atumefaciens/20200122_cbai_trinity_megan_RNAseq/trinity_out_dir/20200122.C_bairdi.megan.Trinity.fasta.gene_trans_map)
+
+Assembly stats (txt):
+
+- [20200122_cbai_trinity_megan_RNAseq/assembly_stats.txt](https://gannet.fish.washington.edu/Atumefaciens/20200122_cbai_trinity_megan_RNAseq/assembly_stats.txt)
+
+---
+
+```
+################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':	13803
+Total trinity transcripts:	19670
+Percent GC: 53.46
+
+########################################
+Stats based on ALL transcript contigs:
+########################################
+
+	Contig N10: 3528
+	Contig N20: 2555
+	Contig N30: 2029
+	Contig N40: 1708
+	Contig N50: 1431
+
+	Median contig length: 745
+	Average contig: 1007.16
+	Total assembled bases: 19810930
+
+
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+
+	Contig N10: 3186
+	Contig N20: 2340
+	Contig N30: 1889
+	Contig N40: 1584
+	Contig N50: 1312
+
+	Median contig length: 635
+	Average contig: 899.22
+	Total assembled bases: 12411973
+	```
