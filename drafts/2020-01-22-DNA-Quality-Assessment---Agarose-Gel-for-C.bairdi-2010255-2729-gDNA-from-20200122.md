@@ -13,7 +13,7 @@ tags:
 categories:
   - Miscellaneous
 ---
-Earlier today, [I isolated gDNA from _C.bairdi_ 20102558-2729 ethanol-preserved muscle tissue using the Quick DNA/RNA MicroPrep Plus Kit (ZymoResearch)]() and prepared the tissue in three different ways to see how they would compare:
+Earlier today, [I isolated gDNA from _C.bairdi_ 20102558-2729 ethanol-preserved muscle tissue using the Quick DNA/RNA MicroPrep Plus Kit (ZymoResearch)](https://robertslab.github.io/sams-notebook/2020/01/22/DNA-Isolation-C.bairdi-20102558-2729-EtOH-preserved-Tissue-via-Three-Variations-Using-Quick-DNA-RNA-MicroPrep-Kit.html) and prepared the tissue in three different ways to see how they would compare:
 
 Ran 10uL of each sample on a 0.8% agarose, 1x low TAE gel with ethidium bromide.
 
