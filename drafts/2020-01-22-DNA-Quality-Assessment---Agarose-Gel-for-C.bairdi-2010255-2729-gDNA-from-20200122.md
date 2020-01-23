@@ -40,4 +40,9 @@ From left to right, gel was loaded:
 
 - "minced" sample prep
 
-![]()
+![Gel image](https://github.com/RobertsLab/sams-notebook/blob/master/images/20200122_gel_cbai_quick-DNA.jpg?raw=true)
+
+
+Well, all three preps look the same - very degraded. This is virtually the same as what I saw using the E.Z.N.A. Mollusc Kit (Omega). Looke like we'll have to pursue a different route to get high quality gDNA for long read sequencing.
+
+Will talk to Grace to see if we have extra hemolymph samples in RNAlater that I can try to get gDNA from and see if that gDNA looks any better.
