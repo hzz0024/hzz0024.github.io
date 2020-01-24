@@ -125,6 +125,10 @@ mkdir "${pfam_out_dir}"
 
 #### RESULTS
 
+Runtime was a bit < 5hrs:
+
+![Transdecoder runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200123_hemat_transdecoder_megan.png?raw=true)
+
 Output folder:
 
 - [20200123_hemat_transdecoder_megan/](https://gannet.fish.washington.edu/Atumefaciens/20200123_hemat_transdecoder_megan/)
