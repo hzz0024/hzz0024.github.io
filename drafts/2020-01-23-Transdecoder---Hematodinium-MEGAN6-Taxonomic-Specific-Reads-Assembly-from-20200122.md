@@ -127,4 +127,22 @@ mkdir "${pfam_out_dir}"
 
 Output folder:
 
-- []()
+- [20200123_hemat_transdecoder_megan/](https://gannet.fish.washington.edu/Atumefaciens/20200123_hemat_transdecoder_megan/)
+
+Coding Sequences (FastA):
+
+- [20200123_hemat_transdecoder_megan/20200122.hemat.megan.Trinity.fasta.transdecoder.cds](https://gannet.fish.washington.edu/Atumefaciens/20200123_hemat_transdecoder_megan/20200122.hemat.megan.Trinity.fasta.transdecoder.cds)
+
+Peptide Sequences (FastA):
+
+- [20200123_hemat_transdecoder_megan/20200122.hemat.megan.Trinity.fasta.transdecoder.pep](https://gannet.fish.washington.edu/Atumefaciens/20200123_hemat_transdecoder_megan/20200122.hemat.megan.Trinity.fasta.transdecoder.pep)
+
+BLASTp output (tab):
+
+- [20200123_hemat_transdecoder_megan/blastp_out/20200123.hemat.blastp.outfmt6](https://gannet.fish.washington.edu/Atumefaciens/20200123_hemat_transdecoder_megan/blastp_out/20200123.hemat.blastp.outfmt6)
+
+Pfam output:
+
+- [20200123_hemat_transdecoder_megan/pfam_out/20200123.hemat.pfam.domtblout](https://gannet.fish.washington.edu/Atumefaciens/20200123_hemat_transdecoder_megan/pfam_out/20200123.hemat.pfam.domtblout)
+
+Will get ready to run Trinotate with these output files.
