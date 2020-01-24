@@ -50,7 +50,7 @@ dmnd=/gscratch/srlab/blastdbs/uniprot_sprot_20200123/uniprot_sprot.dmnd
 fasta=/gscratch/srlab/sam/data/Hematodinium/transcriptomes/20200122.hemat.megan.Trinity.fasta
 
 # Strip leading path and extensions
-no_path=$(echo "${fastq##*/}")
+no_path=$(echo "${fasta##*/}")
 no_ext=$(echo "${no_path%.*}")
 
 # Run DIAMOND with blastx
