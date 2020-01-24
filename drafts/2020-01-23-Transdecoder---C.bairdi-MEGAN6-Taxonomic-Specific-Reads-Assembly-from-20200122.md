@@ -127,6 +127,10 @@ mkdir "${pfam_out_dir}"
 
 #### RESULTS
 
+Runtime was ~5hrs:
+
+![Transdecoder runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200123_cbai_transdecoder_megan_runtime.png?raw=true)
+
 Output folder:
 
 - [20200123_cbai_transdecoder_megan](https://gannet.fish.washington.edu/Atumefaciens/20200123_cbai_transdecoder_megan/)
