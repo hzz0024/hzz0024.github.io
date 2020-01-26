@@ -8,6 +8,8 @@ tags:
 categories:
   - Miscellaneous
 ---
+[Ran Trinity to _de novo_ assembly on the the _C.bairdi_ MEGAN6 taxonomic-specific RNAseq data on 201200122](https://robertslab.github.io/sams-notebook/2020/01/22/Transcriptome-Assembly-C.bairdi-with-MEGAN6-Taxonomy-specific-Reads-with-Trinity-on-Mox.html) and now will begin annotating the transcriptome using TransDecoder on Mox.
+
 
 SBATCH script (GitHub):
 
