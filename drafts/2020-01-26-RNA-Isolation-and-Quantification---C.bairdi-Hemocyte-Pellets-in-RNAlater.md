@@ -70,3 +70,24 @@ RNA was stored in the [-80<sub>o</sup>C freezer](http://b.link/srlab-80C) in [Sh
 Qubit restuls (Google Sheet):
 
 - [20200126_qubit_cbai_RNA](https://docs.google.com/spreadsheets/d/1KTqkx4s1eZG2Y0gtqHvW9J9h9ebRBTYZp35NzlQCsMs/edit?usp=sharing)
+
+
+| Sample ID   | [RNA](ng/uL) |
+|-------------|--------------|
+| 6202_337_12 | 23.7         |
+| 6142_474_26 | 14.4         |
+| 6144_477_26 | 20.3         |
+| 6122_489_26 | 8.32         |
+| 6176_490_26 | 10.7         |
+| 6136_491_26 | 7.37         |
+| 6137_500_26 | 13.8         |
+| 6125_503_26 | 7.12         |
+| 6145_505_26 | 4.7          |
+| 6131_507_26 | 8.9          |
+| 6159_508_26 | 7.74         |
+| 6206_509_26 | 9.75         |
+| 6150_511_26 | 4.12         |
+| 6161_512_26 | 10.9         |
+| 6115_514_26 | 5.96         |
+| 6179_515_26 | 7.23         |
+| 6172_517_26 | Out of range |
