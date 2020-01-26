@@ -99,6 +99,8 @@ Isolated RNA using the [Quick DNA/RNA Microprep Kit](https://github.com/RobertsL
 
 RNA was quantified on the Roberts Lab Qubit 3.0 using the RNA High Sensitivity Assay (Invitrogen), using 2uL of each sample.
 
+RNA was stored in the [-80<sub>o</sup>C freezer](http://b.link/srlab-80C) in [Shellfish RNA Box #7](https://docs.google.com/spreadsheets/d/1ax6C-muxUTXxFEtfWdswBvueLhmxZzmwZcO2ur-0q-Q/edit#gid=1549162576) and [Shellfish Box #8](https://docs.google.com/spreadsheets/d/1ax6C-muxUTXxFEtfWdswBvueLhmxZzmwZcO2ur-0q-Q/edit#gid=1794729843).
+
 ---
 
 #### RESULTS
