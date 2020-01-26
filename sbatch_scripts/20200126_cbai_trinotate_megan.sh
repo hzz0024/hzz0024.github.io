@@ -58,8 +58,10 @@ lORFs_pep="/gscratch/scrubbed/samwhite/outputs/20200123_cbai_transdecoder_megan/
 trinity_fasta="/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20200122.C_bairdi.megan.Trinity.fasta"
 trinity_gene_map="/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20200122.C_bairdi.megan.Trinity.fasta.gene_trans_map"
 
+rnammer_prefix=${trinity_fasta##*/}
+
 # Output files
-rnammer_out="${rnammer_out_dir}/${prefix}.rnammer.gff"
+rnammer_out="${rnammer_out_dir}/${rnammer_prefix}.rnammer.gff"
 signalp_out="${signalp_out_dir}/${prefix}.signalp.out"
 tmhmm_out="${tmhmm_out_dir}/${prefix}.tmhmm.out"
 trinotate_report="${wd}/${prefix}_annotation_report.txt"
