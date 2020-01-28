@@ -31,7 +31,7 @@ DNA was quantified on the Roberts Lab Qubit 3.0 using the 1x DNA High Sensitivit
 
 Qubit results (Google Sheet):
 
-- [20200128_qubit_cbai_DNA]()
+- [20200128_qubit_cbai_DNA](https://docs.google.com/spreadsheets/d/1fiWEyRMX1A5zuIi9FOsOorTotJg1mrqQKy75fULB6GU/edit?usp=sharing)
 
 Samples were stored at -80<sup>o</sup>C in:
 
