@@ -13,13 +13,23 @@ tags:
 categories:
   - Miscellaneous
 ---
-Isolated DNA using the [Quick DNA/RNA Microprep Kit](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ZymoResearch_quick-dna-rna_microprep_plus_kit_20190411.pdf) (ZymoResearch; PDF) according to the manufacturer's protocol for liquids/cells in RNAlater.
+Isolated DNA from 56 samples (see Qubit spreadsheet in "Results" below for sample IDs) using the [Quick DNA/RNA Microprep Kit](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ZymoResearch_quick-dna-rna_microprep_plus_kit_20190411.pdf) (ZymoResearch; PDF) according to the manufacturer's protocol for liquids/cells in RNAlater.
+
+These samples were from RNA isolations on the following dates:
+
+- 20200126(https://robertslab.github.io/sams-notebook/2020/01/26/RNA-Isolation-and-Quantification-C.bairdi-Hemocyte-Pellets-in-RNAlater.html)
+
+- [20200124](https://robertslab.github.io/sams-notebook/2020/01/24/RNA-Isolation-and-Quantification-C.bairdi-Hemocyte-Pellets-in-RNAlater.html)
+
+- [20200123](https://robertslab.github.io/sams-notebook/2020/01/23/RNA-Isolation-and-Quantification-C.bairdi-Hemocyte-Pellets-in-RNAlater-Troubleshooting.html)
+
+Brief rundown of method:
 
 - Used 35uL from each RNAlater/hemocyte slurry.
 
 - Mixed with equal volume of H<sub>2</sub>O (35uL).
 
-- Retained DNA on the Zymo-Spin IC-XM columns for isolation after RNA isolation.
+- Retained DNA on the Zymo-Spin IC-XM columns at 4<sup>o</sup>C for isolation after RNA isolation.
 
 - DNA was eluted in 15uL H<sub>2</sub>O
 
@@ -32,6 +42,8 @@ DNA was quantified on the Roberts Lab Qubit 3.0 using the 1x DNA High Sensitivit
 Qubit results (Google Sheet):
 
 - [20200128_qubit_cbai_DNA](https://docs.google.com/spreadsheets/d/1fiWEyRMX1A5zuIi9FOsOorTotJg1mrqQKy75fULB6GU/edit?usp=sharing)
+
+Overall, the yields aren't particularly great and are significantly lower than [when I previously "co-isolated" RNA/DNA using this kit on 20200117](https://robertslab.github.io/sams-notebook/2020/01/17/DNA-Isolation-and-Quantification-C.bairdi-Hemolymph-Pellets-in-RNAlater.html) (~6.6ng/uL vs. ~32.6ng/uL). The primary difference between today and 20200117 is that today's samples had been stored on the column for multiple days, whereas the samples from 20200117 were isolated immediately after the RNA isolation procedure was completed. Interesting...
 
 Samples were stored at -80<sup>o</sup>C in:
 
