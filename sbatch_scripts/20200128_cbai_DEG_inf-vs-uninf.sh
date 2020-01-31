@@ -54,6 +54,37 @@ declare -A sample_day_array=( [329774]=D12 [329775]=D12 [329776]=D26 [329777]=D2
 
 
 
+# Comparisons
+
+inf_vs_uninf
+counter=0
+for fastq in ${trimmed_reads_dir}/20200131*.fq
+do
+	fastq_nopath=${fastq##*/}
+	sample=$(echo ${fastq_nopath} | awk -F "." '{print $3}')
+	if [[ "${sample}" = "329774"]] || [[ "${sample}" = "329775" ]]; then
+		#statements
+		(( counter ++ ))
+		inf_status=${inf_status_array[${sample}]}
+		sample_day=${sample_day_array[$sample]}
+		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_${counter}" "${fastq}"
+	fi
+done
+
+
+
+d12_vs_d26
+
+d12.inf_vs_d12.uninf
+
+d12.inf_vs_d26.inf
+
+d12.uninf_vs_d26_uninf
+
+d26_inf_vs_d26_uninf
+
+
+
 ## Set input file locations
 trimmed_reads_dir="/gscratch/srlab/sam/data/C_bairdi/RNAseq"
 salmon_out_dir=""
@@ -61,12 +92,12 @@ transcriptome_dir="/gscratch/srlab/sam/data/C_bairdi/transcriptomes"
 transcriptome="${transcriptome_dir}/${fasta_prefix}.fasta"
 fasta_index="${transcriptome_dir}/${fasta_prefix}.fasta.fai"
 fasta_seq_lengths="${transcriptome_dir}/${fasta_prefix}.seq_lens"
-samples="${transcriptome_dir}/20200126.cbai.trinotate.go_annotations.txt"
+samples=""
 
 gene_map="${transcriptome_dir}/${fasta_prefix}.gene_trans_map"
 salmon_gene_matrix="${salmon_out_dir}/salmon.gene.TMM.EXPR.matrix"
 salmon_iso_matrix="${salmon_out_dir}/salmon.isoform.TMM.EXPR.matrix"
-go_annotations=""
+go_annotations="${transcriptome_dir}/20200126.cbai.trinotate.go_annotations.txt"
 
 
 # Standard output/error files
