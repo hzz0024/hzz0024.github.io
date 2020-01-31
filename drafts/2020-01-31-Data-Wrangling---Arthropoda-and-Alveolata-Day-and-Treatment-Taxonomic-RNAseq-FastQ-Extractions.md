@@ -14,6 +14,27 @@ After using MEGAN6 to [extract _Arthropoda_ and _Alveolata_ reads from our RNAse
 
 For gene expression analysis, I need the FastQs based on infection status and sample days. So, I need to modify the read extraction procedure to parse reads based on those conditions. I could've/should've done this originally, as I could've just assembled the transcriptome from the FastQs I'm going to generate now. Oh well.
 
+As a reminder, the reason I'm doing this is that I realized that the FastA headers were incomplete and did not distinguish between paired reads. Here's an example:
+
+R1 FastQ header:
+
+`@A00147:37:HG2WLDMXX:1:1101:5303:1000 1:N:0:AGGCGAAG+AGGCGAAG`
+
+R2 FastQ header:
+
+`@A00147:37:HG2WLDMXX:1:1101:5303:1000 2:N:0:AGGCGAAG+AGGCGAAG`
+
+However, the reads extracted via MEGAN have FastA headers like this:
+
+```
+>A00147:37:HG2WLDMXX:1:1101:5303:1000
+SEQUENCE1
+>A00147:37:HG2WLDMXX:1:1101:5303:1000
+SEQUENCE2
+```
+
+Those are a set of paired reads, but there's no way to distinguish between R1/R2. This may not be an issue, but I'm not sure how downstream programs (i.e. Trinity) will handle duplicate FastA IDs as inputs. To avoid any headaches, I've decided to parse out the corresponding FastQ reads which have the full header info.
+
 Anyway, here's a brief rundown of the approach:
 
 1. Create list of unique read headers from MEGAN6 FastA files.
