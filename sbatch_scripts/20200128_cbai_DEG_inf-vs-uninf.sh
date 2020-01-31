@@ -44,6 +44,12 @@ threads=28
 prefix="${timestamp}.${species}"
 fasta_prefix="20200122.C_bairdi.megan.Trinity"
 
+# Declare empty arrays
+fastq_R1_array=()
+fastq_R2_array=()
+
+declare -A read_pairs_array=()
+
 # Create associate arrays
 
 ## Infection status
@@ -51,7 +57,23 @@ declare -A inf_status_array=( [329774]=infected [329775]=uninfected [329776]=inf
 ## Sampling day
 declare -A sample_day_array=( [329774]=D12 [329775]=D12 [329776]=D26 [329777]=D26 )
 
+for fastq in ${trimmed_reads_dir}/20200131*R1*.fq
+do
+	fastq_R1_array+=(${fastq})
+done
 
+
+for fastq in ${trimmed_reads_dir}/20200131*R2*.fq
+do
+	fastq_R2_array+=(${fastq})
+done
+
+for index in "${!fastq_R1_array[@]}"
+do
+	R1=${fastq_R1_array[index]}
+	R2=${fastq_R2_array[index]}
+	read_pairs_array+=([$R1]=$R2)
+done
 
 
 # Comparisons
