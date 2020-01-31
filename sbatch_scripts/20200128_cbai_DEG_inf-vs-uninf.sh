@@ -89,7 +89,8 @@ do
 		(( counter ++ ))
 		inf_status=${inf_status_array[${sample}]}
 		sample_day=${sample_day_array[$sample]}
-		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_${counter}" "${fastq}"
+		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
+		>> inf_vs_uninf.samples.txt
 	fi
 done
 
