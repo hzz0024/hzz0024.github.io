@@ -48,7 +48,7 @@ fasta_prefix="20200122.C_bairdi.megan.Trinity"
 fastq_R1_array=()
 fastq_R2_array=()
 
-declare -A read_pairs_array=()
+declare -A read_pairs_array
 
 # Create associate arrays
 
@@ -80,7 +80,7 @@ done
 
 inf_vs_uninf
 counter=0
-for fastq in ${trimmed_reads_dir}/20200131*.fq
+for fastq in ${!read_pairs_array[@]}
 do
 	fastq_nopath=${fastq##*/}
 	sample=$(echo ${fastq_nopath} | awk -F "." '{print $3}')
