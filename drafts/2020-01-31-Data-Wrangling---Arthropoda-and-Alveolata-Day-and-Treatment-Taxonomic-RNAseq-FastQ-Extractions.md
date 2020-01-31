@@ -30,6 +30,11 @@ Jupyter notebook (GitHub):
 
 #### RESULTS
 
-Output folder:
+Output folders:
 
-- []()
+- [20200131.C_bairdi_megan_reads](https://gannet.fish.washington.edu/Atumefaciens/20200131.C_bairdi_megan_reads/)
+
+- [20200131.Hematodinium_megan_reads/](https://gannet.fish.washington.edu/Atumefaciens/20200131.Hematodinium_megan_reads/)
+
+
+We now have to distinct sets of RNAseq reads from _C.bairdi_ (_Arhtropoda_) and _Hematodinium_ (_Alveolata_), split by infection status and sample day! Will get some gene expression analysis going.
