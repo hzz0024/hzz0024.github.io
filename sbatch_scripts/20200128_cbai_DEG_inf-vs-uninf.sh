@@ -42,7 +42,7 @@ species="cbai"
 threads=28
 
 prefix="${timestamp}.${species}"
-
+fasta_prefix="20200122.C_bairdi.megan.Trinity"
 
 # Create associate arrays
 
@@ -51,16 +51,19 @@ declare -A inf_status_array=( [329774]=infected [329775]=uninfected [329776]=inf
 ## Sampling day
 declare -A sample_day_array=( [329774]=D12 [329775]=D12 [329776]=D26 [329777]=D26 )
 
+
+
+
 ## Set input file locations
-trimmed_reads_dir=""
+trimmed_reads_dir="/gscratch/srlab/sam/data/C_bairdi/RNAseq"
 salmon_out_dir=""
 transcriptome_dir="/gscratch/srlab/sam/data/C_bairdi/transcriptomes"
-transcriptome="${transcriptome_dir}/20200122.C_bairdi.megan.Trinity.fasta"
-fasta_index="${transcriptome_dir}/20200122.C_bairdi.megan.Trinity.fasta.fai"
-fasta_seq_lengths=""
-samples=""
+transcriptome="${transcriptome_dir}/${fasta_prefix}.fasta"
+fasta_index="${transcriptome_dir}/${fasta_prefix}.fasta.fai"
+fasta_seq_lengths="${transcriptome_dir}/${fasta_prefix}.seq_lens"
+samples="${transcriptome_dir}/20200126.cbai.trinotate.go_annotations.txt"
 
-gene_map=""
+gene_map="${transcriptome_dir}/${fasta_prefix}.gene_trans_map"
 salmon_gene_matrix="${salmon_out_dir}/salmon.gene.TMM.EXPR.matrix"
 salmon_iso_matrix="${salmon_out_dir}/salmon.isoform.TMM.EXPR.matrix"
 go_annotations=""
