@@ -43,6 +43,14 @@ threads=28
 
 prefix="${timestamp}.${species}"
 
+
+# Create associate arrays
+
+## Infection status
+declare -A inf_status_array=( [329774]=infected [329775]=uninfected [329776]=infected [329777]=uninfected )
+## Sampling day
+declare -A sample_day_array=( [329774]=D12 [329775]=D12 [329776]=D26 [329777]=D26 )
+
 ## Set input file locations
 trimmed_reads_dir=""
 salmon_out_dir=""
