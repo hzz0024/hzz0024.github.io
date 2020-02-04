@@ -50,7 +50,16 @@ fastq_R2_array=()
 
 declare -A read_pairs_array
 
-# Create associate arrays
+# Create comparisons array
+comparisons=(
+"infected-vs-uninfected" \
+"Day 12-vs-Day 26" \
+"Day 12 infected-vs-Day 12 uninfected" \
+"Day 12 uninfected-vs-Day 26 uninfected" \
+"Day 26 infected-vs-Day 26 uninfected"
+)
+
+# Create associative arrays
 
 ## Infection status
 declare -A inf_status_array=( [329774]=infected [329775]=uninfected [329776]=infected [329777]=uninfected )
