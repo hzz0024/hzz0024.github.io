@@ -56,6 +56,7 @@ comparisons=(
 "Day 12-vs-Day 26" \
 "Day 12 infected-vs-Day 12 uninfected" \
 "Day 12 uninfected-vs-Day 26 uninfected" \
+"Day 12 infected-vs-Day 26 infected" \
 "Day 26 infected-vs-Day 26 uninfected"
 )
 
