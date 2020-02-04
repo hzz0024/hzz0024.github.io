@@ -53,7 +53,7 @@ declare -A read_pairs_array
 # Create comparisons array
 comparisons=(
 "infected-vs-uninfected" \
-"Day_12-vs-Day _26" \
+"Day_12-vs-Day_26" \
 "Day_12_infected-vs-Day_12_uninfected" \
 "Day_12_uninfected-vs-Day_26_uninfected" \
 "Day_12_infected-vs-Day_26_infected" \
