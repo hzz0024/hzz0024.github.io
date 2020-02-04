@@ -110,53 +110,51 @@ do
 	inf_check1=$(echo ${comparisons[${comparison}]} | awk -F[_-] '{print $2}')
 	inf_check2=$(echo ${comparisons[${comparison}]} | awk -F[_-] '{print $5}')
 
-  # If the field_count is equal to 3
-	# then we know the comparison is either inf_vs_uninf or d12_vs_d26
-	if [[ ${field_count} -eq 3 ]]; then
-		# If the inf_check string matches "infected", then print the associated values to sample file
-	  if [[ "${inf_check}" == "infected" ]]; then
-			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
-				(( counter ++ ))
-	  		sample_list
-			else
-				if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
-					(( counter ++ ))
-		  		sample_list
-				fi
-			fi
-	  fi
-	else
-		if [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D12" ]]; then
-			#statements
-			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
-	  		(( counter ++ ))
-	  		sample_list
-			elif [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D26" ]] && [[ "${inf_check1}" == "uninfected" ]] && [[ "${inf_check2}" == "uninfected" ]]; then
-				#statements
-				if [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329777" ]]; then
-		  		(( counter ++ ))
-		  		sample_list
-				fi
-			elif [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D26" ]] && [[ "${inf_check1}" == "infected" ]] && [[ "${inf_check2}" == "infected" ]]; then
-				#statements
-				if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329776" ]]; then
-		  		(( counter ++ ))
-		  		sample_list
-				fi
-			else
-				if [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
-			  		(( counter ++ ))
-			  		sample_list
-				fi
-		fi
-	fi
-  for fastq in ${!read_pairs_array[@]}
+	for fastq in ${!read_pairs_array[@]}
   do
   	fastq_nopath=${fastq##*/}
   	sample=$(echo ${fastq_nopath} | awk -F "." '{print $3}')
 		inf_status=${inf_status_array[${sample}]}
 		sample_day=${sample_day_array[$sample]}
-
+    # If the field_count is equal to 3
+  	# then we know the comparison is either inf_vs_uninf or d12_vs_d26
+  	if [[ ${field_count} -eq 3 ]]; then
+  		# If the inf_check string matches "infected", then print the associated values to sample file
+  	  if [[ "${inf_check}" == "infected" ]]; then
+  			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
+  				(( counter ++ ))
+  	  		sample_list
+  			else
+  				if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
+  					(( counter ++ ))
+  		  		sample_list
+  				fi
+  			fi
+  	  fi
+  	else
+  		if [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D12" ]]; then
+  			#statements
+  			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
+  	  		(( counter ++ ))
+  	  		sample_list
+  			elif [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D26" ]] && [[ "${inf_check1}" == "uninfected" ]] && [[ "${inf_check2}" == "uninfected" ]]; then
+  				#statements
+  				if [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329777" ]]; then
+  		  		(( counter ++ ))
+  		  		sample_list
+  				fi
+  			elif [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D26" ]] && [[ "${inf_check1}" == "infected" ]] && [[ "${inf_check2}" == "infected" ]]; then
+  				#statements
+  				if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329776" ]]; then
+  		  		(( counter ++ ))
+  		  		sample_list
+  				fi
+  			else
+  				if [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
+  			  		(( counter ++ ))
+  			  		sample_list
+  				fi
+  		fi
   	fi
   done
 done
