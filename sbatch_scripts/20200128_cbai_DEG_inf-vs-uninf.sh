@@ -53,11 +53,11 @@ declare -A read_pairs_array
 # Create comparisons array
 comparisons=(
 "infected-vs-uninfected" \
-"Day 12-vs-Day 26" \
-"Day 12 infected-vs-Day 12 uninfected" \
-"Day 12 uninfected-vs-Day 26 uninfected" \
-"Day 12 infected-vs-Day 26 infected" \
-"Day 26 infected-vs-Day 26 uninfected"
+"Day_12-vs-Day _26" \
+"Day_12_infected-vs-Day_12_uninfected" \
+"Day_12_uninfected-vs-Day_26_uninfected" \
+"Day_12_infected-vs-Day_26_infected" \
+"Day_26_infected-vs-Day_26_uninfected"
 )
 
 # Create associative arrays
