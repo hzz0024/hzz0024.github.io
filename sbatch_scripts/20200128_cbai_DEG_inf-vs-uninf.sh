@@ -91,22 +91,24 @@ done
 for comparison in ${!comparisons[@]}
 do
 	counter=0
+
+	# Record number of fiels in comparison
 	field_count=$(echo ${comparisons[${comparison}]} | awk -F[_-] '{print NF}')
 
 
-
+  # If the field_count is equal to 3
+	# then we know the comparison is either inf_vs_uninf or d12_vs_d26
 	if [[ ${field_count} -eq 3 ]]; then
-		#statements
+		# Capture string in first field of comnparisons
 		inf_check=$(echo ${comparisons[${comparison}]} | awk -F[_-] '{print $1}')
+		# If the inf_check string matches "infected", then print the associated values to sample file
 	  if [[ "${inf_check}" == "infected" ]]; then
-		  #statements
+		  #Infected samples should match the IDs listed
 			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]]; then
-	  		#statements
 	  		(( counter ++ ))
 	  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
 	  		>> inf_vs_uninf.samples.txt
 			elif [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
-				#statements
 				(( counter ++ ))
 	  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
 	  		>> inf_vs_uninf.samples.txt
