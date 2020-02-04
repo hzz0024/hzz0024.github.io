@@ -160,17 +160,6 @@ do
 done
 
 
-d12_vs_d26
-
-d12.inf_vs_d12.uninf
-
-d12.inf_vs_d26.inf
-
-d12.uninf_vs_d26_uninf
-
-d26_inf_vs_d26_uninf
-
-
 
 ## Set input file locations
 trimmed_reads_dir="/gscratch/srlab/sam/data/C_bairdi/RNAseq"
