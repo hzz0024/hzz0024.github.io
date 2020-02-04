@@ -88,22 +88,23 @@ done
 
 # Comparisons
 
-inf_vs_uninf
-counter=0
-for fastq in ${!read_pairs_array[@]}
+for comparison in ${!comparisons[@]}
 do
-	fastq_nopath=${fastq##*/}
-	sample=$(echo ${fastq_nopath} | awk -F "." '{print $3}')
-	if [[ "${sample}" = "329774"]] || [[ "${sample}" = "329775" ]]; then
-		#statements
-		(( counter ++ ))
-		inf_status=${inf_status_array[${sample}]}
-		sample_day=${sample_day_array[$sample]}
-		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
-		>> inf_vs_uninf.samples.txt
-	fi
+  counter=0
+  for fastq in ${!read_pairs_array[@]}
+  do
+  	fastq_nopath=${fastq##*/}
+  	sample=$(echo ${fastq_nopath} | awk -F "." '{print $3}')
+  	if [[ "${sample}" = "329774"]] || [[ "${sample}" = "329775" ]]; then
+  		#statements
+  		(( counter ++ ))
+  		inf_status=${inf_status_array[${sample}]}
+  		sample_day=${sample_day_array[$sample]}
+  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
+  		>> inf_vs_uninf.samples.txt
+  	fi
+  done
 done
-
 
 
 d12_vs_d26
