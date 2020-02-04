@@ -72,6 +72,13 @@ do
 	fastq_R1_array+=(${fastq})
 done
 
+# Functions
+## Sample list file formatting
+sample_list () {
+	printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
+	>> "${comparison}.samples.txt"
+}
+
 
 for fastq in ${trimmed_reads_dir}/20200131*R2*.fq
 do
@@ -110,13 +117,11 @@ do
 	  if [[ "${inf_check}" == "infected" ]]; then
 			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
 				(( counter ++ ))
-	  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
-	  		>> inf_vs_uninf.samples.txt
+	  		sample_list
 			else
 				if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
 					(( counter ++ ))
-		  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
-		  		>> inf_vs_uninf.samples.txt
+		  		sample_list
 				fi
 			fi
 	  fi
@@ -125,27 +130,23 @@ do
 			#statements
 			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
 	  		(( counter ++ ))
-	  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
-	  		>> inf_vs_uninf.samples.txt
+	  		sample_list
 			elif [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D26" ]] && [[ "${inf_check1}" == "uninfected" ]] && [[ "${inf_check2}" == "uninfected" ]]; then
 				#statements
 				if [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329777" ]]; then
 		  		(( counter ++ ))
-		  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
-		  		>> inf_vs_uninf.samples.txt
+		  		sample_list
 				fi
 			elif [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D26" ]] && [[ "${inf_check1}" == "infected" ]] && [[ "${inf_check2}" == "infected" ]]; then
 				#statements
 				if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329776" ]]; then
 		  		(( counter ++ ))
-		  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
-		  		>> inf_vs_uninf.samples.txt
+		  		sample_list
 				fi
 			else
 				if [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
 			  		(( counter ++ ))
-			  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
-			  		>> inf_vs_uninf.samples.txt
+			  		sample_list
 				fi
 		fi
 	fi
