@@ -90,18 +90,35 @@ done
 
 for comparison in ${!comparisons[@]}
 do
-  counter=0
+	counter=0
+	field_count=$(echo ${comparisons[${comparison}]} | awk -F[_-] '{print NF}')
+
+
+
+	if [[ ${field_count} -eq 3 ]]; then
+		#statements
+		inf_check=$(echo ${comparisons[${comparison}]} | awk -F[_-] '{print $1}')
+	  if [[ "${inf_check}" == "infected" ]]; then
+		  #statements
+			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]]; then
+	  		#statements
+	  		(( counter ++ ))
+	  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
+	  		>> inf_vs_uninf.samples.txt
+			elif [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
+				#statements
+				(( counter ++ ))
+	  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
+	  		>> inf_vs_uninf.samples.txt
+	  fi
+	fi
   for fastq in ${!read_pairs_array[@]}
   do
   	fastq_nopath=${fastq##*/}
   	sample=$(echo ${fastq_nopath} | awk -F "." '{print $3}')
 		inf_status=${inf_status_array[${sample}]}
 		sample_day=${sample_day_array[$sample]}
-  	if [[ "${sample}" = "329774"]] || [[ "${sample}" = "329775" ]]; then
-  		#statements
-  		(( counter ++ ))
-  		printf "%s\t%s\t%s\t%s\n" "${inf_status}" "${inf_status}_${sample_day}_0${counter}" "${fastq}" "${read_pairs_array[fastq]}" \
-  		>> inf_vs_uninf.samples.txt
+
   	fi
   done
 done
