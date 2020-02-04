@@ -60,16 +60,29 @@ comparisons=(
 "D26_infected-vs-D26_uninfected"
 )
 
-# Create associative arrays
 
+# Create FastQ arrays
+for fastq in ${trimmed_reads_dir}/20200131*R1*.fq
+do
+	fastq_R1_array+=(${fastq})
+done
+
+for fastq in ${trimmed_reads_dir}/20200131*R2*.fq
+do
+	fastq_R2_array+=(${fastq})
+done
+
+# Create associative arrays
 ## Infection status
 declare -A inf_status_array=( [329774]=infected [329775]=uninfected [329776]=infected [329777]=uninfected )
 ## Sampling day
 declare -A sample_day_array=( [329774]=D12 [329775]=D12 [329776]=D26 [329777]=D26 )
-
-for fastq in ${trimmed_reads_dir}/20200131*R1*.fq
+## Paired reads
+for index in "${!fastq_R1_array[@]}"
 do
-	fastq_R1_array+=(${fastq})
+	R1=${fastq_R1_array[index]}
+	R2=${fastq_R2_array[index]}
+	read_pairs_array+=([$R1]=$R2)
 done
 
 # Functions
@@ -80,21 +93,9 @@ sample_list () {
 }
 
 
-for fastq in ${trimmed_reads_dir}/20200131*R2*.fq
-do
-	fastq_R2_array+=(${fastq})
-done
-
-for index in "${!fastq_R1_array[@]}"
-do
-	R1=${fastq_R1_array[index]}
-	R2=${fastq_R2_array[index]}
-	read_pairs_array+=([$R1]=$R2)
-done
 
 
-# Comparisons
-
+# Create sample list files for usage in Trinity based on comparisons array
 for comparison in ${!comparisons[@]}
 do
 	counter=0
@@ -112,19 +113,25 @@ do
 
 	for fastq in ${!read_pairs_array[@]}
   do
+		# Strip leading file path
   	fastq_nopath=${fastq##*/}
+		# Capture sample ID from filename
   	sample=$(echo ${fastq_nopath} | awk -F "." '{print $3}')
+		# Get infection status and sample day based on sample ID
 		inf_status=${inf_status_array[${sample}]}
 		sample_day=${sample_day_array[$sample]}
+		# Start evaluating each of the comparisons
     # If the field_count is equal to 3
   	# then we know the comparison is either inf_vs_uninf or d12_vs_d26
   	if [[ ${field_count} -eq 3 ]]; then
   		# If the inf_check string matches "infected", then print the associated values to sample file
+			# Infected vs. uninfected samples
   	  if [[ "${inf_check}" == "infected" ]]; then
   			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
   				(( counter ++ ))
   	  		sample_list
   			else
+					# D12 vs. D26 samples
   				if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
   					(( counter ++ ))
   		  		sample_list
@@ -132,23 +139,27 @@ do
   			fi
   	  fi
   	else
+			# Day 12 infected vs. uninfected
   		if [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D12" ]]; then
   			#statements
   			if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
   	  		(( counter ++ ))
   	  		sample_list
+				# Day 12 uninfected vs D26 uninfected
   			elif [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D26" ]] && [[ "${inf_check1}" == "uninfected" ]] && [[ "${inf_check2}" == "uninfected" ]]; then
   				#statements
   				if [[ "${sample}" = "329775" ]] || [[ "${sample}" = "329777" ]]; then
   		  		(( counter ++ ))
   		  		sample_list
   				fi
+				# Day 12 infected vs D26 infected
   			elif [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D26" ]] && [[ "${inf_check1}" == "infected" ]] && [[ "${inf_check2}" == "infected" ]]; then
   				#statements
   				if [[ "${sample}" = "329774" ]] || [[ "${sample}" = "329776" ]]; then
   		  		(( counter ++ ))
   		  		sample_list
   				fi
+				# Day 26 infected vs D26 uninfected
   			else
   				if [[ "${sample}" = "329776" ]] || [[ "${sample}" = "329777" ]]; then
   			  		(( counter ++ ))
