@@ -138,6 +138,7 @@ do
   				fi
   			fi
   	  fi
+		fi
   	else
 			# Day 12 infected vs. uninfected
   		if [[ "${day_check1}" == "D12" ]] && [[ "${day_check2}" == "D12" ]]; then
