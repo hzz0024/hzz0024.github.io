@@ -55,7 +55,7 @@ fasta_seq_lengths="${transcriptome_dir}/${fasta_prefix}.seq_lens"
 samples="${wd}/${comparison}.samples.txt"
 
 trinotate_feature_map="/gscratch/scrubbed/samwhite/outputs/20200126_cbai_trinotate_megan/20200126.cbai.trinotate.annotation_feature_map.txt"
-gene_map="${transcriptome_dir}/${fasta_prefix}.gene_trans_map"
+gene_map="${transcriptome_dir}/${fasta_prefix}.fasta.gene_trans_map"
 salmon_gene_matrix="${salmon_out_dir}/salmon.gene.TMM.EXPR.matrix"
 salmon_iso_matrix="${salmon_out_dir}/salmon.isoform.TMM.EXPR.matrix"
 go_annotations="${transcriptome_dir}/20200126.cbai.trinotate.go_annotations.txt"
