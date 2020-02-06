@@ -76,11 +76,13 @@ trinity_DE_stderr="trinity_DE_stderr.txt"
 edgeR_dir=""
 
 #programs
-trinity_abundance=/gscratch/srlab/programs/trinityrnaseq-v2.9.0/util/align_and_estimate_abundance.pl
-trinity_matrix=/gscratch/srlab/programs/trinityrnaseq-v2.9.0/util/abundance_estimates_to_matrix.pl
-trinity_DE=/gscratch/srlab/programs/trinityrnaseq-v2.9.0/Analysis/DifferentialExpression/run_DE_analysis.pl
-diff_expr=/gscratch/srlab/programs/trinityrnaseq-v2.9.0/Analysis/DifferentialExpression/analyze_diff_expr.pl
-trinity_tpm_length=/gscratch/srlab/programs/trinityrnaseq-v2.9.0/util/misc/TPM_weighted_gene_length.py
+trinity_home=/gscratch/srlab/programs/trinityrnaseq-v2.9.0
+
+trinity_abundance=${trinity_home}/util/align_and_estimate_abundance.pl
+trinity_matrix=${trinity_home}/util/abundance_estimates_to_matrix.pl
+trinity_DE=${trinity_home}/Analysis/DifferentialExpression/run_DE_analysis.pl
+diff_expr=${trinity_home}/Analysis/DifferentialExpression/analyze_diff_expr.pl
+trinity_tpm_length=${trinity_home}/util/misc/TPM_weighted_gene_length.py
 
 # Create directory/sample list for ${trinity_matrix} command
 trin_matrix_list=$(awk '{printf "%s%s", $2, "/quant.sf " }' "${samples}")
