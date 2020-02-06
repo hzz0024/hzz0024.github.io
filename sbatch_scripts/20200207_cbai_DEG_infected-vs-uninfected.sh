@@ -114,7 +114,7 @@ ${trinity_matrix} \
 --gene_trans_map ${gene_map} \
 --out_prefix salmon \
 --name_sample_by_basedir \
-"${trin_matrix_list}"\
+${trin_matrix_list}
 1> ${matrix_stdout} \
 2> ${matrix_stderr}
 
