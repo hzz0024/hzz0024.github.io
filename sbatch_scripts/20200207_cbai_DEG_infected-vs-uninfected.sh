@@ -78,7 +78,7 @@ edgeR_dir=""
 
 #programs
 trinity_home=/gscratch/srlab/programs/trinityrnaseq-v2.9.0
-
+trinity_annotate_matrix="${trinity_home}/Analysis/DifferentialExpression/rename_matrix_feature_identifiers.pl"
 trinity_abundance=${trinity_home}/util/align_and_estimate_abundance.pl
 trinity_matrix=${trinity_home}/util/abundance_estimates_to_matrix.pl
 trinity_DE=${trinity_home}/Analysis/DifferentialExpression/run_DE_analysis.pl
@@ -119,6 +119,12 @@ ${trinity_matrix} \
 1> ${matrix_stdout} \
 2> ${matrix_stderr}
 
+# Integrate functional Trinotate functional annotations
+"${trinity_annotate_matrix}" \
+"${trinotate_feature_map}" \
+> salmon.gene.counts.annotated.matrix
+
+
 # Generate weighted gene lengths
 "${trinity_tpm_length}" \
 --gene_trans_map "${gene_map}" \
@@ -130,7 +136,7 @@ ${trinity_matrix} \
 # Differential expression analysis
 cd ${transcriptome_dir}
 ${trinity_DE} \
---matrix ${salmon_out_dir}/salmon.gene.counts.matrix \
+--matrix ${salmon_out_dir}/salmon.gene.counts.annotated.matrix \
 --method edgeR \
 --samples_file ${samples} \
 1> ${trinity_DE_stdout} \
