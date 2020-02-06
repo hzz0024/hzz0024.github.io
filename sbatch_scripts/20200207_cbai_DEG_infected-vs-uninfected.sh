@@ -136,7 +136,7 @@ salmon.gene.counts.matrix \
 # Differential expression analysis
 cd ${transcriptome_dir}
 ${trinity_DE} \
---matrix "${salmon_out_dir}"/salmon.gene.counts.annotated.matrix \
+--matrix "${salmon_out_dir}"/salmon.gene.counts.matrix \
 --method edgeR \
 --samples_file "${samples}" \
 1> ${trinity_DE_stdout} \
