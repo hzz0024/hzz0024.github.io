@@ -82,6 +82,8 @@ trinity_DE=/gscratch/srlab/programs/trinityrnaseq-v2.9.0/Analysis/DifferentialEx
 diff_expr=/gscratch/srlab/programs/trinityrnaseq-v2.9.0/Analysis/DifferentialExpression/analyze_diff_expr.pl
 trinity_tpm_length=/gscratch/srlab/programs/trinityrnaseq-v2.9.0/util/misc/TPM_weighted_gene_length.py
 
+# Create directory/sample list for ${trinity_matrix} command
+trin_matrix_list=$(awk '{printf "%s%s", $2, "/quant.sf " }' "${samples}")
 
 cd ${trimmed_reads_dir}
 time ${trinity_abundance} \
@@ -110,7 +112,7 @@ ${trinity_matrix} \
 --gene_trans_map ${gene_map} \
 --out_prefix salmon \
 --name_sample_by_basedir \
-# NEED directcory/quant.sf - directory comes from samples list 2nd column
+"${trin_matrix_list}"\
 1> ${matrix_stdout} \
 2> ${matrix_stderr}
 
