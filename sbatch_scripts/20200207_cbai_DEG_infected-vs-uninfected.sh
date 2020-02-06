@@ -130,7 +130,7 @@ ${trinity_matrix} \
 --trans_lengths "${fasta_seq_lengths}" \
 --TPM_matrix "${salmon_iso_matrix}" \
 > Trinity.gene_lengths.txt \
-1> ${tpm_length_stdout}
+1> ${tpm_length_stdout} \
 2> ${tpm_length_stderr}
 
 # Differential expression analysis
