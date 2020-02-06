@@ -52,7 +52,7 @@ salmon_out_dir="${wd}"
 transcriptome_dir="/gscratch/srlab/sam/data/C_bairdi/transcriptomes"
 transcriptome="${transcriptome_dir}/${fasta_prefix}.fasta"
 fasta_seq_lengths="${transcriptome_dir}/${fasta_prefix}.seq_lens"
-samples="${comparison}.samples.txt"
+samples="${wd}/${comparison}.samples.txt"
 
 trinotate_feature_map="/gscratch/scrubbed/samwhite/outputs/20200126_cbai_trinotate_megan/20200126.cbai.trinotate.annotation_feature_map.txt"
 gene_map="${transcriptome_dir}/${fasta_prefix}.gene_trans_map"
