@@ -40,6 +40,7 @@ wd="$(pwd)"
 timestamp=$(date +%Y%m%d)
 species="cbai"
 threads=28
+comparison="${wd##*/}"
 
 prefix="${timestamp}.${species}"
 fasta_prefix="20200122.C_bairdi.megan.Trinity"
@@ -76,7 +77,7 @@ transcriptome_dir="/gscratch/srlab/sam/data/C_bairdi/transcriptomes"
 transcriptome="${transcriptome_dir}/${fasta_prefix}.fasta"
 fasta_index="${transcriptome_dir}/${fasta_prefix}.fasta.fai"
 fasta_seq_lengths="${transcriptome_dir}/${fasta_prefix}.seq_lens"
-samples=""
+samples="${comparison}.samples.txt"
 
 gene_map="${transcriptome_dir}/${fasta_prefix}.gene_trans_map"
 salmon_gene_matrix="${salmon_out_dir}/salmon.gene.TMM.EXPR.matrix"
