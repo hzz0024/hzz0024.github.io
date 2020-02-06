@@ -121,6 +121,7 @@ ${trin_matrix_list}
 # Integrate functional Trinotate functional annotations
 "${trinity_annotate_matrix}" \
 "${trinotate_feature_map}" \
+salmon.gene.counts.matrix \
 > salmon.gene.counts.annotated.matrix
 
 
