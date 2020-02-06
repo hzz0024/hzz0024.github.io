@@ -45,30 +45,6 @@ comparison="${wd##*/}"
 prefix="${timestamp}.${species}"
 fasta_prefix="20200122.C_bairdi.megan.Trinity"
 
-# Declare empty arrays
-fastq_R1_array=()
-fastq_R2_array=()
-
-
-# Create FastQ arrays
-for fastq in ${trimmed_reads_dir}/20200131*R1*.fq
-do
-	fastq_R1_array+=(${fastq})
-done
-
-for fastq in ${trimmed_reads_dir}/20200131*R2*.fq
-do
-	fastq_R2_array+=(${fastq})
-done
-
-## Paired reads
-for index in "${!fastq_R1_array[@]}"
-do
-	R1=${fastq_R1_array[index]}
-	R2=${fastq_R2_array[index]}
-	read_pairs_array+=([$R1]=$R2)
-done
-
 
 ## Set input file locations
 trimmed_reads_dir="/gscratch/srlab/sam/data/C_bairdi/RNAseq"
