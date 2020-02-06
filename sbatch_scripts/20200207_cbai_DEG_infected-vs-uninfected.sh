@@ -42,7 +42,7 @@ species="cbai"
 threads=28
 comparison="${wd##*/}"
 
-prefix="${timestamp}.${species}"
+
 fasta_prefix="20200122.C_bairdi.megan.Trinity"
 
 
@@ -51,7 +51,6 @@ trimmed_reads_dir="/gscratch/srlab/sam/data/C_bairdi/RNAseq"
 salmon_out_dir="${wd}"
 transcriptome_dir="/gscratch/srlab/sam/data/C_bairdi/transcriptomes"
 transcriptome="${transcriptome_dir}/${fasta_prefix}.fasta"
-fasta_index="${transcriptome_dir}/${fasta_prefix}.fasta.fai"
 fasta_seq_lengths="${transcriptome_dir}/${fasta_prefix}.seq_lens"
 samples="${comparison}.samples.txt"
 
@@ -131,6 +130,7 @@ ${trinity_matrix} \
 --trans_lengths "${fasta_seq_lengths}" \
 --TPM_matrix "${salmon_iso_matrix}" \
 > Trinity.gene_lengths.txt \
+1> ${tpm_length_stdout}
 2> ${tpm_length_stderr}
 
 # Differential expression analysis
