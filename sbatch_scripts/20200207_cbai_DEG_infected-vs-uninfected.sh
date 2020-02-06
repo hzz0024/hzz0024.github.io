@@ -72,7 +72,7 @@ done
 
 ## Set input file locations
 trimmed_reads_dir="/gscratch/srlab/sam/data/C_bairdi/RNAseq"
-salmon_out_dir=""
+salmon_out_dir="${wd}"
 transcriptome_dir="/gscratch/srlab/sam/data/C_bairdi/transcriptomes"
 transcriptome="${transcriptome_dir}/${fasta_prefix}.fasta"
 fasta_index="${transcriptome_dir}/${fasta_prefix}.fasta.fai"
@@ -121,10 +121,13 @@ time ${trinity_abundance} \
 --thread_count "${threads}" \
 1> ${salmon_out_dir}/${salmon_stdout} \
 2> ${salmon_out_dir}/${salmon_stderr}
+
 # Move output folders
-mv ${trimmed_reads_dir}/[BN]* \
+mv ${trimmed_reads_dir}/[iu]* \
 ${salmon_out_dir}
+
 cd ${salmon_out_dir}
+
 # Convert abundance estimates to matrix
 ${trinity_matrix} \
 --est_method salmon \
