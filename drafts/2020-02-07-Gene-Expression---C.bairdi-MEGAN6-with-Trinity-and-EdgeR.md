@@ -53,7 +53,7 @@ Took ~18mins to run:
 
 - [D12_infected-vs-D26_infected/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_infected-vs-D26_infected)
 
-
+No differentially expressed genes between these two groups.
 
 ---
 
