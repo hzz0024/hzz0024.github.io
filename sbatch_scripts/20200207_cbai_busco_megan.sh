@@ -104,7 +104,7 @@ sed -i "/^hmmsearch_path/ s%hmmsearch_path = /home/osboxes/BUSCOVM/hmmer/hmmer-3
 
 # Run BUSCO/Augustus training
 ${busco} \
---in ${genome_fasta} \
+--in ${transcriptome_fasta} \
 --out ${base_name} \
 --lineage_path ${busco_db} \
 --mode transcriptome \
