@@ -69,7 +69,13 @@ Took ~18mins to run:
 
 ![D12 uninfected vs D26 uninfected runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_cbai_DEG_D12_uninfected-vs-D26_uninfected_runtime.png?raw=true)
 
+No differentially expressed genes between these two groups.
 
+NOTE: Since no DEGs, that's why this run shows as `FAILED` in the above runtime screencap. This log file captures the error message that kills the job and generates the `FAILED` indicator:
+
+[20200207_cbai_DEG/D12_uninfected-vs-D26_uninfected/edgeR.27147.dir/diff_expr_stderr.txt](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_uninfected-vs-D26_uninfected/edgeR.27147.dir/diff_expr_stderr.txt)
+
+`Error, no differentially expressed transcripts identified at cuttoffs: P:0.05, C:1 at /gscratch/srlab/programs/trinityrnaseq-v2.9.0/Analysis/DifferentialExpression/analyze_diff_expr.pl line 203.`
 ---
 
 
