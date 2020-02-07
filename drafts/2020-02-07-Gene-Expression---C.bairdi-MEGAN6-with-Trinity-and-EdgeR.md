@@ -84,10 +84,16 @@ NOTE: Since no DEGs, that's why this run shows as `FAILED` in the above runtime 
 ---
 
 
-
 D12-vs-D26
 
+Took ~40mins to run:
+
+![D12 vs D26 runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_cbai_DEG_D12-vs-D26_runtime.png?raw=true)
+
 - [D12-vs-D26/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12-vs-D26)
+
+
+---
 
 D26_infected-vs-D26_uninfected
 
