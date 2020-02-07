@@ -15,7 +15,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=samwhite@uw.edu
 ## Specify the working directory for this job
-#SBATCH --chdir=/gscratch/scrubbed/samwhite/outputs/gscratch/scrubbed/samwhite/outputs/20200207_cbai_busco_megan
+#SBATCH --chdir=/gscratch/scrubbed/samwhite/outputs/20200207_cbai_busco_megan
 
 # Load Python Mox module for Python module availability
 module load intel-python3_2017
