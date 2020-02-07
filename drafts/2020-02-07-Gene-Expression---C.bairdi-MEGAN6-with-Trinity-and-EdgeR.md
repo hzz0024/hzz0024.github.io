@@ -99,6 +99,13 @@ D26_infected-vs-D26_uninfected
 
 - [D26_infected-vs-D26_uninfected/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D26_infected-vs-D26_uninfected)
 
+
+---
+
 infected-vs-uninfected
+
+Took ~40mins to run:
+
+![infected vs uninfected runtim](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_cbai_DEG_infected-vs-uninfected_runtime.png?raw=true)
 
 - [infected-vs-uninfected/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/infected-vs-uninfected)
