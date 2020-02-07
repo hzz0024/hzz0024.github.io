@@ -26,7 +26,11 @@ Comparisons:
 
 ---
 
-D12_infected-vs-D12_uninfected directory:
+D12_infected-vs-D12_uninfected
+
+Took a little less than 20mins to run:
+
+![Mox runtime for D12 infected vs D12 uninfeced](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_cbai_DEG_D12_infected-vs-D12_uninfected_runtime.png?raw=true)
 
 - [D12_infected-vs-D12_uninfected/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_infected-vs-D12_uninfected)
 
