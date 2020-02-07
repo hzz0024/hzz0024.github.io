@@ -22,11 +22,24 @@ Output folder:
 
 - [20200207_cbai_DEG/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/)
 
-Comparison sub-directories:
+Comparisons:
 
-D12_infected-vs-D12_uninfected
+---
+
+D12_infected-vs-D12_uninfected directory:
 
 - [D12_infected-vs-D12_uninfected/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_infected-vs-D12_uninfected)
+
+Only a single DEG, which is upregulated in the infected set:
+
+![MA/volcano plot of D12 infected vs D12 uninfeced](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_cbai_DEG_D12_infected-vs-D12_uninfected_MA-plot.png?raw=true)
+
+- [salmon.gene.counts.matrix.infected_vs_uninfected.edgeR.DE_results.P0.05_C1.DE.subset](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_infected-vs-D12_uninfected/edgeR.24484.dir/salmon.gene.counts.matrix.infected_vs_uninfected.edgeR.DE_results.P0.05_C1.DE.subset)
+
+TRINITY_DN10191_c0_g1 - [SPID: Q36421](https://www.uniprot.org/uniprot/Q36421) (Cyctochrome c oxidase I)
+
+
+---
 
 D12_infected-vs-D26_infected
 
