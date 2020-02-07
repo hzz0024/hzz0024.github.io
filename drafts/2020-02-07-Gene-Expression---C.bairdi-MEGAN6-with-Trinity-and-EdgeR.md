@@ -47,7 +47,15 @@ TRINITY_DN10191_c0_g1 - [SPID: Q36421](https://www.uniprot.org/uniprot/Q36421) (
 
 D12_infected-vs-D26_infected
 
+Took ~18mins to run:
+
+![D12 infected vs D26 infected runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_cbai_DEG_D12_infected-vs-D26_infected_runtime.png?raw=true)
+
 - [D12_infected-vs-D26_infected/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_infected-vs-D26_infected)
+
+
+
+---
 
 D12_uninfected-vs-D26_uninfected
 
