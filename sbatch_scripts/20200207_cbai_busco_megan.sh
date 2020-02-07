@@ -38,9 +38,12 @@ echo "${PATH}" | tr : \\n
 
 
 # Establish variables for more readable code
+timestamp=$(date +%Y%m%d)
+species="cbai"
+prefix="${timestamp}.${species}"
 
 ## Input files and settings
-base_name=Pgenerosa_v070
+base_name="${prefix}.megan"
 busco_db=/gscratch/srlab/sam/data/databases/BUSCO/metazoa_odb9
 transcriptome_fasta=/gscratch/srlab/sam/data/C_bairdi/transcriptomes/20200122.C_bairdi.megan.Trinity.fasta
 augustus_species=fly
