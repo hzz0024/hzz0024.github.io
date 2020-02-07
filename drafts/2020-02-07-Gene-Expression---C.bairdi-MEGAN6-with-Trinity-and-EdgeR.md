@@ -92,6 +92,7 @@ Took ~40mins to run:
 
 - [D12-vs-D26/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12-vs-D26)
 
+![D12 vs D26 expression heatmap](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_cbai_DEG_D12-vs-D26_trinity_heatmap.png?raw=true)
 
 ---
 
