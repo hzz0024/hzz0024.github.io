@@ -10,6 +10,10 @@ tags:
 categories:
   - Miscellaneous
 ---
+[I previously created a _Hematodinium_ _de novo_ transcriptome assembly with Trinity from the MEGAN6 taxonomic-specific reads for _Alveolata_ on 20200122](https://robertslab.github.io/sams-notebook/2020/01/22/Transcriptome-Assembly-Hematodinium-with-MEGAN6-Taxonomy-specific-Reads-with-Trinity-on-Mox.html) and decided to assess its "completeness" using BUSCO and the `metazoa_odb9` database.
+
+BUSCO was run with the `--mode transcriptome` option on Mox.
+
 
 SBATCH script (GitHub):
 
