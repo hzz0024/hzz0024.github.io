@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Transcrptome Assessment - BUSCO Metazoa on Hematodinium MEGAN Transcriptome
+title: Transcriptome Assessment - BUSCO Metazoa on Hematodinium MEGAN Transcriptome
 date: '2020-02-07 15:34'
-tags: 
+tags:
   - hematodinium
   - BUSCO
   - metazoa
   - MEGAN6
-categories: 
+categories:
   - Miscellaneous
 ---
 
@@ -20,4 +20,3 @@ categories:
 Output folder:
 
 - []()
-
