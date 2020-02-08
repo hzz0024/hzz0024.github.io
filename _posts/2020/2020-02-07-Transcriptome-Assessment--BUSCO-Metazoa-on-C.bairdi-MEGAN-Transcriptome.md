@@ -144,6 +144,10 @@ ${busco} \
 
 #### RESULTS
 
+This was _very_ quick - 1m42s:
+
+![BUSCO runtime](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_cbai_busco_megan_runtime.png?raw=true)
+
 Output folder:
 
 - [20200207_cbai_busco_megan/](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_busco_megan/)
