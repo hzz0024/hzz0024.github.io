@@ -116,7 +116,42 @@ D12 GO enrichment identified zero enriched and five depleted:
 
 - [20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D12-UP.subset.GOseq.depleted](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D12-UP.subset.GOseq.depleted)
 
+  - Only one of these five is in the "biological process" category and it is uncharacterized (i.e. is identified as "biological process").
 
+
+D26 upregulated genes:
+
+- [20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D26-UP.subset](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D26-UP.subset)
+
+- 11 genes:
+
+  - TRINITY_DN4610_c0_g1 - [SP ID: Q9MFN9](https://www.uniprot.org/uniprot/Q9MFN9)(Cytochrome b)
+
+  - TRINITY_DN10370_c0_g1 - [SP ID: P20241](https://www.uniprot.org/uniprot/P20241)(Neuroglian)
+
+  - TRINITY_DN2559_c1_g1 - No annotation.
+
+  - TRINITY_DN5386_c0_g1 - No annotation.
+
+  - TRINITY_DN400_c2_g1 - [SP ID: Q8N587](https://www.uniprot.org/uniprot/Q8N587)(Zinc finger protein 561)
+
+  - TRINITY_DN2969_c0_g2 - No annotation.
+
+  - TRINITY_DN4328_c0_g1 - No annotation.
+
+  - TRINITY_DN8_c11_g1 - No annotation.
+
+  - TRINITY_DN1107_c1_g1 - No annotation.
+
+  - TRINITY_DN2373_c0_g1 - [SP ID: Q4AEI0](https://www.uniprot.org/uniprot/Q4AEI0)(Glutathione peroxidase 2)
+
+  - TRINITY_DN2730_c0_g1 - No annotation.
+
+D26 GO enrichment identified four up-regulated enriched GO terms (all in the "molecular function" category) and five up-regulated depleted GO terms (all in the "biological process" category).
+
+- [20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D26-UP.subset.GOseq.enriched](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D26-UP.subset.GOseq.enriched)
+
+- [20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D26-UP.subset.GOseq.depleted](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D26-UP.subset.GOseq.depleted)
 
 ---
 
