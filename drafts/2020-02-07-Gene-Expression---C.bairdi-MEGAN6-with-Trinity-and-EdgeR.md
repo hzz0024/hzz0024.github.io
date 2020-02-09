@@ -94,6 +94,30 @@ Took ~40mins to run:
 
 ![D12 vs D26 expression heatmap](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_cbai_DEG_D12-vs-D26_trinity_heatmap.png?raw=true)
 
+D12 upregulated genes:
+
+- [20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D12-UP.subset](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D12-UP.subset)
+
+- Five genes:
+
+  - TRINITY_DN4239_c0_g1 - No annotation
+
+  - TRINITY_DN4669_c0_g2 - No annotation
+
+  - TRINITY_DN5346_c0_g2 - No annotation
+
+  - TRINITY_DN12453_c0_g1 - [SP ID: Q6ING4](https://www.uniprot.org/uniprot/Q6ING4)(DEP domain-containing protein 1A)
+
+  - TRINITY_DN8311_c0_g1 - No annotation
+
+D12 GO enrichment identified zero enriched and five depleted:
+
+- [20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D12-UP.subset.GOseq.enriched](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D12-UP.subset.GOseq.enriched)
+
+- [20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D12-UP.subset.GOseq.depleted](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12-vs-D26/edgeR.21229.dir/salmon.gene.counts.matrix.D12_vs_D26.edgeR.DE_results.P0.05_C1.D12-UP.subset.GOseq.depleted)
+
+
+
 ---
 
 D26_infected-vs-D26_uninfected
