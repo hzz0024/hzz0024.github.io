@@ -31,6 +31,10 @@ Used 4uL of sample (~200ng) to run on 1x low-TAE 0.8% agarose gel.
 
 #### RESULTS
 
+UPDATE: I isolated additional DNA later in the day and combined this isolation with the one from later. [See this post](https://robertslab.github.io/sams-notebook/2020/02/10/DNA-Isolation-&-Quantification-Additional-C.bairdi-gDNA-from-Sample-6129_403_26.html). I'll leave the original info below for posterity.
+
+---
+
 Qubit results (Google Sheet):
 
 - [20200210_qubit_crab_gDNA-01](https://docs.google.com/spreadsheets/d/1NGJYpFNaCKFDlK8E-0uhMW_hQvun76uGvi0cTC_r3vM/edit?usp=sharing)
@@ -58,4 +62,4 @@ GeneRuler DNA Ladder Mix (ThermoFisher):
 
 ![gel image of C.bairdi 6129_403_26 gDNA](https://raw.githubusercontent.com/RobertsLab/sams-notebook/master/images/20200210_gel_cbai_6129_403_26_gDNA.jpg)
 
-Alrighty, this gDNA looks significantly better than the two previous attempts using the EtOH-preserved tissue. Still smearing, but the bulk of the sample is high molecular weight gDNA, which will be suitable for sequencing via PacBio and/or NanoPore. Will isolate some more DNA in order to get enough to send for PacBio sequencing (need ~4x this amount...). 
+Alrighty, this gDNA looks significantly better than the two previous attempts using the EtOH-preserved tissue. Still smearing, but the bulk of the sample is high molecular weight gDNA, which will be suitable for sequencing via PacBio and/or NanoPore. Will isolate some more DNA in order to get enough to send for PacBio sequencing (need ~4x this amount...).
