@@ -44,4 +44,4 @@ Sample was stored at -80<sup>o</sup>C in:
 
 [Rack 15, 4, 5](http://b.link/srlab-80C) in [C.bairdi gDNA Box #2](https://docs.google.com/spreadsheets/d/1EnI5UlvN8qoT3pB0VcP6Eu44BdiyyElToYA9VwukPEE/edit?usp=sharing)
 
-This is still too low for PacBio sequencing. The UW facility suggests 5-8ug for 50X coverage of a 2Gbp genome (which is a rough guesstimate of the Tanner crab genome size) for a decent genome assembly. Maybe I can just send them 2000ng and see what we get out of it? Or, maybe I'll just isolate DNA from some other individuals and pool them. Will discuess with Steven and see how he feels about this.
+This is still too low for PacBio sequencing. The UW facility suggests 5-8ug for 50X coverage of a 2Gbp genome (which is a rough guesstimate of the Tanner crab genome size) for a decent genome assembly. Maybe I can just send them 2000ng and see what we get out of it? Or, maybe I'll just isolate DNA from some other individuals and pool them. Will discuss with Steven and see how he feels about this.
