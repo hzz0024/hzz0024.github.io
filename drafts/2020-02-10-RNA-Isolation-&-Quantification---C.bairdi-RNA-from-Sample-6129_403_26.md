@@ -12,7 +12,20 @@ tags:
 categories:
   - Miscellaneous
 ---
+Since I was [isolating gDNA from _C.bairdi_ 6129_403_26 hemolymph](https://robertslab.github.io/sams-notebook/2020/02/10/DNA-Isolation-&-Quantification-Additional-C.bairdi-gDNA-from-Sample-6129_403_26.html), I figured I might as well co-isolate RNA since I was using the Quick DNA/RNA Microprep Plus Kit (ZymoResearch).
 
+Followed the manufacturer's protocol with the following notes/changes:
+
+- Used 480uL of sample, combined with 1:1 H<sub>2</sub>O (480uL), with 4:1 Lysis Buffer (3840uL) and mixed in 15mL conical
+
+- Flow-through was retained in a 15mL conical for RNA isolation
+
+- Column began to clog during loading of the initial flow-through + EtOH mixture
+
+- Eluted with 15uL
+
+
+Quantified on the Roberts Lab Qubit 3.0 using the high-sensitivity RNA Assay (Invitrogen) and 1uL of sample.
 
 
 ---
