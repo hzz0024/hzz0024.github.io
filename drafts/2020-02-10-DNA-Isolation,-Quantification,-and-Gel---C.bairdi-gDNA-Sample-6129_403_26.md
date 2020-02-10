@@ -56,4 +56,6 @@ GeneRuler DNA Ladder Mix (ThermoFisher):
 ---
 
 
-![gel image of C.bairdi 6129_403_26 gDNA]()
+![gel image of C.bairdi 6129_403_26 gDNA](https://raw.githubusercontent.com/RobertsLab/sams-notebook/master/images/20200210_gel_cbai_6129_403_26_gDNA.jpg)
+
+Alrighty, this gDNA looks significantly better than the two previous attempts using the EtOH-preserved tissue. Still smearing, but the bulk of the sample is high molecular weight gDNA, which will be suitable for sequencing via PacBio and/or NanoPore. Will isolate some more DNA in order to get enough to send for PacBio sequencing (need ~4x this amount...). 
