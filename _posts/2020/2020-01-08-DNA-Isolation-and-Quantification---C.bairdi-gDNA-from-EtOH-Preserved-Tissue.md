@@ -43,3 +43,7 @@ Qubit data (Google Sheet):
 Yield is very good: ~51ng/uL * 800uL = 40ug
 
 Will run sample on gel and NanoDrop to evalute gDNA integrity/quality.
+
+Sample was stored at -80<sup>o</sup>C in:
+
+[Rack 6, 4, 1](http://b.link/srlab-80C) in [C.bairdi gDNA Box #1](https://docs.google.com/spreadsheets/d/1D09mPvwDReuUNR36p_BrlrNfev_Ko1F83W4EKdAO6bk/edit?usp=sharing)
