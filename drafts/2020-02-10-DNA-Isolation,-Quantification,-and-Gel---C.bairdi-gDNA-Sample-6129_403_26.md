@@ -30,3 +30,16 @@ Used 4uL of sample (~200ng) to run on 1x low-TAE 0.8% agarose gel.
 ---
 
 #### RESULTS
+
+GeneRuler HighRange Ladder (ThermoFisher):
+
+![GeneRuler HighRange Ladder](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ThermoFisher_GeneRuler_HighRange_DNALadder_50ug.png?raw=true)
+
+GeneRuler DNA Ladder Mix (ThermoFisher):
+
+![GeneRuler DNA Ladder Mix](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ThermoFisher_OgeneRuler_DNA_Ladder_Mix_F100439.jpg?raw=true)
+
+---
+
+
+![gel image of C.bairdi 129_403_26 gDNA]()
