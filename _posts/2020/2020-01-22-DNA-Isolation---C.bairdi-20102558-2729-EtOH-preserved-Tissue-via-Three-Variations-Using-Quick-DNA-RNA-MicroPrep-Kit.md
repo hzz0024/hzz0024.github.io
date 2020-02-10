@@ -38,3 +38,7 @@ Qubit data (Google Sheet):
 - [20200122_qubit_cbai_quick-DNA](https://docs.google.com/spreadsheets/d/1YXFRzvqTXIQ8cvZ77sRdlwllQad1s8UIUlmispuPZ6A/edit?usp=sharing)
 
 Got DNA, decent yields (165ng, 138ng, and 510ng). Will proceed with checking quality on gel.
+
+Samples were stored at -80<sup>o</sup>C in:
+
+[Rack 6, 4, 1](http://b.link/srlab-80C) in [C.bairdi gDNA Box #1](https://docs.google.com/spreadsheets/d/1D09mPvwDReuUNR36p_BrlrNfev_Ko1F83W4EKdAO6bk/edit?usp=sharing)
