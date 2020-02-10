@@ -48,3 +48,7 @@ Overall, the yields aren't particularly great and are significantly lower than [
 Samples were stored at -80<sup>o</sup>C in:
 
 [Rack 6, 4, 1](http://b.link/srlab-80C) in [C.bairdi gDNA Box #1](https://docs.google.com/spreadsheets/d/1D09mPvwDReuUNR36p_BrlrNfev_Ko1F83W4EKdAO6bk/edit?usp=sharing)
+
+and
+
+[Rack 15, 4, 5](http://b.link/srlab-80C) in [C.bairdi gDNA Box #2](https://docs.google.com/spreadsheets/d/1EnI5UlvN8qoT3pB0VcP6Eu44BdiyyElToYA9VwukPEE/edit?usp=sharing)
