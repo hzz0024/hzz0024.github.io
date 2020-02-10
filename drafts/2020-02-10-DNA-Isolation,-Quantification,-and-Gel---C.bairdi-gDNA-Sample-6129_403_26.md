@@ -31,6 +31,14 @@ Used 4uL of sample (~200ng) to run on 1x low-TAE 0.8% agarose gel.
 
 #### RESULTS
 
+Qubit results (Google Sheet):
+
+- [20200210_qubit_crab_gDNA-01](https://docs.google.com/spreadsheets/d/1NGJYpFNaCKFDlK8E-0uhMW_hQvun76uGvi0cTC_r3vM/edit?usp=sharing)
+
+  - [RNA] = 58.4ng/uL
+
+  - Yield: 1752ng
+
 GeneRuler HighRange Ladder (ThermoFisher):
 
 ![GeneRuler HighRange Ladder](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ThermoFisher_GeneRuler_HighRange_DNALadder_50ug.png?raw=true)
@@ -42,4 +50,4 @@ GeneRuler DNA Ladder Mix (ThermoFisher):
 ---
 
 
-![gel image of C.bairdi 129_403_26 gDNA]()
+![gel image of C.bairdi 6129_403_26 gDNA]()
