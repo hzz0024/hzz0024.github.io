@@ -39,6 +39,12 @@ Qubit results (Google Sheet):
 
   - Yield: 1752ng
 
+Yields a bit lower than I would've liked, but this is isolation is primarily to see what the gDNA integrity looks like from these RNAlater-preserved hemolyph samples.
+
+Sample was stored at -80<sup>o</sup>C in:
+
+[Rack 6, 4, 1](http://b.link/srlab-80C) in [C.bairdi gDNA Box #1](https://docs.google.com/spreadsheets/d/1D09mPvwDReuUNR36p_BrlrNfev_Ko1F83W4EKdAO6bk/edit?usp=sharing)
+
 GeneRuler HighRange Ladder (ThermoFisher):
 
 ![GeneRuler HighRange Ladder](https://github.com/RobertsLab/resources/blob/master/protocols/Commercial_Protocols/ThermoFisher_GeneRuler_HighRange_DNALadder_50ug.png?raw=true)
