@@ -44,7 +44,10 @@ grep "TRINITY_DN6549_c0_g1" \
 #### RESULTS
 
 
+Here are the targets and primers designed and ordered.
 
+
+#### 40s rRNA S30
 
 ```
 PRIMER PICKING RESULTS FOR cbai_TRINITY_DN6411_c0_g2_i1
@@ -79,6 +82,9 @@ PRODUCT SIZE: 182, PAIR ANY COMPL: 3.00, PAIR 3' COMPL: 0.00
 
 ---
 
+
+#### allantoicase
+
 ```
 	PRIMER PICKING RESULTS FOR cbai_TRINITY_DN13073_c0_g1_i1
 
@@ -106,6 +112,8 @@ PRODUCT SIZE: 151, PAIR ANY COMPL: 3.00, PAIR 3' COMPL: 1.00
 ```
 
 ---
+
+#### ubiqutin thioesterase
 
 ```
 PRIMER PICKING RESULTS FOR cbai_TRINITY_DN6549_c0_g1_i1
