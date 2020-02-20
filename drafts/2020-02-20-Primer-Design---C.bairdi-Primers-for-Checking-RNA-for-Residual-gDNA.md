@@ -19,7 +19,21 @@ I used our [recent differential gene expression analysis]() to identify those ge
 
 Overall, the process went something like this:
 
+1. Sort [upregulated genes in infected group](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/infected-vs-uninfected/edgeR.2317.dir/salmon.gene.counts.matrix.infected_vs_uninfected.edgeR.DE_results.P0.05_C1.infected-UP.subset) by logFC (fold change) to find Trinity transcript IDs of highly expressed genes:
 
+```
+awk 'NR>1' salmon.gene.counts.matrix.infected_vs_uninfected.edgeR.DE_results.P0.05_C1.infected-UP.subset \
+| sort -n -k4,4
+```
+
+2. Search for some of the highly expressed Trinity IDs in the [Trinotate annotations](https://gannet.fish.washington.edu/Atumefaciens/20200126_cbai_trinotate_megan/20200126.cbai.trinotate_annotation_report.txt) to find SwissProt IDs:
+
+```
+grep "TRINITY_DN6549_c0_g1" \
+20200126.cbai.trinotate_annotation_report.txt
+```
+
+3. Copy SwissProt ID (if available) and see what it is on the UniProtKB website.
 
 ---
 
