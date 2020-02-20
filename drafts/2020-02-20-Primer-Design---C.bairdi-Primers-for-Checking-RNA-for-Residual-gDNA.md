@@ -35,9 +35,16 @@ grep "TRINITY_DN6549_c0_g1" \
 
 3. Copy SwissProt ID (if available) and see what it is on the UniProtKB website.
 
+4. If interesting (somewhat), search [Trinity _de novo_ assembly](https://gannet.fish.washington.edu/Atumefaciens/20200122_cbai_trinity_megan_RNAseq/trinity_out_dir/20200122.C_bairdi.megan.Trinity.fasta) for transcript sequence.
+
+5. Use sequence to generate primers on the [Primer3 website](http://bioinfo.ut.ee/primer3-0.4.0/).
+
 ---
 
 #### RESULTS
+
+
+
 
 ```
 PRIMER PICKING RESULTS FOR cbai_TRINITY_DN6411_c0_g2_i1
