@@ -4,10 +4,6 @@
 # Script to "flatten" Trinity edgeR GOseq enrichment format
 # so each line contains a single gene/transcript ID
 # and associated GO term
-#
-# NOTE: If a file has no enriched/depleted terms, this script
-# will throw an "operand error", but will properly process any
-# files that actually have data.
 #############################################################
 
 # Declare variables
@@ -19,7 +15,7 @@ output_file=""
 ## category	over_represented_pvalue	under_represented_pvalue	numDEInCat	numInCat	term	ontology	over_represented_FDR	go_term	gene_ids
 ## Field 10 (gene_ids) contains comma separated gene_ids that fall in the given GO term in the "category" column
 
-for goseq in *-UP*.[de][en]*
+for goseq in *-UP.subset.GOseq.enriched
 do
 
   linecount=$(cat "${goseq}" | wc -l)
