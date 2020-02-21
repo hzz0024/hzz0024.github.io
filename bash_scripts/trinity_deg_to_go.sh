@@ -63,4 +63,6 @@ do
 	  fi
 	done < "${tmp_file}" > "${output_file}"
 
+# Cleanup
+rm "${tmp_file}"
 done
