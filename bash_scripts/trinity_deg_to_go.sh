@@ -32,7 +32,8 @@ do
 		> ${tmp_file}
 
 		# Identify the first line number which contains a gene_id
-		begin_goterms=$(grep --line-number "TRINITY" "${tmp_file}" | awk -F":" '{print $1}' | head -n1)
+		begin_goterms=$(grep --line-number "TRINITY" "${tmp_file}" \
+		| awk '{for (i=1;i<=NF;i++) if($i ~/TRINITY/) print i}' | sort -ug | head -n1)
 
 		# "Unfolds" gene_ids to a single gene_id per row
 		while read -r line
