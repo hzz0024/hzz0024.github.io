@@ -17,7 +17,7 @@ do
 	# Convert comma-delimited gene IDs in column 10 to tab-delimited
 	# Also, set output (OFS) to be tab-delimited
 	awk 'BEGIN{FS="\t";OFS="\t"} {gsub(/, /, "\t", $10); print}' \
-	${goseq} \
+	"${goseq}" \
 	> ${tmp_file}
 
 	# Identify the first line number which contains a gene_id
