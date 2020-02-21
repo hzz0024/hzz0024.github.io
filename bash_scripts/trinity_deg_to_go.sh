@@ -7,7 +7,6 @@
 #############################################################
 
 # Declare variables
-tmp_file=""
 output_file=""
 
 # Input file
@@ -17,7 +16,8 @@ output_file=""
 
 for goseq in *-UP.subset.GOseq.enriched
 do
-  tmp_file="file.tmp"
+
+	tmp_file=$(mktemp)
   linecount=$(cat "${goseq}" | wc -l)
 
   if (( "${linecount}" > 1 ))
@@ -68,6 +68,6 @@ do
 		done < "${tmp_file}" > "${output_file}"
 	fi
 
-# Cleanup
+  # Cleanup
   rm "${tmp_file}"
 done
