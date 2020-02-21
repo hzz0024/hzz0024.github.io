@@ -76,7 +76,7 @@ No differentially expressed genes between these two groups.
 
 NOTE: Since no DEGs, that's why this run shows as `FAILED` in the above runtime screencap. This log file captures the error message that kills the job and generates the `FAILED` indicator:
 
-[20200207_cbai_DEG/D12_infected-vs-D26_infected/edgeR.21680.dir/diff_expr_stderr.txt](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_infected-vs-D26_infected/edgeR.21680.dir/diff_expr_stderr.txt)
+- [20200207_cbai_DEG/D12_infected-vs-D26_infected/edgeR.21680.dir/diff_expr_stderr.txt](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_infected-vs-D26_infected/edgeR.21680.dir/diff_expr_stderr.txt)
 
 `Error, no differentially expressed transcripts identified at cuttoffs: P:0.05, C:1 at /gscratch/srlab/programs/trinityrnaseq-v2.9.0/Analysis/DifferentialExpression/analyze_diff_expr.pl line 203.`
 
@@ -96,7 +96,7 @@ No differentially expressed genes between these two groups.
 
 NOTE: Since no DEGs, that's why this run shows as `FAILED` in the above runtime screencap. This log file captures the error message that kills the job and generates the `FAILED` indicator:
 
-[20200207_cbai_DEG/D12_uninfected-vs-D26_uninfected/edgeR.27147.dir/diff_expr_stderr.txt](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_uninfected-vs-D26_uninfected/edgeR.27147.dir/diff_expr_stderr.txt)
+- [20200207_cbai_DEG/D12_uninfected-vs-D26_uninfected/edgeR.27147.dir/diff_expr_stderr.txt](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/D12_uninfected-vs-D26_uninfected/edgeR.27147.dir/diff_expr_stderr.txt)
 
 `Error, no differentially expressed transcripts identified at cuttoffs: P:0.05, C:1 at /gscratch/srlab/programs/trinityrnaseq-v2.9.0/Analysis/DifferentialExpression/analyze_diff_expr.pl line 203.`
 
@@ -212,7 +212,7 @@ Infected GO enrichment identified 374 enriched GO terms:
 
 Uninfected upregulated genes:
 
-- [](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/infected-vs-uninfected/edgeR.2317.dir/salmon.gene.counts.matrix.infected_vs_uninfected.edgeR.DE_results.P0.05_C1.uninfected-UP.subset)
+- [20200207_cbai_DEG/infected-vs-uninfected/edgeR.2317.dir/salmon.gene.counts.matrix.infected_vs_uninfected.edgeR.DE_results.P0.05_C1.uninfected-UP.subset](https://gannet.fish.washington.edu/Atumefaciens/20200207_cbai_DEG/infected-vs-uninfected/edgeR.2317.dir/salmon.gene.counts.matrix.infected_vs_uninfected.edgeR.DE_results.P0.05_C1.uninfected-UP.subset)
 
   - 20 genes
 
