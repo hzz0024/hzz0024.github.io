@@ -8,9 +8,28 @@ tags:
   - Tanner crab
   - Chionoecetes bairdi
   - gene expression
+  - goseq
+  - gene ontology
+  - GO
+  - enrichment
 categories:
   - Miscellaneous
 ---
+After completing [annotation of the _C.bairdi_ MEGAN6 taxonomic-specific Trinity assembly using Trinotate on 20200126](https://robertslab.github.io/sams-notebook/2020/01/26/Transcriptome-Annotation-Trinotate-C.bairdi-MEGAN6-Taxonomic-specific-Trinity-Assembly-on-Mox.html), I performed differential gene expression analysis and gene ontology (GO) term enrichment analysis using Trinity's scripts to run EdgeR and GOseq, respectively, across all of the various treatment comparisons. The comparison are listed below and link to each individual SBATCH script (GitHub) used to run these on Mox.
+
+- [D12_infected-vs-D12_uninfected](https://github.com/RobertsLab/sams-notebook/blob/master/sbatch_scripts/20200207_cbai_DEG_D12_infected-vs-D12_uninfected.sh)
+
+- [D12_infected-vs-D26_infected](https://github.com/RobertsLab/sams-notebook/blob/master/sbatch_scripts/20200207_cbai_DEG_D12_infected-vs-D26_infected.sh)
+
+- [D12_uninfected-vs-D26_uninfected](https://github.com/RobertsLab/sams-notebook/blob/master/sbatch_scripts/20200207_cbai_DEG_D12_uninfected-vs-D26_uninfected.sh)
+
+- [D12-vs-D26](https://github.com/RobertsLab/sams-notebook/blob/master/sbatch_scripts/20200207_cbai_DEG_D12-vs-D26.sh)
+
+- [D26_infected-vs-D26_uninfected](https://github.com/RobertsLab/sams-notebook/blob/master/sbatch_scripts/20200207_cbai_DEG_D26_infected-vs-D26_uninfected.sh)
+
+- [infected-vs-uninfected](https://github.com/RobertsLab/sams-notebook/blob/master/sbatch_scripts/20200128_cbai_DEG_inf-vs-uninf.sh)
+
+It should be noted that most of these comparisons do not have any replicate samples (e.g. D12 infected vs D12 uninfected). I made a weak attempt to coerce some results from these by setting a `dispersion` value in the edgeR command. However, I'm not expecting much, nor am I certain I would really trust the results from those particular comparisons.
 
 
 
