@@ -5,17 +5,15 @@
 ## Field 10 (gene_ids) contains comma separated gene_ids that fall in the given GO term in the "category" column
 goseq="salmon.gene.counts.matrix.infected_vs_uninfected.edgeR.DE_results.P0.05_C1.infected-UP.subset.GOseq.enriched"
 
-# Get GO term and gene_ids
-awk -F "\t" '{print $1, $10}' \
+tmp_file="file.tmp"
+# Convert comma-delimited gene IDs in column 10 to tab-delimited
+# Also, set output (OFS) to be tab-delimited
+awk 'BEGIN{FS="\t";OFS="\t"} {gsub(/, /, "\t", $10); print}' \
 ${goseq} \
-# Remove commas
-| sed 's/,//g' \
-# Create tab-delimited file by converting spaces to tabs
-| tr ' ' $'\t' \
-> $file
+> $tmp_file
 
 # Identify the first line number which contains a gene_id
-begin_goterms=$(grep "TRINITY" "$file" | awk '{for (i=1;i<=NF;i++) if($i ~/TRINITY/) print i}' | sort -ug | head -n1)
+begin_goterms=$(grep "TRINITY" "$tmp_file" | awk '{for (i=1;i<=NF;i++) if($i ~/TRINITY/) print i}' | sort -ug | head -n1)
 
 # "Unfolds" gene_ids to a single gene_id per row
 while read -r line
@@ -48,10 +46,4 @@ do
 	  printf "%s\t%s\n" "$fixed_fields" "${array[$element]}"
   done
   fi
-done < "$file" > "${output_file}"
-
-
-while read line
-do grep ${line} ${goseq}
-
-done < goterms.txt
+done < "$tmp_file" > "${output_file}"
