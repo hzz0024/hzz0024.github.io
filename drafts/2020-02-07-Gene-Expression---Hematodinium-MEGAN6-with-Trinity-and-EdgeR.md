@@ -171,7 +171,7 @@ Output folder:
 
 - [infected-vs-uninfected/](https://gannet.fish.washington.edu/Atumefaciens/20200207_hemat_DEG/infected-vs-uninfected)
 
-![infected vs uninfected expression heatmap](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_hemat_DEG_D12-vs-D26_trinity_heatmap.png?raw=true)
+![infected vs uninfected expression heatmap](https://github.com/RobertsLab/sams-notebook/blob/master/images/screencaps/20200207_hemat_DEG_infected-vs-uninfected_trinity_heatmap.png?raw=true)
 
 Infected upregulated DEGs:
 
