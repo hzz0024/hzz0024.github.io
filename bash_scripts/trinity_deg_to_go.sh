@@ -1,12 +1,19 @@
 #!/bin/bash
 
-# Input file
-## Expects Trinity edgeR GO enrichment format:
-## category	over_represented_pvalue	under_represented_pvalue	numDEInCat	numInCat	term	ontology	over_represented_FDR	go_term	gene_ids
-## Field 10 (gene_ids) contains comma separated gene_ids that fall in the given GO term in the "category" column
+#############################################################
+# Script to "flatten" Trinity edgeR GOseq enrichment format
+# so each line contains a single gene/transcript ID
+# and associated GO term
+#############################################################
 
+# Declare variables
 tmp_file="file.tmp"
 output_file=""
+
+# Input file
+## Expects Trinity edgeR GOseq enrichment format:
+## category	over_represented_pvalue	under_represented_pvalue	numDEInCat	numInCat	term	ontology	over_represented_FDR	go_term	gene_ids
+## Field 10 (gene_ids) contains comma separated gene_ids that fall in the given GO term in the "category" column
 
 for goseq in *-UP*.[de][en]*
 do
