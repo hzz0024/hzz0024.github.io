@@ -36,8 +36,8 @@ do
 		# Capture the length of the longest row
 		max_field=$(echo "$line" | awk -F "\t" '{print NF}')
 
-		# Retain the GO term in the first field
-		fixed_fields=$(echo "$line" | cut -f1)
+		# Retain the first 8 fields (i.e. categories)
+		fixed_fields=$(echo "$line" | cut -f1-8)
 
 		# Since not all the lines contain the same number of fields (e.g. may not have GO terms),
 		# evaluate the number of fields in each line to determine how to handle current line.
