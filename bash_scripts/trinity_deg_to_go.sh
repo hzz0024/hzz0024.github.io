@@ -4,6 +4,10 @@
 # Script to "flatten" Trinity edgeR GOseq enrichment format
 # so each line contains a single gene/transcript ID
 # and associated GO term
+#
+# NOTE: If a file has no enriched/depleted terms, this script
+# will throw an "operand error", but will properly process any
+# files that actually have data.
 #############################################################
 
 # Declare variables
