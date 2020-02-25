@@ -31,7 +31,6 @@ do
 		# 3rd: Sort on Trinity IDs (column 10) and keep only uniques
 		awk 'BEGIN{FS="\t";OFS="\t"} {gsub(/, /, "\t", $10); print}' "${goseq}" \
 		| awk 'BEGIN{F="\t";OFS="\t"} NR==1; NR > 1 {gsub(/ /, "_", $0); print}' \
-		| sort -t $'\t' -u -k 10,10 \
 		> ${tmp_file}
 
 		# Identify the first line number which contains a gene_id
@@ -70,7 +69,7 @@ do
 			  printf "%s\t%s\n" "$fixed_fields" "${array[$element]}"
 		  done
 		  fi
-		done < "${tmp_file}" > "${output_file}"
+		done < "${tmp_file}" | sort --field-separator $'\t' --unique --key 9 > "${output_file}"
 	fi
 
   # Cleanup
