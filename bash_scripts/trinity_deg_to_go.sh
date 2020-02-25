@@ -25,15 +25,19 @@ do
 		output_file="${goseq}.flattened"
 
 
-		# Convert comma-delimited gene IDs in column 10 to tab-delimited
+		# 1st: Convert comma-delimited gene IDs in column 10 to tab-delimited
 		# Also, set output (OFS) to be tab-delimited
-		awk 'BEGIN{FS="\t";OFS="\t"} {gsub(/, /, "\t", $10); print}' \
-		"${goseq}" \
+		# 2nd: Convert spaces to underscores and keep output as tab-delimited
+		# 3rd: Sort on Trinity IDs (column 10) and keep only uniques
+		awk 'BEGIN{FS="\t";OFS="\t"} {gsub(/, /, "\t", $10); print}' "${goseq}" \
+		| awk 'BEGIN{F="\t";OFS="\t"} NR==1; NR > 1 {gsub(/ /, "_", $0); print}' \
+		| sort -t $'\t' -u -k 10,10 \
 		> ${tmp_file}
 
 		# Identify the first line number which contains a gene_id
 		begin_goterms=$(grep --line-number "TRINITY" "${tmp_file}" \
-		| awk '{for (i=1;i<=NF;i++) if($i ~/TRINITY/) print i}' | sort -ug | head -n1)
+		| awk '{for (i=1;i<=NF;i++) if($i ~/TRINITY/) print i}' \
+		| sort --general-numeric-sort --unique | head -n1)
 
 		# "Unfolds" gene_ids to a single gene_id per row
 		while read -r line
