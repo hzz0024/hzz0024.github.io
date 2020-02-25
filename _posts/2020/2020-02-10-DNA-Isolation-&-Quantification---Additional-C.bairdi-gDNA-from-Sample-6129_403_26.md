@@ -36,7 +36,7 @@ Qubit results (Google Sheet):
 
 - [20200210_qubit_crab_gDNA-02](https://docs.google.com/spreadsheets/d/1aXLykULO63w-Y7diGGv_cSndkIu7uHWTBkhGpPQMGnU/edit?usp=sharing)
 
-[RNA] = 40.7ng/uL in ~70uL
+[DNA] = 40.7ng/uL in ~70uL
 
 Yield = ~2849ng
 
