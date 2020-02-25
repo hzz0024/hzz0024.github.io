@@ -69,7 +69,7 @@ do
 			  printf "%s\t%s\n" "$fixed_fields" "${array[$element]}"
 		  done
 		  fi
-		done < "${tmp_file}" | sort --field-separator $'\t' --unique --key 9 > "${output_file}"
+		done < "${tmp_file}" > "${output_file}"
 	fi
 
   # Cleanup
