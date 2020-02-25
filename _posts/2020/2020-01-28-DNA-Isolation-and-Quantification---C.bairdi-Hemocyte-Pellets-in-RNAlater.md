@@ -17,7 +17,7 @@ Isolated DNA from 56 samples (see Qubit spreadsheet in "Results" below for sampl
 
 These samples were from RNA isolations on the following dates:
 
-- 20200126(https://robertslab.github.io/sams-notebook/2020/01/26/RNA-Isolation-and-Quantification-C.bairdi-Hemocyte-Pellets-in-RNAlater.html)
+- [20200126](https://robertslab.github.io/sams-notebook/2020/01/26/RNA-Isolation-and-Quantification-C.bairdi-Hemocyte-Pellets-in-RNAlater.html)
 
 - [20200124](https://robertslab.github.io/sams-notebook/2020/01/24/RNA-Isolation-and-Quantification-C.bairdi-Hemocyte-Pellets-in-RNAlater.html)
 
