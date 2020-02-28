@@ -1,0 +1,153 @@
+---
+comments: true
+title: DelBay19 PCA
+date: '2020-02-27 12:00'
+tags:
+  - angsd
+  - pcangsd
+  - PCA
+categories:
+  - WGS data analysis
+---
+
+I ran the PCA analyses for five wild populations and the challenge (ch1-4) vs. reference (r). 
+
+Below are the scripts for running,
+
+### challenge (ch1-4) vs references (r)
+
+```shell
+
+
+# create the directory for output
+
+mkdir minMaf05_challenge
+
+# run angsd for challenge populations
+
+angsd -b challenge_97.bamlist -anc cv30.fa -ref cv30.fa -out minMaf05_challenge/challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 49 -setMaxDepth 200 -minInd 49 -doMajorMinor 1 > minMaf05_challenge_97_minMAF05.log
+
+```
+the log file is located in /scratch/hzz0024/DelBay19/angsd_325/challenge_angsd.o1911636 wild_angsd.o1911635
+
+angsd version: 0.929-21-g4c6d001 (htslib: 1.5-20-ga159aa4) build(Jun  3 2019 09:05:25)
+
+####Total number of sites analyzed: 563929658
+
+####Number of sites retained after filtering: 4619695
+
+cpu-time used =  18330.00 sec (5 h 6 min) 
+
+```shell
+# this step generates PCA covariance data for challenge populations
+
+module load pcangsd/0.98
+
+python3 /tools/pcangsd-0.98/pcangsd.py -beagle challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.beagle.gz -minMaf 0.05 -threads 16 -o challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv > PCangs_MQ20_challenge.log
+
+# what we need are challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.cov.npy as the inputs for PCA plots
+
+# note: need to change the eigenvalue and eigenvector file names in the R script (plotPCAngsd_mod.R)
+
+Rscript --verbose plotPCAngsd_mod.R -i challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.cov.npy -c 1-2 -a challenge_97.txt -o challenge_97_D73maxD200_minQ20_minMAF05_SNPe6_no97inv.PCAngsd.WGS_1-2.pdf
+
+Rscript --verbose plotPCAngsd_mod.R -i challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.cov.npy -c 2-3 -a challenge_97.txt -o challenge_97_D73maxD200_minQ20_minMAF05_SNPe6_no97inv.PCAngsd.WGS_2-3.pdf
+
+Rscript --verbose plotPCAngsd_mod.R -i challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.cov.npy -c 3-4 -a challenge_97.txt -o challenge_97_D73maxD200_minQ20_minMAF05_SNPe6_no97inv.PCAngsd.WGS_3-4.pdf
+
+```
+
+### wild populations
+
+```shell
+
+
+# create the directory for output
+
+mkdir minMaf05_wild
+
+# run angsd for wild populations
+
+module load angsd/0.929
+
+angsd -b wild_227.bamlist -anc cv30.fa -ref cv30.fa -out minMaf05_wild/wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 100 -setMaxDepth 450 -minInd 114 -doMajorMinor 1 > minMaf05_wild_227_minMAF05.log
+
+```
+
+the log file is located in /scratch/hzz0024/DelBay19/angsd_325/wild_angsd.o1911635
+
+angsd version: 0.929-21-g4c6d001 (htslib: 1.5-20-ga159aa4) build(Jun  3 2019 09:05:25)
+
+####Total number of sites analyzed: 603206000
+
+####Number of sites retained after filtering: 4193992
+
+cpu-time used = 41592.00 sec (11 h 33 min)
+
+```shell
+# this step generates PCA covariance data for challenge populations
+
+module load pcangsd/0.98
+
+python3 /tools/pcangsd-0.98/pcangsd.py -beagle wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.beagle.gz -minMaf 0.05 -threads 16 -o wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv > PCangs_MQ20_wild.log
+
+# what we need are challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.cov.npy as the inputs for PCA plots
+
+# note: need to change the eigenvalue and eigenvector file names in the R script (plotPCAngsd_mod.R)
+
+Rscript --verbose plotPCAngsd_mod.R -i wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.cov.npy -c 1-2 -a wild_227.txt -o wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.PCAngsd.WGS_1-2.pdf
+
+Rscript --verbose plotPCAngsd_mod.R -i wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.cov.npy -c 2-3 -a wild_227.txt -o wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.PCAngsd.WGS_2-3.pdf
+
+Rscript --verbose plotPCAngsd_mod.R -i wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.cov.npy -c 3-4 -a wild_227.txt -o wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.PCAngsd.WGS_3-4.pdf
+
+```
+
+In order to label the individual ID and identify the outliers in the PCA plot, I add the "geom_text" element to the R script. 
+
+The R script is renamed as plotPCAngsd_mod_label.R and can be downloaded [here](https://hzz0024.github.io/scripts/plotPCAngsd_mod_label.R)
+
+---
+
+### RESULTS
+
+The PCA plots do not seperate the challenge vs. reference groups. Not sure why PC1-2 generates the pattern like this, probably due to the genomic inversions, as PCA has been proposed as a method for discovering inversions. see [Li and Ralph, 2019](https://www.genetics.org/content/211/1/289) and [Ma and Amos, 2012](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0040224). Same patterns were shown among wild populations.
+
+One thing I need to check is that whether the chellenge_97.txt and wild_227.txt (used for R plot creation) have the same order as the sample order in .cov.npy files. 
+
+An alternative way of performaing PCA is through non-linear model - [Deep generative models of genetic variation capture the effects of mutations](https://www.nature.com/articles/s41592-018-0138-4), perhaps worth a try. 
+
+Below are the results,
+
+### PCA plots for challenge samples
+
+<img src="https://hzz0024.github.io/images/challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.PCAngsd.WGS_1-2_ant-page-001.jpg" alt="img" width="800"/> 
+
+<img src="https://hzz0024.github.io/images/challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.PCAngsd.WGS_1-2_ant-label.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.PCAngsd.WGS_2-3_ant-page-001.jpg" alt="img" width="800"/> 
+
+<img src="https://hzz0024.github.io/images/challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.PCAngsd.WGS_2-3_ant-label.jpg" alt="img" width="800"/> 
+
+<img src="https://hzz0024.github.io/images/challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.PCAngsd.WGS_3-4_ant-page-001.jpg" alt="img" width="800"/> 
+
+<img src="https://hzz0024.github.io/images/challenge_97_D49maxD200_minQ20_minMAF05_SNPe6_no97inv.PCAngsd.WGS_3-4_ant-label.jpg" alt="img" width="800"/>
+
+### PCA plots for wild populations
+
+<img src="https://hzz0024.github.io/images/wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.PCAngsd.WGS_1-2-page-001.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.PCAngsd.WGS_1-2-label.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.PCAngsd.WGS_2-3-page-001.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.PCAngsd.WGS_2-3-label.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.PCAngsd.WGS_3-4-page-001.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/wild_227_D100maxD450_minQ20_minMAF05_SNPe6_no227inv.PCAngsd.WGS_3-4-label.jpg" alt="img" width="800"/>
+
+
+
+
+

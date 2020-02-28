@@ -1,0 +1,97 @@
+---
+layout: post
+title: SLiM 1
+date: '2020-02-20 12:00'
+tags:
+  - SLiM
+categories:
+  - SLiM
+---
+
+I will start practice with SLiM 
+
+Below is the note (from Matt) and goals,
+
+Goal: to estimate power to detect delta_p for a given starting p after within-generation challenge
+
+I need 
+
+1. sampling ind from pop, applying selection, sequencing & comparing n chromosomes before vs after
+
+2. burn in population to equilibrium
+
+3. subdivide population into groups of 300 - starting samples
+
+4. output "before" chromosomes, 2n --> mut, bin by freqs ("starting freq")
+
+5. apply 80% selection
+
+6. output "after" chromosomes, 2n --> mut, delta_p
+
+Questions:
+
+1. what % of nonneutral mutations (of a given start_p and QTL effect size) are significant at 5% level?
+
+2. how long of a burn in is needed to establish low LD? Use high recomb rate?
+
+Quant Trait Factors:
+
+1. s selection strength (% mortality)
+
+2. h heritability
+
+3. genetic architecture (QTL effect sizes, distribution)
+
+4. equilibrium LD 
+
+Notes (from Ben):
+
+1. nonWF model has easier structure for sampling chromosomes before and after viability selection within gen
+
+2. need to empirically determine % mortality from a given selection model
+
+3. burn in for wild population includes neutral, so large population might require tree-seq recording
+
+4. selected QTL are also burning in, but that is often fast
+
+5. stabilizing selection often maintains very little variation at QTL at equilibrium -
+	NEED wide Gaussian function
+	or lots of small effect loci
+
+6. should be okay to model high recomb rates to lower eq LD, but may still need large N to get low enough LD
+
+---
+
+- SLiM notes
+
+#### How to specify the mutation type
+
+Mutation types might represent things like neutral mutations, beneficial mutations, deleterious mutations, nearly neutral mutations, etc., with different distributions of fitness effects. 
+
+Function: 
+
+initializeMutationType(“m1”, 0.5, “f”,0.0), which means the model simulates a m1 mutation with fixed distribution of fitness effect (DFE) of 0.0.  Here is 0.5 means a dominance coefficient for this mutation type.
+
+A brief note about [dominance coefficient](http://www.uvm.edu/~dstratto/bcor102/readings/0_MutationSelectionBalance.pdf) 
+
+DFE could be 
+
+1. normal - e.g. “n”, 0.0, 0.1 (0.0 is the mean while 0.1 is standard deviation) 
+
+2. fixed - e.g. “f”, 0.0
+
+3. dominance coefficient with exponential DFE - e.g. “e”, 0.1; it draws its selection coefficients from an exponential distribution (‘e’) with a mean of 0.1
+
+4. dominance coefficient with gamma DFE - e.g. “g”, -0.03, 0.2; it draws its selection coefficients from a gamma distribution (‘g’) with a mean of -0.03 and a shape parameter of 0.2. Note, gamma distribution cannot have a negative mean, but here “-“ means that the distribution has a mean of 0.03, while the sign of each drawn value is flipped.
+
+Three mutation examples:
+
+Neutral or non-coding regions: initializeMutationType(“m1”, 0.5, “f”, 0.0)
+
+Beneficial: initializeMutationType(“m2”, 0.1, “e”, 0.1)
+
+Deleterious: initializeMutationType(“m3”, 0.2, “g”, -0.03, 0.2)
+
+
+
+
