@@ -1,5 +1,5 @@
 # Theme Skin
-skin: night # default, night, plum, sea, soft, steel
+skin: default # default, night, plum, sea, soft, steel
 
 # Theme Text
 t:
@@ -39,4 +39,3 @@ navigation_pages:
   - posts_by_year.md
   - tags.md
   - projects.md
-  - about.md

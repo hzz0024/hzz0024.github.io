@@ -14,23 +14,23 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 lang: en-US
-title: HG's workspace
+title: HG's Workspace
 email: ryan890815@gmail.com
-description: University of Washington - Fishery Sciences - Roberts Lab
+description: 
 baseurl:  # the optional subpath of your site, e.g. "/blog"
 url: https://wenlu-w.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 author:
-  name: Sam White
+  name: Honggang Zhao
 
 repository: wenlu-w/wenlu-w.github.io
-github_username: kubu4
+github_username: hzz0024
 logo:  # path of site logo, e.g. "/assets/images/logo.png"
 search: true # true, false (default)
 search_full_content: true # true, false (default)
 search_provider: lunr # lunr (default), algolia
 
 disqus:
-  shortname: vv123
+  shortname: notebook-1
 # Build settings
 markdown: kramdown
 
