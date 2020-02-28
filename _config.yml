@@ -14,8 +14,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 lang: en-US
-title: Sam's Notebook
-email: samwhite@uw.edu
+title: HG's workspace
+email: ryan890815@gmail.com
 description: University of Washington - Fishery Sciences - Roberts Lab
 baseurl:  # the optional subpath of your site, e.g. "/blog"
 url: https://wenlu-w.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
