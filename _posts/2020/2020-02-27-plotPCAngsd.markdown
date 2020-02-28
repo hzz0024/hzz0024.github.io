@@ -13,7 +13,7 @@ categories:
 
 I edited the plotPCAngsd_mod.R script to facilitate the labeling of individaul points under certain x & y-axis values.  
 
-The R script can be download [here](https://hzz0024.github.io/scripts/plotPCAngsd_label.R) or my github site https://github.com/hzz0024/hzz0024.github.io/blob/master/scripts/plotPCAngsd_label.R
+The R script can be download [here](https://hg-zhao.github.io/scripts/plotPCAngsd_label.R)
 
 ### usage
 
