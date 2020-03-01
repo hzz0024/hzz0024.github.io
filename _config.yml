@@ -18,7 +18,7 @@ title: HG's Workspace
 email: ryan890815@gmail.com
 description: 
 baseurl:  # the optional subpath of your site, e.g. "/blog"
-url: https://wenlu-w.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url: https://hzz0024.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 author:
   name: Honggang Zhao
 
