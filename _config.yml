@@ -22,7 +22,7 @@ url: https://wenlu-w.github.io # the base hostname & protocol for your site e.g.
 author:
   name: Honggang Zhao
 
-repository: wenlu-w/wenlu-w.github.io
+repository: hzz0024/hzz0024.github.io
 github_username: hzz0024
 logo:  # path of site logo, e.g. "/assets/images/logo.png"
 search: true # true, false (default)
