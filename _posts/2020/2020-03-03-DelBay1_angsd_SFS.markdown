@@ -50,35 +50,58 @@ First of all, I followed the steps of notes and got the individual pop beagle fi
 
 # below are my script contents:
 
+# for challenge populations
+
+# load the most recent angsd github release, angsd version: 0.931-18-g37be4d5 (htslib: 1.5-20-ga159aa4) build(Mar  4 2020 08:26:29) 
+
+module load angsd/0.931
+
+angsd -b ch_48.bamlist -anc cv30.fa -out Fst_ch/ch_no48inv_minI2D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12
+
+# 6 hrs
+# Total number of sites analyzed: 530191757
+# Number of sites retained after filtering: 113396147
+
+angsd -b r_47.bamlist -anc cv30.fa -out Fst_ch/ref_no47inv_minI2D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12
+
+# 6 hrs
+# Total number of sites analyzed: 519303947
+# Number of sites retained after filtering: 124171639
+
 # for wild populations
 
 module load angsd/0.931
 
 angsd -b ARN_44.bamlist -anc cv30.fa -out Fst_wild_mph/ARN_no44inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
 
+# 6 hrs
+# Total number of sites analyzed: 536691844
+# Number of sites retained after filtering: 94713203
+
 angsd -b COH_42.bamlist -anc cv30.fa -out Fst_wild_mph/COH_no42inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
+
+# 6 hrs
+# Total number of sites analyzed: 539000040
+# Number of sites retained after filtering: 94915508
 
 angsd -b HC_44.bamlist -anc cv30.fa -out Fst_wild_mph/HC_no44inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
 
+# 6 hrs
+# Total number of sites analyzed: 539427341
+# Number of sites retained after filtering: 96294679
+
 angsd -b NB_47.bamlist -anc cv30.fa -out Fst_wild_mph/NB_no47inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
+
+# 6 hrs
+# Total number of sites analyzed: 534922807
+# Number of sites retained after filtering: 100848073
 
 angsd -b SR_48.bamlist -anc cv30.fa -out Fst_wild_mph/SR_no48inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
 
-# for challenge populations
+# 6 hrs
+# Total number of sites analyzed: 545667117
+# Number of sites retained after filtering: 94714818
 
-module load angsd/0.931
-
-angsd -b ch1_11.bamlist -anc cv30.fa -out Fst_ch/ch1_no11inv_minI2D5maxD12_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 5 -setMaxDepth 12 -minInd 2 
-
-angsd -b ch2_11.bamlist -anc cv30.fa -out Fst_ch/ch2_no11inv_minI2D5maxD12_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 5 -setMaxDepth 12 -minInd 2 
-
-angsd -b ch3_12.bamlist -anc cv30.fa -out Fst_ch/ch3_no12inv_minI2D5maxD12_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 5 -setMaxDepth 12 -minInd 2 
-
-angsd -b ch4_14.bamlist -anc cv30.fa -out Fst_ch/ch4_no14inv_minI2D5maxD12_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 5 -setMaxDepth 12 -minInd 2
-
-angsd -b ch_48.bamlist -anc cv30.fa -out Fst_ch/ch_no48inv_minI2D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12
-
-angsd -b r_47.bamlist -anc cv30.fa -out Fst_ch/ref_no47inv_minI2D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12
 
 ```	
 ### Get FST
@@ -88,6 +111,8 @@ angsd -b r_47.bamlist -anc cv30.fa -out Fst_ch/ref_no47inv_minI2D20maxD50_MQ20_m
 # modify get_fst script for window sizes you want
 
 ./get_fst_windows.sh /workdir/mph75/angsd_mq20 /workdir/mph75/3pops_names.txt 1 _minI30D30maxD100_MQ20_minMAF05_SNPe6_no56inv >& Fst_MQ20_log &
+
+# this step is memory-cost process, may need require more memory than usual
 
 # using most recent angsd: /programs/angsd20191002/angsd/misc/realSFS
 
@@ -125,8 +150,8 @@ Not sure about the most efficient way to calculate an overall Fst for a set of p
 
 ### Questions
 
-1. What does -whichFst 1 do?
+1. Following the suggestion by [Mikhail V Matz](https://github.com/z0on), perhaps removing the sites that are potentially from lumped paralogs in the reference assembly, see angsd issue here [Calculating FST: when to fold SFS · Issue #259 · ANGSD/angsd · GitHub](https://github.com/ANGSD/angsd/issues/259)
 
-2. Following the suggestion by [Mikhail V Matz](https://github.com/z0on), perhaps removing the sites that are potentially from lumped paralogs in the reference assembly, see angsd issue here [Calculating FST: when to fold SFS · Issue #259 · ANGSD/angsd · GitHub](https://github.com/ANGSD/angsd/issues/259)
+2. What if using folded option for SFS calculation, given we do not have real ancester genome (mentioned by https://github.com/ANGSD/angsd/issues/259)?
 
-3. What if using folded option for SFS calculation, given we do not have real ancester genome (mentioned by https://github.com/ANGSD/angsd/issues/259)?
+3. What does -whichFst 1 do?
