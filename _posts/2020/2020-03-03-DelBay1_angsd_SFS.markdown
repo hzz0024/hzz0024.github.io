@@ -57,13 +57,11 @@ First of all, I followed the steps of notes and got the individual pop beagle fi
 module load angsd/0.931
 
 angsd -b ch_48.bamlist -anc cv30.fa -out Fst_ch/ch_no48inv_minI2D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12
-
 # 6 hrs
 # Total number of sites analyzed: 530191757
 # Number of sites retained after filtering: 113396147
 
 angsd -b r_47.bamlist -anc cv30.fa -out Fst_ch/ref_no47inv_minI2D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12
-
 # 6 hrs
 # Total number of sites analyzed: 519303947
 # Number of sites retained after filtering: 124171639
@@ -73,35 +71,29 @@ angsd -b r_47.bamlist -anc cv30.fa -out Fst_ch/ref_no47inv_minI2D20maxD50_MQ20_m
 module load angsd/0.931
 
 angsd -b ARN_44.bamlist -anc cv30.fa -out Fst_wild_mph/ARN_no44inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
-
 # 6 hrs
 # Total number of sites analyzed: 536691844
 # Number of sites retained after filtering: 94713203
 
 angsd -b COH_42.bamlist -anc cv30.fa -out Fst_wild_mph/COH_no42inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
-
 # 6 hrs
 # Total number of sites analyzed: 539000040
 # Number of sites retained after filtering: 94915508
 
 angsd -b HC_44.bamlist -anc cv30.fa -out Fst_wild_mph/HC_no44inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
-
 # 6 hrs
 # Total number of sites analyzed: 539427341
 # Number of sites retained after filtering: 96294679
 
 angsd -b NB_47.bamlist -anc cv30.fa -out Fst_wild_mph/NB_no47inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
-
 # 6 hrs
 # Total number of sites analyzed: 534922807
 # Number of sites retained after filtering: 100848073
 
 angsd -b SR_48.bamlist -anc cv30.fa -out Fst_wild_mph/SR_no48inv_minI12D20maxD50_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 10 -minQ 20 -minMapQ 20 -setMinDepth 20 -setMaxDepth 50 -minInd 12 
-
 # 6 hrs
 # Total number of sites analyzed: 545667117
 # Number of sites retained after filtering: 94714818
-
 
 ```	
 ### Get FST
