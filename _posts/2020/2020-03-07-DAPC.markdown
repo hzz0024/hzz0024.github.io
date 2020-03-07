@@ -16,14 +16,15 @@ I created the DAPC_honggang.R script for DAPC population structure analysis.
 The R script can be download [here](https://hzz0024.github.io/scripts/DAPC_honggang.R)
 
 Example genepop dataset is here https://github.com/hzz0024/hzz0024.github.io/blob/master/example_data/WAL605_SNP68.gen
-<a href="https://hzz0024.github.io/example_data/WAL605_SNP68.gen" download>here</a>
+<a href="https://hzz0024.github.io/example_data/WAL605_SNP68.gen" download>or here</a>
 
 ### usage
 
 ### Data preparation
 1. convert the vcf or plink format files to GENEPOP format using PGDspider
-2. make necessary changes for DAPC data loading (e.g. assign individuals to populations using pop flag, see example gene pop file)
-3. change the last sample ID in each population to its population name, which is useful for the DAPC figure legend plotting (see below)
+2. change the extension to .gen
+3. make necessary changes for DAPC data loading (e.g. assign individuals to populations using pop flag, see example gene pop file)
+4. change the last sample ID in each population to its population name, which is useful for the DAPC figure legend plotting (see below)
 
 ```
 for example, change 
