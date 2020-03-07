@@ -70,9 +70,14 @@ x@pop
 dapc1 <- dapc(x, x@pop)
 # when asked "Choose the number PCs to retain (>=1):"
 # I would choose first few PCs that explain the majortiy of cumulated variance, here is 10
+```
+<img src="https://hzz0024.github.io/images/example_variance.jpg" alt="img" width="800"/>
+```R
 # when asked "Choose the number discriminant functions to retain (>=1):"
 # I would choose first few DAs that have high F-statistic values, here is 2
-
+```
+<img src="https://hzz0024.github.io/images/example_DA.jpg" alt="img" width="800"/>
+```R
 ###############################################
 # identifying genetic clusters using find.clusters
 grp <- find.clusters(x, max.n.clust=25)
