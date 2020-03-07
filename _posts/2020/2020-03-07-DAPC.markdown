@@ -15,7 +15,13 @@ I created the DAPC_honggang.R script for DAPC population structure analysis.
 
 The R script can be download [here](https://hzz0024.github.io/scripts/DAPC_honggang.R)
 
+<<<<<<< HEAD
 Example genepop dataset is here https://github.com/hzz0024/hzz0024.github.io/blob/master/example_data/WAL605_SNP68.gen
+=======
+Example genepop dataset can be downloaded
+<a href="https://hzz0024.github.io/example_data/WAL605_SNP68.gen" download>here</a>
+
+>>>>>>> 09d1f5c41c03df110bd286dc175e0037526b8143
 
 ### usage
 
