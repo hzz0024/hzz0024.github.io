@@ -90,14 +90,14 @@ grp <- find.clusters(x, max.n.clust=25)
 # Alpha score test for optimal number of PCs
 # option test for alpha score with 20 simulations, this function allow you examine what is the optiomal number of PCs to retain
 temp <- optim.a.score(dapc1, n.sim = 20)
+
+# load a package called "export" for powerpoint file export (an easy way to edit or combine your plots)
+library(export)
+graph2ppt(file="WAL605_SNP68_alpha",width=4,height=6)
 ```
 <img src="https://hzz0024.github.io/images/example_a-score.jpg" alt="img" width="800"/>
 
 ```R
-# load a package called "export" for powerpoint file export (an easy way to edit or combine your plots)
-library(export)
-graph2ppt(file="WAL605_SNP68_alpha",width=4,height=6)
-
 # generate DAPC data again with the best optimal number of PCs from alpha-score evaluation
 # or you can just use whatever PCs you want by specify the n.pca = 10 (i.e. using first 10 PCs)
 dapc1 <- dapc(x, x@pop, n.pca = temp$best)
