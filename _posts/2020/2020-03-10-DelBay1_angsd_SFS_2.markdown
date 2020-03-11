@@ -142,6 +142,10 @@ awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6_fold.1kb_win_1kb
 awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6_fold.5kb_win_5kb_fst.txt | awk '$2-=2500' | awk '$3+=2500' > ARN_COH_5kb_fold.fst
 awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6_fold.15kb_win_15kb_fst.txt | awk '$2-=7500' | awk '$3+=7500' > ARN_COH_15kb_fold.fst
 
+awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6.1kb_win_1kb_fst.txt | awk '$2-=500' | awk '$3+=500' > ARN_COH_1kb_unfold.fst
+awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6.5kb_win_5kb_fst.txt | awk '$2-=2500' | awk '$3+=2500' > ARN_COH_5kb_unfold.fst
+awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6.15kb_win_15kb_fst.txt | awk '$2-=7500' | awk '$3+=7500' > ARN_COH_15kb_unfold.fst
+
 awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_MQ20_minMAF05_SNPe6.1kb_win_1kb_fst.txt | awk '$2-=500' | awk '$3+=500' > ch_ref_1kb_fold.fst
 awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_MQ20_minMAF05_SNPe6.5kb_win_5kb_fst.txt | awk '$2-=2500' | awk '$3+=2500' > ch_ref_5kb_fold.fst
 awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_MQ20_minMAF05_SNPe6.15kb_win_15kb_fst.txt | awk '$2-=7500' | awk '$3+=7500' > ch_ref_15kb_fold.fst
@@ -268,6 +272,10 @@ dev.off()
 1k (top), 5k (middle), 15k (bottom) windowed Fst plot 
 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_fold.jpg" alt="img" width="800"/>
+
+single SNP based on Fst plot
+
+<img src="https://hzz0024.github.io/images/Mahattan_ch_ref_single_SNP_fold.jpg" alt="img" width="800"/>
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
