@@ -152,6 +152,7 @@ awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_MQ20_minMAF05_SNPe6.15kb_win_15kb_fst
 
 ```
 then edit headers manually: chr window_start window_end angsd_Fst
+
 then edit headers manually (single SNP): chr	pos	c1	c2	angsd_Fst
 
 ### qqman Manhattan plotting
@@ -259,7 +260,7 @@ dev.off()
 
 <img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_fold.jpg" alt="img" width="800"/>
 single SNP based Fst plot
-<img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_single_SNP_fold.jpg.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_single_SNP_fold.jpg" alt="img" width="800"/>
 
 
 |  | Fst | weighted Fst |
@@ -268,7 +269,7 @@ single SNP based Fst plot
 
 <img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_unfold.jpg" alt="img" width="800"/>
 single SNP based Fst plot
-<img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_single_SNP_unfold.jpg.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_single_SNP_unfold.jpg" alt="img" width="800"/>
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
