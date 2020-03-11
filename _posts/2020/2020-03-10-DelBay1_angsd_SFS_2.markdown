@@ -258,12 +258,17 @@ dev.off()
 | ARN x COH (fold)| 0.003315 | 0.003711 |
 
 <img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_fold.jpg" alt="img" width="800"/>
+single SNP based Fst plot
+<img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_single_SNP_fold.jpg.jpg" alt="img" width="800"/>
+
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
 | ARN x COH (unfold)| 0.003314 | 0.003736 |
 
 <img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_unfold.jpg" alt="img" width="800"/>
+single SNP based Fst plot
+<img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_single_SNP_unfold.jpg.jpg" alt="img" width="800"/>
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
@@ -272,9 +277,7 @@ dev.off()
 1k (top), 5k (middle), 15k (bottom) windowed Fst plot 
 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_fold.jpg" alt="img" width="800"/>
-
-single SNP based on Fst plot
-
+single SNP based Fst plot
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_single_SNP_fold.jpg" alt="img" width="800"/>
 
 |  | Fst | weighted Fst |
@@ -284,7 +287,7 @@ single SNP based on Fst plot
 1k (top), 5k (middle), 15k (bottom) windowed Fst plot
 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_unfold.jpg" alt="img" width="800"/>
-
+single SNP based Fst plot
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_single_SNP_unfold.jpg" alt="img" width="800"/>
 
 ### Questions
