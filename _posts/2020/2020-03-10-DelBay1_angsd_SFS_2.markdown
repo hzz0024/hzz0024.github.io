@@ -165,6 +165,77 @@ done
 ```
 Plot with Manhattan_loop.R (several loop options in script)
 
+```R
+library(qqman)
+library(dplyr)
+library(caret)
+library(tidyverse)
+library(animation)
+library(stringr)
+
+require(data.table)
+##### script for chromosome-wide plots
+DT1 <- fread("ch_ref_1kb_fold.fst")
+print(DT1)
+DT1$chr <- as.numeric(DT1$chr)
+pdf("Mahattan_ch_ref_1kb_fold.pdf",width=15,height=10)
+par(mfrow=c(2,1)) 
+manhattan(DT1,chr="chr",bp="window_start",p="angsd_Fst",logp=FALSE, cex = 0.5, cex.axis = 0.8, ylim = c(0, 0.2),
+          col=c("blue4","orange3"),genomewideline=F, suggestiveline=F,
+          ylab="ch_ref angsd Fst") #main = "Chromosome",
+dev.off()
+
+##### script for single-SNP plot (due to difficulty in opening the pdf, I export the png plot here)
+setwd("~/Documents/Ryan_workplace/oyster/WGS/WGS_fst/Fst_challenge/fold/plot/single_snp")
+DT <- fread("ch_ref_MQ20_minMAF05_SNPe6.fst")
+print(DT)
+DT$chr <- as.numeric(DT$chr)
+#pdf("Mahattan_ch_ref_single_SNP_fold.pdf",width=15,height=10)
+par(mfrow=c(1,1)) 
+png("Mahattan_ch_ref_single_SNP_fold.png", width = 16, height = 9, units = 'in', res = 300)
+manhattan(DT,chr="chr",bp="p",p="angsd_Fst",logp=FALSE, cex = 0.5, cex.axis = 0.8, ylim = c(0, 0.5),
+          col=c("blue4","orange3"),genomewideline=F, suggestiveline=F,
+          ylab="ch_ref angsd Fst") #main = "Chromosome",
+dev.off()
+
+setwd("~/Documents/Ryan_workplace/oyster/WGS/WGS_fst/Fst_challenge/unfolded/plot/single_SNP")
+DT <- fread("ch_ref_MQ20_minMAF05_SNPe6.fst")
+print(DT)
+DT$chr <- as.numeric(DT$chr)
+#pdf("Mahattan_ch_ref_single_SNP_unfold.pdf",width=15,height=10)
+par(mfrow=c(1,1)) 
+png("Mahattan_ch_ref_single_SNP_unfold.png", width = 16, height = 9, units = 'in', res = 300)
+manhattan(DT,chr="chr",bp="p",p="angsd_Fst",logp=FALSE, cex = 0.5, cex.axis = 0.8, ylim = c(0, 0.5),
+          col=c("blue4","orange3"),genomewideline=F, suggestiveline=F,
+          ylab="ch_ref angsd Fst") #main = "Chromosome",
+dev.off()
+
+##### script for chromosome-wide plots at 1kb, 5kb, and 15kb (in one window)
+DT1 <- fread("ch_ref_1kb_unfold.fst")
+DT2 <- fread("ch_ref_5kb_unfold.fst")
+DT3 <- fread("ch_ref_15kb_unfold.fst")
+DT1$chr <- as.numeric(DT1$chr)
+DT2$chr <- as.numeric(DT2$chr)
+DT3$chr <- as.numeric(DT3$chr)
+#pdf("Mahattan_ch_ref_fold.pdf",width=15,height=10)
+pdf("Mahattan_ch_ref_unfold.pdf",width=15,height=10)
+#png("Mahattan_ch_ref_unfold.png", width = 6, height = 9, units = 'in', res = 300)
+par(mfrow=c(3,1)) 
+manhattan(DT1,chr="chr",bp="window_start",p="angsd_Fst",logp=FALSE, cex = 0.5, cex.axis = 0.8, ylim = c(0, 0.15),
+          col=c("blue4","orange3"),genomewideline=F, suggestiveline=F,
+          ylab="ch_ref 1kb Fst") #main = "Chromosome",
+
+manhattan(DT2,chr="chr",bp="window_start",p="angsd_Fst",logp=FALSE, cex = 0.5, cex.axis = 0.8, ylim = c(0, 0.15),
+          col=c("blue4","orange3"),genomewideline=F, suggestiveline=F,
+          ylab="ch_ref 5kb Fst") #main = "Chromosome",
+
+manhattan(DT3,chr="chr",bp="window_start",p="angsd_Fst",logp=FALSE, cex = 0.5, cex.axis = 0.8, ylim = c(0, 0.15),
+          col=c("blue4","orange3"),genomewideline=F, suggestiveline=F,
+          ylab="ch_ref 15kb Fst") #main = "Chromosome",
+dev.off()
+
+```
+
 |  | Fst | weighted Fst |
 | -----| ----| --------|
 | ARN x COH (fold) | 0.003315 | 0.003711 |
