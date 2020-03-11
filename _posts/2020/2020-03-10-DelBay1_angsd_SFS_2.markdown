@@ -138,13 +138,21 @@ Here I compared the fold vc unfold option and examined how it impact the SFS and
 | ch x ref (unfold) | 0.005270 | 0.002872 |
 
 ```shell
-awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6_fold.1kb_win_1kb_fst.txt | awk '$2-=7500' | awk '$3+=7500' > ARN_COH_1kb_fold.fst
+awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6_fold.1kb_win_1kb_fst.txt | awk '$2-=500' | awk '$3+=500' > ARN_COH_1kb_fold.fst
+awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6_fold.5kb_win_5kb_fst.txt | awk '$2-=2500' | awk '$3+=2500' > ARN_COH_5kb_fold.fst
+awk -F"\t" '{print $2, $3, $3, $5}' ARN_COH_MQ20_minMAF05_SNPe6_fold.15kb_win_15kb_fst.txt | awk '$2-=7500' | awk '$3+=7500' > ARN_COH_15kb_fold.fst
+
+awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_MQ20_minMAF05_SNPe6.1kb_win_1kb_fst.txt | awk '$2-=500' | awk '$3+=500' > ch_ref_1kb_fold.fst
+awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_MQ20_minMAF05_SNPe6.5kb_win_5kb_fst.txt | awk '$2-=2500' | awk '$3+=2500' > ch_ref_5kb_fold.fst
+awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_MQ20_minMAF05_SNPe6.15kb_win_15kb_fst.txt | awk '$2-=7500' | awk '$3+=7500' > ch_ref_15kb_fold.fst
 
 awk -F"\t" '{print $2, $3, $3, $5}' FIS_SV_minI30D30maxD100_MQ20_minMAF05_SNPe6_no56inv.15kb_win_15kb_fst | awk '$2-=7500' | awk '$3+=7500' > FIS_SV_angsd_15K.fst
 awk -F"\t" '{print $2, $3, $3, $5}' FIS_HH_minI30D30maxD100_MQ20_minMAF05_SNPe6_no56inv.15kb_win_15kb_fst | awk '$2-=7500' | awk '$3+=7500' > FIS_HH_angsd_15K.fst
 
-# then edit headers manually: chr window_start window_end angsd_Fst
 ```
+then edit headers manually: chr window_start window_end angsd_Fst
+then edit headers manually (single SNP): chr	pos	c1	c2	angsd_Fst
+
 ### qqman Manhattan plotting
 
 NOTE - for qqman Manhattan plotting the chr need to be integer
@@ -157,7 +165,29 @@ done
 ```
 Plot with Manhattan_loop.R (several loop options in script)
 
-Not sure about the most efficient way to calculate an overall Fst for a set of populations
+|  | Fst | weighted Fst |
+| -----| ----| --------|
+| ARN x COH (fold) | 0.003315 | 0.003711 |
+
+
+
+|  | Fst | weighted Fst |
+| -----| ----| --------|
+| ARN x COH (unfold) | 0.003314 | 0.003736 |
+
+
+
+|  | Fst | weighted Fst |
+| -----| ----| --------|
+| ch x ref (fold) | 0.005207 | 0.002855 |
+
+<img src="https://hzz0024.github.io/images/Mahattan_ch_ref_fold.jpg" alt="img" width="800"/>
+
+|  | Fst | weighted Fst |
+| -----| ----| --------|
+| ch x ref (unfold) | 0.005270 | 0.002872 |
+
+<img src="https://hzz0024.github.io/images/Mahattan_ch_ref_unfold.jpg" alt="img" width="800"/>
 
 ### Questions
 
