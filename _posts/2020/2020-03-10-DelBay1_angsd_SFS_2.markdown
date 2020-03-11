@@ -257,13 +257,13 @@ dev.off()
 | -----| ----| --------|
 | ARN x COH (fold)| 0.003315 | 0.003711 |
 
-
+<img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_fold.jpg" alt="img" width="800"/>
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
 | ARN x COH (unfold)| 0.003314 | 0.003736 |
 
-
+<img src="https://hzz0024.github.io/images/Mahattan_ARN_COH_unfold.jpg" alt="img" width="800"/>
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
