@@ -285,6 +285,8 @@ single SNP based on Fst plot
 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_unfold.jpg" alt="img" width="800"/>
 
+<img src="https://hzz0024.github.io/images/Mahattan_ch_ref_single_SNP_unfold.jpg" alt="img" width="800"/>
+
 ### Questions
 
 1. Following the suggestion by [Mikhail V Matz](https://github.com/z0on), perhaps removing the sites that are potentially from lumped paralogs in the reference assembly, see angsd issue here [Calculating FST: when to fold SFS · Issue #259 · ANGSD/angsd · GitHub](https://github.com/ANGSD/angsd/issues/259)
