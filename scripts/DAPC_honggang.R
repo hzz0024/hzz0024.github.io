@@ -2,8 +2,10 @@
 
 ###############################################
 # Data preparation
-# 1. convert the vcf or plink format files to GENEPOP format using PGDspider
-# 2. change the last sample ID in each population to its population name, also useful for the DAPC figure legend plotting
+#1. convert the vcf or plink format files to GENEPOP format using PGDspider
+#2. change the extension to .gen
+#3. make necessary changes for DAPC data loading (e.g. assign individuals to populations using pop flag, see example gene pop file)
+#s4. change the last sample ID in each population to its population name, which is useful for the DAPC figure legend plotting (see below)
 
 ##### for example, change 
 ##### Pop
