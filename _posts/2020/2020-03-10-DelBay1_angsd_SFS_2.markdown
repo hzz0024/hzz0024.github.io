@@ -238,25 +238,29 @@ dev.off()
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
-| ARN x COH (fold) | 0.003315 | 0.003711 |
+| ARN x COH (fold)| 0.003315 | 0.003711 |
 
 
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
-| ARN x COH (unfold) | 0.003314 | 0.003736 |
+| ARN x COH (unfold)| 0.003314 | 0.003736 |
 
 
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
-| ch x ref (fold) | 0.005207 | 0.002855 |
+| ch x ref (fold)| 0.005207 | 0.002855 |
+
+1k (top), 5k (middle), 15k (bottom) windowed Fst plot 
 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_fold.jpg" alt="img" width="800"/>
 
 |  | Fst | weighted Fst |
 | -----| ----| --------|
-| ch x ref (unfold) | 0.005270 | 0.002872 |
+| ch x ref (unfold)| 0.005270 | 0.002872 |
+
+1k (top), 5k (middle), 15k (bottom) windowed Fst plot
 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_unfold.jpg" alt="img" width="800"/>
 
