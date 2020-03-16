@@ -45,7 +45,7 @@ Results
 
 #### SNP counts
 
-1. test the results between -setMaxDepth 16 and -setMaxDepth 32 (which reflects 1X and 2X maximum coverage)
+### test the results between -setMaxDepth 16 and -setMaxDepth 32 (which reflects 1X and 2X maximum coverage)
 
 | -setMaxDepth |   SNP No.  |Fst(unwighted/wighted)| SNPs shared by ch and ref in ch5| SNPs shared by ch and ref in ch6|
 |--------------|------------|-----------------|---------------------------------|---------------------------------|
@@ -54,7 +54,7 @@ Results
 
 cpu-time used =  1574.93 sec vs. 3290.04 sec
 
-2. test what if remove the mapping quality control
+### test what if remove the mapping quality control
 
 |  -minMapQ    |   SNP No.  |Fst(unwighted/wighted)|SNPs shared by ch and ref in ch5| SNPs shared by ch and ref in ch6|
 |--------------|------------|-----------------|--------------------------------|---------------------------------|
@@ -64,7 +64,7 @@ cpu-time used =  1574.93 sec vs. 3290.04 sec
 
 cpu-time used =  1574.93 sec vs. 1570.83 sec
 
-3. test what if both ancestral and reference genomes are both specified 
+### test what if both ancestral and reference genomes are both specified 
 
 |  	-ref       |   SNP No.  |Fst(unwighted/wighted)|SNPs shared by ch and ref in ch5| SNPs shared by ch and ref in ch6|
 |--------------|------------|-----------------|--------------------------------|---------------------------------|
@@ -73,7 +73,7 @@ cpu-time used =  1574.93 sec vs. 1570.83 sec
 
 cpu-time used =  1574.93 sec vs. 1597.00 sec
 
-4. Fst plots along chr 5-6
+### Fst plots along chr 5-6
 
 #### Base 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_single_SNP_base.jpg" alt="img" width="800"/>
@@ -90,11 +90,9 @@ cpu-time used =  1574.93 sec vs. 1597.00 sec
 ---
 Conclusion
 
-1. parameter -setMaxDepth impacts a lot on the number of SNPs, and the average Fst values.
+1. parameter -setMaxDepth impacts a lot on the number of SNPs, and the average Fst values. However, with this setting we can see more high-Fst SNPs and clear inversion patterns in the chr 6
 
 2. -minMapQ has limited impacts on the Fst (differ by 0.0025 from Base result), perhaps keep this option for data generation
 
-3. not sure how the -ref will impact the results. 
-
-4. 
+3. not sure how the -ref will impact the results
 
