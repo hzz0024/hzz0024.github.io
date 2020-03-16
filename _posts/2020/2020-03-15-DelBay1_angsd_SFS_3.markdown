@@ -43,9 +43,7 @@ angsd -b ref_16.bamlist -anc cv30.fa -ref cv30.fa -out Fst_test/ref_no16inv_minI
 ---
 Results
 
-#### SNP counts
-
-### test the results between -setMaxDepth 16 and -setMaxDepth 32 (which reflects 1X and 2X maximum coverage)
+#### test the results between -setMaxDepth 16 and -setMaxDepth 32 (which reflects 1X and 2X maximum coverage)
 
 | -setMaxDepth |   SNP No.  |Fst(unwighted/wighted)| SNPs shared by ch and ref in ch5| SNPs shared by ch and ref in ch6|
 |--------------|------------|-----------------|---------------------------------|---------------------------------|
@@ -54,7 +52,7 @@ Results
 
 cpu-time used =  1574.93 sec vs. 3290.04 sec
 
-### test what if remove the mapping quality control
+#### test what if remove the mapping quality control
 
 |  -minMapQ    |   SNP No.  |Fst(unwighted/wighted)|SNPs shared by ch and ref in ch5| SNPs shared by ch and ref in ch6|
 |--------------|------------|-----------------|--------------------------------|---------------------------------|
@@ -64,7 +62,7 @@ cpu-time used =  1574.93 sec vs. 3290.04 sec
 
 cpu-time used =  1574.93 sec vs. 1570.83 sec
 
-### test what if both ancestral and reference genomes are both specified 
+#### test what if both ancestral and reference genomes are both specified 
 
 |  	-ref       |   SNP No.  |Fst(unwighted/wighted)|SNPs shared by ch and ref in ch5| SNPs shared by ch and ref in ch6|
 |--------------|------------|-----------------|--------------------------------|---------------------------------|
@@ -73,7 +71,7 @@ cpu-time used =  1574.93 sec vs. 1570.83 sec
 
 cpu-time used =  1574.93 sec vs. 1597.00 sec
 
-### Fst plots along chr 5-6
+#### Fst plots along chr 5-6
 
 #### Base 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_single_SNP_base.jpg" alt="img" width="800"/>
