@@ -27,13 +27,13 @@ The test is only focused on the chromosome 5-6, the regions that may have genome
 code for testing:
 
 ```shell
-angsd -b ch_16.bamlist -anc cv30.fa -out Fst_test/ch_no16inv_minI8D8maxD16_MQ20 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 2 -minQ 20 -minMapQ 20 -setMinDepth 8 -setMaxDepth 16 -minInd 8 -rf ch5_6.list
+angsd -b ref_16.bamlist -anc cv30.fa -out Fst_test/ref_no16inv_minI8D8maxD16_MQ20 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 2 -minQ 20 -minMapQ 20 -setMinDepth 8 -setMaxDepth 16 -minInd 8 -rf ch5_6.list
 
-angsd -b ch_16.bamlist -anc cv30.fa -out Fst_test/ch_no16inv_minI8D8maxD32_MQ20 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 2 -minQ 20 -minMapQ 20 -setMinDepth 8 -setMaxDepth 32 -minInd 8 -rf ch5_6.list
+angsd -b ref_16.bamlist -anc cv30.fa -out Fst_test/ref_no16inv_minI8D8maxD32_MQ20 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 2 -minQ 20 -minMapQ 20 -setMinDepth 8 -setMaxDepth 32 -minInd 8 -rf ch5_6.list
 
-angsd -b ch_16.bamlist -anc cv30.fa -out Fst_test/ch_no16inv_minI8D8maxD16 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 2 -minQ 20 -setMinDepth 8 -setMaxDepth 16 -minInd 8 -rf ch5_6.list
+angsd -b ref_16.bamlist -anc cv30.fa -out Fst_test/ref_no16inv_minI8D8maxD16 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 2 -minQ 20 -setMinDepth 8 -setMaxDepth 16 -minInd 8 -rf ch5_6.list
 
-angsd -b ch_16.bamlist -anc cv30.fa -ref cv30.fa -out Fst_test/ch_no16inv_minI8D8maxD16_MQ20_ref -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 2 -minQ 20 -minMapQ 20 -setMinDepth 8 -setMaxDepth 16 -minInd 8 -rf ch5_6.list
+angsd -b ref_16.bamlist -anc cv30.fa -ref cv30.fa -out Fst_test/ref_no16inv_minI8D8maxD16_MQ20_ref -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 2 -minQ 20 -minMapQ 20 -setMinDepth 8 -setMaxDepth 16 -minInd 8 -rf ch5_6.list
 ```
 
 ---
@@ -55,7 +55,7 @@ cpu-time used =  1574.93 sec vs. 3290.04 sec
 |  -minMapQ  |   SNP No.  | 
 |------------|------------|
 |      20    |   5225855  | 
-|      -     |   5225855  | 
+|      not specified     |   5225855  | 
 
 cpu-time used =  1574.93 sec vs. 1570.83 sec
 
