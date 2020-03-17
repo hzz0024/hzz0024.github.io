@@ -88,9 +88,9 @@ cpu-time used =  1574.93 sec vs. 1597.00 sec
 ---
 Conclusion
 
-1. parameter -setMaxDepth impacts a lot on the number of SNPs, and the average Fst values. However, with this setting we can see more high-Fst SNPs and clear inversion patterns in the chr 6
+1. parameter -setMaxDepth impacts a lot on the number of SNPs, and the average Fst values. By changing the -setMaxDepth from 16 (1x) to 32 (2x), we can see more high-Fst SNPs and clearer inversion patterns in the chr 6
 
-2. -minMapQ has limited impacts on the Fst (differ by 0.0025 from Base result), perhaps keep this option for data generation
+2. -minMapQ has limited impacts on the Fst (differ by 0.0025 from Base result), but keep this option for data generation may increase the SNP quality
 
-3. not sure how the -ref will impact the results
+3. not sure how -ref will impact the results
 
