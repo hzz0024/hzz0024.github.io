@@ -12,7 +12,7 @@ categories:
   - WGS data analysis
 ---
 
-THis is an update about the DelBay1_angsd_SFS_FST post. I conducted a small test to explore the effects of different angsd options on SNP counts and the Fst.
+This is an update about the DelBay1_angsd_SFS_FST post. I conducted a small test to explore the effects of different angsd options on SNP counts and the Fst.
 
 Three parameters options are:
 
