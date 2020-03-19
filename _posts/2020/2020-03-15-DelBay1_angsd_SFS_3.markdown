@@ -51,6 +51,7 @@ Results
 |      32      |  25978065  |0.008321/0.009190| 	   13869518				  |			 3048976				|  
 
 Time used for ref run =  1263.00 sec vs. 2888.00 sec
+
 Time used for ch run = 1356.00 sec vs. 3467.00 sec
 
 #### test what if remove the mapping quality control
@@ -61,6 +62,7 @@ Time used for ch run = 1356.00 sec vs. 3467.00 sec
 |not specified |   5225855  |0.024870/0.014737|	        964146			|	   245704				| 
  
 Time used for ref run =  1263.00 sec vs. 1180.00 sec
+
 Time used for ch run = 1356.00 sec vs. 1311.00 sec
 
 #### test what if both ancestral and reference genomes are both specified 
@@ -71,6 +73,7 @@ Time used for ch run = 1356.00 sec vs. 1311.00 sec
 |specified           |   5225855  |0.024743/0.014759|	        964146				  |			    245704				| 
 
 Time used for ref run =  1263.00 sec vs. 1223.00 sec
+
 Time used for ch run = 1356.00 sec vs. 1281.00 sec
 
 #### Fst plots along chr 5-6
