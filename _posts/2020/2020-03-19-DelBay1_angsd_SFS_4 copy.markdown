@@ -78,10 +78,10 @@ Time used =  1353.00 sec
 - Control 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_single_SNP_base.jpg" alt="img" width="800"/>
 
-- No chr 6 inversion
+- Without chr 6 inversion
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.jpg" alt="img" width="800"/>
 
-- not chr 5-6 inversion 
+- Withou chr 5-6 inversion 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.jpg" alt="img" width="800"/>
 
 #### PCA plots for each angsd run (ch and ref seperate datasets)
