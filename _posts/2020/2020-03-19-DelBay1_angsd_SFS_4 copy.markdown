@@ -114,21 +114,31 @@ Then I ran the angsd using 32 ch_ref individuals to check the pca patterns befor
 angsd -b ch_ref_32.bamlist -anc cv30.fa -out pca_invers/ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -doIBS 1 -makematrix 1 -doCov 1 -P 16 -minQ 20 -minMapQ 20 -setMinDepth 16 -setMaxDepth 32 -minInd 16 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -minMaf 0.05 -SNP_pval 1e-6 -rf ch5_6.list
 ```
 
-- remove potential inversions  
+- remove potential inversions 
+
 ```shell
+
 zcat ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6.mafs.gz | tail -n +2 > FILE.tmp && mv FILE.tmp ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist
+
 awk '{print $1,$2,$3,$4}' ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist > ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col
+
 awk '(NR == 1 ); !(($1 == "NC_035785.1") && ($2 > 29900000) && ($2 < 44500000))' ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col > ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr6invers.snplist
+
 awk '(NR == 1 ); !(($1 == "NC_035784.1") && ($2 > 60600000) && ($2 < 80200000))' ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr6invers.snplist > ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr56invers.snplist
+
 # index the snp sites
-angsd sites index ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr6invers.snplist
+
+angsd sites index ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr6invers.snplist  
 angsd sites index ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr56invers.snplist
 
 cat ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr6invers.snplist | wc -l
+
 # 117471 (117470 sites) 
 
 cat ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr56invers.snplist | wc -l
+
 # 92543 (92542 sites)
+
 ```
 
 #### Results
