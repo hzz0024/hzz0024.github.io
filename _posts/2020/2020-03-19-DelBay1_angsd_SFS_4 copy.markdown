@@ -12,7 +12,9 @@ categories:
   - WGS data analysis
 ---
 
-The major goal of this post is to check whether the inversions exist in both chr 5 and 6, or just in chr 6. This is done by removing the potential inversion sites (generated from NYC data) and checking the PCA results. I used two seperate datasets, challenge (ch, 16 samples) and reference (ref, 16 samples), for SFS data creation and Fst plotting, and ran PCA on these two seperate dataset. After that, I ran angsd on the combined dataset (32 samples) and check the impact of inversion on PCA patterns.
+The major goal of this post is to check whether the inversions exist in both chr 5 and 6, or just in chr 6. This is done by removing the potential inversion sites (generated from NYC data) and checking the PCA results. I used two seperate datasets, challenge (ch, 16 samples) and reference (ref, 16 samples), for SFS data creation and Fst plotting, and ran PCA on these two seperate dataset (part 1). After that, I ran angsd on the combined dataset (32 samples) and check the impact of inversion on PCA patterns (part 2).
+
+### Part 1
 
 - extract the loci with no inversion at chr 6 and chr 5_6
 
@@ -99,6 +101,9 @@ Time used =  1353.00 sec
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2.jpg" alt="img" width="800"/>
 
 ---
+
+### Part 2
+
 Then I ran the angsd using 32 ch_ref individuals to check the pca patterns before/after inversion exclusion. This part I added some stringent parameters to filter out non-polymorphic and low-quality loci, these include -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -minMaf 0.05 -SNP_pval 1e-6.
 
 - run angsd  
@@ -185,7 +190,9 @@ Conclusion
 
 1. My previous PCA analyses using all challenge and reference samples have shown that the alternative homokaryote (BB) is rare (2 in 97 samples), most of the samples are either AA homokaryote or AB heterokaryote. This might explain the two major cluster I observed in the baseline PCA results.  
 
-2. PCA plots without chr 5-6 inversions still show patterns of two genetic clusters, which may suggest the existence of additional inversion on chr 5 and 6. My next step is to blown up the chr 5 and identify the extra inversion regions.
+2. PCA plots without chr 5-6 inversions still show "inversion" patterns in seperate datasets (ch or ref datasets), which may suggest the existence of additional inversion regions on chr 5. On the other hand, the combined dataset (part 2) without chr 5-6 inversions has shown that trend of cluster merging. Individuals are jumping around between the homokaryote and heterokaryote clusters.  
+
+My next step is to blown up the chr 5 and identify the potential extra inversion regions.
 
 
 
