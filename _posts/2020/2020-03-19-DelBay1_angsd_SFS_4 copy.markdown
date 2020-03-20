@@ -1,6 +1,6 @@
 ---
 comments: true
-title: DelBay1_angsd_SFS_4 
+title: DelBay1_inversion 
 date: '2020-03-19 12:00'
 tags:
   - angsd
@@ -12,7 +12,7 @@ categories:
   - WGS data analysis
 ---
 
-This is an update about the DelBay1_angsd_SFS_FST post. One major goals of this post is to check whether the inversions exist in both chr 5 and 6, or just in chr 6. This is done by removing the potential inversion sites (generated from NYC data) and checking the PCA results.
+The major goal of this post is to check whether the inversions exist in both chr 5 and 6, or just in chr 6. This is done by removing the potential inversion sites (generated from NYC data) and checking the PCA results. I used two seperate datasets, challenge (ch, 16 samples) and reference (ref, 16 samples), for SFS data creation and Fst plotting, and ran PCA on these two seperate dataset. After that, I ran angsd on the combined dataset (32 samples) and check the impact of inversion on PCA patterns.
 
 - extract the loci with no inversion at chr 6 and chr 5_6
 
@@ -46,7 +46,7 @@ note: -rf need to specifed during angsd running, otherwise the output saf files 
 error message: Read block operation failed with error -1 after 5352952 of 18480688 bytes & Problem reading chunk in bgzf_read
 
 ---
-### Results
+#### Results
 
 - ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers
 
@@ -107,7 +107,69 @@ Time used =  1353.00 sec
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc3-4.jpg" alt="img" width="800"/>
 
 ---
+Then I ran the angsd using 32 ch vs. ref individuals to check the pca patterns before/after inversion exclusion.
+
+- run angsd
+```shell
+angsd -b ch_ref_32.bamlist -anc cv30.fa -out pca_invers/ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -doIBS 1 -makematrix 1 -doCov 1 -P 16 -minQ 20 -minMapQ 20 -setMinDepth 16 -setMaxDepth 32 -minInd 16 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -minMaf 0.05 -SNP_pval 1e-6 -rf ch5_6.list
+```
+
+- remove potential inversions
+```shell
+zcat ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6.mafs.gz | tail -n +2 > FILE.tmp && mv FILE.tmp ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist
+awk '{print $1,$2,$3,$4}' ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist > ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col
+awk '(NR == 1 ); !(($1 == "NC_035785.1") && ($2 > 29900000) && ($2 < 44500000))' ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col > ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr6invers.snplist
+awk '(NR == 1 ); !(($1 == "NC_035784.1") && ($2 > 60600000) && ($2 < 80200000))' ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr6invers.snplist > ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr56invers.snplist
+# index the snp sites
+angsd sites index ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr6invers.snplist
+angsd sites index ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr56invers.snplist
+
+cat ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr6invers.snplist | wc -l
+# 117471 (117470 sites) 
+
+cat ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_snplist_4col_nochr56invers.snplist | wc -l
+# 92543 (92542 sites)
+```
+
+#### Results
+
+- global run (ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6)
+
+Total number of sites analyzed: 119963088  
+Number of sites retained after filtering: 131325  
+Time used =  1494.00 sec
+
+- exclude the chr 6 inversion (ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr6invers)
+
+Total number of sites analyzed: 119963088  
+Number of sites retained after filtering: 117470  
+Time used =  1458.00 sec
+
+- exclude both chr 5 and 6 inversion (ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr56invers)
+
+Total number of sites analyzed: 119963088  
+Number of sites retained after filtering: 92541  
+Time used =  1457.00 sec
+
+#### PCA plots
+
+- global run result PC 1-2 (ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6)
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6.pc1-2.jpg" alt="img" width="800"/>
+
+- exclude the chr 6 inversion PC 1-2 (ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr6invers)
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr6invers.pc1-2.jpg" alt="img" width="800"/>
+
+- exclude both chr 5 and 6 inversion PC 1-2 (ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr56invers)
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr56invers.pc1-2.jpg" alt="img" width="800"/>
+
+---
+
 Conclusion
+
+1. My previous PCA analyses using all challenge and reference samples have shown that the alternative homokaryote (BB) is rare (2 in 97 samples), most of the samples are either AA homokaryote or AB heterokaryote. This might explain the two major cluster I observed in the baseline PCA results.  
+
+2. PCA plots without chr 5-6 inversions still show patterns of two genetic clusters, which may suggest the existence of additional inversion on chr 5 and 6. My next step is to blown up the chr 5 and identify the extra inversion regions.
+
 
 
 
