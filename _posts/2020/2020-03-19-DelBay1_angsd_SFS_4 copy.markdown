@@ -88,7 +88,7 @@ Time used =  1353.00 sec
 
 #### PCA plots for each angsd run (ch and ref seperate datasets)
 
-- Baseline (ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2)
+- Baseline (ch_no16inv_minI8D8maxD16_MQ20.pc1-2)
 <img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20.pc1-2.jpg" alt="img" width="800"/>
 
 - Without chr 6 inversion (ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2)
@@ -97,7 +97,7 @@ Time used =  1353.00 sec
 - Withou chr 5-6 inversion (ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2)
 <img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2.jpg" alt="img" width="800"/>
 
-- Baseline (ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2)
+- Baseline (ref_no16inv_minI8D8maxD16_MQ20.pc1-2)
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20.pc1-2.jpg" alt="img" width="800"/>
 
 - Without chr 6 inversion (ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2)
