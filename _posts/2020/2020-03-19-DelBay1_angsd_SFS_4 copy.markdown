@@ -50,26 +50,26 @@ error message: Read block operation failed with error -1 after 5352952 of 184806
 
 ⋅⋅* ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers
 
-Total number of sites analyzed: 109553033 
-Number of sites retained after filtering: 6718359 
+Total number of sites analyzed: 109553033\
+Number of sites retained after filtering: 6718359\
 Time used =  1587.00 sec
 
 ⋅⋅* ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers
 
-Total number of sites analyzed: 109553033
-Number of sites retained after filtering: 5411893
+Total number of sites analyzed: 109553033\
+Number of sites retained after filtering: 5411893\
 Time used =  1383.00 sec
 
 ⋅⋅* ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers
 
-Total number of sites analyzed: 111768475
-Number of sites retained after filtering: 4728400
+Total number of sites analyzed: 111768475\
+Number of sites retained after filtering: 4728400\
 Time used =  1503.00 sec
 
 ⋅⋅* ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers
 
-Total number of sites analyzed: 111768475
-Number of sites retained after filtering: 3876828
+Total number of sites analyzed: 111768475\
+Number of sites retained after filtering: 3876828\
 Time used =  1353.00 sec
 
 ---
