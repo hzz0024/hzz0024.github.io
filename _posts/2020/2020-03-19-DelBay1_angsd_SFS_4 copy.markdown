@@ -77,7 +77,7 @@ Time used =  1353.00 sec
 ---
 #### Fst plots used to check if the potential inversion sites are removed or not
 
-- Control 
+- Baseline 
 <img src="https://hzz0024.github.io/images/Mahattan_ch_ref_single_SNP_base.jpg" alt="img" width="800"/>
 
 - Without chr 6 inversion
@@ -88,16 +88,22 @@ Time used =  1353.00 sec
 
 #### PCA plots for each angsd run (ch and ref seperate datasets)
 
-- ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2
+- Baseline (ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2)
+<img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20.pc1-2.jpg" alt="img" width="800"/>
+
+- Without chr 6 inversion (ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2)
 <img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2.jpg" alt="img" width="800"/>
 
-- ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2
+- Withou chr 5-6 inversion (ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2)
 <img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2.jpg" alt="img" width="800"/>
 
-- ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2
+- Baseline (ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2)
+<img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20.pc1-2.jpg" alt="img" width="800"/>
+
+- Without chr 6 inversion (ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2)
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2.jpg" alt="img" width="800"/>
 
-- ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2
+- Withou chr 5-6 inversion (ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2)
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2.jpg" alt="img" width="800"/>
 
 ---
@@ -184,15 +190,19 @@ Time used =  1457.00 sec
 - exclude both chr 5 and 6 inversion PC 1-2 (ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr56invers)
 <img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr56invers.pc1-2.jpg" alt="img" width="800"/>
 
+- exclude both chr 5 and 6 inversion PC 1-2 (ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr56invers), with 4 challenge groups specified
+<img src="https://hzz0024.github.io/images/1_ch_ref_no32inv_minI16D16maxD32_MQ20_minMAF05_SNPe6_nochr56invers.pc1-2.jpg" alt="img" width="800"/>
+
 ---
 
 Conclusion
 
-1. My previous PCA analyses using all challenge and reference samples have shown that the alternative homokaryote (BB) is rare (2 in 97 samples), most of the samples are either AA homokaryote or AB heterokaryote. This might explain the two major cluster I observed in the baseline PCA results.  
+1. My previous PCA analyses using all challenge and reference samples have shown that the alternative homokaryote (BB) is rare (2 in 97 samples), most of the samples may be either AA homokaryote or AB heterokaryote. This might explain the two major cluster I saw in the PCA results using baseline and the ones without chr 6 inversions.  
 
-2. PCA plots without chr 5-6 inversions still show "inversion" patterns in seperate datasets (ch or ref datasets), which may suggest the existence of additional inversion regions on chr 5. On the other hand, the combined dataset (part 2) without chr 5-6 inversions has shown that trend of cluster merging. Individuals are jumping around between the homokaryote and heterokaryote clusters.  
+2. In part 1 results, PCA plots without chr 6 inversions still show "inversion" patterns in seperate datasets, which may suggest the existence of inversion regions on chr 5 (not very clear from fst plots). When both chr 5 and 6 inversions are removed, I see two clusters but samples start to jump between the pre-defined homokaryote and heterokaryote clusters. I am not sure what forces drive the two clusters here.
 
-My next step is to blown up the chr 5 and identify the potential extra inversion regions.
+3. On the other hand, in part 2 results, the combined dataset without chr 5-6 inversions has shown the trend of cluster merging, which fits our expectation. 
+
 
 
 
