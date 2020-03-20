@@ -14,7 +14,7 @@ categories:
 
 This is an update about the DelBay1_angsd_SFS_FST post. One major goals of this post is to check whether the inversions exist in both chr 5 and 6, or just in chr 6. This is done by removing the potential inversion sites (generated from NYC data) and checking the PCA results.
 
-1. extract the loci with no inversion at chr 6 and chr 5_6
+⋅⋅* extract the loci with no inversion at chr 6 and chr 5_6
 
 ```shell
 # tail -n +2 will only remove the first header line
@@ -29,7 +29,7 @@ awk '(NR == 1 ); !(($1 == "NC_035785.1") && ($2 > 29900000) && ($2 < 44500000))'
 awk '(NR == 1 ); !(($1 == "NC_035784.1") && ($2 > 60600000) && ($2 < 80200000))' ref_base_4col_nochr6invers.snplist > ref_base_4col_nochr56invers.snplist
 ```
 
-2. run angsd using the extracted snp list
+⋅⋅* run angsd using the extracted snp list
 
 ```shell
 angsd -b ch_16.bamlist -anc cv30.fa -out Fst_invers/ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doMajorMinor 3 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -doIBS 1 -makematrix 1 -doCov 1 -P 2 -minQ 20 -minMapQ 20 -setMinDepth 8 -setMaxDepth 16 -minInd 8 -sites ch_base_4col_nochr6invers.snplist -rf ch5_6.list
@@ -46,40 +46,33 @@ note: -rf need to specifed during angsd running, otherwise the output saf files 
 error message: Read block operation failed with error -1 after 5352952 of 18480688 bytes & Problem reading chunk in bgzf_read
 
 ---
-#### Results
+### Results
 
-##### ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers
+⋅⋅* ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers
 
-Total number of sites analyzed: 109553033
-
-Number of sites retained after filtering: 6718359
-
+Total number of sites analyzed: 109553033 
+Number of sites retained after filtering: 6718359 
 Time used =  1587.00 sec
 
-##### ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers
+⋅⋅* ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers
 
 Total number of sites analyzed: 109553033
-
 Number of sites retained after filtering: 5411893
-
 Time used =  1383.00 sec
 
-##### ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers
+⋅⋅* ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers
 
 Total number of sites analyzed: 111768475
-
 Number of sites retained after filtering: 4728400
-
 Time used =  1503.00 sec
 
-##### ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers
+⋅⋅* ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers
 
 Total number of sites analyzed: 111768475
-
 Number of sites retained after filtering: 3876828
-
 Time used =  1353.00 sec
 
+---
 #### Fst plots used to check if the potential inversion sites are removed or not
 
 #### Control 
@@ -94,22 +87,22 @@ Time used =  1353.00 sec
 #### PCA plots for each angsd run (ch and ref seperate datasets)
 
 #### ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2, 2-3, and 3-4
-<img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2.jpg" alt="img" width="800"/>
 <img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc2-3.jpg" alt="img" width="800"/>
 <img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc3-4.jpg" alt="img" width="800"/>
 
 #### ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2, 2-3, and 3-4
-<img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2.jpg" alt="img" width="800"/>
 <img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc2-3.jpg" alt="img" width="800"/>
 <img src="https://hzz0024.github.io/images/ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc3-4.jpg" alt="img" width="800"/>
 
 #### ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2, 2-3, and 3-4
-<img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc1-2.jpg" alt="img" width="800"/>
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc2-3.jpg" alt="img" width="800"/>
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers.pc3-4.jpg" alt="img" width="800"/>
 
 #### ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2, 2-3, and 3-4
-<img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc1-2.jpg" alt="img" width="800"/>
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc2-3.jpg" alt="img" width="800"/>
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc3-4.jpg" alt="img" width="800"/>
 
