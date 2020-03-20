@@ -107,7 +107,7 @@ Time used =  1353.00 sec
 <img src="https://hzz0024.github.io/images/ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers.pc3-4.jpg" alt="img" width="800"/>
 
 ---
-Then I ran the angsd using 32 ch_ref individuals to check the pca patterns before/after inversion exclusion.
+Then I ran the angsd using 32 ch_ref individuals to check the pca patterns before/after inversion exclusion. This part I added some stringent parameters to filter out non-polymorphic and low-quality loci, these include -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -minMaf 0.05 -SNP_pval 1e-6.
 
 - run angsd  
 ```shell
