@@ -26,6 +26,8 @@ Here are posts I found that are useful for this goal:
 
 5. [2d SFS Estimation](http://popgen.dk/angsd/index.php/2d_SFS_Estimation)
 
+6. [A good example of explaining the fold vs. unfold SFS](https://www.mun.ca/biology/scarr/SFS_&_FSFS.html)
+
 and of course, Matt's notes!
 
 First of all, I followed the steps of notes and got the individual pop beagle files (adjust minInd and minDepth and maxDepth) - needed for SFS and pairwise Fst calcs
