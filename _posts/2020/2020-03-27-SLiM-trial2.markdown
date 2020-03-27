@@ -101,7 +101,7 @@ In order to subdivide population into groups of 300 as the starting samples, I u
    		catn("frequencies: " + paste(f, ", "));
 ```
 
-It is still a problem to apply the 80% selection on the subdivided populations (300 samples). Same as last part, I print out the QTL position and frequencies after applying 80% selection (see output at the end of this paragraph). For now I just randonly pick up 60 samples as a function of selection. SLiM can model the population contraction (for bottleneck modeling) using the function of setSubpopulationSize(). However, it causes error during the run. Nevertheless, it sound too simple to apply strong selection in this way. I may need to check the nonWF and viability/survival selection recipes for this goal. 
+It is still a problem to apply the 80% selection on the subdivided populations (300 samples). Same as last part, I print out the QTL position and frequencies (see output at the end of this paragraph) after applying "selection" (not real selection). For now I just randonly pick up 60 samples as a function of selection. SLiM can model the population contraction (for bottleneck modeling) using the function of setSubpopulationSize(). However, it causes error during the run. Nevertheless, it sound too simple to apply strong selection in this way. I may need to check the nonWF and viability/survival selection recipes for this goal. 
 
 ```sh
 subdivide population into groups of 300
