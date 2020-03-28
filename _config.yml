@@ -33,6 +33,11 @@ disqus:
   shortname: notebook-1
 # Build settings
 markdown: kramdown
+kramdown:
+    highlighter: rouge
+    syntax_highlighter_opts:
+        block:
+            line_numbers: true
 
 # Set code block highlighting
 highlighter: rouge
