@@ -197,8 +197,8 @@ fitness(m2) { return 1.0; }
 		
    // print the results
    	catn("\nsubdivide population into groups of 300");
-   	catn("\n" + "positions: " + paste(qtl.position, ", "));
-   	catn("frequencies: " + paste(f, ", "));
+   	catn("\n" + "QTL positions: " + paste(qtl.position, ", "));
+   	catn("QTL frequencies: " + paste(f, ", "));
 
 	// apply 80% selection by randomly selecting 20% samples 	
 		s1 = sample(sim.subpopulations.individuals, 60).genomes;
@@ -207,8 +207,8 @@ fitness(m2) { return 1.0; }
 		qtl = unique(s1.mutationsOfType(m2));
 		f = sapply(qtl, "mean(s1.containsMutations(applyValue));");
    	catn("\napply 80% selection");
-   	catn("\n" + "positions: " + paste(qtl.position, ", "));
-   	catn("frequencies: " + paste(f, ", "));
+   	catn("\n" + "QTL positions: " + paste(qtl.position, ", "));
+   	catn("QTL frequencies: " + paste(f, ", "));
    
 		sim.simulationFinished();
 	}
