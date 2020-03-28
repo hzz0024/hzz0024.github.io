@@ -79,12 +79,12 @@ I assume the population reachs equilibrium when the mean phenotype difference is
    		catn("QTL frequencies: " + paste(f2, ", "));
   ```
 Example output:
-```sh
-neutral loci positions: 10256, 17471, 12992, 18316, 4954, 7801, 2420, 4222, 5220, 9956, 5307, 8128, 19199, 12521, 16272
-neutral loci frequencies: 0.112, 0.069, 0.057, 0.001, 0.163, 0.007, 0.044, 0.6, 0.852, 0.026, 0.038, 0.292, 0.001, 0.654, 0.23
-QTL positions: 13006, 11005
-QTL frequencies: 0.717, 0.863
-```
+
+neutral loci positions: 10256, 17471, 12992, 18316, 4954, 7801, 2420, 4222, 5220, 9956, 5307, 8128, 19199, 12521, 16272   
+neutral loci frequencies: 0.112, 0.069, 0.057, 0.001, 0.163, 0.007, 0.044, 0.6, 0.852, 0.026, 0.038, 0.292, 0.001, 0.654, 0.23   
+QTL positions: 13006, 11005   
+QTL frequencies: 0.717, 0.863   
+
  
 In order to subdivide population into groups of 300 as the starting samples, I used the code below. I also checked how the qtl frequencies are changed in the subdivided populations. The neutral loci positions and frequencies could also be printed out if needed.
 ```sh
@@ -103,17 +103,15 @@ In order to subdivide population into groups of 300 as the starting samples, I u
 
 It is still a problem to apply the 80% selection on the subdivided populations (300 samples). Same as last part, I print out the QTL position and frequencies (see output at the end of this paragraph) after applying "selection" (not real selection). For now I just randonly pick up 60 samples as a function of selection. SLiM can model the population contraction (for bottleneck modeling) using the function of setSubpopulationSize(). However, it causes error during the run. Nevertheless, it sound too simple to apply strong selection in this way. I may need to check the nonWF and viability/survival selection recipes for this goal. 
 
-```sh
-subdivide population into groups of 300
+subdivide population into groups of 300   
 
-positions: 13006, 11005
-frequencies: 0.463333, 0.595
+QTL positions: 13006, 11005   
+QTL frequencies: 0.463333, 0.595
 
 apply 80% selection
 
-positions: 11005, 13006
-frequencies: 0.641667, 0.458333
-```
+QTL positions: 11005, 13006   
+QTL frequencies: 0.641667, 0.458333
 
 Below is the whole code:
 
