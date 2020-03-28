@@ -110,8 +110,8 @@ QTL frequencies: 0.463333, 0.595
 
 apply 80% selection
 
-QTL positions: 11005, 13006   
-QTL frequencies: 0.641667, 0.458333
+QTL positions: 13006, 11005   
+QTL frequencies: 0.458333, 0.641667
 
 Below is the whole code:
 
