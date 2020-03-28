@@ -16,7 +16,6 @@ categories:
 This step will mark duplicate and realgin reads in the bam file. 
 
 ```shell
-
 #!/bin/bash
 #ACC is xxxxx.list base filename of bam filenames
 
