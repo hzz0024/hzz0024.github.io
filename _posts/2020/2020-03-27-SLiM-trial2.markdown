@@ -116,7 +116,6 @@ QTL frequencies: 0.641667, 0.458333
 Below is the whole code:
 
 ```sh
-
 initialize() {
 	defineConstant("nSD", 5.0); // Standard Deviation of S DFE
 	initializeMutationRate(1e-6);
@@ -219,7 +218,6 @@ fitness(m2) { return 1.0; }
 50000 late() {
 	catn("\nDID NOT REACH OPTIMUM");
 }
-
 ```
 ---
 
