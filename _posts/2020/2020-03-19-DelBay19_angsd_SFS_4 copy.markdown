@@ -1,6 +1,6 @@
 ---
 comments: true
-title: DelBay1_inversion 
+title: DelBay19_inversion 
 date: '2020-03-19 12:00'
 tags:
   - angsd
