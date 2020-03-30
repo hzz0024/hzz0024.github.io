@@ -150,11 +150,10 @@ Time used =  431.00 sec
 
 ---
 
-Conclusion
 
-1. Based on the PCA plots alone, it seems the inversions only exist in the chromosome 5 and 6
 
-2. 
+
+
  
 
 
