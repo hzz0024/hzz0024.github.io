@@ -148,6 +148,15 @@ Time used =  431.00 sec
 - chr 10
 <img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_10.pc1-2-1.jpg" alt="img" width="800"/>
 
+#### Fst plots
+
+- fold
+<img src="https://hzz0024.github.io/images/Mahattan_ch_ref_no16inv_minI8D8maxD64_fold_0.jpg" alt="img" width="800"/>
+
+- unfold 
+<img src="https://hzz0024.github.io/images/Mahattan_ch_ref_no16inv_minI8D8maxD64_unfold_0.jpg" alt="img" width="800"/>
+
+
 ---
 
 
