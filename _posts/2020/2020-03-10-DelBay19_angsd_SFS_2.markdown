@@ -1,6 +1,6 @@
 ---
 comments: true
-title: DelBay1_angsd_SFS_FST_2
+title: DelBay19_angsd_SFS_FST_2
 date: '2020-03-10 12:00'
 tags:
   - angsd
