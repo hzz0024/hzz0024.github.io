@@ -1,6 +1,6 @@
 ---
 comments: true
-title: DelBay1_inversion 
+title: DelBay19 inversions in chromosome 5&6 
 date: '2020-03-19 12:00'
 tags:
   - angsd
