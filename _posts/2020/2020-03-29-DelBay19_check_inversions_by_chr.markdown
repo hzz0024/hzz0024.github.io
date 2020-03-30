@@ -11,7 +11,7 @@ categories:
   - WGS data analysis
 ---
 
-The major goal of this post is to check whether the inversions exist in ohter chromosomes except the chr 5 and 6. This is done by checking the PCA results and the Fst plots. The challen datasets, which includes 16 challenge (ch) and 16 reference (ref) is used for the test. 
+The major goal of this post is to check whether the inversions exist in other chromosomes except the chromosome 5 and 6. This was done by checking the PCA results and the Fst plots. The challenge dataset with 16 challenge (ch) and 16 reference (ref) was used for this test. 
 
 ### PCA plots for each chr
 
@@ -39,6 +39,7 @@ angsd -b ch_ref_32.bamlist \
 done
 ```
 - .cov.npy file generation
+
 ```sh
 module load pcangsd/0.98
 
@@ -54,62 +55,98 @@ done
 ---
 #### Results
 
-- ch_no16inv_minI8D8maxD16_MQ20_nochr6_invers
+- chr 1
 
-Total number of sites analyzed: 109553033  
-Number of sites retained after filtering: 6718359  
-Time used =  1587.00 sec
+Total number of sites analyzed: 52552080  
+Number of sites retained after filtering: 444589  
+Time used =  1512.00 sec
 
-- ch_no16inv_minI8D8maxD16_MQ20_nochr56_invers
+- chr 2
 
-Total number of sites analyzed: 109553033  
-Number of sites retained after filtering: 5411893  
-Time used =  1383.00 sec
+Total number of sites analyzed: 49791991  
+Number of sites retained after filtering: 401766  
+Time used =  1314.00 sec
 
-- ref_no16inv_minI8D8maxD16_MQ20_nochr6_invers
+- chr 3
 
-Total number of sites analyzed: 111768475  
-Number of sites retained after filtering: 4728400  
-Time used =  1503.00 sec
+Total number of sites analyzed: 59904312  
+Number of sites retained after filtering: 423224  
+Time used =  1708.00 sec
 
-- ref_no16inv_minI8D8maxD16_MQ20_nochr56_invers
+- chr 4
 
-Total number of sites analyzed: 111768475  
-Number of sites retained after filtering: 3876828  
-Time used =  1353.00 sec
+Total number of sites analyzed: 47970660  
+Number of sites retained after filtering: 399808  
+Time used =  1512.00 sec
+
+- chr 5
+
+Total number of sites analyzed: 83171346  
+Number of sites retained after filtering: 783469  
+Time used =  1958.00 sec
+
+- chr 6
+
+Total number of sites analyzed: 36791742  
+Number of sites retained after filtering: 169199  
+Time used =  747.00 sec
+
+- chr 7
+
+Total number of sites analyzed: 42934065  
+Number of sites retained after filtering: 198263  
+Time used =  843.00 sec
+
+- chr 8
+
+Total number of sites analyzed: 56545474  
+Number of sites retained after filtering: 315429  
+Time used =  1200.00 sec
+
+- chr 9
+
+Total number of sites analyzed: 76515152  
+Number of sites retained after filtering: 386866  
+Time used =  1589.00 sec
+
+- chr 10
+
+Total number of sites analyzed: 23311866  
+Number of sites retained after filtering: 105533  
+Time used =  431.00 sec
 
 ---
-#### Fst plots used to check if the potential inversion sites are removed or not
+#### PCA plots
 
 - chr 1
 <img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
 
 - chr 2
-<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_2.pc1-2-1.jpg" alt="img" width="800"/>
 
 - chr 3
-<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_3.pc1-2-1.jpg" alt="img" width="800"/>
 
 - chr 4
-<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_4.pc1-2-1.jpg" alt="img" width="800"/>
 
 - chr 5
-<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_5.pc1-2-1.jpg" alt="img" width="800"/>
 
 - chr 6
-<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_6.pc1-2-1.jpg" alt="img" width="800"/>
 
 - chr 7
-<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_7.pc1-2-1.jpg" alt="img" width="800"/>
 
 - chr 8
-<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_8.pc1-2-1.jpg" alt="img" width="800"/>
 
 - chr 9
-<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_9.pc1-2-1.jpg" alt="img" width="800"/>
 
 - chr 10
-<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_1.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_no32inv_minI16D16maxD64_MQ20_minMAF05_SNPe6_10.pc1-2-1.jpg" alt="img" width="800"/>
 
 ---
 
