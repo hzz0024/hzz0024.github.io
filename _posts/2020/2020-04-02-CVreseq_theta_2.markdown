@@ -207,7 +207,7 @@ max(exp(DT$Watterson), na.rm = TRUE)
 
 2. what is the optimal depth filtering parameters?
 
-
+useful link for theta estimate [here](https://www.slideserve.com/raya-chaney/phylogeography-from-database-to-genomics-to-discovery)
 
 
 
