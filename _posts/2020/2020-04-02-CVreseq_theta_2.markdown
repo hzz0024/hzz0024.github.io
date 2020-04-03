@@ -1,7 +1,7 @@
 ---
 comments: true
 title: CVreseq theta update 
-date: '2020-03-29 12:00'
+date: '2020-04-02 12:00'
 tags:
   - angsd
   - SFS
