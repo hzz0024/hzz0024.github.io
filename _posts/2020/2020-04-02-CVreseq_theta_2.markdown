@@ -179,7 +179,7 @@ NEH chr 10 Watterson Theta
 NEH chr 10 Tajima Theta
 <img src="https://hzz0024.github.io/images/Mahattan_NEH_no6inv_fold_chr10.jpg" alt="img" width="800"/>
 
-I tried to manually calculate the maximum value of Watterson Theta (R code),
+I tried to manually calculate the maximum value of Watterson Theta (R code) for 6 individuals,
 ```R
 watterson_estimator <- function(Sn, n) {
   a_n = 0
