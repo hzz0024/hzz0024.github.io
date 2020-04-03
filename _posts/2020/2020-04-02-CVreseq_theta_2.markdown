@@ -79,11 +79,11 @@ The .pestPG file is a 14 column file (tab seperated). The first column contains 
 
 I ran the updated theta command lines using the five seperate populations (one population from Cape Shore, Delaware Bay is shared for DB and CB comparsion) in CVreseq, they are
 
-SL - Louisiana wild line
-OBOYS2 - Louisiana selected line
-NEH - Delaware Bay selected NEH line
-DEBY - Chesapeake Bay selected line (initially from DB)
-CS - Cape Shore (Delaware Bay) wild line
+SL - Louisiana wild line   
+OBOYS2 - Louisiana selected line   
+NEH - Delaware Bay selected NEH line   
+DEBY - Chesapeake Bay selected line (initially from DB)   
+CS - Cape Shore (Delaware Bay) wild line   
 
 - saf file generation
 
