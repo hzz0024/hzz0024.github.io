@@ -83,9 +83,9 @@ angsd -b ch4_14.list -anc cv30.fa -out QC_ch4_14_maxD250 \
 
 - Estimate the mean and standard deviation from depthGlobal files
 
-I made an R script that could be used for mean and standard deviation using depthGlobal files
+I made an R script that could be used for mean and standard deviation calculation using the depthGlobal files
 
-The script can be downloaded [here](), or just copy the R code below,
+The script can be downloaded [here]((https://hg-zhao.github.io/scripts/mean_sd.R), or just copy the R code below,
 
 ```R
 # usage: Rscript mean_sd.R prefix_of_the_depthGlobal 2> /dev/null
