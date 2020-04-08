@@ -11,7 +11,7 @@ categories:
   - WGS data analysis
 ---
 
-The DelBay19 rerun samples (pool5) are trimmed and merged (with bam files after bt2 mapping) with previous processed datasets. The overall summary including the number of reads, reads retained after trimming, genome coverage is listed [here](https://docs.google.com/spreadsheets/d/14A5CuNT15jhAgE89HAAXj6ddB3THszFZTpwYOKmu05M/edit?usp=sharing). Some featured values are listed below,
+The DelBay19 rerun samples (pool5) are trimmed and merged (with bam files after bt2 mapping) with previous processed datasets. The overall summary includes the number of reads, reads retained after trimming, genome coverage, which are listed [here](https://docs.google.com/spreadsheets/d/14A5CuNT15jhAgE89HAAXj6ddB3THszFZTpwYOKmu05M/edit?usp=sharing). Some featured values are listed below,
 
 - the whole dataset includes 343 inviduals. Among them, one sample with extreme low mapping rate (SR0719ch_327, 1.7%) and nine individuals with relative low amount of reads (< 2 million) were removed from the final bamlist during angsd run (but I still keep the bamfiles of these samples). 
 
