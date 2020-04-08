@@ -124,10 +124,10 @@ Rscript mean_sd.R QC_ch4_14_maxD250 2> /dev/null
 ### Results
 
 - QC_all_maxD2000
-<img src="https://hzz0024.github.io/images/QC_all_maxD2000-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_all_maxD2000.jpg" alt="img" width="800"/>
 
 - QC_SR_48_maxD250
-<img src="https://hzz0024.github.io/images/QC_SR_48_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_SR_48_maxD250.jpg" alt="img" width="800"/>
 
 - QC_NB_48_maxD250
 <img src="https://hzz0024.github.io/images/QC_NB_48_maxD250-1.jpg" alt="img" width="800"/>
