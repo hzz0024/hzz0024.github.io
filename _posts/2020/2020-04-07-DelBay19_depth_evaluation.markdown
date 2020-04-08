@@ -133,31 +133,31 @@ Rscript mean_sd.R QC_ch4_14_maxD250 2> /dev/null
 <img src="https://hzz0024.github.io/images/QC_NB_48_maxD250.jpg" alt="img" width="800"/>
 
 - QC_HC_48_maxD250
-<img src="https://hzz0024.github.io/images/QC_HC_48_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_HC_48_maxD250.jpg" alt="img" width="800"/>
 
 - QC_ARN_47_maxD250
-<img src="https://hzz0024.github.io/images/QC_ARN_47_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_ARN_47_maxD250.jpg" alt="img" width="800"/>
 
 - QC_COH_44_maxD250 
-<img src="https://hzz0024.github.io/images/QC_COH_44_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_COH_44_maxD250.jpg" alt="img" width="800"/>
 
 - QC_ref_48_maxD250
-<img src="https://hzz0024.github.io/images/QC_ref_48_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_ref_48_maxD250.jpg" alt="img" width="800"/>
 
 - QC_ch_50_maxD250
-<img src="https://hzz0024.github.io/images/QC_ch_50_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_ch_50_maxD250.jpg" alt="img" width="800"/>
 
 - QC_ch1_12_maxD250
-<img src="https://hzz0024.github.io/images/QC_ch1_12_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_ch1_12_maxD250.jpg" alt="img" width="800"/>
 
 - QC_ch2_12_maxD250
-<img src="https://hzz0024.github.io/images/QC_ch2_12_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_ch2_12_maxD250.jpg" alt="img" width="800"/>
 
 - QC_ch3_12_maxD250
-<img src="https://hzz0024.github.io/images/QC_ch3_12_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_ch3_12_maxD250.jpg" alt="img" width="800"/>
 
 - QC_ch4_14_maxD250
-<img src="https://hzz0024.github.io/images/QC_ch4_14_maxD250-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/QC_ch4_14_maxD250.jpg" alt="img" width="800"/>
 
 ---
 
