@@ -67,7 +67,7 @@ done
 
 ### Results
 
-Overall, reads that could be mapped to the mitogenome only contribute a very small portion of trimmed data. The mitogenome mapping rate ranges from 0.00% to 3.78%, with an average value of 0.05%. The detailed summary data is [here](https://docs.google.com/spreadsheets/d/1VB4okrGUJDNhS5E9hsMUYVGbKtz8guPCs4SPiqKmqL4/edit?usp=sharing). Among them, two individuals showed abnormal high mapping rates, SR0719ch_002 (3,78%) and SR0719ch_327 (0.85%), which indicate potential contamination in these samples. The low nuclear genome mapping rates of these two samples (SR0719ch_327 1.9% nuclear reads mapped and SR0719ch_002 SR002 60.89%) relative to other samples (~80% mapping rate) supported this hypothesis.
+Overall, reads that could be mapped to the mitogenome contribute a very small portion of the trimmed data. The mitogenome mapping rates range from 0.00% to 3.78%, with an average value of 0.05%. The detailed summary data is [here](https://docs.google.com/spreadsheets/d/1VB4okrGUJDNhS5E9hsMUYVGbKtz8guPCs4SPiqKmqL4/edit?usp=sharing). Among them, two individuals showed abnormal high mapping rates, SR0719ch_002 (3,78%) and SR0719ch_327 (0.85%), which indicate potential contamination in these two samples. The low nuclear genome mapping rates of these two samples (SR0719ch_327 1.9% mapped and SR0719ch_002 SR002 60.89% mapped to the nuclear genome) relative to other samples (~80% mapping rate) supported this hypothesis.
 
 The unmapped reads are used for the downstream nuclear DNA mapping and bam file processing. 
 
