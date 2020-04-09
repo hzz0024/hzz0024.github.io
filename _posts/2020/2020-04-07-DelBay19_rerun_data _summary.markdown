@@ -35,7 +35,7 @@ The DelBay19 rerun samples (pool5) are trimmed and merged (with bam files after 
 - the alignment rate ranges from 60.89% to 80.76%, with a mean value of 79.27%
 
 - the genome coverage ranges from 0.15 to 2.87, with a mean value of 0.91   
-note: here I used the same coverage definition in Gemma's Atlantic cod paper, the coverage is averaged across both mapped and unmapped regions.
+note: here I used the same coverage definition in Gemma's Atlantic cod paper, the coverage is estimated using the whole genome size but not the mappable regions only.
 
 
 
