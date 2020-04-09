@@ -163,6 +163,6 @@ Rscript mean_sd.R QC_ch4_14_maxD250 2> /dev/null
 
 ### Conclusion 
 
-The average depth coverage in these data is 1X per individual, and 4 standard deviations from the mean includes all but the thinnest part of the tail. 
+The average depth coverage in these data is 1X per individual, and 3 standard deviations from the mean includes all but the thinnest part of the tail. 
 
-The depth results of individual population here (including the ch1-4) is helpful to determine the MaxDepth cutoff for Fst estimation. For population with ~ 50 samples, I would evaluate how the maxDepth impact the Fst patterns by running angsd on two example populations (ch_50 and ref_48). The 3, 4, and 5 standard deviations above the mean will be set as the maxDepth and used for Fst plot generation.
+The depth results of individual population here (including the ch1-4) is helpful to determine the MaxDepth cutoff for Fst estimation. For population with ~ 50 samples, I would evaluate how the maxDepth impact the Fst patterns by running angsd on two example populations (ch_50 and ref_48). The 2, 3 and 4 standard deviations above the mean will be set as the maxDepth and used for Fst plot generation.
