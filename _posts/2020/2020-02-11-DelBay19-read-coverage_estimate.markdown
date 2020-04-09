@@ -24,10 +24,17 @@ for sample in *.sorted.cv30.bam; do
 cov_depth=$(samtools depth $sample | awk '{sum+=$3;cnt++}END{print sum/cnt" "sum}')
 echo $sample: $cov_depth
 done
-
-```
 ---
 
+It outputs 2 numbers: average coverage for a coveraged base (sum/cnt), and the total base coverage (sum).  
+
+The coverage would be - total base coverage (sum)/(genome size). Oone important thing is that this simple coverage estimate ignore the regions that could not be mapped. 
+
+The genome size could be estimated using script below,
+```sh
+grep -v ">" cv30.fa | wc | awk '{print $3-$1}'
+> 684723884 
+```
 #### RESULTS
 
 see google excel link here [coverage report](https://docs.google.com/spreadsheets/d/10V7vTdNp7oagq4SlPPfOGA-kgmrmh4x6m4olKCdzB6E/edit#gid=1728449447)
