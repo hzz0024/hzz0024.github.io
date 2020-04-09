@@ -37,5 +37,5 @@ grep -v ">" cv30.fa | wc | awk '{print $3-$1}'
 ```
 #### RESULTS
 
-see google excel link here [coverage report](https://docs.google.com/spreadsheets/d/10V7vTdNp7oagq4SlPPfOGA-kgmrmh4x6m4olKCdzB6E/edit#gid=1728449447)
+see google excel link here for [coverage report](https://docs.google.com/spreadsheets/d/10V7vTdNp7oagq4SlPPfOGA-kgmrmh4x6m4olKCdzB6E/edit#gid=1728449447)
 
