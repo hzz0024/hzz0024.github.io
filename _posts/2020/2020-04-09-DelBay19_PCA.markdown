@@ -18,8 +18,17 @@ In this post I'd like to make PCA plots for the DelBay19 wild and challenge grou
 - challenge population with 98 samples
 <img src="https://hzz0024.github.io/images/QC_challenge_98_maxD2000.jpg" alt="img" width="800"/>
 
----
+Using 3xSD above the mean as the maxDepth, and half percent of the individual counts as minInd for angsd runs
 
+```sh
+module load angsd/0.931
+
+angsd -b challenge_98.list -anc cv30.fa -ref cv30.fa -out pca_output/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 49 -setMaxDepth 347 -minInd 49 -doMajorMinor 1 >& ch_ref_98_pca.log
+
+angsd -b wild_235.list -anc cv30.fa -ref cv30.fa -out pca_output/wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 118 -setMaxDepth 1003 -minInd 118 -doMajorMinor 1 >& wild_235_pca.log
+```
+
+---
 
 ### Results
 
