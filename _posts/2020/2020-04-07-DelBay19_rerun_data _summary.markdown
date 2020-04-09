@@ -30,7 +30,7 @@ The DelBay19 rerun samples (pool5) are trimmed and merged (with bam files after 
 | -----------|-------|-------|-------|-------|----------------|-----|
 |            |       |       |       |       |                | 333 |
 
-- the reads per sample ranges from 1.98 to 40.31 million, with a mean of 12.47 million reads (after trimming)
+- the reads per sample ranges from 2.0 to 40.3 million, with a mean of 12.5 million reads (after trimming)
 
 - the alignment rate ranges from 60.89% to 80.76%, with a mean value of 79.27%
 
