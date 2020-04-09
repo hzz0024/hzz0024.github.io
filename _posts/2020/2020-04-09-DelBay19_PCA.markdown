@@ -1,0 +1,31 @@
+---
+comments: true
+title: DelBay19 PCA
+date: '2020-04-09 12:00'
+tags:
+  - DelBay19
+  - PCA
+  - WGS
+categories:
+  - WGS data analysis
+---
+
+In this post I'd like to make PCA plots for the DelBay19 wild and challenge groups. First of all, I made the read depth distribution for these two populations.
+
+- wild population with 235 samples
+<img src="https://hzz0024.github.io/images/QC_wild_235_maxD2000.jpg" alt="img" width="800"/>
+
+- challenge population with 98 samples
+<img src="https://hzz0024.github.io/images/QC_challenge_98_maxD2000.jpg" alt="img" width="800"/>
+
+---
+
+
+### Results
+
+
+
+---
+
+### Conclusion 
+
