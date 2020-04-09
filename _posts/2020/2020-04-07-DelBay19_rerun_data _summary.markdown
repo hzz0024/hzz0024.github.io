@@ -30,11 +30,12 @@ The DelBay19 rerun samples (pool5) are trimmed and merged (with bam files after 
 | -----------|-------|-------|-------|-------|----------------|-----|
 |            |       |       |       |       |                | 333 |
 
-- the average reads per sample is 12.47 million (after trimming). 
+- the reads per sample ranges from 1.98 to 40.31 million, with a mean of 12.47 million reads (after trimming)
 
-- the average alignment rate is 79.27% 
+- the alignment rate ranges from 60.89% to 80.76%, with a mean value of 79.27%
 
-- the average genome coverage (using the same definition of coverage in Gemma's Atlantic cod paper) is 0.91
+- the genome coverage ranges from 0.15 to 2.87, with a mean value of 0.91   
+note: here I used the same coverage definition in Gemma's Atlantic cod paper, which did not take the unmapped regions into account.
 
 
 
