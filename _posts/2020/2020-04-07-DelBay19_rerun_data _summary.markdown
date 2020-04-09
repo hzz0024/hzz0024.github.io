@@ -34,7 +34,7 @@ The DelBay19 rerun samples (pool5) are trimmed and merged (with bam files after 
 
 - the average alignment rate is 79.27% 
 
-- the average genome coverage (with same definition in Gemma's Atlantic cod paper) is (under estimating)
+- the average genome coverage (using the same definition of coverage in Gemma's Atlantic cod paper) is 0.91
 
 
 
