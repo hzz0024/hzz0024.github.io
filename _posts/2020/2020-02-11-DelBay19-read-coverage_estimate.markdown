@@ -24,7 +24,7 @@ for sample in *.sorted.cv30.bam; do
 cov_depth=$(samtools depth $sample | awk '{sum+=$3;cnt++}END{print sum/cnt" "sum}')
 echo $sample: $cov_depth
 done
----
+```
 
 It outputs 2 numbers: average coverage for a coveraged base (sum/cnt), and the total base coverage (sum).  
 
