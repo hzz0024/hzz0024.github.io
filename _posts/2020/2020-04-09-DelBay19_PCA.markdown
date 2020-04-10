@@ -42,9 +42,10 @@ angsd -b wild_235.list -anc cv30.fa -ref cv30.fa \
 
 ### Results
 
+- wild population with 235 samples
+<img src="https://hzz0024.github.io/images/wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6.PCAngsd.pc1-2.jpg" alt="img" width="800"/>
 
+- challenge population with 98 samples
+<img src="https://hzz0024.github.io/images/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6.PCAngsd.pc1-2.jpg" alt="img" width="800"/>
 
----
-
-### Conclusion 
 
