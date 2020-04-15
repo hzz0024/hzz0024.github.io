@@ -148,4 +148,8 @@ Rscript --verbose plotPCAngsd_label.R -i ch_ref_98_pca_minI49D49maxD347_minQ20_m
 <img src="https://hzz0024.github.io/images/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2-1.jpg" alt="img" width="800"/>
 
 
+### Conclusion
+
+1. Populations would group together after excluding the inversions in the chromosome 5 ane 6   
+2. It is hard to tell where the individual outliers come from. Need further angsd after removing the outliers above.
 
