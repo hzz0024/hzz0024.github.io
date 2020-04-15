@@ -40,7 +40,6 @@ angsd -b wild_235.list -anc cv30.fa -ref cv30.fa \
 >& wild_235_pca.log
 
 # in order to remove invers in the angsd run, I need to index the bam files first
-module load samtools/1.6
 
 for f in *.bam;
 do
