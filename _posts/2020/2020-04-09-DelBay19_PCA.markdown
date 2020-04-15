@@ -81,7 +81,7 @@ python3 /tools/pcangsd-0.98/pcangsd.py -beagle wild_235_pca_minI118D118maxD1003_
 
 - wild population with 235 samples
 
-```sh
+```R
 # change the code in plotPCAngsd_label.R line 62-63 into contents below
 idx_in_range0 = PC[x_axis]>opt$x_min & PC[x_axis]<opt$x_max & PC[y_axis]>opt$y_min & PC[y_axis]<opt$y_max
 idx_in_range1 = PC[y_axis]>0.4 
@@ -93,7 +93,8 @@ Rscript --verbose plotPCAngsd_label.R -i wild_235_pca_minI118D118maxD1003_minQ20
 ```
 
 - wild population with 235 samples (after removing inversion regions)
-```sh
+
+```R
 # change the code in plotPCAngsd_label.R line 62-63 into contents below
 idx_in_range0 = PC[x_axis]>opt$x_min & PC[x_axis]<opt$x_max & PC[y_axis]>opt$y_min & PC[y_axis]<opt$y_max
 idx_in_range1 = PC[y_axis]>0.2 
@@ -105,7 +106,8 @@ Rscript --verbose plotPCAngsd_label.R -i wild_235_pca_minI118D118maxD1003_minQ20
 ```
 
 - challenge population with 98 samples
-```sh
+
+```R
 # change the code in plotPCAngsd_label.R line 62-63 into contents below
 idx_in_range0 = PC[x_axis]>opt$x_min & PC[x_axis]<opt$x_max & PC[y_axis]>opt$y_min & PC[y_axis]<opt$y_max
 idx_in_range1 = PC[x_axis]>0.18 & PC[x_axis]<0.35
@@ -117,7 +119,8 @@ Rscript --verbose plotPCAngsd_label.R -i ch_ref_98_pca_minI49D49maxD347_minQ20_m
 ```
 
 - challenge population with 98 samples (after removing inversion regions)
-```sh
+
+```R
 # change the code in plotPCAngsd_label.R line 62-63 into contents below
 idx_in_range0 = PC[x_axis]>opt$x_min & PC[x_axis]<opt$x_max & PC[y_axis]>opt$y_min & PC[y_axis]<opt$y_max
 idx_in_range1 = PC[y_axis]>0.2 & PC[y_axis]<0.3 #for chr no invers
