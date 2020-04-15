@@ -20,6 +20,7 @@ In this post I'd like to make PCA plots for the DelBay19 wild and challenge grou
 
 Using 3xSD above the mean as the maxDepth, and half percent of the individual counts as minInd for angsd runs
 
+---
 ### angsd run
 
 ```sh
@@ -147,6 +148,7 @@ Rscript --verbose plotPCAngsd_label.R -i ch_ref_98_pca_minI49D49maxD347_minQ20_m
 - challenge population with 98 samples (after removing inversion regions)
 <img src="https://hzz0024.github.io/images/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2-1.jpg" alt="img" width="800"/>
 
+---
 
 ### Conclusion
 
