@@ -138,7 +138,7 @@ Rscript --verbose plotPCAngsd_label.R -i ch_ref_98_pca_minI49D49maxD347_minQ20_m
 <img src="https://hzz0024.github.io/images/wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2-1.jpg" alt="img" width="800"/>
 
 - challenge population with 98 samples
-<img src="https://hzz0024.github.io/images/cch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6.pc1-2-1.jpg" alt="img" width="800"/>
 
 - challenge population with 98 samples (after removing inversion regions)
 <img src="https://hzz0024.github.io/images/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2-1.jpg" alt="img" width="800"/>
