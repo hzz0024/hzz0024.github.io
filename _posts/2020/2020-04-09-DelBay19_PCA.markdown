@@ -20,6 +20,8 @@ In this post I'd like to make PCA plots for the DelBay19 wild and challenge grou
 
 Using 3xSD above the mean as the maxDepth, and half percent of the individual counts as minInd for angsd runs
 
+### angsd run
+
 ```sh
 module load angsd/0.931
 
@@ -36,6 +38,94 @@ angsd -b wild_235.list -anc cv30.fa -ref cv30.fa \
 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 \
 -SNP_pval 1e-6 -setMinDepth 118 -setMaxDepth 1003 -minInd 118 -doMajorMinor 1 \
 >& wild_235_pca.log
+
+# in order to remove invers in the angsd run, I need to index the bam files first
+module load samtools/1.6
+
+for f in *.bam;
+do
+    samtools index $f
+done
+
+# remove the invers and create new snp lists
+# tail -n +2 will only remove the first header line
+# note NR == 1 will alway keep the first line in the generated file, it may cause some errors but now it is fine
+zcat ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6.mafs.gz | tail -n +2 > FILE.tmp && mv FILE.tmp ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_snplist
+awk '{print $1,$2,$3,$4}' ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_snplist > ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_snplist_4col
+awk '(NR == 1 ); !(($1 == "NC_035785.1") && ($2 > 29900000) && ($2 < 44500000))' ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_snplist_4col > challenge_4col_nochr6invers.snplist
+awk '(NR == 1 ); !(($1 == "NC_035784.1") && ($2 > 60600000) && ($2 < 80200000))' challenge_4col_nochr6invers.snplist > ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.snplist
+
+zcat wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6.mafs.gz | tail -n +2 > FILE.tmp && mv FILE.tmp wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_snplist
+awk '{print $1,$2,$3,$4}' wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_snplist > wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_snplist_4col
+awk '(NR == 1 ); !(($1 == "NC_035785.1") && ($2 > 29900000) && ($2 < 44500000))' wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_snplist_4col > wild_4col_nochr6invers.snplist
+awk '(NR == 1 ); !(($1 == "NC_035784.1") && ($2 > 60600000) && ($2 < 80200000))' wild_4col_nochr6invers.snplist > wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers.snplist
+
+# run angsd again for beagle files without invers in the chr5 and chr6
+module load angsd/0.931
+
+angsd -b challenge_98.list -anc cv30.fa -ref cv30.fa -out pca_output/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 49 -setMaxDepth 347 -minInd 49 -doMajorMinor 3 -sites ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.snplist -rf chr.list >& ch_ref_98_pca_nochr56invers.log
+
+angsd -b wild_235.list -anc cv30.fa -ref cv30.fa -out pca_output/wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 118 -setMaxDepth 1003 -minInd 118 -doMajorMinor 3 -sites wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers.snplist -rf chr.list >& wild_235_pca_nochr56invers.log
+
+# produce the cov file for pca plotting
+module load pcangsd/0.98
+python3 /tools/pcangsd-0.98/pcangsd.py -beagle ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6.beagle.gz -minMaf 0.05 -threads 20 -o ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6 >& PCangs_ch_ref_3SD.log
+
+python3 /tools/pcangsd-0.98/pcangsd.py -beagle wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6.beagle.gz -minMaf 0.05 -threads 20 -o wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6 >& PCangs_wild_3SD.log
+
+python3 /tools/pcangsd-0.98/pcangsd.py -beagle ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.beagle.gz -minMaf 0.05 -threads 20 -o ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers >& PCangs_ch_ref_no_chr56_3SD.log
+
+python3 /tools/pcangsd-0.98/pcangsd.py -beagle wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers.beagle.gz -minMaf 0.05 -threads 20 -o wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers >& PCangs_wild_no_chr56_3SD.log
+```
+
+### plot the PCA
+
+- wild population with 235 samples
+```R
+# change the code in plotPCAngsd_label.R line 62-63 into contents below
+idx_in_range0 = PC[x_axis]>opt$x_min & PC[x_axis]<opt$x_max & PC[y_axis]>opt$y_min & PC[y_axis]<opt$y_max
+idx_in_range1 = PC[y_axis]>0.4 
+idx_in_range = idx_in_range0 | idx_in_range1
+print(idx_in_range)
+
+# bash R script
+Rscript --verbose plotPCAngsd_label.R -i wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6.cov.npy -c 1-2 -a wild_235.list -o wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6.pc1-2.pdf --x_min -0.3 --x_max -0.19 --y_min -0.1 --y_max 0.2
+```
+
+- wild population with 235 samples (after removing inversion regions)
+```R
+# change the code in plotPCAngsd_label.R line 62-63 into contents below
+idx_in_range0 = PC[x_axis]>opt$x_min & PC[x_axis]<opt$x_max & PC[y_axis]>opt$y_min & PC[y_axis]<opt$y_max
+idx_in_range1 = PC[y_axis]>0.2 
+idx_in_range = idx_in_range0 | idx_in_range1
+print(idx_in_range)
+
+# bash R script 
+Rscript --verbose plotPCAngsd_label.R -i wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers.cov.npy -c 1-2 -a wild_235.list -o wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2.pdf --x_min 0 --x_max 0.5 --y_min -0.4 --y_max -0.2
+```
+
+- challenge population with 98 samples
+```R
+# change the code in plotPCAngsd_label.R line 62-63 into contents below
+idx_in_range0 = PC[x_axis]>opt$x_min & PC[x_axis]<opt$x_max & PC[y_axis]>opt$y_min & PC[y_axis]<opt$y_max
+idx_in_range1 = PC[x_axis]>0.18 & PC[x_axis]<0.35
+idx_in_range = idx_in_range0 | idx_in_range1
+print(idx_in_range)
+
+# bash R script 
+Rscript --verbose plotPCAngsd_label.R -i ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6.cov.npy -c 1-2 -a challenge_98.list -o ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6.pc1-2.pdf --x_min -0.1 --x_max 0.4 --y_min -0.9 --y_max -0.2
+```
+
+- challenge population with 98 samples (after removing inversion regions)
+```R
+# change the code in plotPCAngsd_label.R line 62-63 into contents below
+idx_in_range0 = PC[x_axis]>opt$x_min & PC[x_axis]<opt$x_max & PC[y_axis]>opt$y_min & PC[y_axis]<opt$y_max
+idx_in_range1 = PC[y_axis]>0.2 & PC[y_axis]<0.3 #for chr no invers
+idx_in_range = idx_in_range0 | idx_in_range1
+print(idx_in_range)
+
+# bash R script 
+Rscript --verbose plotPCAngsd_label.R -i ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.cov.npy -c 1-2 -a challenge_98.list -o ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2.pdf --x_min -0.7 --x_max 0.2 --y_min -0.6 --y_max -0.05
 ```
 
 ---
@@ -43,9 +133,16 @@ angsd -b wild_235.list -anc cv30.fa -ref cv30.fa \
 ### Results
 
 - wild population with 235 samples
-<img src="https://hzz0024.github.io/images/wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6.PCAngsd.pc1-2.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6.pc1-2.jpg" alt="img" width="800"/>
+
+- wild population with 235 samples (after removing inversion regions)
+<img src="https://hzz0024.github.io/images/wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2-1.jpg" alt="img" width="800"/>
 
 - challenge population with 98 samples
-<img src="https://hzz0024.github.io/images/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6.PCAngsd.pc1-2.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/cch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6.pc1-2.jpg" alt="img" width="800"/>
+
+- challenge population with 98 samples (after removing inversion regions)
+<img src="https://hzz0024.github.io/images/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2.jpg" alt="img" width="800"/>
+
 
 
