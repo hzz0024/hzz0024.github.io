@@ -9,7 +9,7 @@ library(ggrepel)
 setwd('.')
 
 # colorblind friendly: http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
-cbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#ff7878", "#D55E00", "#CC79A7")
+cbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#ff0000", "#ff7878", "#D55E00", "#CC79A7")
 # To use for fills, add: scale_fill_manual(values=cbPalette)
 # To use for line and point colors, add: scale_colour_manual(values=cbPalette)
 
@@ -29,21 +29,11 @@ opt <- parse_args(OptionParser(option_list = option_list))
 #################################################################################
 
 # Read input file
-
-opt$in_file <- 'ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.cov.npy'
-opt$annot <- "challenge_98.list"
-opt$comp <- '1-2'
-opt$out_file <- 'test.pdf'
-opt$x_min <- -0.6
-opt$x_max <- 0.2
-opt$y_min <- -0.6
-opt$y_max <- -0.05
-
-covar <- npyLoad(opt$in_file); #%>%
+covar <- npyLoad(opt$in_file) #%>%
 #covar <- read.table(c, stringsAsFactors=F, sep="\t", fill=TRUE);
 
 # Read annot file
-annot <- read.table(opt$annot, sep="\t", header=T); # note that plink cluster files are usually tab-separated
+annot <- read.table(opt$annot_file, sep="\t", header=T); # note that plink cluster files are usually tab-separated
 
 # Parse components to analyze
 comp <- as.numeric(strsplit(opt$comp, "-", fixed=TRUE)[[1]])
@@ -69,11 +59,10 @@ title <- paste("PC",comp[1]," (",signif(eig$val[comp[1]], digits=3)*100,"%)"," /
 x_axis = paste("PC",comp[1],sep="")
 y_axis = paste("PC",comp[2],sep="")
 
-
 idx_in_range0 = PC[x_axis]>opt$x_min & PC[x_axis]<opt$x_max & PC[y_axis]>opt$y_min & PC[y_axis]<opt$y_max
-idx_in_range1 = PC[y_axis]>0.2
+idx_in_range1 = PC[y_axis]>0.4 
 idx_in_range = idx_in_range0 | idx_in_range1
-
+print(idx_in_range)
 
 ggplot() + geom_point(data=PC, aes_string(x=x_axis, y=y_axis, color="Pop")) + 
 ggtitle(title) + 
@@ -81,9 +70,8 @@ scale_colour_manual(values=cbPalette, breaks=c("CH1","CH2","CH3","CH4","REF")) +
 # add label for each sample, edit the nudge_x and nudge_y to adjust the lable position
 geom_text_repel(data=PC[idx_in_range,], aes_string(x=x_axis, y=y_axis, color="Pop"), label=annot$IID[idx_in_range], size=2, nudge_x = 0.01, nudge_y = 0.01)
 
-#export as ppt
-#library(export)
-#graph2ppt(file="test",width=10,height=10)
-
 ggsave(opt$out_file)
 unlink("Rplots.pdf", force=TRUE)
+
+#library(export)
+#graph2ppt(file = "wild_235_pca_minI118D118maxD1003_minQ20_minMAF05_SNPe6_nochr56invers",width=4.8,height=3.6)
