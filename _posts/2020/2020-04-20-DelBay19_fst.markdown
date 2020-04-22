@@ -30,7 +30,7 @@ angsd -b ch_50.list \
 -P 20 -minQ 20 -minMapQ 20 -setMinDepth 25 -setMaxDepth 167 -minInd 25 \
 >& ch_50_doSAF_minI25D25maxD167.log
 ```
-Note, if the doMajorMinor option is not provided for the saf step (as described at ANGSD webpage [http://popgen.dk/angsd/index.php/2d_SFS_Estimation](http://popgen.dk/angsd/index.php/2d_SFS_Estimation)), the SFS would be polarized by the ancestral states given by -anc <fasta> (see post [NaN in fst values](https://github.com/ANGSD/angsd/issues/274))
+Note, if the doMajorMinor option is not provided for the saf step (as described at ANGSD webpage [http://popgen.dk/angsd/index.php/2d_SFS_Estimation](http://popgen.dk/angsd/index.php/2d_SFS_Estimation)), the SFS would be polarized by the ancestral states given by -anc fasta (see post [NaN in fst values](https://github.com/ANGSD/angsd/issues/274))
 
 ### fold sfs creation and fst estimate
 ```sh
