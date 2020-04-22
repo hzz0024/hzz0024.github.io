@@ -86,6 +86,7 @@ Number of SNPs for each pairwise comparison
 ### Fst plots
 
 - CH_REF
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_singlesnp_fold.jpg" alt="img" width="800"/> 
 <img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold.jpg" alt="img" width="800"/>
 
 - ARN_COH
