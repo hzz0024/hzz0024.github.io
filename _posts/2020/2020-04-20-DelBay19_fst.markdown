@@ -1,0 +1,103 @@
+---
+comments: true
+title: DelBay19 fst evaluation and outlier detection
+date: '2020-04-20 12:00'
+tags:
+  - DelBay19
+  - Fst
+  - ouliter
+  - WGS
+categories:
+  - WGS data analysis
+---
+
+Using the rerun dataset, I'd like to estimate fst for each pairwise comparisons and visulize which parts of the genome have elevated genetic differentiation. The first step is to generate the site allele frequency (saf) likelihood for each sampling location. Below are the ANGSD posts that may be helpful for this step:
+
+[NaN in fst values](https://github.com/ANGSD/angsd/issues/274)   
+[Calculating FST: when to fold SFS](https://github.com/ANGSD/angsd/issues/259)   
+
+Also in the Atlantic cod paper by Clucas et al. (2019), they set the minimum number of individuals threshold (-minInd) at either three or two-third of the number of individuals in the sampling location (12-15 total individuals for each site) to test the effect of missing data on pairwise Fst estimates. Here I used -minInd of 25 in the saf generation, corresponding that half of the inidviduals need to be present for each SNP. 
+
+Initially, I did not set the minInd for the Fst estimates. An example of the code is shown below,
+
+---
+### unfold saf file creation
+
+```sh
+module load angsd/0.931
+
+angsd -b ch_50.list \
+-anc cv30.fa -out ch_50_doSAF_minI25D25maxD167 \
+-dosaf 1 -doDepth 1 -doCounts 1 -GL 1 \
+-P 20 -minQ 20 -minMapQ 20 -setMinDepth 25 -setMaxDepth 167 -minInd 25 \
+>& ch_50_doSAF_minI25D25maxD167.log
+```
+Note, if the doMajorMinor option is not provided for the saf step (as described at ANGSD webpage [http://popgen.dk/angsd/index.php/2d_SFS_Estimation](http://popgen.dk/angsd/index.php/2d_SFS_Estimation)), the SFS would be polarized by the ancestral states given by -anc <fasta> (see post [NaN in fst values](https://github.com/ANGSD/angsd/issues/274))
+
+### fold sfs creation and fst estimate
+```sh
+/tools/angsd-0.931/misc/realSFS $POP1$BASENAME'.saf.idx' $POP2$BASENAME'.saf.idx' -fold 1 > $POP1'_'$POP2$BASENAME'_fold.2dSFS'
+/tools/angsd-0.931/misc/realSFS fst index  $POP1$BASENAME'.saf.idx' $POP2$BASENAME'.saf.idx' -sfs $POP1'_'$POP2$BASENAME'_fold.2dSFS' -fold 1  -whichFst 1 -fstout $POP1'_'$POP2$BASENAME'_fold.alpha_beta' #whichFst 1 for small sample sizes, newer version of angsd
+/tools/angsd-0.931/misc/realSFS fst print $POP1'_'$POP2$BASENAME'_fold.alpha_beta.fst.idx' > $POP1'_'$POP2$BASENAME'_fold.alpha_beta.txt'
+awk '{ print $0 "\t" $3 / $4 }' $POP1'_'$POP2$BASENAME'_fold.alpha_beta.txt' > $POP1'_'$POP2$BASENAME'_fold.fst'
+/tools/angsd-0.931/misc/realSFS fst stats $POP1'_'$POP2$BASENAME'_fold.alpha_beta.fst.idx' > $POP1'_'$POP2$BASENAME'_fold.average_fst.txt'
+# windowsized fst
+/tools/angsd-0.931/misc/realSFS fst stats2 $POP1'_'$POP2$BASENAME'_fold.alpha_beta.fst.idx' -type 0 -win 1000 -step 1000 > $POP1'_'$POP2$BASENAME'_fold.1kb_win_1kb_fst.txt'
+/tools/angsd-0.931/misc/realSFS fst stats2 $POP1'_'$POP2$BASENAME'_fold.alpha_beta.fst.idx' -type 0 -win 5000 -step 5000 > $POP1'_'$POP2$BASENAME'_fold.5kb_win_5kb_fst.txt'
+/tools/angsd-0.931/misc/realSFS fst stats2 $POP1'_'$POP2$BASENAME'_fold.alpha_beta.fst.idx' -type 0 -win 15000 -step 15000 > $POP1'_'$POP2$BASENAME'_fold.15kb_win_15kb_fst.txt'
+
+# parse the output file for fst plotting, for example
+awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_doSAF_fold.1kb_win_1kb_fst.txt | awk '$2-=500' | awk '$3+=500' > ch_ref_1kb_fold.fst
+awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_doSAF_fold.5kb_win_5kb_fst.txt | awk '$2-=2500' | awk '$3+=2500' > ch_ref_5kb_fold.fst
+awk -F"\t" '{print $2, $3, $3, $5}' ch_ref_doSAF_fold.15kb_win_15kb_fst.txt | awk '$2-=7500' | awk '$3+=7500' > ch_ref_15kb_fold.fst
+```
+---
+### Results: number of SNPs and Fst values
+
+The wild population order based on salinity from low to high (HC, ARN, COH, SR, NB)
+
+Number of SNPs for each population in saf
+
+| 			 |Total number of sites analyzed | Number of sites retained after filtering |  
+| -----------|----------|--------------|
+|    HC      | 552206979| 201271276    |
+|    ARN     | 547968598| 198211880    |
+|    COH     | 548674038| 208674608    |
+|    SR      | 550602834| 204514057    |
+|    NB      | 546390064| 193778045    |
+|    REF     | 549584875| 189886237    |
+|    CH      | 545117898| 181283004    |
+   
+Number of SNPs for each pairwise comparison
+
+| 			 |No. sites | Fst unweight | Fst weight | 
+| -----------|----------|--------------|------------|
+|    CH_REF  | 170859421|  0.000664    |   0.000883 |
+|    HC_ARN  | 185953051|  0.001151    |   0.000852 |
+|    HC_COH  |          |              |            |
+|    HC_SR   |          |              |            |
+|    HC_NB   |          |              |            |
+|    ARN_COH | 189084056|  0.000815    |   0.000675 |
+|    ARN_SR  |          |              |            |
+|    ARN_NB  | 182211161|  0.001035    |   0.000827 |
+|    COH_SR  |          |              |            |
+|    COH_NB  |          |              |            |
+|    SR_NB   |          |              |            |
+
+---
+### Fst plots
+
+- CH_REF
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold.jpg" alt="img" width="800"/>
+
+- ARN_COH
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ARN_COH_fold.jpg" alt="img" width="800"/>
+
+- ARN_NB
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ARN_NB_fold.jpg" alt="img" width="800"/>
+
+---
+
+### Conclusion
+
+

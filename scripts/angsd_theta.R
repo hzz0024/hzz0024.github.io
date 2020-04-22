@@ -106,4 +106,4 @@ jpeg("Mahattan_SL_no6inv_fold_TajimaD.jpg", width = 16, height = 9, units = 'in'
 manhattan(DT,chr="Chr",bp="WinCenter",p="Tajima", logp=FALSE, cex = 0.5, cex.axis = 0.8, ylim = c(0, 3),
           col=c("blue4","orange3"),genomewideline=F, suggestiveline=F,
           ylab="Tajima D", cex.lab=1.4, main = "SL TajimaD")
-#dev.off()
+dev.off()
