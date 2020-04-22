@@ -16,9 +16,7 @@ Using the rerun dataset, I'd like to estimate fst for each pairwise comparisons 
 [NaN in fst values](https://github.com/ANGSD/angsd/issues/274)   
 [Calculating FST: when to fold SFS](https://github.com/ANGSD/angsd/issues/259)   
 
-Also in the Atlantic cod paper by Clucas et al. (2019), they set the minimum number of individuals threshold (-minInd) at either three or two-third of the number of individuals in the sampling location (12-15 total individuals for each site) to test the effect of missing data on pairwise Fst estimates. Here I used -minInd of 25 in the saf generation, corresponding that half of the inidviduals need to be present for each SNP. 
-
-Initially, I did not set the minInd for the Fst estimates. An example of the code is shown below,
+Also in the Atlantic cod paper by Clucas et al. (2019), they set the minimum number of individuals threshold (-minInd) at either three or two-third of the number of individuals in the sampling location (12-15 total individuals for each site) to test the effect of missing data on pairwise Fst estimates. Here I used -minInd of 25 in the saf generation, corresponding that half of the inidviduals need to be present for each SNP. An example of the code is shown below,
 
 ---
 ### unfold saf file creation
