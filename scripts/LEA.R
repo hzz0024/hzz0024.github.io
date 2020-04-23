@@ -141,11 +141,12 @@ DT <- fread("ARN_COH_15kb_fold.fst")
 print(DT)
 # here fst.values is just fst values for snps
 fst.values = DT$angsd_Fst
+# number of individuals in the comparison
 n = 91
-# here change the negative fst value into 1e-6
-#fst.values[fst.values<0] = 1e-10
+# here change the negative fst value into 0
 fst.values[fst.values<0] = 0
-#fst.values = fst.values[fst.values!=0]
+#uncomment the line below will retain the SNPs with Fst >0
+#fst.values = fst.values[fst.values!=0] 
 fst.values
 K = 2
 z.scores = sqrt(fst.values*(n-K)/(1-fst.values))
@@ -166,7 +167,7 @@ abline(0,1)
 ## FDR control: Benjamini-Hochberg at level q
 plot(-log10(adj.p.values), main="Manhattan plot", xlab = "Locus", cex = .7, col = "grey")
 L = length(adj.p.values)
-q = 1e-1
+q = 0.05
 w = which(sort(adj.p.values) < q * (1:L)/L)
 candidates = order(adj.p.values)[w]
 candidates

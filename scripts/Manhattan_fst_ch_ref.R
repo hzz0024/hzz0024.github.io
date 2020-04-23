@@ -11,6 +11,17 @@ library(animation)
 library(stringr)
 require(data.table)
 
+DT <- fread("ARN_NB_doSAF_fold.fst")
+print(DT)
+DT$V5 <- as.numeric(DT$V5)
+#pdf("Mahattan_ch_ref_1kb_fold.pdf",width=15,height=10)
+par(mfrow=c(1,1)) 
+jpeg("Mahattan_ch_ref_fold.jpg", width = 16, height = 9, units = 'in', res = 300)
+manhattan(DT,chr="chr",bp="pos",p="angsd_Fst",logp=FALSE, cex = 0.5, cex.axis = 0.8, ylim = c(0, 0.5),
+          col=c("blue4","orange3"),genomewideline=F, suggestiveline=F,
+          ylab="CH vs REF Fst ", cex.lab=1.4) #main = "Chromosome",
+dev.off()
+
 ##### script for single-SNP plot (due to difficulty in opening the pdf, I export the jepg plot here)
 DT <- fread("ch_ref_doSAF_fold.fst")
 print(DT)

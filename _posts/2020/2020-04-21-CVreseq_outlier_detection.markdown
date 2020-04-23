@@ -79,6 +79,8 @@ NEH - Delaware Bay selected NEH line
 DEBY - Chesapeake Bay selected line (initially from DB)   
 CS - Cape Shore (Delaware Bay) wild line 
 
+Among these outliers, only one SNP (5_11774642) was shared between DB_2 (pr_odd 100) and LA (pr_odd 100) results.
+
 - Outlier plots
 
 Mahattan plot for SL-OBOYS2 (pr_odds 10)
@@ -110,18 +112,74 @@ Mahattan plot for CS-DEBY (pr_odds 100)
 
 ---
 ### Percentile
-1. first estimate the Fst values using VCFtools 
+
+- get polymorphic loci for each comparsion
+
+```sh
+vcftools --vcf LA.recode.vcf --maf 0.05 --recode --recode-INFO-all --out LA_maf
+>After filtering, kept 284587 out of a possible 334011 Sites
+
+vcftools --vcf DB_1.recode.vcf --maf 0.05 --recode --recode-INFO-all --out DB_1_maf
+>After filtering, kept 282067 out of a possible 334011 Sites
+
+vcftools --vcf DB_2.recode.vcf --maf 0.05 --recode --recode-INFO-all --out DB_2_maf
+>After filtering, kept 293946 out of a possible 334011 Sites
+```
+
+- estimate the Fst values using VCFtools 
 ```sh
 ./vcftools --vcf vcf_file1.vcf --weir-fst-pop individual_list_1.txt --weir-fst-pop individual_list_2.txt
+
+vcftools --vcf LA_maf.recode.vcf --weir-fst-pop SL --weir-fst-pop OBOYS2
+Weir and Cockerham mean Fst estimate: 0.024711
+Weir and Cockerham weighted Fst estimate: 0.036727
+After filtering, kept 284587 out of a possible 284587 Sites
+
+vcftools --vcf DB_1_maf.recode.vcf --weir-fst-pop CS --weir-fst-pop NEH
+Weir and Cockerham mean Fst estimate: 0.048347
+Weir and Cockerham weighted Fst estimate: 0.063669
+After filtering, kept 282067 out of a possible 282067 Sites
+
+vcftools --vcf DB_2_maf.recode.vcf --weir-fst-pop CS --weir-fst-pop DEBY
+Weir and Cockerham mean Fst estimate: 0.02112
+Weir and Cockerham weighted Fst estimate: 0.033042
+After filtering, kept 293946 out of a possible 293946 Sites
 ```
 see vcftools [manual](https://vcftools.github.io/man_latest.html) and biostars [post](https://www.biostars.org/p/46858/) for detailed parameter explanation. Here the Fst values are estimated using Weir and Cockerham’s (1984) method
 
----
-### Results: number of outlier SNPs and Fst values
+- calculate the percentile and extract the SNP information
 
+A python script is made for this purpose, for example
 
+```python
+python3 percentile.py -i input -o output -p target_percentile
+```
+| Group	     |Populations|  Percentile  |  Fst threshold | No. outlier|
+| -----------|-----------|--------------|----------------|------------|
+|   LA       | SL-OBOYS2 |    99.9      |      0.70      |    269     |
+|   DB_1     | CS-NEH    |    99.9      |      0.73      |    260     |
+|   DB_2     | CS-DEBY   |    99.9      |      0.70      |    239     |
+
+Nubmber of shared outliers
+
+| Group	     |Fst ranges    | No. of shared outlier|
+| -----------|--------------|----------------------|
+|   LA-DB_1  |    0.8       |    2                 |
+|   LA-DB_2  |    0.8       |    1                 |
+| DB_1-DB_2  |    0.73-1    |    7                 |
+|DB_1-DB_2-LA|    0.8       |    1                 |
+
+Again, SNP 5_11774642 is shared among three groups.
 
 ---
 ### Conclusion and questions
+
+1. In general, outliers were found throughout the genome. Top outliers with the strongest evidence and consistent observations included SNP 5_11774642. 
+ 
+2. The genomic location including containing or nearby these outliers (within 10 kb) need further investigation.
+
+3. Due to the limited sample size (6 for each populations), the Fst may not reflect the real genomic differentiation.
+
+
 
 
