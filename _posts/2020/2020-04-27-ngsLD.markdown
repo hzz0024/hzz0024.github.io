@@ -47,7 +47,6 @@ Number of sites retained after filtering (minInd 9): 1302240
 ### Generate the beagle file for ngsLD run
 
 - DelBay19 
-
 ```sh
 angsd -b DelBay19_12.list -anc cv30.fa -ref cv30.fa -out ngsLD/DelBay19_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10 \
 -dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 \
