@@ -16,7 +16,7 @@ The ngsLD is a program that could estimate pairwise linkage disequilibrium (LD) 
 
 ### Evaluate the SNP depth distribution
 
-- DelBay19 data
+- DelBay19
 
 ```sh
 angsd -b DelBay19_12.list -anc cv30.fa -ref cv30.fa -out depth/QC_DelBay19_12_maxD2000 \
@@ -46,7 +46,22 @@ Number of sites retained after filtering (minInd 9): 1302240
 ---
 ### Generate the beagle file for ngsLD run
 
+- DelBay19 
 
+```sh
+angsd -b DelBay19_12.list -anc cv30.fa -ref cv30.fa -out ngsLD/DelBay19_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10 \
+-dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 \
+-remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 4 -setMaxDepth 55 -minInd 9 -doMajorMinor 1 \
+-rf chr.list >& DelBay19_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10.log
+```
+
+- CVreseq
+```sh
+angsd -b CVreseq_12.list -anc cv30.fa -ref cv30.fa -out ngsLD/CVreseq_minI9D88maxD108_minQ20_minMAF05_SNPe6_chr10 \
+-dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 \
+-remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 88 -setMaxDepth 108 -minInd 9 -doMajorMinor 1 \
+-rf chr.list >& CVreseq_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10.log
+```
 
 ---
 ### Conclusion and questions
