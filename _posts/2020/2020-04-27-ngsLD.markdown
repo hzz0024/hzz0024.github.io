@@ -14,7 +14,7 @@ categories:
 
 The ngsLD is a program that could estimate pairwise linkage disequilibrium (LD) taking the uncertainty of genotype's assignation into account. It would be interesting to compare the resequencing data (wild vs. a selected strain) and then my low coverage data.
 
-Note that from ngsLD Github site:   
+Hints that from ngsLD Github site:   
 1) it may better to call SNPs based on MAF since monomorphic sites are not informative.     
 2) ngsLD performance seems to drop considerable under extremely low coverages (<1x); consider these cases only if you have large sample sizes (>100 individuals).     
 3) For some analyses (e.g. LD decay) consider sampling your data (--rnd_sample), since ngsLD will be much faster and you probably don't need all comparisons.            
