@@ -24,6 +24,7 @@ angsd -b ch_6.bamlist -anc cv30.fa -ref cv30.fa -out depth/QC_ch_6_maxD2000 \
 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 -rf chr.list >& QC_ch_6_maxD2000.log
 ```
 <img src="https://hzz0024.github.io/images/ngsLD/QC_ch_6_maxD2000.jpg" alt="img" width="800"/>
+
 ```sh
 angsd -b ref_6.bamlist -anc cv30.fa -ref cv30.fa -out depth/QC_ref_6_maxD2000 \
 -dosaf 1 -GL 1 -doGlf 3 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 4 -minQ 20 -minMapQ 30 -minMaf 0.05 \
@@ -40,6 +41,7 @@ angsd -b NEH.bamlist -anc CVtot_3.0_newchr.fa.bgz -ref CVtot_3.0_newchr.fa.bgz -
 -rf chr.list >& QC_NEH_6_maxD2000.log
 ```
 <img src="https://hzz0024.github.io/images/ngsLD/QC_NEH_6_maxD2000.jpg" alt="img" width="800"/>
+
 ```sh
 angsd -b CS.bamlist -anc CVtot_3.0_newchr.fa.bgz -ref CVtot_3.0_newchr.fa.bgz -out depth/QC_CS_6_maxD2000 \
 -dosaf 1 -GL 1 -doGlf 3 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 4 -minQ 20 -minMapQ 30 -minMaf 0.05 \
