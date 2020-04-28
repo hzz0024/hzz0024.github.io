@@ -19,27 +19,17 @@ The ngsLD is a program that could estimate pairwise linkage disequilibrium (LD) 
 - DelBay19
 
 ```sh
-angsd -b DelBay19_12.list -anc cv30.fa -ref cv30.fa -out depth/QC_DelBay19_12_maxD2000 \
--dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 9 -minQ 20 -minMapQ 20 -minMaf 0.05 \
--remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 -rf chr.list >& QC_DelBay19_12_maxD2000.log
+
 ```
-Total number of sites analyzed: 18595684     
-Number of sites retained after filtering (minInd 6): 96849        
-Number of sites retained after filtering (minInd 9): 51669    
+    
 
 <img src="https://hzz0024.github.io/images/ngsLD/QC_DelBay19_12_maxD2000.jpg" alt="img" width="800"/>
 
 - CVreseq
 
 ```sh
-angsd -b CVreseq_12.list -anc CVtot_3.0_newchr.fa.bgz -ref CVtot_3.0_newchr.fa.bgz -out depth/QC_CVreseq_12_maxD2000 \
--dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 9 -minQ 20 -minMapQ 20 -minMaf 0.05 \
--remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 \
--rf chr.list >& QC_CVreseq_12_maxD2000.log
+
 ```
-Total number of sites analyzed: 30608008    
-Number of sites retained after filtering (minInd 6): 1614133
-Number of sites retained after filtering (minInd 9): 1302240   
 
 <img src="https://hzz0024.github.io/images/ngsLD/QC_CVreseq_12_maxD2000.jpg" alt="img" width="800"/>
 
@@ -48,18 +38,12 @@ Number of sites retained after filtering (minInd 9): 1302240
 
 - DelBay19 
 ```sh
-angsd -b DelBay19_12.list -anc cv30.fa -ref cv30.fa -out ngsLD/DelBay19_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10 \
--dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 \
--remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 4 -setMaxDepth 55 -minInd 9 -doMajorMinor 1 \
--rf chr.list >& DelBay19_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10.log
+
 ```
 
 - CVreseq
 ```sh
-angsd -b CVreseq_12.list -anc cv30.fa -ref cv30.fa -out ngsLD/CVreseq_minI9D88maxD108_minQ20_minMAF05_SNPe6_chr10 \
--dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 \
--remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 88 -setMaxDepth 108 -minInd 9 -doMajorMinor 1 \
--rf chr.list >& CVreseq_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10.log
+
 ```
 
 ---
