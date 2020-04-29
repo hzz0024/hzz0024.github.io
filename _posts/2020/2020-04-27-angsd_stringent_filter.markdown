@@ -13,7 +13,7 @@ categories:
 
 In this post I'd like to evaluate how parameters such as minInd and minMapQ affect the SNP number produced from the low-coverage data. 
 
-The control run here used -minQ 20 -minMapQ 20 -minInd 25 or 24 (50% missing rate).
+The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - corresponding 50% missing rate.
 
 ### Set the MinDepth and MaxDepth based on global depth distribution
 
@@ -40,11 +40,24 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 or 24 (50% missing rat
 |  Applied   | 84791110       |    41680598       | 85218526        |    43137643        |    0.000766    |      0.001052     |
 
 - 50% 
-- 60% 
+
+<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd50.jpg" alt="img" width="800"/>
+
+- 60%
+
+<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd60.jpg" alt="img" width="800"/>
+
 - 70% 
+
+<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd70.jpg" alt="img" width="800"/>
+
 - 80% 
+
+<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd80.jpg" alt="img" width="800"/>
+
 - 90% 
 
+<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd90.jpg" alt="img" width="800"/>
 
 ---
 ### Different settings of minMapQ
