@@ -194,22 +194,26 @@ cat NEH_pos.txt | wc -l
 - DelBay19 
 
 ```sh
-Rscript --vanilla --slave fit_LDdecay.R --ld_files LD.list --out ref_ch.jpg --fit_level 0
+Rscript --vanilla --slave fit_LDdecay_edit.R --ld_files LD.list --out ref_ch.jpg --fit_level 0
 ```
 Result without fitting model
 
 <img src="https://hzz0024.github.io/images/ngsLD/ref_ch_ngsLD.jpg" alt="img" width="800"/>
 
+```sh
+Rscript --vanilla --slave fit_LDdecay.R --ld_files LD.list --out ref_ch.jpg --fit_level 3
+```
 Random seed: 65743
 ==> Fitting r2 LD decay assuming a three (rate of decay, max LD and min LD) parameter decay model 
 
 |              File LD|   DecayRate   |  LDmax |    LDmin  |
 |---------------------|---------------|--------|-----------|   
-|  ch_ngsLD_output r2 | 0.006095614   |0.4581553 |0.3406605 |     
-| ref_ngsLD_output r2 | 0.003160602 |0.4473140 |0.3243038 |   
+|  ch_ngsLD_output r2 | 0.00595882   |0.4570612 |0.3406312 |     
+| ref_ngsLD_output r2 | 0.00269337 |0.4411942 |0.3240726 |   
 
 ==> Plotting data...     
 
+<img src="https://hzz0024.github.io/images/ngsLD/ref_ch_ngsLD_fitting.jpg" alt="img" width="800"/>
 
 ---
 ### Results
