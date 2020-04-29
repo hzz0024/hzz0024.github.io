@@ -21,7 +21,7 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 
 <img src="https://hzz0024.github.io/images/ngsLD/QC_CVreseq_12_maxD2000.jpg" alt="img" width="800"/>
 
-### Different settings of minInd
+### SNP counts summary
 
 |     	     |Total sites (ch)|Sites retained (ch)|Total sites (ref)|Sites retained (ref)| Unweight Fst   |  Weight Fst       |  
 | -----------|----------------|-------------------|-----------------|--------------------|----------------|-------------------|
@@ -38,6 +38,9 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 |remove_bads |  uniqueOnlys   | only_proper_pair  |                 |                    |                |                   |
 |Not applied | 84791110       |    41680598       | 85218526        |    43137643        |    0.000733    |      0.001047     |
 |  Applied   | 84791110       |    41680598       | 85218526        |    43137643        |    0.000766    |      0.001052     |
+
+
+### Different settings of minInd
 
 - 50% 
 
