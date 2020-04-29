@@ -87,9 +87,9 @@ Rscript --vanilla --slave fit_LDdecay.R --ld_files LD.list --out ref_ch.pdf --fi
 ```
 Random seed: 65743
 ==> Fitting r2 LD decay assuming a three (rate of decay, max LD and min LD) parameter decay model   
-              File LD   DecayRate     LDmax     LDmin     
-1  ch_ngsLD_output r2 0.006095614 0.4581553 0.3406605      
-2 ref_ngsLD_output r2 0.003160602 0.4473140 0.3243038      
+|              File LD|   DecayRate   |  LDmax |    LDmin  |   
+|  ch_ngsLD_output r2| 0.006095614 |0.4581553 |0.3406605 |     
+| ref_ngsLD_output r2| 0.003160602 |0.4473140 |0.3243038 |    
 ==> Plotting data...     
 
 ---
