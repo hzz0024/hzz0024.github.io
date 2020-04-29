@@ -44,39 +44,39 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 
 - 50% 
 
-<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd50.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_minInd50.jpg" alt="img" width="800"/>
 
 - 60%
 
-<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd60.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_minInd60.jpg" alt="img" width="800"/>
 
 - 70% 
 
-<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd70.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_minInd70.jpg" alt="img" width="800"/>
 
 - 80% 
 
-<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd80.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_minInd80.jpg" alt="img" width="800"/>
 
 - 90% 
 
-<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_minInd90.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_minInd90.jpg" alt="img" width="800"/>
 
 ---
 ### Different settings of minMapQ
 
 - mapQ25
 
-<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_mapQ25.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_mapQ25.jpg" alt="img" width="800"/>
 
 - mapQ30
 
-<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_mapQ30.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_mapQ30.jpg" alt="img" width="800"/>
 
 ---
 ### Effect of -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1
 
-<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_extra.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_extra.jpg" alt="img" width="800"/>
 
 ---
 ### Remove potential paralogs
