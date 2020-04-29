@@ -29,8 +29,8 @@ angsd -b ch_6.bamlist -anc cv30.fa -ref cv30.fa -out depth/QC_ch_6_maxD2000 \
 -dosaf 1 -GL 1 -doGlf 3 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 4 -minQ 20 -minMapQ 30 -minMaf 0.05 \
 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 -rf chr.list >& QC_ch_6_maxD2000.log
 ```
-	-> Total number of sites analyzed: 11876980
-	-> Number of sites retained after filtering: 19386 
+	-> Total number of sites analyzed: 11876980     
+	-> Number of sites retained after filtering: 19386     
   
 <img src="https://hzz0024.github.io/images/ngsLD/QC_ch_6_maxD2000.jpg" alt="img" width="800"/>
 
@@ -39,8 +39,8 @@ angsd -b ref_6.bamlist -anc cv30.fa -ref cv30.fa -out depth/QC_ref_6_maxD2000 \
 -dosaf 1 -GL 1 -doGlf 3 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 4 -minQ 20 -minMapQ 30 -minMaf 0.05 \
 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 -rf chr.list >& QC_ref_6_maxD2000.log
 ```
-	-> Total number of sites analyzed: 13238610
-	-> Number of sites retained after filtering: 26119 
+	-> Total number of sites analyzed: 13238610      
+	-> Number of sites retained after filtering: 26119     
 
 <img src="https://hzz0024.github.io/images/ngsLD/QC_ref_6_maxD2000.jpg" alt="img" width="800"/>    
 
@@ -52,8 +52,8 @@ angsd -b NEH.bamlist -anc CVtot_3.0_newchr.fa.bgz -ref CVtot_3.0_newchr.fa.bgz -
 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 \
 -rf chr.list >& QC_NEH_6_maxD2000.log
 ```
-	-> Total number of sites analyzed: 27373560
-	-> Number of sites retained after filtering: 957677 
+	-> Total number of sites analyzed: 27373560    
+	-> Number of sites retained after filtering: 957677     
 
 <img src="https://hzz0024.github.io/images/ngsLD/QC_NEH_6_maxD2000.jpg" alt="img" width="800"/>
 
@@ -63,8 +63,8 @@ angsd -b CS.bamlist -anc CVtot_3.0_newchr.fa.bgz -ref CVtot_3.0_newchr.fa.bgz -o
 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 \
 -rf chr.list >& QC_CS_6_maxD2000.log
 ```
-	-> Total number of sites analyzed: 28443753
-	-> Number of sites retained after filtering: 1316679 
+	-> Total number of sites analyzed: 28443753      
+	-> Number of sites retained after filtering: 1316679      
 
 <img src="https://hzz0024.github.io/images/ngsLD/QC_CS_6_maxD2000.jpg" alt="img" width="800"/>
 
@@ -80,8 +80,8 @@ angsd -b ch_6.bamlist -anc cv30.fa -ref cv30.fa \
 -setMinDepth 4 -setMaxDepth 29 -minInd 4 -doMajorMinor 1 \
 -rf chr.list >& ch_minI4D4maxD29_MQ30_chr10.log
 ```
--> Total number of sites analyzed: 11876980
--> Number of sites retained after filtering: 19087
+-> Total number of sites analyzed: 11876980    
+-> Number of sites retained after filtering: 19087    
 
 ```sh
 angsd -b ref_6.bamlist -anc cv30.fa -ref cv30.fa \
@@ -92,8 +92,8 @@ angsd -b ref_6.bamlist -anc cv30.fa -ref cv30.fa \
 -setMinDepth 4 -setMaxDepth 32 -minInd 4 -doMajorMinor 1 \
 -rf chr.list >& ref_minI4D4maxD32_MQ30_chr10.log
 ```
--> Total number of sites analyzed: 13238610
--> Number of sites retained after filtering: 25721
+-> Total number of sites analyzed: 13238610    
+-> Number of sites retained after filtering: 25721    
 
 ```sh
 angsd -b NEH.bamlist -anc cv30.fa -ref cv30.fa \
@@ -104,8 +104,8 @@ angsd -b NEH.bamlist -anc cv30.fa -ref cv30.fa \
 -setMinDepth 6 -setMaxDepth 120 -minInd 4 -doMajorMinor 1 \
 -rf chr.list >& NEH_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10.log
 ```
--> Total number of sites analyzed: 27373560
--> Number of sites retained after filtering: 774086
+-> Total number of sites analyzed: 27373560    
+-> Number of sites retained after filtering: 774086    
 
 ```sh
 angsd -b CS.bamlist -anc cv30.fa -ref cv30.fa \
@@ -116,8 +116,8 @@ angsd -b CS.bamlist -anc cv30.fa -ref cv30.fa \
 -setMinDepth 6 -setMaxDepth 120 -minInd 4 -doMajorMinor 1 \
 -rf chr.list >& CS_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10.log
 ```
--> Total number of sites analyzed: 28443753
--> Number of sites retained after filtering: 1165713
+-> Total number of sites analyzed: 28443753    
+-> Number of sites retained after filtering: 1165713    
 
 ### ngsLD steps
 
@@ -196,7 +196,7 @@ cat NEH_pos.txt | wc -l
 ```sh
 Rscript --vanilla --slave fit_LDdecay.R --ld_files LD.list --out ref_ch.jpg --fit_level 0
 ```
-Result withno fitting model
+Result without fitting model
 
 <img src="https://hzz0024.github.io/images/ngsLD/ref_ch_ngsLD.jpg" alt="img" width="800"/>
 
