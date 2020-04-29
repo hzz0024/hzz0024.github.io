@@ -12,54 +12,73 @@ categories:
   - WGS data analysis
 ---
 
-The ngsLD is a program that could estimate pairwise linkage disequilibrium (LD) taking the uncertainty of genotype's assignation into account. It would be interesting to compare the resequencing data (wild vs. a selected strain) and then also our low coverage data.
+The ngsLD is a program that could estimate pairwise linkage disequilibrium (LD) taking the uncertainty of genotype's assignation into account. It would be interesting to compare the resequencing data (wild vs. a selected strain) and then my low coverage data.
+
+Hints that from ngsLD Github site:   
+1) it may better to call SNPs based on MAF since monomorphic sites are not informative.     
+2) ngsLD performance seems to drop considerable under extremely low coverages (<1x); consider these cases only if you have large sample sizes (>100 individuals).     
+3) For some analyses (e.g. LD decay) consider sampling your data (--rnd_sample), since ngsLD will be much faster and you probably don't need all comparisons.            
+4) For the LD decay, as a rule-of-thumb, consider using at least 10'000 SNPs; check the confidence interval and, if too wide, increase number of SNPs.
 
 ### Evaluate the SNP depth distribution
 
 - DelBay19
 
 ```sh
-angsd -b DelBay19_12.list -anc cv30.fa -ref cv30.fa -out depth/QC_DelBay19_12_maxD2000 \
--dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 9 -minQ 20 -minMapQ 20 -minMaf 0.05 \
--remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 -rf chr.list >& QC_DelBay19_12_maxD2000.log
+angsd -b ch_6.bamlist -anc cv30.fa -ref cv30.fa -out depth/QC_ch_6_maxD2000 \
+-dosaf 1 -GL 1 -doGlf 3 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 4 -minQ 20 -minMapQ 30 -minMaf 0.05 \
+-remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 -rf chr.list >& QC_ch_6_maxD2000.log
 ```
-Total number of sites analyzed: 18595684     
-Number of sites retained after filtering (minInd 6): 96849        
-Number of sites retained after filtering (minInd 9): 51669    
+	-> Total number of sites analyzed: 11876980
+	-> Number of sites retained after filtering: 19386 
+  
+<img src="https://hzz0024.github.io/images/ngsLD/QC_ch_6_maxD2000.jpg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/ngsLD/QC_DelBay19_12_maxD2000.jpg" alt="img" width="800"/>
+```sh
+angsd -b ref_6.bamlist -anc cv30.fa -ref cv30.fa -out depth/QC_ref_6_maxD2000 \
+-dosaf 1 -GL 1 -doGlf 3 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 4 -minQ 20 -minMapQ 30 -minMaf 0.05 \
+-remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 -rf chr.list >& QC_ref_6_maxD2000.log
+```
+	-> Total number of sites analyzed: 13238610
+	-> Number of sites retained after filtering: 26119 
+
+<img src="https://hzz0024.github.io/images/ngsLD/QC_ref_6_maxD2000.jpg" alt="img" width="800"/>    
 
 - CVreseq
 
 ```sh
-angsd -b CVreseq_12.list -anc CVtot_3.0_newchr.fa.bgz -ref CVtot_3.0_newchr.fa.bgz -out depth/QC_CVreseq_12_maxD2000 \
--dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 9 -minQ 20 -minMapQ 20 -minMaf 0.05 \
+angsd -b NEH.bamlist -anc CVtot_3.0_newchr.fa.bgz -ref CVtot_3.0_newchr.fa.bgz -out depth/QC_NEH_6_maxD2000 \
+-dosaf 1 -GL 1 -doGlf 3 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 4 -minQ 20 -minMapQ 30 -minMaf 0.05 \
 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 \
--rf chr.list >& QC_CVreseq_12_maxD2000.log
+-rf chr.list >& QC_NEH_6_maxD2000.log
 ```
-Total number of sites analyzed: 30608008    
-Number of sites retained after filtering (minInd 6): 1614133
-Number of sites retained after filtering (minInd 9): 1302240   
+	-> Total number of sites analyzed: 27373560
+	-> Number of sites retained after filtering: 957677 
 
-<img src="https://hzz0024.github.io/images/ngsLD/QC_CVreseq_12_maxD2000.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/ngsLD/QC_NEH_6_maxD2000.jpg" alt="img" width="800"/>
+
+```sh
+angsd -b CS.bamlist -anc CVtot_3.0_newchr.fa.bgz -ref CVtot_3.0_newchr.fa.bgz -out depth/QC_CS_6_maxD2000 \
+-dosaf 1 -GL 1 -doGlf 3 -doMaf 1 -doPost 1 -doCounts 1 -doDepth 1 -P 20 -minInd 4 -minQ 20 -minMapQ 30 -minMaf 0.05 \
+-remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMaxDepth 2000 -doMajorMinor 1 \
+-rf chr.list >& QC_CS_6_maxD2000.log
+```
+	-> Total number of sites analyzed: 28443753
+	-> Number of sites retained after filtering: 1316679 
+
+<img src="https://hzz0024.github.io/images/ngsLD/QC_CS_6_maxD2000.jpg" alt="img" width="800"/>
 
 ---
-### Generate the beagle file for ngsLD run
+### Generate the glf file for ngsLD run
 
 - DelBay19 
 ```sh
-angsd -b DelBay19_12.list -anc cv30.fa -ref cv30.fa -out ngsLD/DelBay19_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10 \
--dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 \
--remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 4 -setMaxDepth 55 -minInd 9 -doMajorMinor 1 \
--rf chr.list >& DelBay19_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10.log
+
 ```
 
 - CVreseq
 ```sh
-angsd -b CVreseq_12.list -anc cv30.fa -ref cv30.fa -out ngsLD/CVreseq_minI9D88maxD108_minQ20_minMAF05_SNPe6_chr10 \
--dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 -doVcf 1 -doCounts 1 -doDepth 1 -dumpCounts 1 -P 20 -minQ 20 -minMapQ 20 -minMaf 0.05 \
--remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 -setMinDepth 88 -setMaxDepth 108 -minInd 9 -doMajorMinor 1 \
--rf chr.list >& CVreseq_minI9D4maxD55_minQ20_minMAF05_SNPe6_chr10.log
+
 ```
 
 ### LD decay
