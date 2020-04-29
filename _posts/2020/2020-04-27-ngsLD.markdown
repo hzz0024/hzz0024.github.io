@@ -20,7 +20,7 @@ Hints that from ngsLD Github site:
 3) For some analyses (e.g. LD decay) consider sampling your data (--rnd_sample), since ngsLD will be much faster and you probably don't need all comparisons.            
 4) For the LD decay, as a rule-of-thumb, consider using at least 10'000 SNPs; check the confidence interval and, if too wide, increase number of SNPs.
 
-### Evaluate the SNP depth distribution
+### Evaluate the SNP depth distribution (for chr 10 only)
 
 - DelBay19
 
@@ -69,22 +69,137 @@ angsd -b CS.bamlist -anc CVtot_3.0_newchr.fa.bgz -ref CVtot_3.0_newchr.fa.bgz -o
 <img src="https://hzz0024.github.io/images/ngsLD/QC_CS_6_maxD2000.jpg" alt="img" width="800"/>
 
 ---
-### Generate the glf file for ngsLD run
+### Generate the glf file for ngsLD run (for chr 10 only)
+
+```sh
+angsd -b ch_6.bamlist -anc cv30.fa -ref cv30.fa \
+-out ngsLD/ch_minI4D4maxD29_MQ30_minMAF05_SNPe6_chr10 \
+-dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 \
+-doCounts 1 -doDepth 1 -P 20 -minQ 20 -minMapQ 30 \
+-minMaf 0.05 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 \
+-setMinDepth 4 -setMaxDepth 29 -minInd 4 -doMajorMinor 1 \
+-rf chr.list >& ch_minI4D4maxD29_MQ30_chr10.log
+```
+-> Total number of sites analyzed: 11876980
+-> Number of sites retained after filtering: 19087
+
+```sh
+angsd -b ref_6.bamlist -anc cv30.fa -ref cv30.fa \
+-out ngsLD/ref_minI4D4maxD32_MQ30_minMAF05_SNPe6_chr10 \
+-dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 \
+-doCounts 1 -doDepth 1 -P 20 -minQ 20 -minMapQ 30 \
+-minMaf 0.05 -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 \
+-setMinDepth 4 -setMaxDepth 32 -minInd 4 -doMajorMinor 1 \
+-rf chr.list >& ref_minI4D4maxD32_MQ30_chr10.log
+```
+-> Total number of sites analyzed: 13238610
+-> Number of sites retained after filtering: 25721
+
+```sh
+angsd -b NEH.bamlist -anc cv30.fa -ref cv30.fa \
+-out ngsLD/NEH_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10 \
+-dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 \
+-doCounts 1 -doDepth 1 -P 20 -minQ 20 -minMapQ 30 -minMaf 0.05 \
+-remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 \
+-setMinDepth 6 -setMaxDepth 120 -minInd 4 -doMajorMinor 1 \
+-rf chr.list >& NEH_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10.log
+```
+-> Total number of sites analyzed: 27373560
+-> Number of sites retained after filtering: 774086
+
+```sh
+angsd -b CS.bamlist -anc cv30.fa -ref cv30.fa \
+-out ngsLD/CS_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10 \
+-dosaf 1 -GL 1 -doGlf 2 -doMaf 1 -doPost 1 \
+-doCounts 1 -doDepth 1 -P 20 -minQ 20 -minMapQ 30 -minMaf 0.05 \
+-remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1 -SNP_pval 1e-6 \
+-setMinDepth 6 -setMaxDepth 120 -minInd 4 -doMajorMinor 1 \
+-rf chr.list >& CS_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10.log
+```
+-> Total number of sites analyzed: 28443753
+-> Number of sites retained after filtering: 1165713
+
+### ngsLD steps
+
+- extract the site position and number of sites
+
+```sh
+zcat ch_minI4D4maxD29_MQ30_minMAF05_SNPe6_chr10.mafs.gz | cut -f 1,2 | tail -n +2 > ch_pos.txt
+cat ch_pos.txt | wc -l
+
+zcat ref_minI4D4maxD32_MQ30_minMAF05_SNPe6_chr10.mafs.gz | cut -f 1,2 | tail -n +2 > ref_pos.txt
+cat ref_pos.txt | wc -l
+
+zcat CS_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10.mafs | cut -f 1,2 | tail -n +2 > CS_pos.txt
+cat CS_pos.txt | wc -l
+
+zcat NEH_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10.mafs| cut -f 1,2 | tail -n +2 > NEH_pos.txt
+cat NEH_pos.txt | wc -l
+```
 
 - DelBay19 
-```sh
 
+```sh
+/programs/ngsLD/ngsLD \
+--geno ch_minI4D4maxD29_MQ30_minMAF05_SNPe6_chr10.beagle.gz \
+--pos ch_pos.txt \
+--n_ind 6 \
+--n_sites 19087 \
+--out ch_ngsLD_output \
+--probs \
+--max_kb_dist 100 \
+--min_maf 0.05 \
+--n_threads 8
+
+/programs/ngsLD/ngsLD \
+--geno ref_minI4D4maxD32_MQ30_minMAF05_SNPe6_chr10.beagle.gz \
+--pos ref_pos.txt \
+--n_ind 6 \
+--n_sites 25721 \
+--out ref_ngsLD_output \
+--probs \
+--max_kb_dist 100 \
+--min_maf 0.05 \
+--n_threads 8
 ```
 
 - CVreseq
-```sh
 
+```sh
+/programs/ngsLD/ngsLD \
+--geno CS_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10.beagle.gz \
+--pos CS_pos.txt \
+--n_ind 6 \
+--n_sites 1165713 \
+--out CS_ngsLD_output \
+--probs \
+--max_kb_dist 100 \
+--min_maf 0.05 \
+--n_threads 8
+
+/programs/ngsLD/ngsLD \
+--geno NEH_minI4D6maxD120_minQ30_minMAF05_SNPe6_chr10.beagle.gz \
+--pos NEH_pos.txt \
+--n_ind 6 \
+--n_sites 774086 \
+--out NEH_ngsLD_output \
+--probs \
+--max_kb_dist 100 \
+--min_maf 0.05 \
+--n_threads 8
 ```
 
 ### LD decay
+
+- DelBay19 
+
 ```sh
-Rscript --vanilla --slave fit_LDdecay.R --ld_files LD.list --out ref_ch.pdf --fit_level 3
+Rscript --vanilla --slave fit_LDdecay.R --ld_files LD.list --out ref_ch.jpg --fit_level 0
 ```
+Result withno fitting model
+
+<img src="https://hzz0024.github.io/images/ngsLD/ref_ch_ngsLD.jpg" alt="img" width="800"/>
+
 Random seed: 65743
 ==> Fitting r2 LD decay assuming a three (rate of decay, max LD and min LD) parameter decay model 
 
@@ -92,11 +207,14 @@ Random seed: 65743
 |---------------------|---------------|--------|-----------|   
 |  ch_ngsLD_output r2 | 0.006095614   |0.4581553 |0.3406605 |     
 | ref_ngsLD_output r2 | 0.003160602 |0.4473140 |0.3243038 |   
- 
+
 ==> Plotting data...     
 
+
 ---
-### Conclusion and questions
+### Results
+
+
 
 
 
