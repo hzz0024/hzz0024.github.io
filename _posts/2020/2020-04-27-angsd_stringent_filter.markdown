@@ -65,8 +65,18 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 ---
 ### Different settings of minMapQ
 
+- mapQ25
+
+<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_mapQ25.jpg" alt="img" width="800"/>
+
+- mapQ30
+
+<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_mapQ30.jpg" alt="img" width="800"/>
+
 ---
 ### Effect of -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1
+
+<img src="https://hzz0024.github.io/images/DelBay19/Mahattan_ch_ref_fold_extra.jpg" alt="img" width="800"/>
 
 ---
 ### Remove potential paralogs
