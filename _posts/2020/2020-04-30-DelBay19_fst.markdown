@@ -84,6 +84,7 @@ New Beds (NB)
 
 <img src="https://hzz0024.github.io/images/map1.jpg" alt="img" width="400"/>
 
+- 99.9% Percentile Results 
 
 | Group	     |Number of SNP bins (1kb)| Percentile   |  Fst threshold | Max Fst    |No. outlier|
 | -----------|------------------------|--------------|----------------|------------|-----------|
@@ -93,7 +94,24 @@ New Beds (NB)
 |   ARN_COH  |        294114          |     99.9     |    0.0222      |   0.0546   |   295     |
 |   ARN_NB   |        287305          |     99.9     |    0.0217      |   0.0912   |   288     |
 
+- 99% Percentile Results
 
+| Group	     |Number of SNP bins (1kb)| Percentile   |  Fst threshold | Max Fst    |No. outlier|
+| -----------|------------------------|--------------|----------------|------------|-----------|
+|   CH_REF   |        277410          |     99       |    0.0117      |   0.0802   |  2775     |
+|   HC_NB    |        289111          |     99       |    0.0119      |   0.0839   |  2892     |
+|   HC_ARN   |        290807          |     99       |    0.0117      |   0.0674   |  2908     |
+|   ARN_COH  |        294114          |     99       |    0.0118      |   0.0546   |  2942     |
+|   ARN_NB   |        287305          |     99       |    0.0114      |   0.0912   |  2874     |
 
+- Comparing challenge vs. wild 
 
+| Groups used for comparison     | No. shared outlier (99.9 percentile)|No. shared outlier (99 percentile)|
+| -------------------------------|-------------------------------------|----------------------------------|
+| CH_REF & HC_NB                 |    4                                |        65                        |
+| CH_REF & HC_ARN                |    0                                |        54                        |
+| CH_REF & ARN_COH               |    0                                |        63                        |
+| CH_REF & ARN_NB                |    0                                |        60                        |
+
+<img src="https://hzz0024.github.io/images/comp99.jpg" alt="img" width="400"/>
 
