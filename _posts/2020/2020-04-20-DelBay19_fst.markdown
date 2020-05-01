@@ -173,30 +173,3 @@ points(candidates, -log10(adj.p.values)[candidates], pch = 19, cex = .7, col = "
 ```
 <img src="https://hzz0024.github.io/images/trial_fst_p_values.jpeg" alt="img" width="800"/>
 
-### Outlier detection (Percentile)
-
-Python script for percentile calculation: percentile.py        
-Python script for common shared loci detection: common.py
-
-salinity from low to high:   
-Hope Creek (HC)        
-Arnolds (ARN)   
-Cohansey (COH)   
-Shell Rock (SR)   
-New Beds (NB)   
-
-<img src="https://hzz0024.github.io/images/map1.jpg" alt="img" width="800"/>
-
-
-| Group	     |Number of SNP bins (1kb)| Percentile   |  Fst threshold | Max Fst    |No. outlier|
-| -----------|------------------------|--------------|----------------|------------|-----------|
-|   CH_REF   |        277410.         |     99.9     |    0.0217      |   0.0802   |   278     |
-|   HC_NB    |        289111          |     99.9     |    0.0220      |   0.0839   |   290     |
-|   HC_ARN   |        290807          |     99.9     |    0.0212      |   0.0674   |   291     |
-|   ARN_COH  |        294114          |     99.9     |    0.0222      |   0.0546   |   295     |
-|   ARN_NB   |        287305          |     99.9     |    0.0217      |   0.0912   |   288     |
-
-
-
-
-
