@@ -1,0 +1,99 @@
+---
+comments: true
+title: DelBay19 fst outlier detection
+date: '2020-04-30 12:00'
+tags:
+  - DelBay19
+  - Fst
+  - ouliter
+  - WGS
+categories:
+  - WGS data analysis
+---
+
+### Number of SNPs and Fst values
+
+Basic parameter used during filtering
+
+-minQ 20
+-minInd 50% 
+-minMapQ 20
+
+Number of SNPs for each saf
+
+| 			 |Total number of sites analyzed | Number of sites retained after filtering |  
+| -----------|----------|--------------|
+|    HC      | 552206979| 201271276    |
+|    ARN     | 547968598| 198211880    |
+|    COH     | 548674038| 208674608    |
+|    SR      | 550602834| 204514057    |
+|    NB      | 546390064| 193778045    |
+|    REF     | 549584875| 189886237    |
+|    CH      | 545117898| 181283004    |
+   
+Number of SNPs for each pairwise comparison
+
+| 			     |No. sites | Fst unweight | Fst weight | 
+| -----------|----------|--------------|------------|
+|    CH_REF  | 170859421|  0.000664    |   0.000883 |
+|    HC_ARN  | 185953051|  0.001151    |   0.000852 |
+|    HC_COH  |          |              |            |
+|    HC_SR   |          |              |            |
+|    HC_NB   | 183396017|  0.000490    |   0.000827 |
+|    ARN_COH | 189084056|  0.000815    |   0.000675 |
+|    ARN_SR  |          |              |            |
+|    ARN_NB  | 182211161|  0.001035    |   0.000827 |
+|    COH_SR  |          |              |            |
+|    COH_NB  |          |              |            |
+|    SR_NB   |          |              |            |
+
+---
+### Fst plots
+
+- CH_REF
+
+Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
+
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_singlesnp_fold.jpg" alt="img" width="800"/> 
+
+- HC_ARN 
+
+Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
+
+- ARN_COH
+
+Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
+
+- ARN_NB
+
+Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
+
+---
+
+### Outlier detection (Percentile)
+
+Python script for percentile calculation: percentile.py        
+Python script for common shared loci detection: common.py
+
+Salinity from low to high:   
+Hope Creek (HC)        
+Arnolds (ARN)   
+Cohansey (COH)   
+Shell Rock (SR)   
+New Beds (NB)   
+
+<img src="https://hzz0024.github.io/images/map1.jpg" alt="img" width="400"/>
+
+
+| Group	     |Number of SNP bins (1kb)| Percentile   |  Fst threshold | Max Fst    |No. outlier|
+| -----------|------------------------|--------------|----------------|------------|-----------|
+|   CH_REF   |        277410          |     99.9     |    0.0217      |   0.0802   |   278     |
+|   HC_NB    |        289111          |     99.9     |    0.0220      |   0.0839   |   290     |
+|   HC_ARN   |        290807          |     99.9     |    0.0212      |   0.0674   |   291     |
+|   ARN_COH  |        294114          |     99.9     |    0.0222      |   0.0546   |   295     |
+|   ARN_NB   |        287305          |     99.9     |    0.0217      |   0.0912   |   288     |
+
+
+
+
+
