@@ -87,11 +87,11 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 <img src="https://hzz0024.github.io/images/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2-1.jpg" alt="img" width="800"/>
 
 - challenge population with 60% missing (after removing inversion regions)
-<img src="https://hzz0024.github.io/images/60.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/60.pc1-2-1.jpg" alt="img" width="800"/>
 
 - challenge population with 70% missing (after removing inversion regions)
-<img src="https://hzz0024.github.io/images/70.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/70.pc1-2-1.jpg" alt="img" width="800"/>
 
 - challenge population with 80% missing (after removing inversion regions)
-<img src="https://hzz0024.github.io/images/80.pc1-2-1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/80.pc1-2-1.jpg" alt="img" width="800"/>
 
