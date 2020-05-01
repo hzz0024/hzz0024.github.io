@@ -127,6 +127,7 @@ vcftools --vcf DB_2.recode.vcf --maf 0.05 --recode --recode-INFO-all --out DB_2_
 ```
 
 - estimate the Fst values using VCFtools 
+
 ```sh
 ./vcftools --vcf vcf_file1.vcf --weir-fst-pop individual_list_1.txt --weir-fst-pop individual_list_2.txt
 
@@ -145,6 +146,7 @@ Weir and Cockerham mean Fst estimate: 0.02112
 Weir and Cockerham weighted Fst estimate: 0.033042
 After filtering, kept 293946 out of a possible 293946 Sites
 ```
+
 see vcftools [manual](https://vcftools.github.io/man_latest.html) and biostars [post](https://www.biostars.org/p/46858/) for detailed parameter explanation. Here the Fst values are estimated using Weir and Cockerham’s (1984) method
 
 - calculate the percentile and extract the SNP information
@@ -154,6 +156,7 @@ A python script is made for this purpose, for example
 ```python
 python3 percentile.py -i input -o output -p target_percentile
 ```
+
 | Group	     |Populations|  Percentile  |  Fst threshold | No. outlier|
 | -----------|-----------|--------------|----------------|------------|
 |   LA       | SL-OBOYS2 |    99.9      |      0.70      |    269     |
