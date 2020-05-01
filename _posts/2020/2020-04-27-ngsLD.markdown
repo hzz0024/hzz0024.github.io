@@ -188,6 +188,14 @@ cat NEH_pos.txt | wc -l
 --min_maf 0.05 \
 --n_threads 8
 ```
+The output includes four measures of LD:
+
+r^2 from pearson correlation between expected genotypes    
+D from expectation–maximization (EM) algorithm       
+D' from EM algorithm        
+r^2 from EM algorithm 
+
+See details here https://github.com/fgvieira/ngsLD
 
 ### LD decay
 
@@ -216,9 +224,13 @@ Random seed: 65743
 <img src="https://hzz0024.github.io/images/ngsLD/ref_ch_ngsLD_fitting.jpg" alt="img" width="800"/>
 
 ---
-### Results
+### LD Heatmap
 
+I manaually generated a test dataset and plot the LD Heatmap below,
 
+<img src="https://hzz0024.github.io/images/ngsLD/LD_blocks_test.r2.jpg" alt="img" width="800"/>
+
+Note the legend title is mistyped here should be r^, need to figure out how to make it correct.
 
 
 
