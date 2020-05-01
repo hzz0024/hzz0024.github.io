@@ -11,6 +11,16 @@ categories:
   - WGS data analysis
 ---
 
+Some references that are helpful in understanding the outlier detections
+
+[Uninformative polymorphisms bias genome scans for signatures of selection](https://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-12-94)
+
+[tutorial on statistical methods for population association studies](nature.com/articles/nrg1916)
+
+[Generating Manhattan Plots in R](https://genome.sph.umich.edu/wiki/Code_Sample:_Generating_Manhattan_Plots_in_R)
+
+[Using Haplotype Information for Conservation Genomics](https://www.sciencedirect.com/science/article/pii/S0169534719303040?via%3Dihub)
+
 ### Number of SNPs and Fst values
 
 Basic parameter used during filtering
