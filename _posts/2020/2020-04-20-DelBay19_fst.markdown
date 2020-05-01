@@ -123,6 +123,10 @@ Mahattan plot based on 1k, 5k, and 15k window-sized snp (Fst ranges from 0 - 0.1
 
 <img src="https://hzz0024.github.io/images/Fst_null_hypo.jpg" alt="img" width="800"/>
 
+A good [question](https://www.researchgate.net/post/What_is_the_most_appropriate_way_to_assess_the_significance_of_pairwise_Fst_values) asked by Nicholas in researchgate has some answers torwards the bootstrapping individuals, which might be good solution for null distribution of Fst. Another test by Kevin keenan has shown that bootstrapping across individuals give tighter CIs (a desirable feature) that bootstrapping across loci (https://rpubs.com/kkeenan02/citype). This pattern is only seen when DJost (Jost 2008) is > 0.05 ((not sure why yet), other wise locus CIs have tighter coverage.
+
+The question now is how can I approach that. The R package diveRsity (https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.12067) developed by Kevin Keenan only accepts raw genotype data in the genepop file format. I may need to write the code for my own data analysis purpose. 
+
 - I used the code from LEA tutorial site with minor modifications (see R code below)
 
 ```R

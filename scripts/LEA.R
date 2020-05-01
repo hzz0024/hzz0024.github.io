@@ -167,7 +167,7 @@ abline(0,1)
 ## FDR control: Benjamini-Hochberg at level q
 plot(-log10(adj.p.values), main="Manhattan plot", xlab = "Locus", cex = .7, col = "grey")
 L = length(adj.p.values)
-q = 0.05
+q = 0.5
 w = which(sort(adj.p.values) < q * (1:L)/L)
 candidates = order(adj.p.values)[w]
 candidates
