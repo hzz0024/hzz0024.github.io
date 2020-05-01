@@ -74,7 +74,7 @@ Number of SNPs for each pairwise comparison
 |    HC_ARN  | 185953051|  0.001151    |   0.000852 |
 |    HC_COH  |          |              |            |
 |    HC_SR   |          |              |            |
-|    HC_NB   |          |              |            |
+|    HC_NB   | 183396017|  0.000490    |   0.000827 |
 |    ARN_COH | 189084056|  0.000815    |   0.000675 |
 |    ARN_SR  |          |              |            |
 |    ARN_NB  | 182211161|  0.001035    |   0.000827 |
