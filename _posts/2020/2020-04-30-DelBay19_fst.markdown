@@ -60,13 +60,19 @@ Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
 
 Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
 
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_HC_ARN_singlesnp_fold.jpg" alt="img" width="800"/>
+
 - ARN_COH
 
 Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
 
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ARN_COH_singlesnp_fold.jpg" alt="img" width="800"/>
+
 - ARN_NB
 
 Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
+
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ARN_NB_singlesnp_fold.jpg" alt="img" width="800"/>
 
 ---
 
