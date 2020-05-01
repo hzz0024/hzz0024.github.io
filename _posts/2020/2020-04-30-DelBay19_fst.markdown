@@ -119,5 +119,5 @@ New Beds (NB)
 | CH_REF & ARN_COH               |    0                                |        63                        |
 | CH_REF & ARN_NB                |    0                                |        60                        |
 
-<img src="https://hzz0024.github.io/images/comp99.jpg" alt="img" width="400"/>
+<img src="https://hzz0024.github.io/images/comp99.jpg" alt="img" width="800"/>
 
