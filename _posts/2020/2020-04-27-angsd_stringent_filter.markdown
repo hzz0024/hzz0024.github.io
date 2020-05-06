@@ -13,7 +13,7 @@ categories:
 
 In this post I'd like to evaluate how parameters such as minInd and minMapQ affect the SNP number produced from the low-coverage data. 
 
-The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - corresponding 50% missing rate.
+The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - corresponding 50% minInd rate.
 
 ### Set the MinDepth and MaxDepth based on global depth distribution
 
@@ -83,15 +83,27 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 
 ### PCA plots
 
-- challenge population with 98 samples (after removing inversion regions)
-<img src="https://hzz0024.github.io/images/ch_ref_98_pca_minI49D49maxD347_minQ20_minMAF05_SNPe6_nochr56invers.pc1-2-1.jpg" alt="img" width="800"/>
+- challenge group with 98 samples (after removing inversion regions)
+<img src="https://hzz0024.github.io/images/DelBay19_fst/ch_50.pc1-2-1.jpg" alt="img" width="800"/>
 
-- challenge population with 60% missing (after removing inversion regions)
+- challenge group with 60% minInd (after removing inversion regions)
 <img src="https://hzz0024.github.io/images/DelBay19_fst/ch_60.pc1-2-1.jpg" alt="img" width="800"/>
 
-- challenge population with 70% missing (after removing inversion regions)
+- challenge group with 70% minInd (after removing inversion regions)
 <img src="https://hzz0024.github.io/images/DelBay19_fst/ch_70.pc1-2-1.jpg" alt="img" width="800"/>
 
-- challenge population with 80% missing (after removing inversion regions)
+- challenge group with 80% minInd (after removing inversion regions)
 <img src="https://hzz0024.github.io/images/DelBay19_fst/ch_80.pc1-2-1.jpg" alt="img" width="800"/>
+
+- wild group with 235 samples (after removing inversion regions)
+<img src="https://hzz0024.github.io/images/DelBay19_fst/wild_50.pc1-2-1.jpg" alt="img" width="800"/>
+
+- wild group with 60% minInd (after removing inversion regions)
+<img src="https://hzz0024.github.io/images/DelBay19_fst/wild_60.pc1-2-1.jpg" alt="img" width="800"/>
+
+- wild group with 70% minInd (after removing inversion regions)
+<img src="https://hzz0024.github.io/images/DelBay19_fst/wild_70.pc1-2-1.jpg" alt="img" width="800"/>
+
+- wild group with 80% minInd (after removing inversion regions)
+<img src="https://hzz0024.github.io/images/DelBay19_fst/wild_80.pc1-2-1.jpg" alt="img" width="800"/>
 
