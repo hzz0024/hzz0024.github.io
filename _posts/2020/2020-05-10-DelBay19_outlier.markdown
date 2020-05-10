@@ -53,46 +53,31 @@ Number of SNPs for each saf
    
 Number of SNPs for each pairwise comparison
 
-| 			     |No. sites | Fst unweight | Fst weight | 
-| -----------|----------|--------------|------------|
-|    CH_REF  | 170859421|  0.000664    |   0.000883 |
-|    HC_ARN  | 185953051|  0.001151    |   0.000852 |
-|    HC_COH  |          |              |            |
-|    HC_SR   |          |              |            |
-|    HC_NB   | 183396017|  0.000490    |   0.000827 |
-|    ARN_COH | 189084056|  0.000815    |   0.000675 |
-|    ARN_SR  |          |              |            |
-|    ARN_NB  | 182211161|  0.001035    |   0.000827 |
-|    COH_SR  |          |              |            |
-|    COH_NB  |          |              |            |
-|    SR_NB   |          |              |            |
+| 			 |No. sites | Fst unweight | Fst weight |No. sites | Fst unweight | Fst weight | 
+| -----------|----------|--------------|------------|----------|--------------|------------|
+|            | Base     |              |            | Stringent|              |            |
+|    CH_REF  | 170859421|  0.000664    |   0.000883 | 67342522 |  0.000219    |   0.000481 |
+|    HC_ARN  | 185953051|  0.001151    |   0.000852 | 84370607 |  0.001092    |   0.000730 |
+|    HC_COH  |          |              |            | 87635841 |  0.000547    |   0.000455 |
+|    HC_SR   |          |              |            | 85884128 |  0.000438    |   0.000420 |
+|    HC_NB   | 183396017|  0.000490    |   0.000827 | 79010942 |  0.000214    |   0.000438 |
+|    ARN_COH | 189084056|  0.000815    |   0.000675 | 89018391 |  0.000624    |   0.000362 |
+|    ARN_SR  |          |              |            | 87159569 |  0.000702    |   0.000421 |
+|    ARN_NB  | 182211161|  0.001035    |   0.000827 | 79859000 |  0.000887    |   0.000645 |
+|    COH_SR  |          |              |            | 91029646 |  0.000434    |   0.000391 |
+|    COH_NB  |          |              |            | 82359665 |  0.000463    |   0.000493 |
+|    SR_NB   |          |              |            | 81136283 |  0.000391    |   0.000399 |
 
 ---
-### Fst plots
+### Fst plots (examples)
 
 - CH_REF
 
-Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
+Mahattan plot based on single snp (base data, Fst ranges from 0 - 0.2)
 
 <img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_singlesnp_fold.jpg" alt="img" width="800"/> 
 
-- HC_ARN 
 
-Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
-
-<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_HC_ARN_singlesnp_fold.jpg" alt="img" width="800"/>
-
-- ARN_COH
-
-Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
-
-<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ARN_COH_singlesnp_fold.jpg" alt="img" width="800"/>
-
-- ARN_NB
-
-Mahattan plot based on single snp (Fst ranges from 0 - 0.2)
-
-<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ARN_NB_singlesnp_fold.jpg" alt="img" width="800"/>
 
 ---
 
