@@ -40,9 +40,9 @@ Stringent dataset
 
 Number of SNPs for each saf
 
-|   		 |Base      |              | Stringent    |              |
 | 			 |Total number of sites analyzed | Number of sites retained after filtering |Total number of sites analyzed | Number of sites retained after filtering | 
 | -----------|----------|--------------|--------------|--------------|
+|   		 |Base      |              | Stringent    |              |
 |    HC      | 552206979| 201271276    | 528287677    | 94684245     |
 |    ARN     | 547968598| 198211880    | 521758280    | 96654202     |
 |    COH     | 548674038| 208674608    | 523144804    | 104599911    |
