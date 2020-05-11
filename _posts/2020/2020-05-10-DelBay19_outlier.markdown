@@ -69,15 +69,6 @@ Number of SNPs for each pairwise comparison
 |    SR_NB   |          |              |            | 81136283 |  0.000391    |   0.000399 |
 
 ---
-### Fst plots (examples)
-
-- CH_REF
-
-Mahattan plot based on single snp (base data, Fst ranges from 0 - 0.2)
-
-<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_singlesnp_fold.jpg" alt="img" width="800"/> 
-
----
 
 ### Outlier detection (Percentile) using stringent dataset (minQ 20, minInd 70%, minMapQ 25)
 
