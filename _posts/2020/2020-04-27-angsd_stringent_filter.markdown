@@ -38,6 +38,10 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 |remove_bads |  uniqueOnlys   | only_proper_pair  |                 |                    |                |                   |
 |Not applied | 84791110       |    41680598       | 85218526        |    43137643        |    0.000733    |      0.001047     |
 |  Applied   | 84791110       |    41680598       | 85218526        |    43137643        |    0.000766    |      0.001052     |
+|paralogs    |                |                   |                 |                    |                |                   |
+|Not filtered| 84791110       |    41680598       | 85218526        |    43137643        |    0.000733    |      0.001047     |
+|filtered    | 84791110       |    41667727       | 85218526        |    43122665        |    0.000735    |      0.001069     |
+|No. paralogs|                |       12871       |                 |       14978        |                |                   |
 
 
 ### Different settings of minInd
@@ -77,6 +81,11 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 ### Effect of -remove_bads 1 -uniqueOnly 1 -only_proper_pairs 1
 
 <img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_extra.jpg" alt="img" width="800"/>
+
+---
+### Paralogs
+
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_paralogs.jpg" alt="img" width="800"/>
 
 ---
 ### Remove potential paralogs
