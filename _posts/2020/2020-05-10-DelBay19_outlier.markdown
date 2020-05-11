@@ -142,7 +142,7 @@ New Beds (NB)
 | CH_REF & COH_NB                |    3                                |        203                       |
 | CH_REF & SR_NB                 |    5                                |        220                       |
 
-- Plotting common shared SNPs in challenge vs. wild comparsions
+- Plotting common shared SNPs in challenge vs. wild comparsions (stringent dataset)
 
 <img src="https://hzz0024.github.io/images/outlier/com_snps.jpg" alt="img" width="800"/>
 <img src="https://hzz0024.github.io/images/outlier/com_snps_no_invers.jpg" alt="img" width="800"/>
