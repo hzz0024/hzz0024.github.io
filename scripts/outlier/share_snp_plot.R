@@ -1,6 +1,6 @@
 # Read values from csv
-#dt <- read.table("plot.csv", header=T, sep=",")
-dt <- read.table("plot_no_invers.csv", header=T, sep=",")
+dt <- read.table("plot.csv", header=T, sep=",")
+#dt <- read.table("plot_no_invers.csv", header=T, sep=",")
 dt
 max_y <- max(dt)
 plot_colors <- c("#e41a1c",
@@ -13,7 +13,8 @@ plot_colors <- c("#e41a1c",
                  "#f781bf",
                  "#808080",
                  "#000080")
-jpeg("com_snps_no_invers.jpg", width = 8, height = 6, units = 'in', res = 300)
+jpeg("com_snps.jpg", width = 8, height = 6, units = 'in', res = 300)
+#jpeg("com_snps_no_invers.jpg", width = 8, height = 6, units = 'in', res = 300)
 plot(NULL, type="o", col=plot_colors[1], 
      ylim=c(0,max_y), xlim=c(1,10), axes=FALSE, ann=FALSE)
 # Make x axis using 1-10
