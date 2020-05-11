@@ -77,14 +77,13 @@ Mahattan plot based on single snp (base data, Fst ranges from 0 - 0.2)
 
 <img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_singlesnp_fold.jpg" alt="img" width="800"/> 
 
-
-
 ---
 
 ### Outlier detection (Percentile)
 
 Python script for percentile calculation: percentile.py        
 Python script for common shared loci detection: common.py
+R script used for shared snp plotting: share_snp_plot.R
 
 Salinity from low to high:   
 Hope Creek (HC)        
@@ -97,23 +96,23 @@ New Beds (NB)
 
 - 99.9% Percentile Results 
 
-| Group	     |Number of SNP bins (1kb)| Percentile   |  Fst threshold | Max Fst    |No. outlier|
-| -----------|------------------------|--------------|----------------|------------|-----------|
-|   CH_REF   |        277410          |     99.9     |    0.0217      |   0.0802   |   278     |
-|   HC_NB    |        289111          |     99.9     |    0.0220      |   0.0839   |   290     |
-|   HC_ARN   |        290807          |     99.9     |    0.0212      |   0.0674   |   291     |
-|   ARN_COH  |        294114          |     99.9     |    0.0222      |   0.0546   |   295     |
-|   ARN_NB   |        287305          |     99.9     |    0.0217      |   0.0912   |   288     |
+| Group	     |Number of SNP bins (100bp)| Percentile   |  Fst threshold | Max Fst    |No. outlier|
+| -----------|--------------------------|--------------|----------------|------------|-----------|
+|   CH_REF   |        277410            |     99.9     |    0.0217      |   0.0802   |   278     |
+|   HC_NB    |        289111            |     99.9     |    0.0220      |   0.0839   |   290     |
+|   HC_ARN   |        290807            |     99.9     |    0.0212      |   0.0674   |   291     |
+|   ARN_COH  |        294114            |     99.9     |    0.0222      |   0.0546   |   295     |
+|   ARN_NB   |        287305            |     99.9     |    0.0217      |   0.0912   |   288     |
 
 - 99% Percentile Results
 
-| Group	     |Number of SNP bins (1kb)| Percentile   |  Fst threshold | Max Fst    |No. outlier|
-| -----------|------------------------|--------------|----------------|------------|-----------|
-|   CH_REF   |        277410          |     99       |    0.0117      |   0.0802   |  2775     |
-|   HC_NB    |        289111          |     99       |    0.0119      |   0.0839   |  2892     |
-|   HC_ARN   |        290807          |     99       |    0.0117      |   0.0674   |  2908     |
-|   ARN_COH  |        294114          |     99       |    0.0118      |   0.0546   |  2942     |
-|   ARN_NB   |        287305          |     99       |    0.0114      |   0.0912   |  2874     |
+| Group	     |Number of SNP bins (100bp)| Percentile   |  Fst threshold | Max Fst    |No. outlier|
+| -----------|--------------------------|--------------|----------------|------------|-----------|
+|   CH_REF   |        277410            |     99       |    0.0117      |   0.0802   |  2775     |
+|   HC_NB    |        289111            |     99       |    0.0119      |   0.0839   |  2892     |
+|   HC_ARN   |        290807            |     99       |    0.0117      |   0.0674   |  2908     |
+|   ARN_COH  |        294114            |     99       |    0.0118      |   0.0546   |  2942     |
+|   ARN_NB   |        287305            |     99       |    0.0114      |   0.0912   |  2874     |
 
 - Comparing challenge vs. wild 
 
@@ -124,29 +123,6 @@ New Beds (NB)
 | CH_REF & ARN_COH               |    0                                |        63                        |
 | CH_REF & ARN_NB                |    0                                |        60                        |
 
-<img src="https://hzz0024.github.io/images/comp99.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/outlier/com_snps.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/outlier/com_snps_no_invers.jpg" alt="img" width="800"/>
 
-Most of the outliers are not in the inversion regions (NC_035784.1 60600000-80200000)
-
-For example, in CH_REF & HC_NB comparison
-
-5_8234000   
-5_12612000   
-5_12699000   
-5_13141000   
-5_16297000   
-5_16551000   
-5_18934000   
-5_19565000   
-5_31984000   
-5_43506000   
-__5_62134000__  
-__5_64129000__   
-__5_65798000__   
-__5_65800000__   
-__5_65822000__   
-__5_70279000__   
-__5_70908000__   
-5_86165000   
-5_86240000   
-5_90503000   
