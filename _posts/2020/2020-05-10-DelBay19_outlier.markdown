@@ -82,7 +82,7 @@ Mahattan plot based on single snp (base data, Fst ranges from 0 - 0.2)
 ### Outlier detection (Percentile) using stringent dataset (minQ 20, minInd 70%, minMapQ 25)
 
 Python script for percentile calculation: percentile.py        
-Python script for common shared loci detection: common.py
+Python script for common shared loci detection: common.py   
 R script used for shared snp plotting: share_snp_plot.R
 
 Salinity from low to high:   
