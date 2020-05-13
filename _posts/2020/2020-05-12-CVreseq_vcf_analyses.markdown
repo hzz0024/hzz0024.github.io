@@ -1,7 +1,7 @@
 ---
 comments: true
 title: CVreseq vcf data analyese
-date: '2020-05-10 11:00'
+date: '2020-05-13 11:00'
 tags:
   - CVreseq
   - vcftools
