@@ -87,6 +87,28 @@ do echo "${file}..."
 done
 
 ### using plot_fst_dxy.R for fst and dxy plotting
+
+#get the nucleotide diversity
+#get allele frequencies for each population
+
+for file in *.recode.vcf
+do echo "vcftools --vcf $file --freq2 --out ${file/.recode.vcf/}"
+done
+
+vcftools --vcf CS.recode.vcf --freq2 --out CS
+vcftools --vcf DEBY.recode.vcf --freq2 --out DEBY
+vcftools --vcf NEH.recode.vcf --freq2 --out NEH
+vcftools --vcf OBOYS2.recode.vcf --freq2 --out OBOYS2
+vcftools --vcf SL.recode.vcf --freq2 --out SL
+
+#assemble them
+echo -e "CHROM\tPOS\tN_ALLELES\tN_CHR\tp1\tp2\tpop" > alleleFrequencies.tsv
+for file in *.frq
+do POP=${file/.frq/}
+tail -n +2 $file | awk -v pop="$POP" '{print $0"\t"pop}' >> alleleFrequencies.tsv
+done
+
+#analyze with plot_fst_dxy_pi.R
 ```
 ---
 
@@ -106,6 +128,11 @@ done
  |---------|---------|---------|          
  | CS-DEBY |   dxy   | 0.383   |   
  | CS-NEH  |   dxy   | 0.384   |   
- |SL-OBOYS2|   dxy   | 0.386   |     
+ |SL-OBOYS2|   dxy   | 0.386   |  
+
+<img src="https://hzz0024.github.io/images/CVreseq/fst_dxy.jpeg" alt="img" width="800"/>
+
+
+
  
 ```
