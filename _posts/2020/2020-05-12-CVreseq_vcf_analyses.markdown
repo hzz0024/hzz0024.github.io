@@ -88,13 +88,13 @@ done
 ```
 ### using plot_fst_dxy.R for fst and dxy plotting
 
-# Groups:   group, spp [3]     
+  Groups:   group, spp [3]     
   group     spp   stat      mn           
 1 CS-DEBY   n     fst   0.0211      
 2 SL-OBOYS2 n     fst   0.0247      
 3 CS-NEH    n     fst   0.0483      
 
-# Groups:   group, spp [3]      
+  Groups:   group, spp [3]      
   group     spp   stat      mn            
 1 CS-DEBY   n     dxy   0.383     
 2 CS-NEH    n     dxy   0.384     
