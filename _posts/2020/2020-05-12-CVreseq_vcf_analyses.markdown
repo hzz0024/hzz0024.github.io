@@ -85,19 +85,27 @@ for file in *.dxy
 do echo "${file}..."
  tail -n +2 $file | awk -v f="${file/.dxy/}" '{print $0"\t"f}' >> all_dxy_results.tsv
 done
-```
+
 ### using plot_fst_dxy.R for fst and dxy plotting
+```
+---
 
-  Groups:   group, spp [3]     
-  group     spp   stat      mn           
-1 CS-DEBY   n     fst   0.0211      
-2 SL-OBOYS2 n     fst   0.0247      
-3 CS-NEH    n     fst   0.0483      
+### Stats summary
 
-  Groups:   group, spp [3]      
-  group     spp   stat      mn            
-1 CS-DEBY   n     dxy   0.383     
-2 CS-NEH    n     dxy   0.384     
-3 SL-OBOYS2 n     dxy   0.386      
+- Fst
+    
+ | group   |  stat   | average | weighted aveage |
+ |---------|---------|---------|-----------------|        
+ | CS-DEBY |   fst   | 0.0211  | 0.033042        |
+ |SL-OBOYS2|   fst   | 0.0247  | 0.036727        |  
+ | CS-NEH  |   fst   | 0.0483  | 0.063669        |  
+ 
+- Dxy
+
+ | group   |  stat   | average | 
+ |---------|---------|---------|          
+ | CS-DEBY |   dxy   | 0.383   |   
+ | CS-NEH  |   dxy   | 0.384   |   
+ |SL-OBOYS2|   dxy   | 0.386   |     
  
 ```
