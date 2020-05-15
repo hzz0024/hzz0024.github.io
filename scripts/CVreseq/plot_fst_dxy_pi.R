@@ -1,4 +1,4 @@
-#plot_fst_dxy.R
+#plot_.R
 #plot this a bunch of ways trying to figure out what looks nice
 #none particularly do, so went with barplot
 
@@ -23,8 +23,8 @@ read_fst_by_pseudochrom = function(fileName){
   adat$pair = factor(adat$pair, levels = unique(adat$pair))
   return(adat)
 }
-ndat = read_fst_by_pseudochrom('fst_dxy/nesticus/weighted_fst_by_pseudochromosome.tsv')
-pdat = read_fst_by_pseudochrom('fst_dxy/ptomaphagus/weighted_fst_by_pseudochromosome.tsv')
+ndat = read_fst_by_pseudochrom('/nesticus/weighted_fst_by_pseudochromosome.tsv')
+pdat = read_fst_by_pseudochrom('/ptomaphagus/weighted_fst_by_pseudochromosome.tsv')
 
 plot_overall_watershed = function(fstdat, TITLE=''){
   fstdat %>% 
@@ -124,10 +124,10 @@ read_in = function(fileName, stat, spp){
   colnames(d)[3]='value'
   return(d)
 }
-nf.dat = read_in('fst_dxy/nesticus/all_fst_results.tsv', 'fst', 'n')
-pf.dat = read_in('fst_dxy/ptomaphagus/all_fst_results.tsv', 'fst', 'p')
-nd.dat = read_in('fst_dxy/nesticus/all_dxy_results.tsv', 'dxy', 'n')
-pd.dat = read_in('fst_dxy/ptomaphagus/all_dxy_results.tsv', 'dxy', 'p')
+nf.dat = read_in('/nesticus/all_fst_results.tsv', 'fst', 'n')
+pf.dat = read_in('/ptomaphagus/all_fst_results.tsv', 'fst', 'p')
+nd.dat = read_in('/nesticus/all_dxy_results.tsv', 'dxy', 'n')
+pd.dat = read_in('/ptomaphagus/all_dxy_results.tsv', 'dxy', 'p')
 dat = list(nf.dat, pf.dat, nd.dat, pd.dat) %>% 
   purrr::reduce(rbind) 
 unique(dat$group)
@@ -244,7 +244,7 @@ phard = dat %>%
   
 #GET THE ANGSD RESULTS
 #for nesticus
-nangsd = read.table('fst_dxy/nesticus/overall_fst.tsv',
+nangsd = read.table('/nesticus/overall_fst.tsv',
                     header = TRUE,
                     stringsAsFactors = FALSE) %>% 
   mutate(group=sub('.', '-', pair, fixed=TRUE)) %>% 
@@ -252,7 +252,7 @@ nangsd = read.table('fst_dxy/nesticus/overall_fst.tsv',
   as_tibble()
 
 #for ptomaphagus
-pangsd = read.table('fst_dxy/ptomaphagus/overall_fst.tsv',
+pangsd = read.table('/ptomaphagus/overall_fst.tsv',
                     header = TRUE,
                     stringsAsFactors = FALSE) %>% 
   mutate(group=sub('.', '-', pair, fixed=TRUE)) %>% 
@@ -266,14 +266,14 @@ ndist = nangsd %>%
   full_join(nhard, by = 'group')
 ndist
 ndist %>% 
-  write_csv('fst_dxy/nesticus/resultsTable.csv')
+  write_csv('/nesticus/resultsTable.csv')
 
 #ptom
 pdist = pangsd %>% 
   full_join(phard, by = 'group')
 pdist
 pdist %>% 
-  write_csv('fst_dxy/ptomaphagus/resultsTable.csv')
+  write_csv('/ptomaphagus/resultsTable.csv')
 
 
 
