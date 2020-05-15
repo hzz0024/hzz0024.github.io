@@ -134,7 +134,7 @@ The remaining columns relate to statistics based on a 2D-SFS.
 
 The results are copied here [DelBay19_challenge_ngsrelate_output](https://docs.google.com/spreadsheets/d/1HMrO2qM5LJjXo60WwiODrQbHxurmF3AwsRhDrvC1MMg/edit?usp=sharing)
 
-- plot of relatedness for challenge samples
+- plot of relatedness for challenge samples (for relatedness > 0.0024)
 
 <img src="https://hzz0024.github.io/images/ngsrelate/DelBay19_chr_relatedness.jpg" alt="img" width="800"/>
 
