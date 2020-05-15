@@ -33,7 +33,7 @@ for (i in c(1: length(names(dt)))){
 
 
 # Create a title with a red, bold/italic font
-title(main="Common shared SNPs in challenge vs. wild comparsions (no inversions)", col.main="red", font.main=4)
+title(main="Common shared SNPs in challenge vs. wild comparsions (including inversions)", col.main="red", font.main=4)
 
 # Label the x and y axes with dark green text
 title(xlab= "Chromosome", col.lab=rgb(0,0,0))

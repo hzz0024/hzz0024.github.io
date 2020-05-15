@@ -12,7 +12,7 @@ categories:
   - WGS data analysis
 ---
 
-This post will measure the relatedness for DelBay19 dataset.
+This post will summarize the measurements the relatedness in DelBay19 dataset.
 
 Some scripts are adopted from [here](https://github.com/grovesdixon/caveRAD/blob/master/cave_RAD_processing_walkthrough.txt)
 
