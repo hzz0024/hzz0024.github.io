@@ -132,3 +132,5 @@ The remaining columns relate to statistics based on a 2D-SFS.
 > 31 the log-likelihood of the 2dsfs estimate.   
 > 32 number of iterations for 2dsfs estimate   
 
+The results are copied here [DelBay19_challenge_ngsrelate_output](https://docs.google.com/spreadsheets/d/1HMrO2qM5LJjXo60WwiODrQbHxurmF3AwsRhDrvC1MMg/edit?usp=sharing)
+
