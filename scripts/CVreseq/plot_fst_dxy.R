@@ -16,6 +16,7 @@ read_in = function(fileName, stat, spp){
   return(d)
 }
 nf.dat = read_in('all_fst_results.tsv', 'fst', 'n')
+nf.dat$value[nf.dat$value<0]=0
 #pf.dat = read_in('all_fst_results.tsv', 'fst', 'p')
 nd.dat = read_in('all_dxy_results.tsv', 'dxy', 'n')
 #pd.dat = read_in('all_dxy_results.tsv', 'dxy', 'p')
