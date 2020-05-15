@@ -3,6 +3,8 @@ head(admix[, 1:98])
 ref <- read.table('challenge_98.list', head=TRUE)
 populations <- as.vector(ref[,3])
 
+#admix = admix[,populations=='CH4']
+
 
 # sort by population
 orders <- order(populations, decreasing=FALSE)
@@ -36,11 +38,11 @@ for (i in idx){
 }
 
 
-barplot(admix, col = c("black", "red"), space = 0, border = NA, 
+barplot(admix, col = c("black", "red",'blue','green'), space = 0, border = NA, 
         ylab = "Admixture", xlab = "Marshes", main = "Wild Amargosa Voles (K=2)")
+
 text(text_loc, -0.05, unique(populations), 
      xpd = T)
 abline(v = idx, lty = 5, lwd = 2, col = "white")
-
 
 

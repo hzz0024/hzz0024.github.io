@@ -21,6 +21,7 @@ Some scripts are adopted from [here](https://github.com/grovesdixon/caveRAD/blob
 ### Details of data analyses
 
 ```sh
+
 module load angsd/0.931
 
 # angsd run
@@ -54,8 +55,8 @@ done
   mydata_k2.qopt      -- Infered admixture proportions. Each line is an individual and each column is a population.
   
 
-#send the following files to PC for plotting with plot_ngsAdmix.R and angsd_ibs_pca.R:
-*.qopt, *Mat, bams
+#send the following files to PC for plotting with plot_ngsAdmix.R 
+*.qopt
 
 #--------RELATNEDNESS----------#
 
@@ -78,5 +79,5 @@ angsd -b wild_235.list -anc cv30.fa -ref cv30.fa -out relat_output/wild_235_pca_
 zcat ch_ref_98_pca_minI69D49maxD347_minQ30_minMAF05_SNPe6_nochr56invers_70.mafs.gz | cut -f5 |sed 1d > ch_ref_freq
 zcat wild_235_pca_minI165D118maxD1003_minQ30_minMAF05_SNPe6_nochr56invers_70.mafs.gz | cut -f5 |sed 1d >wild_freq
 
-
+```
 
