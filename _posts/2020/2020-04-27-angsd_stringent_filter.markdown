@@ -1,25 +1,25 @@
 ---
 comments: true
 title: DelBay19_stringent_filter
-date: '2020-04-27 12:00'
+date: '2020-05-15 12:00'
 tags:
   - DelBay19
   - angsd
   - filter
   - WGS
+  - paralogs
 categories:
   - WGS data analysis
 ---
 
-In this post I'd like to evaluate how parameters such as minInd and minMapQ affect the SNP number produced from the low-coverage data. 
+In this post I'd like to evaluate how factors such as minInd, minMapQ, or paralogs impact the SNP counts and summary statistics produced from the low-coverage data. This post has two parts, in part I I only focus on the SNPs generated from chromosome 5 (chr 5), and examine how different parameters or paralogs impact the SNPs counts and fst values.  
 
-The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - corresponding 50% minInd rate.
+In analysis part II, the GENOME-WIDE SNPs from chr 1-10 are used for two analyses: fst qqplot and PCA. I draw plots for fst distribution and see how does the data fit the exponential distribution. I also make several PCA plots based on different settings of minInd: 50%, 60%, 70% and 80%. By doing this I want to test whether the individual outliers are resulted from higher reads (therefore lead to higher genotype call rates) or not. 
 
-### Set the MinDepth and MaxDepth based on global depth distribution
+---
+PART I
 
-<img src="https://hzz0024.github.io/images/ngsLD/QC_DelBay19_12_maxD2000.jpg" alt="img" width="800"/>
-
-<img src="https://hzz0024.github.io/images/ngsLD/QC_CVreseq_12_maxD2000.jpg" alt="img" width="800"/>
+The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - corresponding 50% minInd rate. 
 
 ### SNP counts summary
 
@@ -43,6 +43,7 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 |filtered    | 84791110       |    41667727       | 85218526        |    43122665        |    0.000735    |      0.001069     |
 |No. paralogs|                |       12871       |                 |       14978        |                |                   |
 
+Note: the paralog filtering step is trying to filter out sites where heterozygotes likely comprise more than 50% of all genotypes (likely lumped paralogs)
 
 ### Different settings of minInd
 
@@ -83,16 +84,19 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 <img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_extra.jpg" alt="img" width="800"/>
 
 ---
-### Paralogs
+### After removing potential paralogs
 
 <img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_paralogs.jpg" alt="img" width="800"/>
 
----
-### Remove potential paralogs
+--- 
+
+PART II
+
+The results below are generated using genome-wide chr 1-10 SNP data.
 
 ### PCA plots
 
-- challenge group with 98 samples (after removing inversion regions)
+- challenge group with 50% minInd (after removing inversion regions)
 <img src="https://hzz0024.github.io/images/DelBay19_fst/ch_50.pc1-2-1.jpg" alt="img" width="800"/>
 
 - challenge group with 60% minInd (after removing inversion regions)
@@ -104,7 +108,7 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 - challenge group with 80% minInd (after removing inversion regions)
 <img src="https://hzz0024.github.io/images/DelBay19_fst/ch_80.pc1-2-1.jpg" alt="img" width="800"/>
 
-- wild group with 235 samples (after removing inversion regions)
+- wild group with 50% minInd (after removing inversion regions)
 <img src="https://hzz0024.github.io/images/DelBay19_fst/wild_50.pc1-2-1.jpg" alt="img" width="800"/>
 
 - wild group with 60% minInd (after removing inversion regions)
@@ -115,4 +119,13 @@ The control run here used -minQ 20 -minMapQ 20 -minInd 25 (ch) or 24 (ref) - cor
 
 - wild group with 80% minInd (after removing inversion regions)
 <img src="https://hzz0024.github.io/images/DelBay19_fst/wild_80.pc1-2-1.jpg" alt="img" width="800"/>
+
+- fst distribution and qq-plot
+
+- fst distribution for challenge group with 70% minInd and minMAPQ 25 
+<img src="https://hzz0024.github.io/images/qqplot/fst_dis_ch_minInd70_mapq25.jpeg" alt="img" width="800"/>
+
+- qqplot for fst dataset above
+<img src="https://hzz0024.github.io/images/qqplot/qqplot_ch_minInd70_mapq25.jpeg" alt="img" width="800"/>
+
 
