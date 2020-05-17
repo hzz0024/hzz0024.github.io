@@ -139,7 +139,7 @@ The results below are generated using genome-wide chr 1-10 SNP data.
 
 Conclusion of part I:
 
-1. Weighted mean Fst and number of retained sites goes down linearly as the missingness threshold gets more stringent (from 50% to 90%). One potential explaination for this is that  `<the stringent missingness filter creates a data set enriched for loci suffering from paralogous mapping. This would presumably increase within population diversity and therefore decrease Fst>`. 
+1. Weighted mean Fst and number of retained sites goes down linearly as the missingness threshold gets more stringent (from 50% to 90%). One potential explaination for this is that  *”the stringent missingness filter creates a data set enriched for loci suffering from paralogous mapping. This would presumably increase within population diversity and therefore decrease Fst“*. 
 
 2.
 
