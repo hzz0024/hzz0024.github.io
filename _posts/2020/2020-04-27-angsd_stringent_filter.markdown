@@ -149,5 +149,5 @@ The results below are generated using genome-wide chr 1-10 SNP data.
 - qqplot for ch_ref_minInd70_mapq25 vs. ch_ref_minInd50_mapq20 (note the minInd70 means 70% minInd setting, same for minIn50)
 <img src="https://hzz0024.github.io/images/qqplot/50_vs_70.jpg" alt="img" width="800"/>
 
-3. Overall, I prefer to use the stringent datasets for analyses like PCA, MDS, or Fst outlier detection. It would 1) reduce the computational cost; 2) eliminate the PCA individual outliers due to uneven sequencing depth. It would be also beneficial to remove the paralogs for downstream analyese.
+3. Overall, I prefer to use the stringent datasets for analyses like PCA, MDS, or Fst outlier detection. It would 1) reduce the computational cost; 2) eliminate the PCA individual outliers due to uneven missing genotypes. It would be also beneficial to remove the paralogs for downstream analyses.
 
