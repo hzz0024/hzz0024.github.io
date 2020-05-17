@@ -86,7 +86,7 @@ Note: the paralog filtering step is trying to filter out sites where heterozygot
 ---
 ### After removing potential paralogs
 
-<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_paralogs.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/DelBay19_fst/Mahattan_ch_ref_fold_paralogs.jpg" alt="img" width="800"/> 
 
 --- 
 
@@ -137,4 +137,9 @@ The results below are generated using genome-wide chr 1-10 SNP data.
 - qqplot for ch_ref_minInd70_mapq25 vs. ch_ref_minInd50_mapq20 
 <img src="https://hzz0024.github.io/images/qqplot/50_vs_70.jpg" alt="img" width="800"/>
 
+Conclusion of part I:
+
+1. Weighted mean Fst and number of retained sites goes down linearly as the missingness threshold gets more stringent (from 50% to 90%). One potential explaination for this is that  `<the stringent missingness filter creates a data set enriched for loci suffering from paralogous mapping. This would presumably increase within population diversity and therefore decrease Fst>`. 
+
+2.
 
