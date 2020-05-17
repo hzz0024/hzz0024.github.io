@@ -141,12 +141,7 @@ The results below are generated using genome-wide chr 1-10 SNP data.
 
 Conclusion and questions:
 
-1. Weighted mean Fst and number of retained sites goes down linearly as the missingness threshold gets more stringent (from 50% to 90%). One potential explaination for this is that  *”the stringent missingness filter creates a data set enriched for loci suffering from paralogous mapping. This would presumably increase within population diversity and therefore decrease Fst“*. While this hypothesis makes sense, by increasing the -minMAPQ from 20 to 30 I did not see a big drop in number of SNPs and Fst. In addition, the potential paralogs identified from the baseline dataset (minInd50, mapq20) is low: 12871 in 41680598 (0.031%) SNPs for ch, or 14978 in 43137643 (0.034%). The existence of paralogs has little effect on the weighted Fst but removal of these paralogs increase the Fst, consisting with the hypothesis. 
-
-Put these data aside, it appears that a big chunk of low Fst data are disappeared from the Fst hitorgram for base dataset, see [fst distribution and qq-plot](#fst_distribution)
-
-
-
+1. Weighted mean Fst and number of retained sites goes down linearly as the missingness threshold gets more stringent (from 50% to 90%). One potential explaination for this is that  *”the stringent missingness filter creates a data set enriched for loci suffering from paralogous mapping. This would presumably increase within population diversity and therefore decrease Fst“*. While this hypothesis makes sense, by increasing the -minMAPQ from 20 to 30 I did not see a big drop in number of SNPs and Fst. In addition, the potential paralogs identified from the baseline dataset (minInd50, mapq20) is low: 12871 in 41680598 (0.031%) SNPs for ch, or 14978 in 43137643 (0.034%). The existence of paralogs has little effect on the weighted Fst but removal of these paralogs increase the Fst, consisting with the hypothesis. Put these data aside, it appears that a big chunk of low Fst data are disappeared from the Fst hitorgram for base dataset, see [fst distribution and qq-plot](#fst_distribution)
 
 2.
 
