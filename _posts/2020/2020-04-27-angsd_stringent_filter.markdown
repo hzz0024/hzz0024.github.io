@@ -14,7 +14,7 @@ categories:
 
 In this post I'd like to evaluate how factors such as minInd, minMapQ, or paralogs impact the SNP counts and summary statistics produced from the low-coverage data. This post has two parts, in part I I only focus on the SNPs generated from chromosome 5 (chr 5), and examine how different parameters or paralogs impact the SNPs counts and fst values.  
 
-In analysis part II, the GENOME-WIDE SNPs from chr 1-10 are used for two analyses: fst qqplot and PCA. I draw plots for fst distribution and see how does the data fit the exponential distribution. I also make several PCA plots based on different settings of minInd: 50%, 60%, 70% and 80%. By doing this I want to test whether the individual outliers are resulted from higher reads (therefore lead to higher genotype call rates) or not. 
+In analysis part II, the GENOME-WIDE SNPs from chr 1-10 are used for two analyses: fst qqplot and PCA. I draw plots for fst distribution and see how does the data fit the exponential distribution. I also make several PCA plots based on different settings of minInd: 50%, 60%, 70% and 80%. By doing this I want to test whether the individual outliers are resulted from significant higher sequencing depth (therefore lead to higher genotype call rates) or not. 
 
 ---
 PART I
