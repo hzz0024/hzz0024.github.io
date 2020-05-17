@@ -129,10 +129,10 @@ The results below are generated using genome-wide chr 1-10 SNP data.
 <img src="https://hzz0024.github.io/images/qqplot/fst_dis_ch_minInd50_mapq20.jpeg" alt="img" width="800"/>
 
 - qq-plot for challenge group with 70% minInd and minMAPQ 25 
-<img src="https://hzz0024.github.io/images/qqplot/fst_dis_ch_minInd70_mapq25.jpeg" alt="img" width="800"/> 
+<img src="https://hzz0024.github.io/images/qqplot/qqplot_ch_minInd70_mapq25.jpeg" alt="img" width="800"/> 
 
 - qq-plot for challenge group with 50% minInd and minMAPQ 20
-<img src="https://hzz0024.github.io/images/qqplot/fst_dis_ch_minInd50_mapq20.jpeg" alt="img" width="800"/> 
+<img src="https://hzz0024.github.io/images/qqplot/qqplot_ch_minInd50_mapq20.jpeg" alt="img" width="800"/> 
 
 - qqplot for ch_ref_minInd70_mapq25 vs. ch_ref_minInd50_mapq20 
 <img src="https://hzz0024.github.io/images/qqplot/50_vs_70.jpeg" alt="img" width="800"/>
