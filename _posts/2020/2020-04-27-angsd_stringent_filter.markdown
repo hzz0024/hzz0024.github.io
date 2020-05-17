@@ -146,7 +146,7 @@ The results below are generated using genome-wide chr 1-10 SNP data.
 
 2. I also generate qq-plots for two datasets: challenge group with 70% minInd and minMAPQ 25 settings, and another one with 50% minInd and minMAPQ 20 settings. The plots are shown in[qq-plot](#qq-plot). Here in the first two plots, the x-axis are quantie values based on normal exponential distribution (λ = 1). I use exponential distribution as a reference because 1) the Fst distribution looks like exponential distribution (although the λ would be very large); 2) based on literature [Empirical Distributions of FST from Large-Scale Human Polymorphism Data](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0049837#s5). It looks like both datasets are skewed towards the lower fst vlues that close to zero. This is also reflected by the distribution plots. By checking the qq-plot from the comparsion between base (minInd50%, mapq20) and stringent (minInd70%, mapq25) datasets, I found that stringent data performances better at high quantile regions (see qq-plot below). That is, for data point shares the same quantile in both datasets, it has higher Fst in the stringent data side. 
 
-- qqplot for ch_ref_minInd70_mapq25 vs. ch_ref_minInd50_mapq20 
+- qqplot for ch_ref_minInd70_mapq25 vs. ch_ref_minInd50_mapq20 (note the minInd70 means 70% minInd setting, same for minIn50)
 <img src="https://hzz0024.github.io/images/qqplot/50_vs_70.jpg" alt="img" width="800"/>
 
 3. Overall, I prefer to use the stringent datasets for analyses like PCA, MDS, or Fst outlier detection. It would 1) reduce the computational cost; 2) eliminate the PCA individual outliers due to uneven sequencing depth. It would be also beneficial to remove the paralogs for downstream analyese.
