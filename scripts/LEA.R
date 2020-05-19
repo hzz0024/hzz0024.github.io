@@ -62,6 +62,19 @@ library(animation)
 library(stringr)
 require(data.table)
 
+# first make qq-plot for challenge data
+DT <- fread("ch_ref_1kb_fold.fst")
+print(DT)
+fst.values = DT$angsd_Fst
+# here change the negative fst value into 0
+fst.values[fst.values<0] = 0
+# make qqplot for fst
+qqplot(rexp(length(fst.values)),
+       fst.values, xlab = "Expected quantile",
+       pch = 19, cex = .4)
+abline(0,1)
+
+#---------------test challenge data in window---------------#
 # load the data set
 DT <- fread("ch_ref_1kb_fold.fst")
 print(DT)
