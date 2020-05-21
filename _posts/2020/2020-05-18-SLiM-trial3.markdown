@@ -8,7 +8,7 @@ categories:
   - SLiM
 ---
 
-In this post I will continue work on the SLiM simulation for DelBay19 project. The key question in this post is how to simulate a selection process that differentiate from the simple drift.  
+In this post I will continue work on the SLiM simulation for DelBay19 project. The key question in this post is how to simulate a selection process that differentiate from the simple drift. This can be done by using the nonWF model and the viability selection within generation. 
 
 Notes for SLiM:
 
