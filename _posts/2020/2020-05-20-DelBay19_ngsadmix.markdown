@@ -1,6 +1,6 @@
 ---
 comments: true
-title: ngsadmix analyese
+title: ngsadmix analyses
 date: '2020-05-20 12:00'
 tags:
   - DelBay19
@@ -121,26 +121,32 @@ abline(v = idx, lty = 5, lwd = 2, col = "white")
 ### plot the admixture results
 
 ch_ref_k2_run1
-<img src="https://hzz0024.github.io/images/ngsadmix/chr_k2_run1.jepg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/ngsadmix/chr_k2_run1.jpeg" alt="img" width="800"/>
 
 ch_ref_k2_run2
-<img src="https://hzz0024.github.io/images/ngsadmix/chr_k2_run2.jepg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/ngsadmix/chr_k2_run2.jpeg" alt="img" width="800"/>
 
 ch_ref_k2_run3
-<img src="https://hzz0024.github.io/images/ngsadmix/chr_k2_run3.jepg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/ngsadmix/chr_k2_run3.jpeg" alt="img" width="800"/>
 
 ch_ref_k2_run4
-<img src="https://hzz0024.github.io/images/ngsadmix/chr_k2_run4.jepg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/ngsadmix/chr_k2_run4.jpeg" alt="img" width="800"/>
 
 By looking at the admixture plots with equal K, the q-value for the same individual varies a lot. Need double check the ngsadmix again to see why this happens.
 
 DeltaK can only calculate best K with K > 1, but based on likelihood estimate itself, the best K is 4. Not very informative based on admixature plot with K=4. 
 
 best k from likelihood estimates
-<img src="https://hzz0024.github.io/images/ngsadmix/bestk.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/ngsadmix/bestK.jpg" alt="img" width="800"/>
 
 ch_ref_k1_run1
-<img src="https://hzz0024.github.io/images/ngsadmix/chr_k4_run1.ejpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/ngsadmix/chr_k4_run1.jpeg" alt="img" width="800"/>
 
 
 
