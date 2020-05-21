@@ -1,7 +1,7 @@
 ---
 comments: true
 title: ngsadmix analyese
-date: '2020-05-13 12:00'
+date: '2020-05-20 12:00'
 tags:
   - DelBay19
   - angsd
