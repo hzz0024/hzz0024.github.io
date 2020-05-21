@@ -67,7 +67,9 @@ done
   mydata_k2.qopt      -- Infered admixture proportions. Each line is an individual and each column is a population.
 
 ```
+
 > Create the CLUMPAK Input File to Calculate the Best K and make barplot
+
 ```sh
 #only k1-4 now, I will include other run results later
 logs <- as.data.frame(read.table("logfile"))
