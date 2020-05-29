@@ -1,14 +1,18 @@
 ---
 layout: post
 title: SLiM 3
-date: '2020-05-18 12:00'
+date: '2020-05-28 12:00'
 tags:
   - SLiM
 categories:
   - SLiM
 ---
 
-In this post I will continue work on the SLiM simulation for DelBay19 project. The key question in this post is how to simulate a selection process that differentiate from the simple drift. This can be done by using the nonWF model and the viability selection within generation. 
+In this post I will continue work on the SLiM simulation for DelBay19 project. The key question in this post is how to simulate a selection process in the model. This can be done by using the nonWF model and the viability selection within generation. Agian, the notes are listed below.
+
+Some useful notes:     
+1) SLiM manual p206: it describes how the fitness is influenced by the qtl, and how to examine the phenotypes
+2) 
 
 Notes for SLiM:
 
@@ -43,96 +47,58 @@ Notes (from Ben):
 
 ---
 
-In order to burin in population to equilibrium, I created 10 QTLs and tried to model quantitative phenotypic traits that are governed by these QTLs. In addition, these QTLs are modeled to be unlinked by setting the recombination rate as 0.5.
+- Notes about WF vs. nonWF models
 
-Here selection will act upon the phenotype, not upon the individual QTLs; we will therefore deal not with selection coefficients, but with QTL effect sizes. Note that the effect sizes are additive, I am ignoring non-additive effects for now.
+In WF models, early() events occur just before offspring generation and late() events happen
+just after, next stage is fitness evaluation. In nonWF models this positioning is reversed: early() occurs just after offspring generation, , and late() events happen just after viability selection.
 
-After creating the QTLs and genomic architecture, I added a part to calculate the phenotypic trait values and fitness effects. This is done with code below,
+WF model: early() -- late() -- fitness evaluation
+nonWF model: offspring generation -- early() -- viability/survival stage -- late() event
 
-```sh
-1: late() {
-	inds = sim.subpopulations.individuals;
-	phenotype = inds.sumOfMutationsOfType(m2);
-	inds.fitnessScaling = 1.0 + dnorm(phenotype, 10.0, 5.0) * 10.0;
-	inds.tagF = phenotype;
-```
+    Viability selection in nonWF models is mechanistically simple. For a given individual, a fitness
+of 0.0 or less results in certain death; that individual is immediately removed from its
+subpopulation. A fitness of 1.0 or greater results in certain survival; that individual remains in its
+subpopulation, and will live into the next generation cycle. A fitness greater than 0.0 and less than
+1.0 is interpreted as a survival probability; SLiM will do a random draw to determine whether the
+individual survives or not. The major difference about fitness bewtween WF and nonWF models are:
 
-This code gets a vector of all individuals in the model (as inds), and sum all the QTL effect sizes of all indviduals as phenotypes.  The next line calculates fitness effects, given thoese phenotypic trait values. The dnorm() function returns the probability density for a Gaussian function at a given quantile. Here 10 is optimum of stabilizing selection on the phenotypic traits; and 5 is the standard deviation of the normal distribution. 
+1) first, nonWF models fitness is absolute fitness, WF models fitness is relative fitness    
+2) second, nonWF models selection is generally hard selection, reducing the size of
+the population proportionate to mean population fitness; whereas in WF models it is generally soft
+selection, changing the relative success of particular individuals but not changing the size of the
+population.    
+3) third, in nonWF models the population is not automatically regulated –
+both extinction and unbounded exponential growth are very real possibilities – whereas in WF
+models SLiM automatically regulates the population size.
 
-Next part is to check the mean phenotype. With this code, in every generation the model calculates the mean phenotype and compare it to the optimum at 10. If the difference is < 0.1, the mean phenotype reachs the optimum. The code also prints the mean phenotype every 100 generations.
-
-I assume the population reachs equilibrium when the mean phenotype difference is less than 0.1. Then I tried to output the QTL and neutral frequencies across all the individuals in this population using the code below, 
-
-```sh
-   // get all the m2 QTL and m1 neutral mutations in the simulation
-		neu = sim.mutationsOfType(m1);
-		qtl = sim.mutationsOfType(m2);
-		
-	// then for every QTL mutation find the frequency
-		f1 = sapply(neu, "mean(inds.containsMutations(applyValue));");
-		f2 = sapply(qtl, "mean(inds.containsMutations(applyValue));");
-		
-	// print the position and frequencies of QTL before selection
-		catn("\nneutral loci positions: " + paste(neu.position, ", "));
-   		catn("\nneutral loci frequencies: " + paste(f1, ", "));
-   		catn("\n" + "QTL positions: " + paste(qtl.position, ", "));
-   		catn("QTL frequencies: " + paste(f2, ", "));
-  ```
-Example output:
-
-neutral loci positions: 10256, 17471, 12992, 18316, 4954, 7801, 2420, 4222, 5220, 9956, 5307, 8128, 19199, 12521, 16272   
-neutral loci frequencies: 0.112, 0.069, 0.057, 0.001, 0.163, 0.007, 0.044, 0.6, 0.852, 0.026, 0.038, 0.292, 0.001, 0.654, 0.23   
-QTL positions: 13006, 11005   
-QTL frequencies: 0.717, 0.863   
-
- 
-In order to subdivide population into groups of 300 as the starting samples, I used the code below. I also checked how the qtl frequencies are changed in the subdivided populations. The neutral loci positions and frequencies could also be printed out if needed.
-```sh
-   // take a sample of individuals, and then get the genomes
-   		s = sample(sim.subpopulations.individuals, 300).genomes;
-   		qtl = unique(s.mutationsOfType(m2));
-
-   // for every QTL mutation find the frequency
-		f = sapply(qtl, "mean(s.containsMutations(applyValue));");
-		
-   // print the results
-   		catn("\nsubdivide population into groups of 300");
-   		catn("\n" + "positions: " + paste(qtl.position, ", "));
-   		catn("frequencies: " + paste(f, ", "));
-```
-
-It is still a problem to apply the 80% selection on the subdivided populations (300 samples). Same as last part, I print out the QTL position and frequencies (see output at the end of this paragraph) after applying "selection" (not real selection). For now I just randonly pick up 60 samples as a function of selection. SLiM can model the population contraction (for bottleneck modeling) using the function of setSubpopulationSize(). However, it causes error during the run. Nevertheless, it sound too simple to apply strong selection in this way. I may need to check the nonWF and viability/survival selection recipes for this goal. 
-
-subdivide population into groups of 300   
-
-QTL positions: 13006, 11005   
-QTL frequencies: 0.463333, 0.595
-
-apply 80% selection
-
-QTL positions: 13006, 11005   
-QTL frequencies: 0.458333, 0.641667
-
-Below is the whole code:
 
 ```sh
+
+// Keywords: nonWF, QTL, fitnessscaling
 initialize() {
-	defineConstant("nSD", 5.0); // Standard Deviation of S DFE
-	initializeMutationRate(1e-6);
-	initializeMutationType("m1", 0.5, "f", 0.0);       // neutral
-	initializeMutationType("m2", 0.5, "n", 0.0, nSD);  // QTLs
+	initializeSLiMModelType("nonWF");
+	initializeSex("A");
+	defineConstant("K", 500);
+		
+	initializeMutationType("m1", 0.5, "f", 0.0);  // neutral
+	m1.convertToSubstitution = T;
+	initializeMutationType("m2", 0.5, "n", 0.0, 1);  // QTLs
 	m2.convertToSubstitution = F;
 	m2.color = "red";
+	
+	initializeMutationRate(1e-5);
+	
 	//set to use a “last mutation” stacking policy, so that when a new
 	//mutation occurs at a given QTL it replaces the allele that was 
 	//previously at that site, rather than “stacking” with it as is
 	//SLiM’s default behavior (see section 1.5.3)
 	m2.mutationStackPolicy = "l";
 	initializeGenomicElementType("g1", m1, 1);
-	initializeGenomicElementType("g2", c(m1,m2), c(0.9,0.1));
+	initializeGenomicElementType("g2", m2, 1);
 	
-	defineConstant("C", 10);    // number of QTLs
-	defineConstant("W", 1000);  // size of neutral buffer on each side
+	//define how constant the QTLs are occured on the genome
+	defineConstant("C", 200); // number of QTLs
+	defineConstant("W", 200);  // size of neutral buffer on each side
 	pos = 0;
 	q = NULL;
 	
@@ -141,7 +107,7 @@ initialize() {
 		initializeGenomicElement(g1, pos, pos + W-1);
 		pos = pos + W;
 		
-		initializeGenomicElement(g2, pos, pos);
+		initializeGenomicElement(g2, pos, pos );
 		q = c(q, pos);
 		pos = pos + 1;
 		
@@ -151,128 +117,125 @@ initialize() {
 	
 	defineConstant("Q", q);     // remember our QTL positions
 
-// we want the QTLs to be unlinked; build a recombination map for that
+   // we want the QTLs to be unlinked; build a recombination map for that
 	rates = c(rep(c(1e-8, 0.5), C-1), 1e-8);
 	ends = (repEach(Q + W, 2) + rep(c(0,1), C))[0:(C*2 - 2)];
 	initializeRecombinationRate(rates, ends);
-}
 
-
-fitness(m2) { return 1.0; }
-1 { sim.addSubpop("p1", 1000); }
-1: late() {
-	inds = sim.subpopulations.individuals;
-	phenotype = inds.sumOfMutationsOfType(m2);
-	inds.fitnessScaling = 1.0 + dnorm(phenotype, 10.0, 5.0) * 10.0;
-	inds.tagF = phenotype;
 	
-	// Output and check for termination
-	mean_phenotype = mean(phenotype);
-			
-	if (abs(mean_phenotype - 10.0) < 0.1)
-	{	
-   // get all the m2 QTL and m1 mutations in the simulation
-		neu = sim.mutationsOfType(m1);
-		qtl = sim.mutationsOfType(m2);
-		
-	// then for every QTL mutation find the frequency
-		f1 = sapply(neu, "mean(inds.containsMutations(applyValue));");
-		f2 = sapply(qtl, "mean(inds.containsMutations(applyValue));");
-		
-	// print the position and frequencies of QTL before selection
-		catn("\nneutral loci positions: " + paste(neu.position, ", "));
-   	catn("\nneutral loci frequencies: " + paste(f1, ", "));
-   	catn("\n" + "QTL positions: " + paste(qtl.position, ", "));
-   	catn("QTL frequencies: " + paste(f2, ", "));
-   	
-   // take a sample of individuals, and then get the genomes
-   	s = sample(sim.subpopulations.individuals, 300).genomes;
-   	qtl = unique(s.mutationsOfType(m2));
+	}
+	// start reproducation callback
+reproduction(NULL, "F") {
+	mate = subpop.sampleIndividuals(1, sex="M");
+	
+	if (mate.size())
+	{
+		qtlValue = individual.tagF;
+	//	cat(individual.tagF);
+		expectedLitterSize = max(0.0, qtlValue + 5);
+	//	cat(expectedLitterSize + "\n");
+	// the investment is per egg but not per hatched individuals, the littlesize is removed	
+	//	litterSize = rpois(1, expectedLitterSize);
+		penalty = 5 / expectedLitterSize;
+		for (i in seqLen(asInteger(expectedLitterSize)))
+		{
+			offspring = subpop.addCrossed(individual, mate);
+			offspring.setValue("penalty", rgamma(1, penalty, 20));
+	//		cat("Penalty: " +offspring.getValue("penalty") + "\n");
+		}
+	}
+}
+1 early() {
+	sim.addSubpop("p1", 50);
+	p1.individuals.setValue("penalty", 1.0);
+	
+}
+early() {
+	// non-overlapping generations
+	inds = sim.subpopulations.individuals;
+	inds[inds.age > 0].fitnessScaling = 0.0;
+	inds = inds[inds.age == 0];  // focus on juveniles
+	// QTL calculations
+	//cat(sim.mutationsOfType(m2));
+	inds.tagF = inds.sumOfMutationsOfType(m2);
+	//cat(inds.tagF);
+	// parental investment fitness penalties
+	inds.fitnessScaling = inds.getValue("penalty");
+	
+	// density-dependence for juveniles
+	//p1.fitnessScaling = K / sum(inds.fitnessScaling);
+	p1.fitnessScaling = K / size(inds);
+	
+	//catn(sim.subpopulations.individuals.fitnessScaling);
+}
+//since this is a QTL model we need to zero out the fitness effect of the QTL mutations as usual, so that their only fitness effects are indirect p341
+fitness(m2) { return 1.0; }
 
+late() {
+		// output the phenotypic mean and pop size
+	   qtlValues = p1.individuals.tagF;
+	   expectedSizes = pmax(0.0, qtlValues + 5);
+	   //cat(expectedSizes);
+	   cat(sim.generation + ": " + p1.individualCount + " individuals");
+	   cat(", mean litter size " + mean(expectedSizes));
+	   catn();
+}
+2001 early() {
+   // take a sample of individuals, and then get the genomes
+   
+   //		catn(sim.subpopulations.individuals.fitnessScaling);
+   //		catn(sim.subpopulations.individualCount);
+   		
+   		sampled = sample(sim.subpopulations.individuals, 300);
+   		s = sampled.genomes;
+   		qtl = unique(s.mutationsOfType(m2));   		
+   	
    // for every QTL mutation find the frequency
-		f = sapply(qtl, "mean(s.containsMutations(applyValue));");
+		   f = sapply(qtl, "mean(s.containsMutations(applyValue));");
 		
    // print the results
-   	catn("\nsubdivide population into groups of 300");
-   	catn("\n" + "QTL positions: " + paste(qtl.position, ", "));
-   	catn("QTL frequencies: " + paste(f, ", "));
-
-	// apply 80% selection by randomly selecting 20% samples 	
-		s1 = sample(sim.subpopulations.individuals, 60).genomes;
-	// or setSubpopulationSize is a better way to do so but it causes error	
-	//	s1 = s.setSubpopulationSize(60);
-		qtl = unique(s1.mutationsOfType(m2));
-		f = sapply(qtl, "mean(s1.containsMutations(applyValue));");
-   	catn("\napply 80% selection");
-   	catn("\n" + "QTL positions: " + paste(qtl.position, ", "));
-   	catn("QTL frequencies: " + paste(f, ", "));
-   
-		sim.simulationFinished();
-	}
-	else if (sim.generation % 100 == 0)
-	{
-		catn(sim.generation + ": Mean phenotype == " + mean_phenotype);
-	}
+   		catn("\nqtl information before selection");
+   		catn("qtl positions: " + paste(qtl.position, ", "));
+   		catn("qtl frequencies: " + paste(f, ", "));
+	//		using the fitnessScaling property to change the fitness as 0 
+			catn(sampled.fitnessScaling); 
+			sim.subpopulations.individuals.fitnessScaling = 0;
+			
+	// 	reassign the fitness of 0.4 to all sampled (300 in this case) individuals; used to simulate 20% viability selection
+			sampled.fitnessScaling = 0.4;
+			
+			catn('Write to file. Population size: '+ p1.individualCount + '\n');
+			sim.outputFull('record.txt');
+			
+}
+2001 late() {
+   // take a sample of individuals, and then get the genomes
+   		s = sim.subpopulations.individuals.genomes;
+   		qtl = unique(s.mutationsOfType(m2));
+   // for every QTL mutation find the frequency
+			f = sapply(qtl, "mean(s.containsMutations(applyValue));");	
+   // print the results
+   		catn("\nafter viability selection");
+   		catn("qtl positions: " + paste(qtl.position, ", "));
+   		catn("qtl frequencies: " + paste(f, ", "));
+   		scaled_size = p1.individualCount;
+   		catn('population size after selection: '+ scaled_size);	
+   // this part is used to capture the qtl frequency using the same sample size after viability selection (to simulat dirft effect during sampling)
+   		sim.readFromPopulationFile('record.txt');
+   		catn('Read from file. Population size: '+ p1.individualCount);
+   		
+   		sampled = sample(sim.subpopulations.individuals, scaled_size);
+   		s = sampled.genomes;
+   		qtl = unique(s.mutationsOfType(m2));
+			f = sapply(qtl, "mean(s.containsMutations(applyValue));");
+			catn("\nsamples before viability selection, with the same sample size after selection (to simulate drift effect)");
+   		catn("qtl positions: " + paste(qtl.position, ", "));
+   		catn("qtl frequencies: " + paste(f, ", "));
+   			
+   		sim.simulationFinished();
 }
 
-50000 late() {
-	catn("\nDID NOT REACH OPTIMUM");
-}
 ```
 
-- Notes about WF vs. nonWF models
-
-In WF models, early() events occur just before offspring generation and late() events happen
-just after, next stage is fitness evaluation. In nonWF models this positioning is reversed: early() occurs just after offspring generation, , and late() events happen just after viability selection.
-
-WF model: early() -- late() -- fitness evaluation
-nonWF model: early() -- add new mutations -- late() means after viability selection
-
-Reading in a previously written output file, or otherwise setting up new population state, is generally best done in an early() event in
-nonWF models so that fitness values are recalculated immediately after the change (just as with
-adding new mutations). pp 460
-
-- The order of offspring generation   
-
-Several decision need to be made:   
-(1) what are its parents?   
-(2) is it male or female (in sexual simulations)?   
-(3) is it produced by cloning, selfing, or biparental mating?   
-
-	After fitness values have been recalculated for all individuals, viability selection then occurs
-immediately. In WF models, viability selection does not exist (or you could consider new offspring
-to have a survival rate of 100%, and the parental generation to have a survival rate of 0%, if you
-like). In nonWF models, in contrast, viability selection is the primary way in which differential
-fitness is expressed; individual fitness values influence survival, not mating success.
-
-    Viability selection in nonWF models is mechanistically simple. For a given individual, a fitness
-of 0.0 or less results in certain death; that individual is immediately removed from its
-subpopulation. A fitness of 1.0 or greater results in certain survival; that individual remains in its
-subpopulation, and will live into the next generation cycle. A fitness greater than 0.0 and less than
-1.0 is interpreted as a survival probability; SLiM will do a random draw to determine whether the
-individual survives or not. The major difference about fitness bewtween WF and nonWF models are:
-
-1) nonWF models fitness is absolute fitness, WF models fitness is relative fitness   
-2) nonWF models selection is generally hard selection, reducing the size of
-the population proportionate to mean population fitness; whereas in WF models it is generally soft
-selection, changing the relative success of particular individuals but not changing the size of the
-population.    
-3) Third, it means that in nonWF models the population is not automatically regulated –
-both extinction and unbounded exponential growth are very real possibilities – whereas in WF
-models SLiM automatically regulates the population size.
-
-
-
----
-
-To do list:
-
-1. perhaps add more QTLs and use the wider Gaussian function so that each QTL has a weaker effects on the fitness (for polygenic inheritance) 
-
-2. write the code for delta_p or Fst estimates
-
-3. find the optimal way to model the within-generation challenge. I will check the nonWF model recipes.
-
-4. equilibrium LD
 
 
