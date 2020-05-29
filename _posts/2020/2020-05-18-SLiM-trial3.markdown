@@ -55,18 +55,20 @@ just after, next stage is fitness evaluation. In nonWF models this positioning i
 WF model: early() -- late() -- fitness evaluation
 nonWF model: offspring generation -- early() -- viability/survival stage -- late() event
 
-    Viability selection in nonWF models is mechanistically simple. For a given individual, a fitness
+> Viability selection in nonWF models is mechanistically simple. For a given individual, a fitness
 of 0.0 or less results in certain death; that individual is immediately removed from its
 subpopulation. A fitness of 1.0 or greater results in certain survival; that individual remains in its
 subpopulation, and will live into the next generation cycle. A fitness greater than 0.0 and less than
 1.0 is interpreted as a survival probability; SLiM will do a random draw to determine whether the
 individual survives or not. The major difference about fitness bewtween WF and nonWF models are:
 
-1) first, nonWF models fitness is absolute fitness, WF models fitness is relative fitness    
+1) first, nonWF models fitness is absolute fitness, WF models fitness is relative fitness
+
 2) second, nonWF models selection is generally hard selection, reducing the size of
 the population proportionate to mean population fitness; whereas in WF models it is generally soft
 selection, changing the relative success of particular individuals but not changing the size of the
 population.    
+
 3) third, in nonWF models the population is not automatically regulated –
 both extinction and unbounded exponential growth are very real possibilities – whereas in WF
 models SLiM automatically regulates the population size.
