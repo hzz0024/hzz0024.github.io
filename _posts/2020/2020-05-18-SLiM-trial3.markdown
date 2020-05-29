@@ -74,7 +74,7 @@ models SLiM automatically regulates the population size.
 
 ```sh
 
-// Keywords: nonWF, QTL, fitnessscaling
+// Keywords: nonWF, non-Wright-Fisher, sexual, QTL, quantitative trait loci
 initialize() {
 	initializeSLiMModelType("nonWF");
 	initializeSex("A");
@@ -132,16 +132,16 @@ reproduction(NULL, "F") {
 	{
 		qtlValue = individual.tagF;
 	//	cat(individual.tagF);
-		expectedLitterSize = max(0.0, qtlValue + 5);
+		expectedLitterSize = max(0.0, qtlValue + 40);
 	//	cat(expectedLitterSize + "\n");
 	// the investment is per egg but not per hatched individuals, the littlesize is removed	
 	//	litterSize = rpois(1, expectedLitterSize);
-		penalty = 5 / expectedLitterSize;
+		penalty = 40 / expectedLitterSize;
 		for (i in seqLen(asInteger(expectedLitterSize)))
 		{
 			offspring = subpop.addCrossed(individual, mate);
 			offspring.setValue("penalty", rgamma(1, penalty, 20));
-	//		cat("Penalty: " +offspring.getValue("penalty") + "\n");
+			//cat("Penalty: " +offspring.getValue("penalty") + "\n");
 		}
 	}
 }
@@ -167,6 +167,7 @@ early() {
 	p1.fitnessScaling = K / size(inds);
 	
 	//catn(sim.subpopulations.individuals.fitnessScaling);
+	
 }
 //since this is a QTL model we need to zero out the fitness effect of the QTL mutations as usual, so that their only fitness effects are indirect p341
 fitness(m2) { return 1.0; }
@@ -174,41 +175,56 @@ fitness(m2) { return 1.0; }
 late() {
 		// output the phenotypic mean and pop size
 	   qtlValues = p1.individuals.tagF;
-	   expectedSizes = pmax(0.0, qtlValues + 5);
+	   expectedSizes = pmax(0.0, qtlValues + 40);
 	   //cat(expectedSizes);
+	  
 	   cat(sim.generation + ": " + p1.individualCount + " individuals");
 	   cat(", mean litter size " + mean(expectedSizes));
 	   catn();
 }
-2001 early() {
-   // take a sample of individuals, and then get the genomes
-   
-   //		catn(sim.subpopulations.individuals.fitnessScaling);
-   //		catn(sim.subpopulations.individualCount);
+101 early() {
+
+   		catn(size(sim.subpopulations.individuals.fitnessScaling[sim.subpopulations.individuals.fitnessScaling==0]));
+   		// [exclude parents]
+   		sampled = sample(sim.subpopulations.individuals[sim.subpopulations.individuals.fitnessScaling!=0], 300);
    		
-   		sampled = sample(sim.subpopulations.individuals, 300);
+   		children = sim.subpopulations.individuals[sim.subpopulations.individuals.fitnessScaling!=0];
+ 
+   		//sampled = sample(sim.subpopulations.individuals, 300);
    		s = sampled.genomes;
    		qtl = unique(s.mutationsOfType(m2));   		
-   	
    // for every QTL mutation find the frequency
 		   f = sapply(qtl, "mean(s.containsMutations(applyValue));");
 		
    // print the results
    		catn("\nqtl information before selection");
    		catn("qtl positions: " + paste(qtl.position, ", "));
-   		catn("qtl frequencies: " + paste(f, ", "));
+   		catn("qtl frequencies: " + paste(f, ", "));		
+   		
 	//		using the fitnessScaling property to change the fitness as 0 
-			catn(sampled.fitnessScaling); 
 			sim.subpopulations.individuals.fitnessScaling = 0;
 			
-	// 	reassign the fitness of 0.4 to all sampled (300 in this case) individuals; used to simulate 20% viability selection
-			sampled.fitnessScaling = 0.4;
 			
-			catn('Write to file. Population size: '+ p1.individualCount + '\n');
+	// 	reassign the fitness of 0.4 to all sampled (300 in this case) individuals; used to simulate 20% viability selection
+			sampled.fitnessScaling = 0.2;
+			catn(size(sim.subpopulations.individuals[sim.subpopulations.individuals.fitnessScaling==0.2]));
+			p1.fitnessScaling = 1;
+			
+			//catn("*********");
+			//catn('\nWrite to file. Population size: '+ p1.individualCount);
 			sim.outputFull('record.txt');
 			
+			//catn(size(sampled));
+			//catn(size(sampled[sampled.sumOfMutationsOfType(m2)!=0]));
+			
 }
-2001 late() {
+101 late() {
+
+//catn(size(sim.subpopulations.individuals));
+//catn(size(sim.subpopulations.individuals[sim.subpopulations.individuals.sumOfMutationsOfType(m2)!=0]));
+			
+
+			
    // take a sample of individuals, and then get the genomes
    		s = sim.subpopulations.individuals.genomes;
    		qtl = unique(s.mutationsOfType(m2));
@@ -234,6 +250,7 @@ late() {
    			
    		sim.simulationFinished();
 }
+
 
 ```
 
