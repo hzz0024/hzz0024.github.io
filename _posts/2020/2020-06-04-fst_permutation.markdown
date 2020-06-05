@@ -72,7 +72,11 @@ angsd -b /scratch/hzz0024/fst_pt/sample/ref.list -anc /scratch/hzz0024/fst_pt/ge
 |    CH      | 520698396| 243239       |
 |    REF     | 545117898| 188681       |
 
-Step 3 Perform permutation test by randomly drawing individauls from two populations and obtain a neutral dataset of Fst. A python script is developed for individual shuffle. The script is designed to ensure that each redraw has a equal number of samples from each population. 
+Here the SNP number should be same, in my next round test I will remove the minInd settings to keep the SNP number same as the snplist
+
+Step 3 Perform the LD pruning using ngsLD tool
+
+Step 4 Perform permutation test by randomly drawing individauls from two populations and obtain a neutral dataset of Fst. A python script is developed for individual shuffle. The script is designed to ensure that each redraw has a equal number of samples from each population. 
 
 ```sh
 # write script for angsd run
@@ -98,13 +102,23 @@ done
 
 Step 4 Compare the Fst outputs between observed and neutral datasets. Perform statistic analyses on shared SNPs.
 
-- Average weighted Fst comparsion
+- Average weighted Fst comparsion 
 
 |            | Observed | Neutral      |  
 | -----------|----------|--------------|
 |Average Fst | 0.001167 | 0.000446     |
 
 - Fst distribution 
+
+<img src="https://hzz0024.github.io/images/slim/fst_density_all.jpeg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/slim/fst_density.jpeg" alt="img" width="800"/>
+
+- qqplot
+
+<img src="https://hzz0024.github.io/images/slim/qqplot.jpeg" alt="img" width="800"/>
+
+
 
 
 
