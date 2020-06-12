@@ -256,5 +256,10 @@ late() {
 
 ```
 
+Notes:
+
+- initializeRecombinationRate(1e-8); This specifies the recombination rate for the whole chromosome to be 1e-8, which means that a
+crossing-over event will occur between any two adjacent bases with a probability of 1e-8 per
+genome per generation. 
 
 
