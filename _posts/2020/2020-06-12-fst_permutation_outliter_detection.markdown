@@ -102,9 +102,11 @@ Step 4 Compare the Fst outputs between observed and neutral datasets. Perform st
 
 - Average weighted Fst comparsion 
 
-|            | Observed | Neutral      |  
+|            | Observed | Neutral (averaged from 100 runs)     |  
 | -----------|----------|--------------|
-|Average Fst | 0.001167 | 0.000446     |
+|Average Fst | 0.001167 | 0.00076406   |
+
+Note: the mean weighted fst ranges from 0.00044 to 0.001398
 
 - Fst distribution 
 
@@ -116,7 +118,9 @@ Step 4 Compare the Fst outputs between observed and neutral datasets. Perform st
 
 <img src="https://hzz0024.github.io/images/slim/qqplot.jpeg" alt="img" width="800"/>
 
+Step 5 For each shared SNP (291,145 in total), I selected the snp outliers by calculating the proportion of resamples that are larger than Fst_obs. That proportion would be the p-value for the null. Note that here the proportation is calibrated by adding a 1 to the numerator and denominator to account for misestimation of the p-value (see https://genomicsclass.github.io/book/pages/permutation_tests.html, for more details see [Permutation P-values should never be zero][https://pubmed.ncbi.nlm.nih.gov/21044043/])
 
+Initially, I selected the outliers with proportion < 0.1, which means that I only includes loci that non of resamples are greater than Fst_obs.   
 
 
 
