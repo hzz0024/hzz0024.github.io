@@ -120,8 +120,13 @@ Note: the mean weighted fst ranges from 0.00044 to 0.001398
 
 Step 5 For each shared SNP (291,145 in total), I selected the snp outliers by calculating the proportion of resamples that are larger than Fst_obs. That proportion would be the p-value for the null. Note that here the proportation is calibrated by adding a 1 to the numerator and denominator to account for misestimation of the p-value (see https://genomicsclass.github.io/book/pages/permutation_tests.html). For more details see [Permutation P-values should never be zero](https://pubmed.ncbi.nlm.nih.gov/21044043/).
 
-Initially, I selected the outliers with proportion < 0.1, which means that I only includes loci that non of resamples are greater than Fst_obs.   
+Initially, I selected the outliers with proportion < 0.01, which means that I only includes loci with non of resamples greater than observed Fst values. 
 
+- outliers with p-value < 0.01
+
+<img src="https://hzz0024.github.io/images/outlier/p_value_less_than_0.01.jpeg" alt="img" width="800"/>
+
+- 
 
 
 
