@@ -88,8 +88,8 @@ dev.off()
 
 # plot the allele shift
 setwd("~/Documents/Ryan_workplace/DelBay19/11_permutation/deltap/alleleshift")
-datA = read.table(file = "ch_ref_alleleshift_obs.txt", header=FALSE)$V3
-datB = read.table(file = "ch_ref_alleleshift_neu.txt", header=FALSE)$V3
+datA = read.table(file = "obs.txt", header=FALSE)$V3
+datB = read.table(file = "neu0.txt", header=FALSE)$V3
 
 b <- min(c(datA,datB))
 e <- max(c(datA,datB))

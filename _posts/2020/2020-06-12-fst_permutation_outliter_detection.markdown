@@ -126,7 +126,10 @@ Initially, I selected the outliers with proportion < 0.01, which means that I on
 
 <img src="https://hzz0024.github.io/images/outlier/p_value_less_than_0.01.jpeg" alt="img" width="800"/>
 
-- 
+- outlier with 0.01 < p-value <0.02
+
+<img src="https://hzz0024.github.io/images/outlier/p_value_large0.01less0.02.jpeg" alt="img" width="800"/>
+
 
 
 
