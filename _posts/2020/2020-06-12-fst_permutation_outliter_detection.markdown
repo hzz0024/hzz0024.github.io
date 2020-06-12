@@ -122,11 +122,11 @@ Step 5 For each shared SNP (291,145 in total), I selected the snp outliers by ca
 
 Initially, I selected the outliers with proportion < 0.01, which means that I only includes loci with non of resamples greater than observed Fst values. 
 
-- outliers with p-value < 0.01 (3190 snps)
+- outliers with p-value < 0.01 (3180 snps)
 
 <img src="https://hzz0024.github.io/images/outlier/p_value_less_than_0.01.jpeg" alt="img" width="800"/>
 
-- outlier with 0.01 < p-value <0.02 (3192 snps)
+- outlier with 0.01 < p-value <0.02 (3292 snps)
 
 <img src="https://hzz0024.github.io/images/outlier/p_value_large0.01less0.02.jpeg" alt="img" width="800"/>
 
