@@ -1,0 +1,34 @@
+---
+comments: true
+title: Redundancy Analysis
+date: '2020-06-16 12:00'
+tags:
+  - RDA
+  - environment
+  - linear
+categories:
+  - WGS data analysis
+---
+
+In this post I will try to learn how to perform Redundancy analysis (RDA) using snp data. 
+
+Some references are
+
+[Seascape genomics of eastern oyster (Crassostrea virginica ) along the Atlantic coast of Canada](https://onlinelibrary.wiley.com/doi/full/10.1111/eva.12741).
+
+[Buttigieg, P. L., & Ramette, A. (2014). A guide to statistical analysis in microbial ecology: A community‐focused, living review of multivariate data analyses. FEMS Microbiology Ecology, 90, 543–550](https://doi.org/10.1111/1574-6941.12437)
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+

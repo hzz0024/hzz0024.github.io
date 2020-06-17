@@ -45,7 +45,7 @@ done
 walltime used =  17648.00 sec
 ```
 
-| 	 MAF	   | No. SNPs |  
+|    MAF     | No. SNPs |  
 | -----------|----------|
 |  no filter | 34313641 | 
 |    0.05    | 872160   | 
@@ -71,10 +71,10 @@ angsd -b /scratch/hzz0024/fst_pt/sample/ref.list -anc /scratch/hzz0024/fst_pt/ge
 |    CH      | 520698396| 291145       |
 |    REF     | 545117898| 291145       |
 
-Step 3 Perform permutation tests by shuffling and randomly drawing individauls. A python script is developed for this purpose. I now consider the case in which permutations are randomly drawn with replacement. Each permutation is randomly generated independently of previous permutations or of the original data configuration. This is by far the most common way that permutation tests are used in practice, especially in the genomic literature (see Phipson and Smyth, 2010 - Permutation P-values Should Never Be Zero:
-Calculating Exact P-values When Permutations Are Randomly Drawn). 
+Step 3 Perform permutation tests by shuffling and randomly assigning challenge and reference individauls to two new groups. A python script is developed for this purpose. Each permutation is randomly generated independently of previous permutations or of the original data configuration. It also means that random permutations may include repetitions of the same permutations. This is the most common way that permutation tests are used in practice, especially in the genomic literature. 
 
-> This scenario requires careful treatment from a mathematical point of view, because of the possibility that the random permutations may include repetitions of the same permutations and indeed of the original data.
+Note that here the p-value is calibrated by adding a 1 to the numerator and denominator to account for misestimation of the p-value (see https://genomicsclass.github.io/book/pages/permutation_tests.html). For more details see [Permutation P-values should never be zero](https://pubmed.ncbi.nlm.nih.gov/21044043/).
+
 
 ```sh
 # write script for angsd run
@@ -118,7 +118,7 @@ Note: the mean weighted fst ranges from 0.00044 to 0.001398
 
 <img src="https://hzz0024.github.io/images/slim/qqplot.jpeg" alt="img" width="800"/>
 
-Step 5 For each shared SNP (291,145 in total), I selected the snp outliers by calculating the proportion of resamples that are larger than Fst_obs. That proportion would be the p-value for the null. Note that here the proportation is calibrated by adding a 1 to the numerator and denominator to account for misestimation of the p-value (see https://genomicsclass.github.io/book/pages/permutation_tests.html). For more details see [Permutation P-values should never be zero](https://pubmed.ncbi.nlm.nih.gov/21044043/).
+Step 5 For each shared SNP (291,145 in total), I selected the snp outliers by calculating the proportion of resamples that are larger than Fst_obs. That proportion would be the p-value for the null. 
 
 Initially, I selected the outliers with proportion < 0.01, which means that I only includes loci with non of resamples greater than observed Fst values. 
 
