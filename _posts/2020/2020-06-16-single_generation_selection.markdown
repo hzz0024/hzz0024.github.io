@@ -122,7 +122,7 @@ plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
 
 <img src="https://hzz0024.github.io/images/SGS/S4.jpeg" alt="img" width="800"/>
 
-In this part the remained question is 
+In this part the left question is 
 
 - where should I obtain the theta (M) values, from the angsd result or from the equation (5) in Tajima (1989)
 
