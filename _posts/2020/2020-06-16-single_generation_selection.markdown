@@ -111,7 +111,7 @@ res1 = draw_distribution(n, k, 0.0037)
 plot( seq(1:(n-1))/n, res1$points, xlab="p", ylab="probability")
 ```
 
-<img src="https://hzz0024.github.io/images/SGS/S3.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/SGS/S3.jepg" alt="img" width="800"/>
 
 
 - Figure S4
@@ -120,7 +120,7 @@ plot( seq(1:(n-1))/n, res1$points, xlab="p", ylab="probability")
 plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
 ```
 
-<img src="https://hzz0024.github.io/images/SGS/S4.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/SGS/S4.jepg" alt="img" width="800"/>
 
 In this part the remained question is 
 
@@ -130,13 +130,13 @@ In this part the remained question is
 
 I am still confused about this part, the key questions are:
 
-1. How can I compare the ΔP from N1 and N2 in the null model, this sentence is really confusing, 
+1) How can I compare the ΔP from N1 and N2 in the null model, this sentence is really confusing, 
 
 > The posterior probability distribution of 𝑍 in the common gene pool given X=𝑘 observed allele counts in N1 diploid individuals was finally used to obtain the null distribution of ΔP between the two samples of size N1 and N2. For that, we assumed that the two samples are drawn from the same common gene pool, and used the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2. Finally, the distribution of allele frequency differences between the two samples was computed and compared to the observed value of ΔP to estimate a P-value.
 
-2. How should I estimte the p-value, a simple t-test?
+2) How should I estimte the p-value, a simple t-test?
 
-3. What is the difference between SGS and Fisher's exact test (in terms of coding)
+3) What is the difference between SGS and Fisher's exact test (in terms of coding)
 
 
 ### Part III Incorprate the uncertainty of frequency (p) in the model
