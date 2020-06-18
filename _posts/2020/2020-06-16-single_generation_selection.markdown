@@ -18,17 +18,19 @@ categories:
 
 In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across Environments in Juvenile Sea Bream](https://www.mdpi.com/2073-4425/11/4/398/htm#app1-genes-11-00398), the author estimated the expected distribution of allele frequency changes (deltap) due to finite sample sizes in the absence of selection to generate null expectations.
 
-Conceptional steps:
+### Conceptional steps:
 
 1) a panmictic common gene pool of finite size (i.e. the real population)
 
 2) two samples of size N1 and N2 are drawn within the same generation
 
-3) compare the observed allele frequency difference (ΔP=|P1−P2|) with the distribution of ΔP expected from random sampling effects (i.e. due to finite sample size effects)
+3) compare the observed allele frequency difference - ΔP=abs(P1−P2) with the distribution of ΔP expected from random sampling effects (i.e. due to finite sample size effects)
 
 > Question: here the ΔP is estimated from absolute freqeuency changes. Shouldn't it to be the actual differences?
 
+### Steps
 
+1) 
 
 
 
