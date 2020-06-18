@@ -34,14 +34,14 @@ In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across E
 
 Based on Bayes’ theorem equation above, the posterior probability distribution of Z in the common gene pool given k observed allele counts in N1 diploid individuals is could be estimated from three parts,
 
-1. probability mass function of the binomial distribution, 
+1) probability mass function of the binomial distribution, 
 
 ```R
 # I used upper_left to represent this part of the Bayes’ equation
 upper_left = factorial(n)/(factorial(n - k)*factorial(k)) * p^k * (1-p)^(n-k)
 ```
 
-2. prior probability distribution of Z, given a genetic diversity parameter 𝜃=4𝑁e𝜇
+2) prior probability distribution of Z, given a genetic diversity parameter 𝜃=4𝑁e𝜇
 
 > this is derived from equation (50) in Tajima (1989), Gn(i) = M (1/i + 1/(n-1)). Here i should be the seq(1:(n-1)).
 
@@ -56,13 +56,13 @@ upper_left = factorial(n)/(factorial(n - k)*factorial(k)) * p^k * (1-p)^(n-k)
   }
 ```
 
-3. The probability Pr(X=k) of observing k allele counts was given a uniform value of 1(2N−1)
+3) The probability Pr(X=k) of observing k allele counts was given a uniform value of 1(2N−1)
 
 ```R
 1/(n-1)
 ```
 
-4. because the in Figure S3 and S4 the y-axis is the probability values, each results with different p should be scaled probability. This could be done by 
+4) because the in Figure S3 and S4 the y-axis is the probability values, each results with different p should be scaled probability. This could be done by 
 
 ```R
 tajima_points = tajima_points/sum(tajima_points)
@@ -103,7 +103,7 @@ draw_distribution <- function(n,k,M){
 res1 = draw_distribution(n, k, 0.0037)
 ```
 
-5. Draw the figures
+5) Draw the figures
 
 - Figure S3
 
@@ -111,7 +111,7 @@ res1 = draw_distribution(n, k, 0.0037)
 plot( seq(1:(n-1))/n, res1$points, xlab="p", ylab="probability")
 ```
 
-<img src="https://hzz0024.github.io/images/SGS/S3.jepg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/SGS/S3.jpeg" alt="img" width="800"/>
 
 
 - Figure S4
@@ -120,7 +120,7 @@ plot( seq(1:(n-1))/n, res1$points, xlab="p", ylab="probability")
 plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
 ```
 
-<img src="https://hzz0024.github.io/images/SGS/S4.jepg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/SGS/S4.jpeg" alt="img" width="800"/>
 
 In this part the remained question is 
 
