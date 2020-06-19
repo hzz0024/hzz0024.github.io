@@ -20,7 +20,6 @@ library(ggpubr)
 
 #This function returns FST for a haploid sample with 2 alleles. Its not designed for pool-seq data but just used here as an approximation.
 
-
 WC_FST_FiniteSample_Haploids_2AllelesB_MCW<-function(AllCounts){
   #Input a matrix of the counts of each allele (columns) in each population (rows)
   #returns vector instead of list of Fst values, according to Weir
