@@ -137,7 +137,7 @@ I am still confused about this part, the key questions are:
 
 > The posterior probability distribution of 𝑍 in the common gene pool given X=𝑘 observed allele counts in N1 diploid individuals was finally used to obtain the null distribution of ΔP between the two samples of size N1 and N2. For that, we assumed that the two samples are drawn from the same common gene pool, and used the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2. Finally, the distribution of allele frequency differences between the two samples was computed and compared to the observed value of ΔP to estimate a P-value.
 
-Anyway, I tried to used "the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2". This is done by using the *sample* function in the R, which allows me to randomly draw p based on probability distribution conditioned the first N1. The average p should be ~ 0.25 in for the current test SNP. Then I simplyly calculate the differences between two p values - i.e. deltap.
+Anyway, I tried to used "the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2". This is done by using the *sample* function in the R, which allows me to randomly draw p based on probability distribution conditioned the first N1. The average p should be ~ 0.25 in for the current test SNP. Then I simply calculate the differences between two p values - i.e. deltap.
 
 ```R
 n = 100
