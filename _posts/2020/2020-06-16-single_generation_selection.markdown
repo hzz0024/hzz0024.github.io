@@ -165,11 +165,26 @@ hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 it
 
 ### Part III Incorprate the uncertainty of frequency (p) in the model
 
-No investigation yet. Perhaps some hints from paper below
+Need more investigation. Perhaps some hints from paper below
 
 [Experimental evidence for ecological selection on genome variation in the wild](https://onlinelibrary.wiley.com/doi/full/10.1111/ele.12238)
 
 Also I found a new program ABC that is useful to measure selection on polygenic traits based on population-genomic time-series data and a genotype-phenotype map [https://gompertlab.com/software/](https://gompertlab.com/software/). The manual is [here](https://github.com/zgompert/fsabc/blob/master/fsabc_manual.pdf). However, at minimum fsabc requires the user to provide files with allele frequency data (potential snp outliers), environmental data, effective population size estimates, and a genotype-phenotype map, which looks like a downstream analysis after outlier detection.
 
-   
+From Angsd,
+
+Allele Frequency estimation could be produced by multiple ways (see [here](http://www.popgen.dk/angsd/index.php/Allele_Frequencies),
+
+-doMaf [int]
+
+1: Known major, and Known minor. Here both the major and minor allele is assumed to be known (inferred or given by user). The allele frequency is the obtained using based on the genotype likelihoods. The allele frequency estimator from genotype likelihoods are from this publication but using the EM algorithm and is briefly described here.
+
+2: Known major, Unknown minor. Here the major allele is assumed to be known (inferred or given by user) however the minor allele is not determined. Instead we sum over the 3 possible minor alleles weighted by their probabilities. The allele frequency estimator from genotype likelihoods are from this publication but using the EM algorithm and is briefly described here. .
+
+4: frequency based on genotype posterior probabilities. If genotype probabilities are used as input to ANGSD the allele frequency is estimated directly on these by summing over the probabitlies.
+
+8: frequency based on base counts. This method does not rely on genotype likelihood or probabilities but instead infers the allele frequency directly on the base counts. The base counts method is from this publication.
+
+Multiple estimators can be used simultaniusly be summing up the above numbers. Thus -doMaf 7 (1+2+4) will use the first three estimators. If the allele frequencies are estimated from the genotype likelihoods then you need to infer the major and minor allele (-doMajorMinor)
+
 
