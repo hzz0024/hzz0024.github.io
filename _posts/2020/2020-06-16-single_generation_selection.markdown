@@ -160,7 +160,7 @@ hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 it
 
 2) How should I estimte the p-value, based on 5% significance in the distribution? Where the observation value comes from?
 
-3) What is the difference between SGS and Fisher's exact test (in terms of coding)
+3) What is the difference between SGS and Fisher's exact test in the power analyses (in terms of coding)?
 
 
 ### Part III Incorprate the uncertainty of frequency (p) in the model
