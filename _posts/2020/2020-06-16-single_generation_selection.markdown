@@ -122,6 +122,10 @@ plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
 
 <img src="https://hzz0024.github.io/images/SGS/S4.jpeg" alt="img" width="800"/>
 
+The results above are exactly the same as Figure S3 and S4 in the supplementary doc of sea bream paper
+
+<img src="https://hzz0024.github.io/images/SGS/SGS_2.jpg" alt="img" width="800"/>
+
 In this part the left question is 
 
 - where should I obtain the theta (M) values, from the angsd result or from the equation (5) in Tajima (1989)
