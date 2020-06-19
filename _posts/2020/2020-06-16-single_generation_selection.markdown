@@ -145,7 +145,7 @@ No investigation yet. Perhaps some hints from paper below
 
 [Experimental evidence for ecological selection on genome variation in the wild](https://onlinelibrary.wiley.com/doi/full/10.1111/ele.12238)
 
-
+Also I found a new program ABC that is useful to measure selection on polygenic traits based on population-genomic time-series data and a genotype-phenotype map. https://gompertlab.com/software/. The manual is here https://github.com/zgompert/fsabc/blob/master/fsabc_manual.pdf
 
    
 
