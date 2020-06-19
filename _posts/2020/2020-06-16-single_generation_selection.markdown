@@ -137,7 +137,28 @@ I am still confused about this part, the key questions are:
 
 > The posterior probability distribution of 𝑍 in the common gene pool given X=𝑘 observed allele counts in N1 diploid individuals was finally used to obtain the null distribution of ΔP between the two samples of size N1 and N2. For that, we assumed that the two samples are drawn from the same common gene pool, and used the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2. Finally, the distribution of allele frequency differences between the two samples was computed and compared to the observed value of ΔP to estimate a P-value.
 
-2) How should I estimte the p-value, based on 5% significance in the distribution?
+Anyway, I tried to used "the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2". This is done by using <sample> function in the R, which allows me to randomly draw p based on probability distribution conditioned the first N1. The average p should be ~ 0.25 in for the current test SNP. Then I simplyly calculate the differences between two p values - i.e. deltap.
+
+```R
+n = 100
+N1 = draw_distribution(n, 25, 0.0037)
+
+num_sample = 10000
+sample_p = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
+
+delta_ps = c()
+for(j in seq(1,num_sample)){
+  p = sample_p[j]
+  delta_p = (0.25-p)
+  delta_ps = c(delta_ps, delta_p)
+}
+
+hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 iterations ")
+```
+
+<img src="https://hzz0024.github.io/images/SGS/deltap_10000.jpeg" alt="img" width="800"/>
+
+2) How should I estimte the p-value, based on 5% significance in the distribution? Where the observation value comes from?
 
 3) What is the difference between SGS and Fisher's exact test (in terms of coding)
 
