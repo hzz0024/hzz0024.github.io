@@ -105,7 +105,7 @@ res1 = draw_distribution(n, k, 0.0037)
 
 5) Draw the figures
 
-- Figure S3
+- Figure S3 The prior probability distribution of 𝑍 with N=50 and theta=0.0037
 
 ```R
 plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
@@ -113,14 +113,13 @@ plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
 
 <img src="https://hzz0024.github.io/images/SGS/S4.jpeg" alt="img" width="800"/>
 
-- Figure S4
+- Figure S4 The posterior probability distribution of 𝑍 with N=50 and X=25
 
 ```R
 plot( seq(1:(n-1))/n, res1$points, xlab="p", ylab="probability")
 ```
 
 <img src="https://hzz0024.github.io/images/SGS/S3.jpeg" alt="img" width="800"/>
-
 
 The results above are exactly the same as Figure S3 and S4 in the supplementary doc of sea bream paper
 
