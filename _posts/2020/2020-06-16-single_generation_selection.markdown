@@ -108,19 +108,19 @@ res1 = draw_distribution(n, k, 0.0037)
 - Figure S3
 
 ```R
+plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
+```
+
+<img src="https://hzz0024.github.io/images/SGS/S4.jpeg" alt="img" width="800"/>
+
+- Figure S4
+
+```R
 plot( seq(1:(n-1))/n, res1$points, xlab="p", ylab="probability")
 ```
 
 <img src="https://hzz0024.github.io/images/SGS/S3.jpeg" alt="img" width="800"/>
 
-
-- Figure S4
-
-```R
-plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
-```
-
-<img src="https://hzz0024.github.io/images/SGS/S4.jpeg" alt="img" width="800"/>
 
 The results above are exactly the same as Figure S3 and S4 in the supplementary doc of sea bream paper
 
