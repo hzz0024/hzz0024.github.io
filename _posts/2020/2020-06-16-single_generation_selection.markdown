@@ -165,11 +165,9 @@ hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 it
 
 ### Part III Incorprate the uncertainty of frequency (p) in the model
 
-Need more investigation. Perhaps some hints from paper below
+Need more investigation. Perhaps some hints from insect paper below
 
 [Experimental evidence for ecological selection on genome variation in the wild](https://onlinelibrary.wiley.com/doi/full/10.1111/ele.12238)
-
-Also I found a new program ABC that is useful to measure selection on polygenic traits based on population-genomic time-series data and a genotype-phenotype map [https://gompertlab.com/software/](https://gompertlab.com/software/). The manual is [here](https://github.com/zgompert/fsabc/blob/master/fsabc_manual.pdf). However, at minimum fsabc requires the user to provide files with allele frequency data (potential snp outliers), environmental data, effective population size estimates, and a genotype-phenotype map, which looks like a downstream analysis after outlier detection.
 
 From Angsd,
 
@@ -187,4 +185,7 @@ Allele Frequency estimation could be produced by multiple ways (see [here](http:
 
 Multiple estimators can be used simultaniusly be summing up the above numbers. Thus -doMaf 7 (1+2+4) will use the first three estimators. If the allele frequencies are estimated from the genotype likelihoods then you need to infer the major and minor allele (-doMajorMinor)
 
+Can we just use the frequency data (derived from -doMaf 4 here) from angsd for null model building?
+
+Also I found a new program ABC that is useful to measure selection on polygenic traits based on population-genomic time-series data and a genotype-phenotype map [https://gompertlab.com/software/](https://gompertlab.com/software/). The manual is [here](https://github.com/zgompert/fsabc/blob/master/fsabc_manual.pdf). However, at minimum fsabc requires the user to provide files with allele frequency data (potential snp outliers), environmental data, effective population size estimates, and a genotype-phenotype map, which looks like a downstream analysis after outlier detection.
 
