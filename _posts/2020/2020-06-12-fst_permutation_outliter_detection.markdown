@@ -1,7 +1,7 @@
 ---
 comments: true
 title: DelBay19 fst permutation and outlier detection
-date: '2020-06-12 12:00'
+date: '2020-06-22 12:00'
 tags:
   - DelBay19
   - Fst
@@ -12,23 +12,24 @@ categories:
   - WGS data analysis
 ---
 
-In this post I tried to perform the significance test for Fst outliers and examine the allele shift among these outliters. The first step is to shuffle the samples from two populations and randomly re-assign them to either of the two new population. Next I would generate 100 neutral dataset of Fst (or permutation test), and using that dataset for p-value calculation (see below). 
+In this post I will perform the significance test for Fst outliers and examine the deltap among these outliters. The first step is to "label" the samples from two populations and shuffle them to recreate two new population. Next I would generate 1,000 neutral dataset of Fst (i.e. permutation test), and use that dataset for p-value calculation (see below). 
 
 1) For each SNP k: have the observed Fst_k
 
-2) Repeated scrambled the subpopulation membership to get Fst_k_hat, say M = 100 times. For each Fst_k, we have 100 resampled Fst_k_hat values - this will have a mean and SE. In this case, we could run a one sample t-test (could be a one-side test or two-sided)    
+2) p-value = proportion of resamples that are larger than Fst_k - WINNER! i.e. the proportion of resamples where the Ha is true. Assume that p-value =0.01 -> that means that only 1% of resamples are greater than Fst_k
+
+3) Apply FDR to p-values
+
+Note: the alternative way to calculate the p-value is based on simple t-test. That is, for each neutral Fst_k, we have 1,000 resampled Fst values - this will have a mean and SE. In this case, we could run a one sample t-test (could be a one-side test or two-sided)    
    Ho: mean resampled Fst >= Fst_k    
    Ha: mean resampled Fst < Fst_k 
-
-3) Or p-value = proportion of resamples that are larger than Fst_k - WINNER! i.e. the proportion of resamples where the Ha is true. Assume that p-value =0.01 -> that means that only 1% of resamples are greater than Fst_k
-
-4) Apply FDR to p-values
 
 ### Data generation
 
 -minQ 20
 -minInd 70% 
 -minMapQ 25
+-maf 0.20
 
 Step 1 Using all samples of two contrast groups (ch and ref here) for maf file generation. The maf file will be used for minor allele frequency filter. Here I used three filters, 0.05, 0.10, and 0.20 to generate the SNP list for angsd running.
 
