@@ -38,10 +38,17 @@ Description of the experiment. Blue circles represent Ceanothus and orange circl
 
 Field experiment details
 
-1) individuals initially colleced from Far Hill Adenostoma (FHA, N=500), with both striped and green phenotypes   
-2) placed in 500-ml containers with 50/container -- 10 populations   
-3) randomly assign individuals to 10 bushes (5 Adenostoma and 5 Ceanothus), each individual has a portion of leg removed 
-4) recapture after selection (mostly due to bird predation)
+1) individuals initially colleced from Far Hill Adenostoma (FHA, N=500), with both striped and green phenotypes       
+2) placed in 500-ml containers with 50/container -- 10 populations      
+3) randomly assign individuals to 10 bushes (5 Adenostoma and 5 Ceanothus), each individual has a portion of leg removed      
+4) recapture after 8-day selection (mostly due to bird predation)     
+
+GBS 
+
+1) DNA from 500 released and 140 recaptured individuals were used for GBS.      
+2) Burrow's composite measure of Hardy-Weinberg was calculated        
+3) Linkage disequilibrium (LD) were estimated for each pair of SNPs          
+4) only SNPs with maf > 5% were used for deltap calculation        
 
 
 
