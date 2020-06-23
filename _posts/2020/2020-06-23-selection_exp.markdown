@@ -34,9 +34,11 @@ In the single-generation selection (SGS) test, the authors considered a panmicti
 
 <img src="https://hzz0024.github.io/images/samples/stick_insect_sample.jpg" alt="img" width="800"/>
 
-Field experiment 
+Description of the experiment. Blue circles represent Ceanothus and orange circles Adenostoma. A) A total of 500 individuals were transplanted into five replicate blocks. Numbers within circles denote number of recaptured individuals (out of 50 released). B) Map of the experiment. 
 
-1) Far Hill Adenostoma (FHA, N=500), with both striped and green phenotypes   
+Field experiment details
+
+1) individuals initially colleced from Far Hill Adenostoma (FHA, N=500), with both striped and green phenotypes   
 2) placed in 500-ml containers with 50/container -- 10 populations   
 3) randomly assign individuals to 10 bushes (5 Adenostoma and 5 Ceanothus), each individual has a portion of leg removed 
 4) recapture after selection (mostly due to bird predation)
