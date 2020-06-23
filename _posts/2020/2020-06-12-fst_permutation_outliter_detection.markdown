@@ -72,19 +72,18 @@ angsd -b /scratch/hzz0024/fst_pt/sample/ref.list -anc /scratch/hzz0024/fst_pt/ge
 |    CH      | 520698396| 291145       |
 |    REF     | 545117898| 291145       |
 
-Step 3 Perform permutation tests by shuffling and randomly assigning challenge and reference individauls to two new groups. A python script is developed for this purpose. Each permutation is randomly generated independently of previous permutations or of the original data configuration. It also means that random permutations may include repetitions of the same permutations. This is the most common way that permutation tests are used in practice, especially in the genomic literature. 
+Step 3 Perform permutation tests. A python script is developed for this purpose. Each permutation is randomly generated independently of previous permutations or of the original data configuration. It also means that random permutations may include repetitions of the same permutations. This is the most common way that permutation tests are used in practice, especially in the genomic literature. 
 
 Note that here the p-value is calibrated by adding a 1 to the numerator and denominator to account for misestimation of the p-value (see https://genomicsclass.github.io/book/pages/permutation_tests.html). For more details see [Permutation P-values should never be zero](https://pubmed.ncbi.nlm.nih.gov/21044043/).
 
-
 ```sh
 # write script for angsd run
-for i in {0..99}; do
+for i in {0..999}; do
     echo -e 'module load angsd/0.931\nangsd -b /scratch/hzz0024/fst_pt/sample/ch-ref_'$i'a.list -anc /scratch/hzz0024/fst_pt/genome/cv30.fa -out /scratch/hzz0024/fst_pt/output/ch-ref_'$i'a_doMAF_filter -dosaf 1 -doMaf 1 -doGlf 2 -GL 1 -doPost 1 -doMajorMinor 1 -doDepth 1 -doCounts 1 -P 20 -minQ 20 -minMapQ 25 -setMinDepth 25 -setMaxDepth 100 -minInd 35 -sites ch_ref_98_maf20.snplist >& /scratch/hzz0024/fst_pt/output/ch-ref_'$i'a_doMAF.log' >> 'ch-ref_'$i'a.sh'
     echo -e 'module load angsd/0.931\nangsd -b /scratch/hzz0024/fst_pt/sample/ch-ref_'$i'b.list -anc /scratch/hzz0024/fst_pt/genome/cv30.fa -out /scratch/hzz0024/fst_pt/output/ch-ref_'$i'b_doMAF_filter -dosaf 1 -doMaf 1 -doGlf 2 -GL 1 -doPost 1 -doMajorMinor 1 -doDepth 1 -doCounts 1 -P 20 -minQ 20 -minMapQ 25 -setMinDepth 25 -setMaxDepth 100 -minInd 35 -sites ch_ref_98_maf20.snplist >& /scratch/hzz0024/fst_pt/output/ch-ref_'$i'b_doMAF.log' >> 'ch-ref_'$i'b.sh'
 done
 # write script for pop txt and get fst
-for i in {0..99}; do
+for i in {0..999}; do
     echo -e 'Pop\nch-ref_'$i'a\nch-ref_'$i'b' >> 'pop_ch_'$i'.txt'
     echo -e './get_fst_ch.sh /scratch/hzz0024/fst_pt/output_random pop_ch_'$i'.txt 1 _doMAF_filter >& get_fst_ch_'$i'_06042020.log' >> 'get_fst_ch_'$i'_run.sh'
 done
@@ -92,12 +91,11 @@ done
 files=$(ls *.sh)
 for file in $files; do
     file=${file/.sh/}
-    echo -e 'EMAIL=`whoami`"@auburn.edu";\nCWD=`pwd`;\nqsub -q general -N '$file'_06032020 -j oe -e '$file'.error -l nodes=1:ppn=20,mem=120GB,walltime=240:00:00 -m be -M $EMAIL -d $CWD -V '$file'.sh\nexit 0;' >> 'run_'$file'_06042020.sh'
+    echo -e 'EMAIL=`whoami`"@XXXXX.edu";\nCWD=`pwd`;\nqsub -q general -N '$file'_06032020 -j oe -e '$file'.error -l nodes=1:ppn=20,mem=120GB,walltime=240:00:00 -m be -M $EMAIL -d $CWD -V '$file'.sh\nexit 0;' >> 'run_'$file'_06042020.sh'
 done
 ```
 
  - for each run, the saf step will cost > 3 hours, while the realSFS step costs ~ 15 mins.
-
 
 Step 4 Compare the Fst outputs between observed and neutral datasets. Perform statistic analyses on shared SNPs.
 
@@ -105,7 +103,7 @@ Step 4 Compare the Fst outputs between observed and neutral datasets. Perform st
 
 |            | Observed | Neutral (averaged from 100 runs)     |  
 | -----------|----------|--------------|
-|Average Fst | 0.001167 | 0.00076406   |
+|Average Fst | 0.001167 | 0.000731     |
 
 Note: the mean weighted fst ranges from 0.00044 to 0.001398
 
