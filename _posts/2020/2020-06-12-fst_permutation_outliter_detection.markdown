@@ -74,7 +74,7 @@ angsd -b /scratch/hzz0024/fst_pt/sample/ref.list -anc /scratch/hzz0024/fst_pt/ge
 
 Step 3 Perform permutation tests. A python script is developed for this purpose. Each permutation is randomly generated independently of previous permutations or of the original data configuration. It also means that random permutations may include repetitions of the same permutations. This is the most common way that permutation tests are used in practice, especially in the genomic literature. 
 
-Note that here the p-value is calibrated by adding a 1 to the numerator and denominator to account for misestimation of the p-value (see https://genomicsclass.github.io/book/pages/permutation_tests.html). For more details see [Permutation P-values should never be zero](https://pubmed.ncbi.nlm.nih.gov/21044043/).
+Sometimes the p-value is calibrated by adding a 1 to the numerator and denominator to account for misestimation of the p-value (see https://genomicsclass.github.io/book/pages/permutation_tests.html). For more details see [Permutation P-values should never be zero](https://pubmed.ncbi.nlm.nih.gov/21044043/). 
 
 ```sh
 # write script for angsd run
@@ -97,31 +97,54 @@ done
 
  - for each run, the saf step will cost > 3 hours, while the realSFS step costs ~ 15 mins.
 
-Step 4 Compare the Fst outputs between observed and neutral datasets. Perform statistic analyses on shared SNPs.
+Step 4 Compare the Fst values between observed and neutral datasets. Perform statistic analysis for each SNP using the Fst_cnt.py.
 
 - Average weighted Fst comparsion 
 
-|            | Observed | Neutral (averaged from 100 runs)     |  
+|            | Observed | Neutral (averaged from 1,000 runs)     |  
 | -----------|----------|--------------|
-|Average Fst | 0.001167 | 0.000731     |
+|Average Fst | 0.001167 | 0.000778     |
 
-Note: the mean weighted fst ranges from 0.00044 to 0.001398
+Note: the mean weighted fst ranges from 0.000328 to 0.001694
 
-- Fst distribution 
+Step 5 For each shared SNP (291,145 in total), I selected the snp outliers by calculating the proportion of resamples that are larger than Fst_obs. That proportion would be the p-value.
 
-<img src="https://hzz0024.github.io/images/slim/fst_density_all.jpeg" alt="img" width="800"/>
+|     P-value    |  No. of outliers  |  
+| ---------------|-------------------|
+|      0.0100    |      3254         |
+|      0.0075    |      2626         |
+|      0.0050    |      1673         |
+|      0.0025    |      1054         |
+|      0.0010    |      386          |
 
-<img src="https://hzz0024.github.io/images/slim/fst_density.jpeg" alt="img" width="800"/>
+Step 6 Examine the deltap change. 
 
-- qqplot
+1) extract the snp outliers identifed from permutation test. This is done by creating a file named "outlier_list.txt", followed by *extract.py* script. The mafs files for both populations (e.g. challenge and reference) are also needed for script running.
 
-<img src="https://hzz0024.github.io/images/slim/qqplot.jpeg" alt="img" width="800"/>
+```sh
+python extract.py
 
-Step 5 For each shared SNP (291,145 in total), I selected the snp outliers by calculating the proportion of resamples that are larger than Fst_obs. That proportion would be the p-value for the null. 
+# add header to the outputs
+chromo  position  major minor anc knownEM nInd
+```
 
-Initially, I selected the outliers with proportion < 0.01, which means that I only includes loci with non of resamples greater than observed Fst values. 
+2) calculate the deltap using R script
 
-- outliers with p-value < 0.01 (3180 snps)
+Two versions of deltap were available, one for absolute value, another for actual deltap. 
+
+example usage: 
+
+```sh
+Rscript get_deltaP.R -d /workdir/xxx/ -p 1.mafs.gz -q 2.mafs.gz -t 291145 -o deltap.output
+
+#for obs data
+Rscript deltaP_abs.R -d /Volumes/cornell/DelBay19_Hopper/permutation/3_deltap -p ch_ref_98_ref_doMAF_filter.mafs.extracted -q ch_ref_98_ch_doMAF_filter.mafs.extracted -t 291145 -o obs_deltap.output
+
+#for neutral data
+
+```
+
+- outliers with p-value < 0.001 (386 snps)
 
 <img src="https://hzz0024.github.io/images/outlier/p_value_less_than_0.01.jpeg" alt="img" width="800"/>
 
@@ -129,15 +152,7 @@ Initially, I selected the outliers with proportion < 0.01, which means that I on
 
 <img src="https://hzz0024.github.io/images/outlier/p_value_large0.01less0.02.jpeg" alt="img" width="800"/>
 
-Some literatures showed alternative ways to achieve this goal,
 
-[Experimental evidence for ecological selection on genome variation in the wild](https://onlinelibrary.wiley.com/doi/full/10.1111/ele.12238)
-
-<img src="https://hzz0024.github.io/images/outlier/index.jpg" alt="img" width="800"/>
-
-> Figure S2. Schematic of the null models of the absence of selection (null models 1 and 2). Each box or circle contains the genetic data for a hypothetical locus. Black numbers or letters denote individuals that survived and gray characters denote individuals that lived. A) In null model 1 the squares denote the true survivors and circles denote simulated sets of survivors. Density plots show the simulated distribution of allele frequency change for each locus and the vertical blue lines denote the observed allele frequency change. We reject the null hypothesis in model 1 for loci where the observed change (blue line) is an extreme tail of this null distribution. B) In null model 2 the real and replicate simulated data sets are show in boxes and numbers rather than genotypes are used to highlight the fact that the survival data is applied to all loci. Each of these data sets (the true data set and 100 replicate simulated data sets) are subjected to the null model 1 analysis (i.e., pane A) and the number of exceptional allele frequency change loci designated from the true survival data (vertical blue line) and replicate simulated data sets (gray histogram) are tabulated to determine whether the null hypothesis of no selection across the genome (null model 2) can be rejected.
-
-[Within-Generation Polygenic Selection Shapes Fitness-Related Traits across Environments in Juvenile Sea Bream](https://www.mdpi.com/2073-4425/11/4/398/htm#app1-genes-11-00398)
 
 
 
