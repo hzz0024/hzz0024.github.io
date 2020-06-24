@@ -178,7 +178,7 @@ Note that Fst outliers with p-value < 0.001 are 386, while deltap (based on abso
 
 6) deltap plotting
 
-- absolute deltap plotting for all 386 SNPs, here the red dots means observation deltap (absolute value for each SNP), the black dos means medium deltap (absolute) value calculated from the 1000 permutation test. The yellow part covers the 25% to 99% quantile range for the neutral deltap (absolute).
+- absolute deltap plotting for all 386 SNPs, here the red dots means observation deltap (absolute value for each SNP), the black dots means medium deltap (absolute) value calculated from the 1000 permutation test. The yellow part covers the 25% to 99% quantile range for the neutral deltap (absolute).
 
 <img src="https://hzz0024.github.io/images/outlier/386_deltap.jpg" alt="img" width="800"/>
 
