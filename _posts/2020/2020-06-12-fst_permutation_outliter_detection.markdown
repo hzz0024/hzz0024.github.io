@@ -174,15 +174,15 @@ python deltap_cnt.py
 # need to change the No. of SNPs at line 21
 ```
 
-Note that Fst outliers with p-value < 0.001 are 386, while deltap outliers with p-value < 0.001 are 259 out of 386 SNPs. I will use another post to show the deltap outlier identification from permutation test, and compare that results to single-generation selection tests (use by sea bream paper)
+Note that Fst outliers with p-value < 0.001 are 386, while deltap (based on absolute values) outliers with p-value < 0.001 are 259 out of 386 SNPs. I will use another post to show the deltap outlier identification from permutation test, and compare that results to single-generation selection tests (used by sea bream paper)
 
-6) extract one snp as an example for deltap plotting
+6) deltap plotting
 
-<img src="https://hzz0024.github.io/images/outlier/p_value_less_than_0.01.jpeg" alt="img" width="800"/>
+- absolute deltap plotting for all 386 SNPs, here the red dots means observation deltap (absolute value for each SNP), the black dos means medium deltap (absolute) value calculated from the 1000 permutation test. The yellow part covers the 25% to 99% quantile range for the neutral deltap (absolute).
 
-- outlier with 0.01 < p-value <0.02 (3292 snps)
+<img src="https://hzz0024.github.io/images/outlier/386_deltap.jpg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/outlier/p_value_large0.01less0.02.jpeg" alt="img" width="800"/>
+
 
 
 
