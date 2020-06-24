@@ -11,7 +11,7 @@ ggplot(data=DT, aes(DT$V3)) +
 p_fdr <- round(p.adjust((DT$V3), "fdr"), 3)
 
 #create a data containing the loci with p-value < 0.01
-new = data.frame(DT$V1[DT$V3<0.01], DT$V2[DT$V3<0.01])
+new = data.frame(DT$V1[DT$V3<0.02 & DT$V3>0.01], DT$V2[DT$V3<0.02 & DT$V3>0.01])#, DT$V1[DT$V3>0.01], DT$V2[DT$V3>0.01])
 names(new) <- c('chr','pos')
 write.table(new, file = "my_data.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
 #################################

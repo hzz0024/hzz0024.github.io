@@ -140,11 +140,43 @@ Rscript get_deltaP.R -d /workdir/xxx/ -p 1.mafs.gz -q 2.mafs.gz -t 291145 -o del
 #for obs data
 Rscript deltaP_abs.R -d /Volumes/cornell/DelBay19_Hopper/permutation/3_deltap -p ch_ref_98_ref_doMAF_filter.mafs.extracted -q ch_ref_98_ch_doMAF_filter.mafs.extracted -t 291145 -o obs_deltap.output
 
-#for neutral data
+#for neutral data 
 
 ```
 
 - outliers with p-value < 0.001 (386 snps)
+
+1) create the outlier list
+
+2) extract the outlier maf information
+
+```py
+python extract_neu.py
+```
+
+3) add the header to the extracted file
+
+```sh
+./addname.sh
+```
+
+4) calculate deltap (absolute value) for each neutral data using deltaP_abs.R
+
+```sh
+./repeat_run.sh
+```
+
+5) compare the observed deltap and neutral deltap (from 1000 permutations) for 386 SNPs
+
+```py
+python deltap_cnt.py
+
+# need to change the No. of SNPs at line 21
+```
+
+Note that Fst outliers with p-value < 0.001 are 386, while deltap outliers with p-value < 0.001 are 259 out of 386 SNPs. I will use another post to show the deltap outlier identification from permutation test, and compare that results to single-generation selection tests (use by sea bream paper)
+
+6) extract one snp as an example for deltap plotting
 
 <img src="https://hzz0024.github.io/images/outlier/p_value_less_than_0.01.jpeg" alt="img" width="800"/>
 

@@ -50,6 +50,13 @@ GBS
 3) Linkage disequilibrium (LD) were estimated for each pair of SNPs          
 4) only SNPs with maf > 5% were used for deltap calculation        
 
+- DelBay19 study
+
+<img src="https://hzz0024.github.io/images/samples/DelBay19.jpg" alt="img" width="800"/>
+
+In general, the DelBay19 experimental design is similar to the stick insect paper, which follows capture-challenge(viability selection)-recapture. However, what we sequenced are not the entire gene pool but only the individuals after selection (recatpure part) and a ref population sourced from wild. This is more similar to the sea bream paper. That is, the selection and reference populations are independent from each other.
+
+
 
 
    

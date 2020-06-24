@@ -26,11 +26,33 @@ draw_distribution <- function(n,k,M){
 }
 
 
-res1 = draw_distribution(n, k, 0.0037)
+res1 = draw_distribution(100, 25, 0.0037)
+res2 = draw_distribution(40, 10, 0.0037)
+plot( seq(1:(n-1))/n, abs(res1$points-res2$points),  xlab="p", ylab="probability")
 
-plot( seq(1:(n-1))/n, res1$points-res2$points,  xlab="p", ylab="probability")
+X = seq(1:(n-1))/n
+Y = res1$points
+plot( X, Y, xlab="p", ylab="probability")
+X
+
+n=100
 plot( seq(1:(n-1))/n, res1$points, xlab="p", ylab="probability")
+n = 40
 plot( seq(1:(n-1))/n, res2$points, xlab="p", ylab="probability")
 
-plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
+
+n = 100
+N1 = draw_distribution(n, 25, 0.0037)
+
+num_sample = 10000
+sample_p = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
+
+delta_ps = c()
+for(j in seq(1,num_sample)){
+  p = sample_p[j]
+  delta_p = (0.25-p)
+  delta_ps = c(delta_ps, delta_p)
+}
+
+hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 iterations ")
 
