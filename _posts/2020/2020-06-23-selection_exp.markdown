@@ -1,6 +1,6 @@
 ---
 comments: true
-title: sampling design comparsion
+title: experimental design and sampling strategies comparsion
 date: '2020-06-23 12:00'
 tags:
   - design
