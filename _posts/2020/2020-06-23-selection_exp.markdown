@@ -54,7 +54,13 @@ GBS
 
 <img src="https://hzz0024.github.io/images/samples/DelBay19.jpg" alt="img" width="800"/>
 
-In general, the DelBay19 experimental design is similar to the stick insect paper, which follows capture-challenge(viability selection)-recapture. However, what we sequenced are not the entire gene pool but only the individuals after selection (recatpure part) and a ref population sourced from wild. This is more similar to the sea bream paper. That is, the selection and reference populations are independent from each other.
+In general, the DelBay19 experimental design is similar to the stick insect paper, which follows capture-challenge(viability selection)-recapture. However, what we sequenced are not the entire gene pool but only the individuals after selection (recatpure part) and a ref population sourced from wild. This is more similar to the sea bream paper. That is, the selection and reference populations are independent from each other but from a big gene pool. 
+
+Below is another stickleback paper that used similar sampling stratege.
+
+<img src="https://hzz0024.github.io/images/samples/stickback_sample.jpg" alt="img" width="800"/>
+
+
 
 
 
