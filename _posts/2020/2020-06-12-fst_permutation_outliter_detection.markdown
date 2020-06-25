@@ -182,12 +182,11 @@ Note that Fst outliers with p-value < 0.001 are 386, while deltap (based on abso
 
 <img src="https://hzz0024.github.io/images/outlier/386_deltap.jpg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/outlier/386_mac.jpeg" alt="img" width="800"/>
-
 <img src="https://hzz0024.github.io/images/outlier/obs_deltap_p.jpeg" alt="img" width="800"/>
 
 <img src="https://hzz0024.github.io/images/outlier/neu_deltap_p.jpeg" alt="img" width="800"/>
 
+<img src="https://hzz0024.github.io/images/outlier/386_mac.jpeg" alt="img" width="800"/>
 
 
 
