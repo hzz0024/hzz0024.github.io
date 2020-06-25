@@ -1,27 +1,30 @@
-Delta p plot
-
+##################### Delta p plot #####################
+library(ggplot2)
+# load the neutral datasets
 files <- list.files('.', pattern = "*.txt")
+# load the observation dataset
 observation_file = 'obs_deltap.output'
-
+# obtain the deltap from obs dataset
 observations = read.delim(observation_file, header = TRUE, sep = "\t", dec = ".")
 observations = observations$deltaP
-
+# create a matrix for neu deltap 
 deltaP_matix = c()
 for(file in files){
   dat <- read.delim(file, header = TRUE, sep = "\t", dec = ".")
   deltaP_matix = cbind(deltaP_matix,dat$deltaP)
 }
-
-
 dim(deltaP_matix)
+
+# create variables for quantile values
 mins = c()
 maxs = c()
 mids = c()
+# create tags for deltap comparsion
 tags = c()
-
-num_snap = 386
-for(snap in seq(1,num_snap)){
-  delta_Ps = deltaP_matix[snap,]
+# loop over snps
+num_snp = 386
+for(snp in seq(1,num_snp)){
+  delta_Ps = deltaP_matix[snp,]
   q0 = unname(quantile(delta_Ps, probs=0.25))
   mins = c(mins, q0)
   q1 = unname(quantile(delta_Ps, probs=0.99))
@@ -29,29 +32,121 @@ for(snap in seq(1,num_snap)){
   q2 = unname(quantile(delta_Ps, probs=0.5))
   mids = c(mids, q2)
   
-  observation = observations[snap]
+  observation = observations[snp]
   if(observation>q1){
     tags = c(tags, 1)
-    print(length(tags))
   }
   else{
     tags = c(tags, 0)
   }
-  
 }
 
-
-
-
-library(ggplot2)
-DATA = data.frame(X=seq(1,num_snap), MIN=mins, MAX=maxs, MID=mids,OBS=observations)
-
+DATA = data.frame(X=seq(1,num_snp), MIN=mins, MAX=maxs, MID=mids,OBS=observations)
 
 sp <- ggplot(DATA, aes(x=X, y=MID)) +
   geom_point(size=.5)+
   geom_point(aes(x=X, y=OBS),size=.5,color='red')+
-  #draws the CI error bars
+# draws the range bars
   geom_errorbar(data=DATA, aes(ymin=MIN, ymax=MAX), width=.001,color='yellow',alpha=.2)
+# add x and y-axis titles
+sp + scale_x_continuous(name="SNP", limits=c(0, 400)) +
+  scale_y_continuous(name="absolute deltap", limits=c(0, 0.5))
 
+##################### reveal the relationship between deltap and start p, first plot #####################
+
+# Delta p plot
+library(ggplot2)
+# load the neutral datasets
+files <- list.files('.', pattern = "*.txt")
+# load the dataset
+ch_file = 'ch_ref_98_ch_doMAF_filter.mafs.extracted'
+ref_file = 'ch_ref_98_ref_doMAF_filter.mafs.extracted'
+# obtain the deltap from obs dataset
+ch = read.delim(ch_file, header = TRUE, sep = "\t", dec = ".")
+ref = read.delim(ref_file, header = TRUE, sep = "\t", dec = ".")
+p0 = ref$knownEM
+p1 = ch$knownEM
+DATA = data.frame(MIN=p0, MAX=p1)
+#DATA$MIN = 1- DATA$MIN
+#DATA$MAX = 1- DATA$MAX
+DATA = DATA[order(DATA$MIN),]
+num_snp = 386
+DATA$X = seq(1, num_snp)
+
+sp <- ggplot(DATA, aes(x=X, y=MIN)) +
+  geom_point(size=.5)+
+  geom_point(aes(x=X, y=MAX),size=.5,color='red')+
+  # draws the range bars
+  geom_errorbar(data=DATA, aes(ymin=MIN, ymax=MAX), width=.001,color='yellow',alpha=.8)
+# add x and y-axis titles
+sp + scale_x_continuous(name="SNP", limits=c(0, 400)) +
+     scale_y_continuous(name="Allele frequency", limits=c(0, 1)) +
+     labs(title = "Minor allele changes for 386 SNP outliers identified from fst permutation test",
+     subtitle = "ref allele = black, ch allele = red, deltap = yellow")
+
+##################### reveal the relationship between deltap and start p, second plot #####################
+setwd("/Volumes/cornell/DelBay19_Hopper/permutation/4_deltap_plot/deltap_vs_p_plot2")
+library(ggplot2)
+# load the dataset
+ch_file = 'ch_ref_98_ch_doMAF_filter.mafs.output'
+ref_file = 'ch_ref_98_ref_doMAF_filter.mafs.output'
+deltap_file = 'obs_deltap.output'
+# obtain the deltap from obs dataset
+ch = read.delim(ch_file, header = TRUE, sep = "\t", dec = ".")
+ref = read.delim(ref_file, header = TRUE, sep = "\t", dec = ".")
+deltap = read.delim(deltap_file, header = TRUE, sep = "\t", dec = ".")
+p0 = ref$knownEM
+p1 = ch$knownEM
+dp = deltap$deltaP
+DATA = data.frame(p=p0, abs_dp=dp)
+#DATA$MIN = 1- DATA$MIN
+#DATA$MAX = 1- DATA$MAX
+DATA = DATA[order(DATA$p),]
+num_snp = 386
+DATA$X = seq(1, num_snp)
+sp <- ggplot(DATA, aes(x=p, y=abs_dp)) +
+  geom_point(size=.5)
+  # add x and y-axis titles
+sp + scale_x_continuous(name="p", limits=c(0, 0.5)) +
+  scale_y_continuous(name="Deltap (absolute values)", limits=c(0, 1)) +
+  labs(title = "Deltap against reference allele p for the observation data")
+# load the neutral datasets
+file1 <- list.files('.', pattern = "*.txt")
+file2 <- list.files('.', pattern = "*.extracted")
+# create a matrix for neu deltap and p
+deltaP_matix = c()
+for(f1 in file1){
+  dat1 <- read.delim(f1, header = TRUE, sep = "\t", dec = ".")
+  deltaP_matix = cbind(deltaP_matix,dat1$deltaP)
+}
+p_matix = c()
+for(f2 in file2){
+  dat2 <- read.delim(f2, header = TRUE, sep = "\t", dec = ".")
+  p_matix = cbind(p_matix,dat2$knownEM)
+}
+
+dim(deltaP_matix)
+deltaP_matix
+# create variables for quantile values
+mids = c()
+# create tags for deltap comparsion
+tags = c()
+# loop over snps
+num_snp = 386
+for(snp in seq(1,num_snp)){
+  delta_Ps = deltaP_matix[snp,]
+  q2 = unname(quantile(delta_Ps, probs=0.5))
+  mids = c(mids, q2)
+}
+
+DATA = data.frame(X=seq(1,num_snp), MID=mids)
+
+sp <- ggplot(DATA, aes(x=X, y=MID)) +
+  geom_point(size=.5)
+
+  geom_point(aes(x=X, y=OBS),size=.5,color='red')+
+  # draws the range bars
+  geom_errorbar(data=DATA, aes(ymin=MIN, ymax=MAX), width=.001,color='yellow',alpha=.2)
+# add x and y-axis titles
 sp + scale_x_continuous(name="SNP", limits=c(0, 400)) +
   scale_y_continuous(name="absolute deltap", limits=c(0, 0.5))
