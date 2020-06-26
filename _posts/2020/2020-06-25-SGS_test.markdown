@@ -225,7 +225,21 @@ The p-value for each SNP will be generated at the end of script running. The res
 
 ### Part III Incorprate the uncertainty of frequency (p) in the model
 
-So far I used doMajorMinor to infer the minor allele and use doMaf -1 for allele frequency estimates. It seems that -doMaf 4 allows us to propagate the minor allele uncertainty into our allele freq estimate using beagle file, and this requires further investigation. 
+So far I used doMajorMinor to infer the minor allele and use doMaf -1 for allele frequency estimates. 
+
+the maf output for reference population looks like this
+
+|chromo| position| major|minor|anc|knownEM |nInd|
+|------|---------|------|-----|---|--------|----|
+|5     |212337   |  T   | A   |T  |0.230666|  34|
+|5     |213101   |  T   | C   |C  |0.419006|  35|
+|5     |213128   |  G   | T   |G  |0.464944|  40|
+|5     |213159   |  T   | C   |C  |0.452815|  36|
+|5     |213194   |  T   | C   |T  |0.209213|  37|
+
+Here the nInd x 2 = n in the model, KnownEM x nInd = k in the model 
+
+It seems that -doMaf 4 allows us to propagate the minor allele uncertainty into our allele freq estimate using beagle file, and this requires further investigation. 
 
 > Allele Frequency estimation could be produced by multiple ways (see [here](http://www.popgen.dk/angsd/index.php/Allele_Frequencies),
 > 4: frequency based on genotype posterior probabilities. If genotype probabilities are used as input to ANGSD the allele frequency is estimated directly on these by summing over the probabitlies [http://www.popgen.dk/angsd/index.php/PostFreq](http://www.popgen.dk/angsd/index.php/PostFreq).
