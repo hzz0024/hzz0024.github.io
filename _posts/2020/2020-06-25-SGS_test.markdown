@@ -249,3 +249,7 @@ Example of the use of a genotype probability file for example from the output fr
 ```sh
 ./angsd -out out -doMaf 4 -beagle beagle.file.gz
 ```
+
+In Nina's recent paper of Atlantic silverside, she used genotype likehood to estimated the count of slow-growing alleles and test for correlations between SNP alleles and individual fish lengths (see sup material [here](https://science.sciencemag.org/content/sci/suppl/2019/07/31/365.6452.487.DC1/aaw7271_Therkildsen_SM.pdf)). 
+
+> We estimated the count of slow-growing alleles in each individual from genotype likelihoods (normalized to sum to 1) computed in ANGSD (see above), by for each SNP calculating 2× the likelihood of the homozygous slow-growing genotype + the likelihood of the heterozygous slow-growing genotype, and summing over all 23,648 SNPs in this candidate set. We then used a linear mixed-effects model implemented in the lmekin() function in the R package kinship2 to test for a correlation between these polygenic counts of slow-growing alleles and individual body length, while accounting for the relatedness structure in each population. 
