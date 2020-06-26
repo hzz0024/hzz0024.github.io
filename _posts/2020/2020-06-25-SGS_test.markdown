@@ -132,10 +132,10 @@ S = 2.185/85
 M = S/a1
 
 M
-0.0037831 # looks not the same as 0.0037 in the sea bream example but close. The difference may be caused by differnt floating-point
+0.0037831 # looks not the same as 0.0037 in the sea bream example but close. The difference may be caused by different floating-point
 ```
 
-The angsd results for DelBay19 reference samples are shown below, which are estimated from minInd 70%, mapq 25, and a window size of 1000 bp for the ref population
+The angsd theta estimates for DelBay19 reference samples are shown below, which are estimated from minInd 70%, mapq 25, and a window size of 1000 bp for the ref population
 
 |Chr           |wincenter |tW              |tP            |Tajima's D| nSites |tW/nSites|  
 |--------------|----------|----------------|--------------|----------|--------|---------|
@@ -221,9 +221,17 @@ There are 73741 SNPs in the chromosome 5, which may take 73741 * 1 second = 7374
 
  <img src="https://hzz0024.github.io/images/SGS/test1.jpg" alt="img" width="800"/>
 
+The p-value for each SNP will be generated at the end of script running. The results will be compared to the Fst permutation results. 
+
 ### Part III Incorprate the uncertainty of frequency (p) in the model
 
-So far I used doMajorMinor to infer the minor allele and use doMaf -1 for allele frequency estimates. It seems that -doMaf 4 allows us to propagate the minor allele uncertainty into our allele freq estimate using beagle file, which requires further investigation. 
+So far I used doMajorMinor to infer the minor allele and use doMaf -1 for allele frequency estimates. It seems that -doMaf 4 allows us to propagate the minor allele uncertainty into our allele freq estimate using beagle file, and this requires further investigation. 
 
 > Allele Frequency estimation could be produced by multiple ways (see [here](http://www.popgen.dk/angsd/index.php/Allele_Frequencies),
 > 4: frequency based on genotype posterior probabilities. If genotype probabilities are used as input to ANGSD the allele frequency is estimated directly on these by summing over the probabitlies [http://www.popgen.dk/angsd/index.php/PostFreq](http://www.popgen.dk/angsd/index.php/PostFreq).
+
+Example of the use of a genotype probability file for example from the output from beagle.
+
+```sh
+./angsd -out out -doMaf 4 -beagle beagle.file.gz
+```
