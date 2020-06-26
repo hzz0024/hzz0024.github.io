@@ -135,7 +135,7 @@ M
 0.0037831 # looks not the same as 0.0037 in the sea bream example but close. The difference may be caused by differnt floating-point
 ```
 
-The angsd results are shown below, which are estimated from minInd 70%, mapq 25, and a window size of 1000 bp for the ref population
+The angsd results for DelBay19 reference samples are shown below, which are estimated from minInd 70%, mapq 25, and a window size of 1000 bp for the ref population
 
 |Chr           |wincenter |tW              |tP            |Tajima's D| nSites |tW/nSites|  
 |--------------|----------|----------------|--------------|----------|--------|---------|
