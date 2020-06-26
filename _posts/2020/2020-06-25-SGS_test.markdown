@@ -1,0 +1,229 @@
+---
+comments: true
+title: DelBay19 single generation selection (SGS) test
+date: '2020-06-25 12:00'
+tags:
+  - DelBay19
+  - deltap
+  - ouliter
+  - null model
+  - theta
+  - drift
+  - WGS
+categories:
+  - WGS data analysis
+---
+
+### Test for single-generation selection
+
+In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across Environments in Juvenile Sea Bream](https://www.mdpi.com/2073-4425/11/4/398/htm#app1-genes-11-00398), the author estimated the expected distribution of allele frequency changes (deltap) due to finite sample sizes in the absence of selection to generate null expectations.
+
+### Conceptional steps:
+
+1) a panmictic common gene pool of finite size (i.e. the real population)
+
+2) two samples of size N1 and N2 are drawn within the same generation
+
+3) compare the observed allele frequency difference - ΔP=abs(P1−P2) with the distribution of ΔP expected from random sampling effects (i.e. due to finite sample size effects) and obtain the p-values. 
+
+### Part I Build the Bayes’ theorem equation
+
+<img src="https://hzz0024.github.io/images/SGS/SGS_1.jpg" alt="img" width="800"/>
+
+Based on Bayes’ theorem equation above, the posterior probability distribution of Z in the common gene pool given k observed allele counts in N1 diploid individuals is could be estimated from three parts,
+
+1) probability mass function of the binomial distribution, 
+
+```R
+# I used upper_left to represent this part of the Bayes’ equation
+upper_left = factorial(n)/(factorial(n - k)*factorial(k)) * p^k * (1-p)^(n-k)
+```
+
+2) prior probability distribution of Z, given a genetic diversity parameter 𝜃=4𝑁e𝜇
+
+> this is derived from equation (50) in Tajima (1989), Gn(i) = M (1/i + 1/(n-1)). Here i should be the seq(1:(n-1)).
+
+> 𝜃 could be estimated by equation (5) in Tajima (1989), M = s/a1, where s is the number of segregating sites (snp), while a1 is the harmonic number.
+
+```R
+# I used tajima_points to represent this part of the Bayes’ equation
+  tajima_points = c()
+  for(i in seq(1:(n-1))){
+    upper_right =  M * (1/i + 1/(n-i))
+    tajima_points = c(tajima_points, upper_right)
+  }
+
+```
+
+3) The probability Pr(X=k) of observing k allele counts was a uniform value of 1(2N−1)
+
+4) because the in Figure S3 and S4 the y-axis is the probability values, each results with different p should be scaled probability. This could be done by 
+
+```R
+tajima_points = tajima_points/sum(tajima_points)
+points=points/sum(points)
+```
+
+Overall, the code for Figure S3 and S4 are shown below,
+
+```R
+# these values are identical to data used for Figure S3 and S4, note that N = 50 in Figure S4 equals n=100 DNA sequences
+n = 100
+k = 25
+M = 0.0037
+  
+# create the function
+draw_distribution <- function(n,k,M){
+  tajima_points = c()
+  for(i in seq(1:(n-1))){
+    upper_right =  M * (1/i + 1/(n-i))
+    tajima_points = c(tajima_points, upper_right)
+  }
+
+  tajima_points = tajima_points/sum(tajima_points) 
+  points = c()
+  for(i in seq(1:(n-1))){
+    p = i/n
+    upper_left = factorial(n)/(factorial(n - k)*factorial(k)) * p^k * (1-p)^(n-k)
+    upper_right =  M * (1/i + 1/(n-i))/sum(tajima_points)
+    res = upper_left * upper_right / (1/(n-1))
+    points = c(points, res)
+  }
+  points=points/sum(points)
+
+  return(list("tajima" = tajima_points, "points" = points))
+}
+
+
+res1 = draw_distribution(n, k, 0.0037)
+```
+
+5) Draw the figures
+
+- Figure S3 The prior probability distribution of 𝑍 with N=50 and theta=0.0037
+
+```R
+plot( seq(1:(n-1))/n, res1$tajima, xlab="p", ylab="probability")
+```
+
+<img src="https://hzz0024.github.io/images/SGS/S4.jpeg" alt="img" width="800"/>
+
+- Figure S4 The posterior probability distribution of 𝑍 with N=50 and X=25
+
+```R
+plot( seq(1:(n-1))/n, res1$points, xlab="p", ylab="probability")
+```
+
+<img src="https://hzz0024.github.io/images/SGS/S3.jpeg" alt="img" width="800"/>
+
+The results above are exactly the same as Figure S3 and S4 in the supplementary doc of sea bream paper
+
+In this part the left question is 
+
+- Are angsd theta results identical to the outcomes from equation (5) in Tajima (1989)? In sea bream paper, genetic diversity parameter 𝜃 = 4𝑁e𝜇 has been estimated from the data using equation (5) in Tajima (1989). The equation 5 is 𝜃 = S/a1, where S is the number of segregating sites, a1 is the (n-1)th harmonic number. From the sea bream paper they used global theta, with total number of individuals to estimate 𝜃 is 251, the length of each RAD locus is 86 bp, and the observed average number of SNPs per RAD locus is 2.185. Below is the possible method they used for theta calculation,
+
+```R
+n=251*2
+a1 = 0
+for(i in seq(1,n-1)){
+  a1 = a1 + 1/i
+}
+S = 2.185/85
+M = S/a1
+
+M
+0.0037831 # looks not the same as 0.0037 in the sea bream example but close. The difference may be caused by differnt floating-point
+```
+
+The angsd results are shown below, which are estimated from minInd 70%, mapq 25, and a window size of 1000 bp for the ref population
+
+|Chr           |wincenter |tW              |tP            |Tajima's D| nSites |tW/nSites|  
+|--------------|----------|----------------|--------------|----------|--------|---------|
+|NC_035780.1   |32828549  |148144.8989     |95488.97981   |-1.219706 |10556994|0.014032 |
+|NC_035781.1   |30871886  |159575.0886     |101900.1146   |-1.240273 |11574278|0.013787 |
+|NC_035782.1   |38109713  |165459.7798     |108822.8723   |-1.174633 |12446299|0.013293 |
+|NC_035783.1   |29809372  |152617.4477     |98161.52266   |-1.224435 |11169746|0.013663 |
+|NC_035784.1   |49342325  |272287.4623     |184119.0694   |-1.111171 |20154438|0.013510 |
+|NC_035785.1   |25546893  |39230.21913     |29203.91021   |-0.877019 |3237973 |0.012115 |
+|NC_035786.1   |28914002  |42712.12261     |27105.36086   |-1.253865 |3007587 |0.014201 |
+|NC_035787.1   |37817418  |61524.0679      |39461.64284   |-1.230551 |4025801 |0.015282 |
+|NC_035788.1   |52052134  |74280.59148     |47352.3937    |-1.244012 |4810811 |0.015440 |
+|NC_035789.1   |16305066  |16720.89692     |10249.03138   |-1.32815  |973820  |0.017170 |
+
+tW is wattersons theta.      
+tP is pairwise theta, which is also called tajimas theta.       
+These two estimates can be used for a netrality test called tajimas D.       
+
+### Part II Assessment of the deltap for DelBay19 dataset
+
+> The posterior probability distribution of 𝑍 in the common gene pool given X=𝑘 observed allele counts in N1 diploid individuals was finally used to obtain the null distribution of ΔP between the two samples of size N1 and N2. For that, we assumed that the two samples are drawn from the same common gene pool, and used the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2. Finally, the distribution of allele frequency differences between the two samples was computed and compared to the observed value of ΔP to estimate a P-value.
+
+I used "the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2". This is done by using the *sample* function in the R, which allows me to randomly draw two p values based on probability distribution conditioned the first N1. Then I simply calculate the differences between two p values - i.e. deltap.
+
+```R
+draw_distribution <- function(n,k,M){
+  tajima_points = c()
+  for(i in seq(1:(n-1))){
+    upper_right =  M * (1/i + 1/(n-i))
+    tajima_points = c(tajima_points, upper_right)
+  }
+  tajima_points = tajima_points/sum(tajima_points) 
+  points = c()
+  for(i in seq(1:(n-1))){
+    p = i/n
+    upper_left = factorial(n)/(factorial(n - k)*factorial(k)) * p^k * (1-p)^(n-k)
+    upper_right =  M * (1/i + 1/(n-i))/sum(tajima_points)
+    res = upper_left * upper_right / (1/(n-1))
+    points = c(points, res)
+  }
+  points=points/sum(points)
+  return(list("tajima" = tajima_points, "points" = points))
+}
+
+null_distribution <- function(n, k, obs_delta){
+  N1 = draw_distribution(n, k, 0.01351005) #chr5 global theta
+  num_sample = 10000
+  sample_p1 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
+  sample_p2 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
+  delta_ps = c()
+  for(j in seq(1,num_sample)){
+    p1 = sample_p1[j]
+    p2 = sample_p2[j]
+    delta_p = abs(p1-p2) # note here I focus on the absolute deltap, which requires one sided test for absolute delta_p
+    delta_ps = c(delta_ps, delta_p)
+  }
+  hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 iterations ")
+  abline(v=obs_delta, col='red')
+  return(length(delta_ps[delta_ps>obs_delta])/num_sample)
+}
+
+filename = 'ch_ref_98_ref_doMAF_filter.mafs.new'
+obs_file = 'obs_deltap_new.output'
+
+dat <- read.delim(filename, header = TRUE, sep='\t')
+obs_dat <- read.delim(obs_file, header = TRUE, sep='\t')
+
+dat = dat[dat$chromo==5,]
+obs_dat= obs_dat[obs_dat$chromo==5,]
+
+p_values = c()
+for(i in seq(1,dim(dat)[1])){
+  p_value = null_distribution(n=dat$nInd[i]*2, k=floor(dat$nInd[i]*dat$knownEM[i]), obs_delta=obs_dat$deltaP[i])
+  p_values = c(p_values, p_value)
+}
+
+out = data.frame(chromo=dat$chromo, position=dat$position, p_value=p_values)
+write.table(out, file = "p_value_list_chr5.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
+
+```
+
+There are 73741 SNPs in the chromosome 5, which may take 73741 * 1 second = 73741 second = 20.48 hours to run. An snp example during the run looks like this,
+
+ <img src="https://hzz0024.github.io/images/SGS/test1.jpg" alt="img" width="800"/>
+
+### Part III Incorprate the uncertainty of frequency (p) in the model
+
+So far I used doMajorMinor to infer the minor allele and use doMaf -1 for allele frequency estimates. It seems that -doMaf 4 allows us to propagate the minor allele uncertainty into our allele freq estimate using beagle file, which requires further investigation. 
+
+> Allele Frequency estimation could be produced by multiple ways (see [here](http://www.popgen.dk/angsd/index.php/Allele_Frequencies),
+> 4: frequency based on genotype posterior probabilities. If genotype probabilities are used as input to ANGSD the allele frequency is estimated directly on these by summing over the probabitlies [http://www.popgen.dk/angsd/index.php/PostFreq](http://www.popgen.dk/angsd/index.php/PostFreq).

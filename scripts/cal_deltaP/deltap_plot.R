@@ -53,7 +53,7 @@ sp + scale_x_continuous(name="SNP", limits=c(0, 400)) +
   scale_y_continuous(name="absolute deltap", limits=c(0, 0.5))
 
 ##################### reveal the relationship between deltap and start p, first plot #####################
-
+setwd("/Volumes/cornell/DelBay19_Hopper/permutation/4_deltap_plot/deltap_vs_p_plot1")
 # Delta p plot
 library(ggplot2)
 # load the neutral datasets
@@ -81,8 +81,8 @@ sp <- ggplot(DATA, aes(x=X, y=MIN)) +
 # add x and y-axis titles
 sp + scale_x_continuous(name="SNP", limits=c(0, 400)) +
      scale_y_continuous(name="Allele frequency", limits=c(0, 1)) +
-     labs(title = "Minor allele changes for 386 SNP outliers identified from fst permutation test",
-     subtitle = "ref allele = black, ch allele = red, deltap = yellow")
+     labs(title = "Minor allele changes for 386 SNP outliers",
+     subtitle = "ref allele = black, ch allele = red, actual deltap = yellow")
 
 ##################### reveal the relationship between deltap and start p, second plot #####################
 setwd("/Volumes/cornell/DelBay19_Hopper/permutation/4_deltap_plot/deltap_vs_p_plot2")
@@ -108,8 +108,9 @@ sp <- ggplot(DATA, aes(x=p, y=abs_dp)) +
   geom_point(size=.5)
   # add x and y-axis titles
 sp + scale_x_continuous(name="p", limits=c(0, 0.5)) +
-  scale_y_continuous(name="Deltap (absolute values)", limits=c(0, 1)) +
-  labs(title = "Deltap against reference allele p for the observation data")
+  scale_y_continuous(name="Deltap (absolute values)", limits=c(0, 0.5)) +
+  labs(title = "Deltap against reference allele p for the observation data",
+       subtitle = "note deltap ranges from 0-0.5")
 # load the neutral datasets
 file1 <- list.files('.', pattern = "*.txt")
 file2 <- list.files('.', pattern = "*.extracted")
@@ -124,29 +125,29 @@ for(f2 in file2){
   dat2 <- read.delim(f2, header = TRUE, sep = "\t", dec = ".")
   p_matix = cbind(p_matix,dat2$knownEM)
 }
-
 dim(deltaP_matix)
-deltaP_matix
+dim(p_matix)
 # create variables for quantile values
-mids = c()
+mid1 = c()
+mid2 = c()
 # create tags for deltap comparsion
 tags = c()
 # loop over snps
 num_snp = 386
 for(snp in seq(1,num_snp)){
   delta_Ps = deltaP_matix[snp,]
+  p_s = p_matix[snp,]
   q2 = unname(quantile(delta_Ps, probs=0.5))
-  mids = c(mids, q2)
+  ref_p = unname(quantile(p_s, probs=0.5))
+  mid1 = c(mid1, q2)
+  mid2 = c(mid2, ref_p)
 }
 
-DATA = data.frame(X=seq(1,num_snp), MID=mids)
+DATA = data.frame(X=seq(1,num_snp), neu_deltap = mid1, neu_p = mid2)
 
-sp <- ggplot(DATA, aes(x=X, y=MID)) +
+sp <- ggplot(DATA, aes(x=neu_p, y=neu_deltap)) +
   geom_point(size=.5)
-
-  geom_point(aes(x=X, y=OBS),size=.5,color='red')+
-  # draws the range bars
-  geom_errorbar(data=DATA, aes(ymin=MIN, ymax=MAX), width=.001,color='yellow',alpha=.2)
-# add x and y-axis titles
-sp + scale_x_continuous(name="SNP", limits=c(0, 400)) +
-  scale_y_continuous(name="absolute deltap", limits=c(0, 0.5))
+sp + scale_x_continuous(name="p", limits=c(0, 0.5)) +
+  scale_y_continuous(name="Deltap (absolute values)", limits=c(0, 0.1)) +
+  labs(title = "Deltap against reference allele p for the neutral data",
+       subtitle = "Deltap and p are medium (50% quantile) values for each SNP, note deltap ranges from 0-0.1")
