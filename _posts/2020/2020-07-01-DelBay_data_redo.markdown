@@ -88,7 +88,7 @@ echo "Ouput of -doQsDist can be used for depth evaluation with  all individuals 
 echo "keep loci with at leat one read for n individuals = $MIN_IND, which is 70% of total $N_IND individuals"
 echo "filter on allele frequency = $MIN_MAF"
 
-####Calculate the SAF, MAF and GL
+####prepare the output for depth evaluation
 angsd -P $NB_CPU \
 -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 \
 -doDepth 1 -dumpCounts 1 \
