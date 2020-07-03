@@ -38,7 +38,7 @@ COH_SR=/scratch/hzz0024/DelBay19_HG/02_info/COH_SR_92.list
 SR_NB=/scratch/hzz0024/DelBay19_HG/02_info/SR_NB_96.list
 
 #path to the anc genome
-ANC=/scratch/hzz0024/DelBay19_HG/genome/cv30.fasta
+ANC=/scratch/hzz0024/DelBay19_HG/genome/cv30.fa
 ANC_MASKED=/scratch/hzz0024/DelBay19_HG/genome/cv30_masked.fasta
 
 #path to bam folder
