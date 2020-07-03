@@ -70,10 +70,10 @@ K_MAX=5
 module load angsd/0.931
 
 ###this script will work on all bamfiles and calculate saf, maf & genotype likelihood
-# maybe edit
-# need to change $CHR in the first echo part and angsd command
+#maybe edit
+# need to change $CHR at first echo part (L19) and angsd command (L29)
 # also change the target below
-target=WILD
+target=CHR
 NB_CPU=20 #change accordingly
 REGIONS="-rf chr_list.txt" #optional
 #REGIONS="" # to remove the options to focus on a limited number of regions
@@ -84,7 +84,7 @@ N_IND=$(wc -l $CHR | cut -d " " -f 1)
 MIN_IND_FLOAT=$(echo "($N_IND * 0.7)"| bc -l)
 MIN_IND=${MIN_IND_FLOAT%.*}
 
-echo "Ouput of -doQsDist can be used for depth evaluation with all individuals listed in $WILD"
+echo "Ouput of -doQsDist can be used for depth evaluation with  all individuals listed in $CHR"
 echo "keep loci with at leat one read for n individuals = $MIN_IND, which is 70% of total $N_IND individuals"
 echo "filter on allele frequency = $MIN_MAF"
 
@@ -94,7 +94,7 @@ angsd -P $NB_CPU \
 -doDepth 1 -dumpCounts 1 \
 -anc $ANC_MASKED -remove_bads 1 -doQsDist 1 -minMapQ 30 -minQ 20 \
 -minInd $MIN_IND -minMaf $MIN_MAF -setMaxDepth 2000 \
--b $WILD -out /scratch/hzz0024/DelBay19_HG/03_depth/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"
+-b $CHR -out /scratch/hzz0024/DelBay19_HG/03_depth/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"
 
 #main features
 # -P nb of threads
