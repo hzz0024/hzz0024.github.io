@@ -1,7 +1,7 @@
 ---
 comments: true
 title: DelBay19 single generation selection (SGS) test
-date: '2020-06-25 12:00'
+date: '2020-07-02 12:00'
 tags:
   - DelBay19
   - deltap
@@ -161,6 +161,20 @@ These two estimates can be used for a netrality test called tajimas D.
 I used "the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2". This is done by using the *sample* function in the R, which allows me to randomly draw two p values based on probability distribution conditioned the first N1. Then I simply calculate the differences between two p values - i.e. deltap.
 
 ```R
+### step 1 create null model
+library(gtools)
+library(hash)
+
+filename = 'ch_ref_98_ref_doMAF_filter.mafs.new'
+obs_file = 'obs_deltap_new.output'
+
+dat <- read.delim(filename, header = TRUE, sep='\t')
+obs_dat <- read.delim(obs_file, header = TRUE, sep='\t')
+
+# uncomment lines below will restrict the runs on chr 5
+#dat = dat[dat$chromo==5,]
+#obs_dat= obs_dat[obs_dat$chromo==5,]
+
 draw_distribution <- function(n,k,M){
   tajima_points = c()
   for(i in seq(1:(n-1))){
@@ -180,8 +194,8 @@ draw_distribution <- function(n,k,M){
   return(list("tajima" = tajima_points, "points" = points))
 }
 
-null_distribution <- function(n, k, obs_delta){
-  N1 = draw_distribution(n, k, 0.01351005) #chr5 global theta
+null_distribution <- function(n, k){
+  N1 = draw_distribution(n, k, 0.0142493) # global theta across all chromosomes
   num_sample = 10000
   sample_p1 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
   sample_p2 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
@@ -192,36 +206,49 @@ null_distribution <- function(n, k, obs_delta){
     delta_p = abs(p1-p2) # note here I focus on the absolute deltap, which requires one sided test for absolute delta_p
     delta_ps = c(delta_ps, delta_p)
   }
-  hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 iterations ")
-  abline(v=obs_delta, col='red')
-  return(length(delta_ps[delta_ps>obs_delta])/num_sample)
+  return(delta_ps)
 }
 
-filename = 'ch_ref_98_ref_doMAF_filter.mafs.new'
-obs_file = 'obs_deltap_new.output'
-
-dat <- read.delim(filename, header = TRUE, sep='\t')
-obs_dat <- read.delim(obs_file, header = TRUE, sep='\t')
-
-dat = dat[dat$chromo==5,]
-obs_dat= obs_dat[obs_dat$chromo==5,]
+# create the dictionary each posterior distribution
+dic <- hash()
+for(i in seq(1,dim(dat)[1])){
+  n=dat$nInd[i]*2
+  k=floor(dat$nInd[i]*2*dat$knownEM[i])
+  delta_ps = null_distribution(n=n, k=k)
+  
+  key = paste0(n, ' ', k)
+  dic[[key]] <- delta_ps
+}
 
 p_values = c()
 for(i in seq(1,dim(dat)[1])){
-  p_value = null_distribution(n=dat$nInd[i]*2, k=floor(dat$nInd[i]*dat$knownEM[i]), obs_delta=obs_dat$deltaP[i])
+  
+  n=dat$nInd[i]*2
+  k=floor(dat$nInd[i]*2*dat$knownEM[i])
+  obs_delta=obs_dat$deltaP[i]
+  
+  key = paste0(n, ' ', k)
+  delta_ps <- dic[[key]]
+  
+  p_value <- length(delta_ps[delta_ps>obs_delta])/length(delta_ps)
   p_values = c(p_values, p_value)
+  
+  #hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 iterations ")
+  #abline(v=obs_delta, col='red')
 }
 
 out = data.frame(chromo=dat$chromo, position=dat$position, p_value=p_values)
-write.table(out, file = "p_value_list_chr5.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
+write.table(out, file = "p_value_list_all.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
 
 ```
 
-There are 73741 SNPs in the chromosome 5, which may take 73741 * 1 second = 73741 second = 20.48 hours to run. An snp example during the run looks like this,
-
- <img src="https://hzz0024.github.io/images/SGS/test1.jpg" alt="img" width="800"/>
-
-The p-value for each SNP will be generated at the end of script running. The results will be compared to the Fst permutation results. 
+|     P-value    |  No. of outliers  |  
+| ---------------|-------------------|
+|      0.0100    |      14440        |
+|      0.0050    |      9826         |
+|      0.0010    |      4173         |
+|      0.0005    |      2930         |
+|      0.0001    |      1199         |
 
 ### Part III Incorprate the uncertainty of frequency (p) in the model
 
@@ -237,7 +264,7 @@ the maf output for reference population looks like this
 |5     |213159   |  T   | C   |C  |0.452815|  36|
 |5     |213194   |  T   | C   |T  |0.209213|  37|
 
-Here the nInd x 2 = n in the model, KnownEM x nInd = k in the model 
+Here the nInd x 2 = n in the model, KnownEM x nInd X 2 = k in the model 
 
 It seems that -doMaf 4 allows us to propagate the minor allele uncertainty into our allele freq estimate using beagle file, and this requires further investigation. 
 

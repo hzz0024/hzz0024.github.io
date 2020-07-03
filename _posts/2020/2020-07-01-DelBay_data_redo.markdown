@@ -17,7 +17,7 @@ In this post I am trying to rebuild the DelBay19 data for downstream deltap and 
 
 The angsd pipeline from [Claire Mérot's github](https://github.com/clairemerot) is well-organized and could be used as a good reference for this redo process. 
 
-Besides, I'd like to compare the Fst, theta, and/or outlier identification results before/after genome masking. 
+Besides, I'd like to compare the Fst, theta, and/or outlier identification results before/after genome masking. Note that steps below used the masked genome for data rebuilding. 
 
 ### 1) set up the 01_config.sh
 
