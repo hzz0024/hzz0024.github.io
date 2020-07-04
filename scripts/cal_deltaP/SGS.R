@@ -74,10 +74,6 @@ for(i in seq(1,dim(dat)[1])){
   dic[[key]] <- delta_ps
 }
 
-#for(i in seq(1,dim(dat)[1])){
-#  null_distribution(n=dat$nInd[i]*2, k=floor(dat$nInd[i]*2*dat$knownEM[i]), obs_delta=obs_dat$deltaP[i])
-#}
-
 p_values = c()
 for(i in seq(1,dim(dat)[1])){
   
@@ -96,4 +92,4 @@ for(i in seq(1,dim(dat)[1])){
 }
 
 out = data.frame(chromo=dat$chromo, position=dat$position, p_value=p_values)
-write.table(out, file = "p_value_list_chr5.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
+write.table(out, file = "p_value_list_all.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
