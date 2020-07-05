@@ -225,4 +225,27 @@ angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doMajorMinor 3 -anc $ANC -remove_bads 
 
 ```
 
+- Output 
+
+CH (cv30/mask) walltime: 8856/8882 s     
+REF (cv30/mask) walltime: 8168/8542 s
+
+### 6) conduct Fst estimates
+
+```sh
+#!/bin/bash
+for genome in cv30 mask
+do
+    echo -e './get_fst.sh /scratch/hzz0024/DelBay19_HG/06_fst_by_pop_pair pop_ch.txt 1 _maf0.05_pctind0.7_'$genome'' >> formal/'06_fst_by_pop_pair_CHR_'$genome'.sh'
+done
+
+# An example script is shown below,
+
+./get_fst.sh /scratch/hzz0024/DelBay19_HG/06_fst_by_pop_pair pop_ch.txt 1 _maf0.05_pctind0.7_cv30
+
+```
+
+- Output
+
+
 
