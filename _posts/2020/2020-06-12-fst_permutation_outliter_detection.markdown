@@ -174,7 +174,7 @@ python deltap_cnt.py
 # need to change the No. of SNPs at line 21
 ```
 
-Note that Fst outliers with p-value < 0.001 are 386, while deltap (based on absolute values) outliers with p-value < 0.001 are 259 out of 386 SNPs. I will use another post to show the deltap outlier identification from permutation test, and compare that results to single-generation selection tests (used by sea bream paper)
+Note that Fst outliers with p-value < 0.001 are 386, while deltap (based on absolute values) outliers with p-value < 0.001 are 259 out of 386 SNPs. I will use another post to show the deltap outlier identification from permutation test, and compare that results to single-generation selection tests (i.e. SGS used by sea bream paper)
 
 6) deltap plotting
 

@@ -246,11 +246,44 @@ angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doMajorMinor 3 -anc $ANC -remove_bads 
 CH (cv30/mask) walltime: 8856/8882 s     
 REF (cv30/mask) walltime: 8168/8542 s
 
+- Question here: is there any fixed allele frequency in the maf files?
 
-```sh
-Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_cv30.mafs -q REF_maf0.05_pctind0.7_cv30.mafs -t 1885320 -o obs_deltap_cv30.output
-
-Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_mask.mafs -q REF_maf0.05_pctind0.7_mask.mafs -t 1868745 -o obs_deltap_mask.output
+```R
+> filename = 'CH_maf0.05_pctind0.7_cv30_nochr56invers.mafs'
+> dat <- read.delim(filename, header = TRUE, sep='\t')
+> max_maf=max(dat$knownEM)
+> max_maf
+[1] 0.718242
+> filename = 'REF_maf0.05_pctind0.7_cv30_nochr56invers.mafs'
+> dat <- read.delim(filename, header = TRUE, sep='\t')
+> max_maf=max(dat$knownEM)
+> max_maf
+[1] 0.70511
+> filename = 'HC_maf0.05_pctind0.7_cv30_no56invers.mafs'
+> dat <- read.delim(filename, header = TRUE, sep='\t')
+> max_maf=max(dat$knownEM)
+> max_maf
+[1] 0.765922
+> filename = 'ARN_maf0.05_pctind0.7_cv30_no56invers.mafs'
+> dat <- read.delim(filename, header = TRUE, sep='\t')
+> max_maf=max(dat$knownEM)
+> max_maf
+[1] 0.766392
+> filename = 'COH_maf0.05_pctind0.7_cv30_no56invers.mafs'
+> dat <- read.delim(filename, header = TRUE, sep='\t')
+> max_maf=max(dat$knownEM)
+> max_maf
+[1] 0.832372
+> filename = 'SR_maf0.05_pctind0.7_cv30_no56invers.mafs'
+> dat <- read.delim(filename, header = TRUE, sep='\t')
+> max_maf=max(dat$knownEM)
+> max_maf
+[1] 0.774196
+> filename = 'NB_maf0.05_pctind0.7_cv30_no56invers.mafs'
+> dat <- read.delim(filename, header = TRUE, sep='\t')
+> max_maf=max(dat$knownEM)
+> max_maf
+[1] 0.754925
 ```
 
 ### 6) conduct Fst estimates
@@ -270,5 +303,12 @@ done
 
 - Output
 
+walltime: ~ 1 hour for each run
 
+### 7) the SGS test is under running
 
+```sh
+Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_cv30.mafs -q REF_maf0.05_pctind0.7_cv30.mafs -t 1885320 -o obs_deltap_cv30.output
+
+Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_mask.mafs -q REF_maf0.05_pctind0.7_mask.mafs -t 1868745 -o obs_deltap_mask.output
+```
