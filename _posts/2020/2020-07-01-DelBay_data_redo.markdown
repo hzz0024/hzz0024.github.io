@@ -175,21 +175,37 @@ angsd sites index "$target"_sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdept
 CHR (cv30/mask) walltime: 16370/16081 s     
 WILD (cv30/mask) walltime:      
 
-No. of SNPs for each group
+No. of SNPs for each group (before inversion removal)
 
 |           |CHR_no_mask |CHR_mask|WILD_no_mask|WILD_mask|
 |-----------|------------|--------|------------|---------|
-|NC_035780.1|246545      |244926  |
-|NC_035781.1|263368      |260829  |
-|NC_035782.1|282895      |280797  |
-|NC_035783.1|253018      |250925  |
-|NC_035784.1|464025      |462615  |
-|NC_035785.1|68069       |67204   |
-|NC_035786.1|68417       |67166   |
-|NC_035787.1|96490       |94616   |
-|NC_035788.1|118175      |115916  |
-|NC_035789.1|24318       |23751   |
-|Total      | 1885320    |1868745 |
+|NC_035780.1|246545      |244926  |2293798     |291460   |
+|NC_035781.1|263368      |260829  |315613      |312294   |
+|NC_035782.1|282895      |280797  |337773      |334781   |
+|NC_035783.1|253018      |250925  |304301      |301402   |
+|NC_035784.1|464025      |462615  |555977      |553815   |
+|NC_035785.1|68069       |67204   |80197       | 78960   |
+|NC_035786.1|68417       |67166   |82698       |80886    |
+|NC_035787.1|96490       |94616   |117951      |115320   |
+|NC_035788.1|118175      |115916  |144945      |141895   |
+|NC_035789.1|24318       |23751   |30442       |29684    |
+|Total      |1885320     |1868745 |2263695     |2240497  |
+
+No. of SNPs for each group (after inversion removal)
+
+|           |CHR_no_mask |CHR_mask|WILD_no_mask|WILD_mask|
+|-----------|------------|--------|------------|---------|
+|NC_035780.1|246545      |244926  |293798      |291460   |
+|NC_035781.1|263368      |260829  |315613      |312294   |
+|NC_035782.1|282895      |280797  |337773      |334781   |
+|NC_035783.1|253018      |250925  |304301      |301402   |
+|NC_035784.1|366069      |364659  |439627      |437465   |
+|NC_035785.1|13219       |12368   |16467       | 15258   |
+|NC_035786.1|68417       |67166   |82698       |80886    |
+|NC_035787.1|96490       |94616   |117951      |115320   |
+|NC_035788.1|118175      |115916  |144945      |141895   |
+|NC_035789.1|24318       |23751   |30442       |29684    |
+|Total      |1732514     |1715953 |2083615     |2060445  |
 
 ### 5) create saf for Fst estimates
 
@@ -229,6 +245,13 @@ angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doMajorMinor 3 -anc $ANC -remove_bads 
 
 CH (cv30/mask) walltime: 8856/8882 s     
 REF (cv30/mask) walltime: 8168/8542 s
+
+
+```sh
+Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_cv30.mafs -q REF_maf0.05_pctind0.7_cv30.mafs -t 1885320 -o obs_deltap_cv30.output
+
+Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_mask.mafs -q REF_maf0.05_pctind0.7_mask.mafs -t 1868745 -o obs_deltap_mask.output
+```
 
 ### 6) conduct Fst estimates
 
