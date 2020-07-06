@@ -286,6 +286,21 @@ REF (cv30/mask) walltime: 8168/8542 s
 [1] 0.754925
 ```
 
+It seem there is no fixed allele at all, which raise the question that where are the fixed snps (p=1 or 0). I performed a small test with 5 individual within the challenge population (CH) and examine the maf result. This small amount of sample sould produce some fixed allele due to drift. 
+
+```R
+filename = 'maf_test.mafs'
+dat <- read.delim(filename, header = TRUE, sep='\t')
+max_maf=max(dat$knownEM)
+max_maf
+[1] 1
+min_maf=min(dat$knownEM)
+min_maf
+[1] 0
+```
+
+I observed the fixed snp with allele frequency = 1 or 0, suggesting that Angsd did not show unexpected behanior in maf calculation.   
+
 ### 6) conduct Fst estimates
 
 ```sh
