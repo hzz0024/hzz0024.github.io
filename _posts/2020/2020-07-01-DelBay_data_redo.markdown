@@ -13,7 +13,7 @@ categories:
   - WGS data analysis
 ---
 
-In this post I am trying to rebuild the DelBay19 data for downstream deltap and outlier analyses. This is inspired by that the major and minor alleles are sometimes reversed if I run ref and challenge population independently. Instead, I need to use a inferred snp list to set the major and minor alleles. That is, the major and minor alleles were inferred from genotype likelihoods across all individuals (run ‐doMajorMinor 1 for challenge and wild populations separately), and these were then set for downstream analyses (‐doMajorMinor 3).
+In this post I am trying to rebuild the DelBay19 data for downstream deltap and outlier analyses. This is inspired by that the major and minor alleles are sometimes reversed if I run ref and challenge population independently. Instead, I need to use a inferred snp list to set the major and minor alleles. That is, the major and minor alleles were inferred from genotype likelihoods across all individuals, and these were then set for downstream analyses (‐doMajorMinor 3).
 
 The angsd pipeline from [Claire Mérot's github](https://github.com/clairemerot) is well-organized and could be used as a good reference for this redo process. 
 
@@ -249,44 +249,74 @@ REF (cv30/mask) walltime: 8168/8542 s
 - Question here: is there any fixed allele frequency in the maf files?
 
 ```R
-> filename = 'CH_maf0.05_pctind0.7_cv30_nochr56invers.mafs'
-> dat <- read.delim(filename, header = TRUE, sep='\t')
-> max_maf=max(dat$knownEM)
-> max_maf
+setwd("/DelBay19_HG/05_saf_maf_by_pop")
+filename = 'CH_maf0.05_pctind0.7_cv30_nochr56invers.mafs'
+dat <- read.delim(filename, header = TRUE, sep='\t')
+> max_af=max(dat$knownEM)
+> min_af=min(dat$knownEM)
+> max_af
 [1] 0.718242
+> min_af
+[1] 0
 > filename = 'REF_maf0.05_pctind0.7_cv30_nochr56invers.mafs'
 > dat <- read.delim(filename, header = TRUE, sep='\t')
-> max_maf=max(dat$knownEM)
-> max_maf
+> max_af=max(dat$knownEM)
+> min_af=min(dat$knownEM)
+> max_af
 [1] 0.70511
+> min_af
+[1] 0
 > filename = 'HC_maf0.05_pctind0.7_cv30_no56invers.mafs'
 > dat <- read.delim(filename, header = TRUE, sep='\t')
-> max_maf=max(dat$knownEM)
-> max_maf
+> max_af=max(dat$knownEM)
+> min_af=min(dat$knownEM)
+> max_af
 [1] 0.765922
+> min_af
+[1] 0
 > filename = 'ARN_maf0.05_pctind0.7_cv30_no56invers.mafs'
 > dat <- read.delim(filename, header = TRUE, sep='\t')
-> max_maf=max(dat$knownEM)
-> max_maf
+> max_af=max(dat$knownEM)
+> min_af=min(dat$knownEM)
+> max_af
 [1] 0.766392
+> min_af
+[1] 0
 > filename = 'COH_maf0.05_pctind0.7_cv30_no56invers.mafs'
 > dat <- read.delim(filename, header = TRUE, sep='\t')
-> max_maf=max(dat$knownEM)
-> max_maf
+> max_af=max(dat$knownEM)
+> min_af=min(dat$knownEM)
+> max_af
 [1] 0.832372
+> min_af
+[1] 0
 > filename = 'SR_maf0.05_pctind0.7_cv30_no56invers.mafs'
 > dat <- read.delim(filename, header = TRUE, sep='\t')
-> max_maf=max(dat$knownEM)
-> max_maf
+> max_af=max(dat$knownEM)
+> min_af=min(dat$knownEM)
+> max_af
 [1] 0.774196
+> min_af
+[1] 0
 > filename = 'NB_maf0.05_pctind0.7_cv30_no56invers.mafs'
 > dat <- read.delim(filename, header = TRUE, sep='\t')
-> max_maf=max(dat$knownEM)
-> max_maf
+> max_af=max(dat$knownEM)
+> min_af=min(dat$knownEM)
+> max_af
 [1] 0.754925
+> min_af
+[1] 0
+> filename = 'maf_test.mafs'
+> dat <- read.delim(filename, header = TRUE, sep='\t')
+> max_af=max(dat$knownEM)
+> min_af=min(dat$knownEM)
+> max_af
+[1] 1
+> min_af
+[1] 0
 ```
 
-It seem there is no fixed allele at all, which raise the question that where are the fixed snps (p=1 or 0). I performed a small test with 5 individual within the challenge population (CH) and examine the maf result. This small amount of sample sould produce some fixed allele due to drift. 
+I performed a small test with 5 individual within the challenge population (CH) and examine the maf result. This small amount of sample sould produce some snp with allele frquency due to drift. 
 
 ```R
 filename = 'maf_test.mafs'
@@ -294,12 +324,12 @@ dat <- read.delim(filename, header = TRUE, sep='\t')
 max_maf=max(dat$knownEM)
 max_maf
 [1] 1
-min_maf=min(dat$knownEM)
-min_maf
+min_af=min(dat$knownEM)
+min_af
 [1] 0
 ```
 
-I observed the fixed snp with allele frequency = 1 or 0, suggesting that Angsd did not show unexpected behanior in maf calculation.   
+I observed the fixed snp with allele frequency = 0, suggesting that Angsd did not show unexpected behanior for maf calculation.   
 
 ### 6) conduct Fst estimates
 
