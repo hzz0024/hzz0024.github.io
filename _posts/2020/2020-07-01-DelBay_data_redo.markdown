@@ -350,7 +350,13 @@ done
 
 walltime: ~ 1 hour for each run
 
-### 7) the SGS test is under running
+### 7) Fst plots
+
+<img src="https://hzz0024.github.io/images/Fst/Mahattan_ch_ref_cv30.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/Fst/Mahattan_ch_ref_mask.jpg" alt="img" width="800"/>
+
+### 8) the SGS test is under running
 
 ```sh
 Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_cv30.mafs -q REF_maf0.05_pctind0.7_cv30.mafs -t 1885320 -o obs_deltap_cv30.output
