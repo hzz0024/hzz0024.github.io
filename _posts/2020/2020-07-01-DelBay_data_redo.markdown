@@ -364,8 +364,8 @@ I can only observe some subtle differences between the plots from non-masked (fi
 
 Note the 0.2 line does not mean anthing. It is just used for easier comparsion. By comparing plots below, it seems 
 
-1) fst values for some potential outliers are increased with the masked genome but changes are subtle (for example, SNP marked with red arrow).
-2) SNPs may be removed due to the genome masking, see SNP marked with blue arrow.
+1) fst values for some potential outliers are increased with the masked genome but changes are subtle (for example, SNP marked with red arrow).     
+2) SNPs may be removed due to the genome masking, see SNP marked with blue arrow.     
 
 ### 8) the SGS test is under running
 
