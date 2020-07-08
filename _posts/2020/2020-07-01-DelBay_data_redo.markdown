@@ -350,7 +350,7 @@ done
 
 walltime: ~ 1 hour for each run
 
-### 7) Fst plots
+### 7) Fst plots for challenge vs. reference
 
 <img src="https://hzz0024.github.io/images/Fst/Mahattan_ch_ref_cv30.jpg" alt="img" width="800"/>
 
