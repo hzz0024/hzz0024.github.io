@@ -356,6 +356,17 @@ walltime: ~ 1 hour for each run
 
 <img src="https://hzz0024.github.io/images/Fst/Mahattan_ch_ref_mask.jpg" alt="img" width="800"/>
 
+I can only observe some subtle differences between the plots from non-masked (first plot) vs masked (second one) genomes, let us take a look at the single SNP plots between these two.
+
+<img src="https://hzz0024.github.io/images/Fst/cv30_single.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/Fst/mask_single.jpg" alt="img" width="800"/>
+
+Note the 0.2 line does not mean anthing. It is just used for easier comparsion. By comparing plots below, it seems 
+
+1) fst values for some potential outliers are increased with the masked genome but changes are subtle (for example, SNP marked with red arrow).
+2) SNPs may be removed due to the genome masking, see SNP marked with blue arrow.
+
 ### 8) the SGS test is under running
 
 ```sh
