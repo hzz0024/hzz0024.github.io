@@ -370,7 +370,22 @@ Note the 0.2 line does not mean anthing. It is just used for easier comparsion. 
 ### 8) the SGS test is under running
 
 ```sh
+# script for deltap calculation
 Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_cv30.mafs -q REF_maf0.05_pctind0.7_cv30.mafs -t 1885320 -o obs_deltap_cv30.output
 
 Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_mask.mafs -q REF_maf0.05_pctind0.7_mask.mafs -t 1868745 -o obs_deltap_mask.output
 ```
+
+### 9) ngsLD analyses
+
+```sh
+# first use awk to extract the snp list for each chromosome
+# given that the masked genome gave us less SNPs (good for computation) I decided to use the results from masked genome for ngsLD analyses.
+# create the snp list for each chromosome
+for i in {0..9}
+do
+awk -v val=$i '(($1 == "NC_03578"val".1"))' CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_mask > "CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_mask_chr_"$(($i+1))
+awk -v val=$i '(($1 == "NC_03578"val".1"))' WILD_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_mask > "WILD_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_mask_chr_"$(($i+1))
+done
+```
+
