@@ -379,13 +379,87 @@ Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p 
 ### 9) ngsLD analyses
 
 ```sh
-# first use awk to extract the snp list for each chromosome
-# given that the masked genome gave us less SNPs (good for computation) I decided to use the results from masked genome for ngsLD analyses.
-# create the snp list for each chromosome
+##### step 1 create the snp list for each group and chromosome 
 for i in {0..9}
 do
-awk -v val=$i '(($1 == "NC_03578"val".1"))' CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_mask > "CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_mask_chr_"$(($i+1))
-awk -v val=$i '(($1 == "NC_03578"val".1"))' WILD_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_mask > "WILD_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_mask_chr_"$(($i+1))
+awk -v val=$i '(($1 == "NC_03578"val".1"))' CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30_no56invers.snplist > "CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30_no56invers_chr"$(($i+1))".list"
+awk -v val=$i '(($1 == "NC_03578"val".1"))' WILD_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30_no56invers.snplist > "WILD_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30_no56invers_chr"$(($i+1))".list"
+done
+##### index the sitelist file using angsd
+module load angsd/0.931
+for i in {1..10}
+do
+angsd sites index "CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_mask_no56invers_chr"$i".list"
+done
+
+
+# stpe 2 create beagle files for ngsLD calculation
+# for challenge group
+for i in {1..10}
+do
+    for pop in CH REF
+    do
+    echo -e 'module load angsd/0.931\n#this script is used to create beagle files for ngsLD calculation\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_'$i'.list" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_HG/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 3 -anc $ANC_MASKED -remove_bads 1 -minMapQ 30 -minQ 20 -b $'$pop' -sites CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30_no56invers_chr'$i'.list -out "/scratch/hzz0024/DelBay19_HG/07_ngsLD/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_nochr56invers_ch'$i'"' >> formal/'07_ngsLD_'$pop'_cv30_no56invers_ch'$i'.sh'
+    done
+done
+# for wild group
+for i in {1..10}
+do
+    for pop in HC ARN COH SR NB
+    do
+    echo -e 'module load angsd/0.931\n#this script is used to create beagle files for ngsLD calculation\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_'$i'.list" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_HG/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 3 -anc $ANC_MASKED -remove_bads 1 -minMapQ 30 -minQ 20 -b $'$pop' -sites WILD_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30_no56invers_chr'$i'.list -out "/scratch/hzz0024/DelBay19_HG/07_ngsLD/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_nochr56invers_ch'$i'"' >> formal/'07_ngsLD_'$pop'_cv30_no56invers_ch'$i'.sh'
+    done
+done
+
+# An example script is shown below,
+
+module load angsd/0.931
+#this script is used to create beagle files for ngsLD calculation
+# maybe edit
+target="CH"
+NB_CPU=20 #change accordingly
+#REGIONS="" # to remove the options to focus on a limited number of regions
+
+#prepare variables - avoid to modify
+source /scratch/hzz0024/DelBay19_HG/01_scripts/01_config.sh
+N_IND=$(wc -l $CH | cut -d " " -f 1)
+MIN_IND=$(($N_IND*7/10))
+
+angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 3 -anc $ANC_MASKED -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH -sites CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30_no56invers_chr1.list -out "/scratch/hzz0024/DelBay19_HG/07_ngsLD/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_nochr56invers_ch1"
+
+# step 3 run ngsLD
+
+# create the position file
+for i in {1..10};do
+    zcat 'REF_maf0.05_pctind0.7_cv30_nochr56invers_ch'$i'.mafs.gz' | cut -f 1,2 | tail -n +2 > 'ref_chr'$i'_pos.txt'
+done
+
+# run ngsLD
+module load perl/5.26.1
+module load R/3.6.3
+#module load gsl/intel/2.1
+module load gcc/4.9.3
+#module load zlib/1.2.8
+module load curl/7.47.1
+module load samtools/1.6
+module load bzip2/1.6.0
+module load intel/mpi/2017
+module load zlib/1.2.8
+module load gsl/intel/2.1
+
+for i in {1..10};do
+
+/tools/ngsld/ngsLD \
+--geno 'REF_maf0.05_pctind0.7_cv30_nochr56invers_ch'$i'.beagle.gz' \
+--pos 'ref_chr'$i'_pos.txt' \
+--n_ind 48 \
+--n_sites $(cat 'ref_chr'$i'_pos.txt' | wc -l) \
+--out 'ref_chr'$i'.output' \
+--probs \
+--max_kb_dist  1 \
+--min_maf 0.05 \
+--n_threads 20
+
 done
 ```
 
