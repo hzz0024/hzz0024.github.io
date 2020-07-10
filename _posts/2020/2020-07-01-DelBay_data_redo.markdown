@@ -376,7 +376,7 @@ Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p 
 Rscript deltaP_abs.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/SGS -p CH_maf0.05_pctind0.7_mask.mafs -q REF_maf0.05_pctind0.7_mask.mafs -t 1868745 -o obs_deltap_mask.output
 ```
 
-### 9) ngsLD analyses
+### 9) ngsLD
 
 ```sh
 ##### step 1 create the snp list for each group and chromosome 
