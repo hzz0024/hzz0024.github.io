@@ -356,7 +356,7 @@ I observed the fixed snp with allele frequency = 0, suggesting that Angsd did no
 |    CH      |   −    |   −    |   −    |   −    |   −    |    −   |0.000585|
 |    REF     |   −    |   −    |   −    |   −    |   −    |0.000585|    −   |
 
-Compared to the non-masked genome results, Fst values from the masked genome have 5 decreases vs. 3 increases observation. May need further tests to see if the masked regions lead to such changes. 
+Compared to the non-masked genome results, Fst values from the masked genome have 5 decreases vs. 3 increases observations. May need further tests to see if the masked regions lead to such changes. 
 
 ### 6) conduct Fst estimates
 
