@@ -329,7 +329,34 @@ min_af
 [1] 0
 ```
 
-I observed the fixed snp with allele frequency = 0, suggesting that Angsd did not show unexpected behanior for maf calculation.   
+I observed the fixed snp with allele frequency = 0, suggesting that Angsd did not show unexpected behanior for maf calculation.  
+
+- Fst (weighted) pairwise comparsion using non-masked genome
+
+|            |   HC   |  ARN   |  COH   |   SR   |   NB   |   CH   |   REF  | 
+| -----------|--------|--------|--------|--------|--------|--------|--------|
+|    HC      |   −    |0.000521|0.000475|0.000514|0.000732|    −   |    −   |
+|    ARN     |0.000521|   −    |0.000433|0.000338|0.000530|    −   |    −   |
+|    COH     |0.000475|0.000433|   −    |0.000539|0.000681|    −   |    −   |
+|    SR      |0.000514|0.000338|0.000539|   −    |0.000533|    −   |    −   |
+|    NB      |0.000732|0.000530|0.000681|0.000533|   −    |    −   |    −   |
+|    CH      |   −    |   −    |   −    |   −    |   −    |    −   |0.000584|
+|    REF     |   −    |   −    |   −    |   −    |   −    |0.000584|    −   |
+
+
+- Fst (weighted) pairwise comparsion using masked genome
+
+|            |   HC   |  ARN   |  COH   |   SR   |   NB   |   CH   |   REF  | 
+| -----------|--------|--------|--------|--------|--------|--------|--------|
+|    HC      |   −    |0.000521|0.000469|0.000513|0.000732|    −   |    −   |
+|    ARN     |0.000521|   −    |0.000428|0.000334|0.000527|    −   |    −   |
+|    COH     |0.000469|0.000428|   −    |0.000539|0.000682|    −   |    −   |
+|    SR      |0.000513|0.000334|0.000539|   −    |0.000540|    −   |    −   |
+|    NB      |0.000732|0.000527|0.000682|0.000540|   −    |    −   |    −   |
+|    CH      |   −    |   −    |   −    |   −    |   −    |    −   |0.000585|
+|    REF     |   −    |   −    |   −    |   −    |   −    |0.000585|    −   |
+
+Compared to the non-masked genome results, Fst values from the masked genome have 5 decreases vs. 3 increases observation. May need further tests to see if the masked regions lead to such changes. 
 
 ### 6) conduct Fst estimates
 
