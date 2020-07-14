@@ -1,21 +1,3 @@
-### step 1 reorder the major and minor allele ###
-ref_file = 'ch_ref_98_ref_doMAF_filter.mafs'
-template = read.delim(ref_file, header = TRUE, sep = "\t", dec = ".")
-snp = data.frame(chr=template$chromo, chr=template$position)
-write.table(snp, file = "snp_list.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
-# then use python extract.py for data formatting
-
-### step 2 calculate the theta
-
-n=251*2
-a1 = 0
-for(i in seq(1,n-1)){
-  a1 = a1 + 1/i
-}
-
-S = 2.185/85
-M_hat = S/a1
-
 ### step 2 create null model
 library(gtools)
 library(hash)
@@ -64,32 +46,42 @@ null_distribution <- function(n, k){
   return(delta_ps)
 }
 
-dic <- hash()
-for(i in seq(1,dim(dat)[1])){
-  n=dat$nInd[i]*2
-  k=floor(dat$nInd[i]*2*dat$knownEM[i])
-  delta_ps = null_distribution(n=n, k=k)
-  
-  key = paste0(n, ' ', k)
-  dic[[key]] <- delta_ps
-}
 
+
+# main 
+dic <- hash()
 p_values = c()
+sink("p_values.txt")
 for(i in seq(1,dim(dat)[1])){
   
+  s = paste0(i,'/',dim(dat)[1])
+  message(s,"\r",appendLF=FALSE)
   n=dat$nInd[i]*2
   k=floor(dat$nInd[i]*2*dat$knownEM[i])
+  
   obs_delta=obs_dat$deltaP[i]
   
   key = paste0(n, ' ', k)
-  delta_ps <- dic[[key]]
+  if(has.key(key, dic)){
+    delta_ps <- dic[[key]]
+  }
+  else{
+    delta_ps = null_distribution(n=n, k=k)
+    dic[[key]] <- delta_ps
+  }
   
   p_value <- length(delta_ps[delta_ps>obs_delta])/length(delta_ps)
-  p_values = c(p_values, p_value)
+  
+  flush.console()
+  cat(p_value)
+  cat('\n')
+  #p_values = c(p_values, p_value)
   
   #hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 iterations ")
   #abline(v=obs_delta, col='red')
 }
+sink()
 
+p_values <- read.delim("p_values.txt",header=FALSE) #read p values from p_values.txt
 out = data.frame(chromo=dat$chromo, position=dat$position, p_value=p_values)
 write.table(out, file = "p_value_list_all.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
