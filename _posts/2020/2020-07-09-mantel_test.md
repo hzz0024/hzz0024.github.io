@@ -49,7 +49,7 @@ for i in *.fst;do
 done 
 ```
 
-4) extract the percentile data (99.9% percentile)
+4) extract the percentile data (99.9% PERCENTILE)
 
 ```sh
 python3 4_percentile.py -i ch_ref_200_fold.fst -o ch_ref_200.csv -p 99.9 > ch_ref_200.log
@@ -123,9 +123,12 @@ GEOGRAPHIC_DISTANCE
 
 8) run the IBD (only windows version is working)
 
-the outcome and log file are stored [here](https://docs.google.com/spreadsheets/d/1xcbEXtuEYNLG2BUW8Ivh0o79iArKyGI7mixq_wzaAlc/edit?usp=sharing)
+The outcome and log file are stored [here](https://docs.google.com/spreadsheets/d/1xcbEXtuEYNLG2BUW8Ivh0o79iArKyGI7mixq_wzaAlc/edit?usp=sharing)
+
+In mantel test based on raw data (non-log scaled values), r = -0.423569 and p-value = 0.913, suggesting that there is no significant IBD in the data. 
 
 9) plot the genetic vs. geographic distance
 
 <img src="https://hzz0024.github.io/images/Mantel/mantel1.jpeg" alt="img" width="800"/>
 
+Note that Reduced Major Axis (RMA) regrassion between genetic and geographic distance is slightly negative (again these Fst values are generated from the top 0.1% percentile), with a slope of -0.00035320186051 and an intercept of 0.068903807201. Not sure how to interpret this yet. May need more reading about the IBD manual and related literatures.
