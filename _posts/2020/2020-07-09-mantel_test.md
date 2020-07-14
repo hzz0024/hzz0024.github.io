@@ -13,12 +13,11 @@ categories:
 
 This post shows the steps for Mantel test. The Fst datasets were created from this post [Rebuild DelBay19 data](https://hzz0024.github.io/2020/07/08/DelBay_data_redo.html)
 
-Given that LD is minimal beyond 200 bp, I used 200bp as the window size to produce the Fst values. The wild transect has 5 population, leading to 10 pairwise comparsions. Below is the steps for data prepariation and Mantel test:
+Given that LD is minimal beyond 200 bp, I used 200bp as the window size to produce the Fst values. The wild transect has 5 population, leading to 10 pairwise comparsions. Below are the steps for data prepariation and Mantel test:
 
 1) Replace the chromosome name (string) with numbers
 
 ```sh
-
 for i in *.txt; do
 sed -i.bak 's/NC_035780.1/1/g;s/NC_035781.1/2/g;s/NC_035782.1/3/g;s/NC_035783.1/4/g;s/NC_035784.1/5/g;s/NC_035785.1/6/g;s/NC_035786.1/7/g;s/NC_035787.1/8/g;s/NC_035788.1/9/g;s/NC_035789.1/10/g;s/NC_007175.2/11/g' $i
 done
@@ -28,7 +27,6 @@ done
 2) extract the chr, window_start, window_end, and Fst values for each SNP
 
 ```sh
-
 awk -F"\t" '{print $2, $3, $3, $5}' CH_REF_maf0.05_pctind0.7_cv30_nochr56invers_fold.200_win_200_fst.txt | awk '$2-=100' | awk '$3+=100' > ch_ref_200_fold.fst
 awk -F"\t" '{print $2, $3, $3, $5}' ARN_HC_maf0.05_pctind0.7_cv30_no56invers_fold.200_win_200_fst.txt | awk '$2-=100' | awk '$3+=100' > HC_ARN_200_fold.fst
 awk -F"\t" '{print $2, $3, $3, $5}' COH_HC_maf0.05_pctind0.7_cv30_no56invers_fold.200_win_200_fst.txt | awk '$2-=100' | awk '$3+=100' > HC_COH_200_fold.fst
@@ -54,7 +52,6 @@ done
 4) extract the percentile data (99.9% percentile)
 
 ```sh
-
 python3 4_percentile.py -i ch_ref_200_fold.fst -o ch_ref_200.csv -p 99.9 > ch_ref_200.log
 python3 4_percentile.py -i HC_ARN_200_fold.fst -o HC_ARN_200.csv -p 99.9 > HC_ARN_200.log
 python3 4_percentile.py -i HC_COH_200_fold.fst -o HC_COH_200.csv -p 99.9 > HC_COH_200.log
