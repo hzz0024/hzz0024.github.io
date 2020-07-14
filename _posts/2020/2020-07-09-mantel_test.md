@@ -67,7 +67,7 @@ python3 4_percentile.py -i SR_NB_200_fold.fst -o SR_NB_200.csv -p 99.9 > SR_NB_2
 ```
 
 
-5) rouguly calculate the geographic distance between two sites. The approximate distance was calculated on the basis of a spherical earch and used the webstie https://www.movable-type.co.uk/scripts/latlong.html.
+5) rouguly calculate the geographic distance between two sites. The approximate distance was calculated on the basis of a spherical earch and used the website here [https://www.movable-type.co.uk/scripts/latlong.html](https://www.movable-type.co.uk/scripts/latlong.html).
 
 |ID  |pop |coordinate 1|coordinate 2|
 |----|----|-----------|-------------|
