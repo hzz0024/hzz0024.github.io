@@ -131,6 +131,6 @@ In mantel test based on raw data (non-log scaled values), r = -0.423569 and p-va
 
 <img src="https://hzz0024.github.io/images/Mantel/mantel1.jpeg" alt="img" width="800"/>
 
-Note that Reduced Major Axis (RMA) regrassion between genetic and geographic distance is slightly negative (again these Fst values are generated from the top 0.1% percentile with 474 SNPs), with a slope of -0.00035320186051 and an intercept of 0.068903807201. Negative correlation values indicate that populations that are located at a close distance tend to be genetically dissimilar. However, the popualtion pair with shorter geographic distance should be less differentiated. Maybe the 99.9% percentile is a less stringent filtering parameter for outlier collection, thus bring in some false positives to homogenize the average Fst values. 
+Note that Reduced Major Axis (RMA) regrassion between genetic and geographic distance is slightly negative (again these Fst values are generated from the top 0.1% percentile with 474 SNPs), with a slope of -0.00035 and an intercept of 0.06890. Negative correlation values indicate that populations that are located at a close distance tend to be genetically dissimilar. However, the popualtion pair with shorter geographic distance should be less differentiated. Maybe the 99.9% percentile is a less stringent filtering parameter for outlier collection, thus bring in some false positives to homogenize the average Fst values. 
 
 May need more reading about the IBD manual and related literatures.
