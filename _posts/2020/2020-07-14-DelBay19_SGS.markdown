@@ -76,7 +76,7 @@ length(DT$V3[DT$V3 < 0.001])
 
 1) The number of outliers after FDR correction is so high (11516). Actually all these p-values are 0, meaning that none of the deltap (10000 values) from the null-model is larger than the observed deltap. This looks not accurate. Perhaps I should use One-Sample Test to obtain the p-value.
 
-2) The accurate pi need to be corrected by the actual number of variant and invariant sites covered in global and window estimates. Anna Tigano did that and posted the script here https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD. I will follow her steps and edit the script for my data usage. This pi value is important to the SGS analyses. My current SGS analysis uses the global theta calcualted from tW(Watterson theta)/nSites, which only take the variant sites into account.
+2) The pi need to be corrected by the actual number of variant and invariant sites covered in global and window estimates. Anna Tigano did that and posted the script here https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD. I will follow her steps and edit the script for my data usage. This pi value is important to the SGS analyses. My current SGS analysis uses the global theta calcualted from tW(Watterson theta)/nSites, which only take the variant sites into account.
 
 
 
