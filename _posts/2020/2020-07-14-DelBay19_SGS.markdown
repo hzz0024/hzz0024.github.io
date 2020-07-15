@@ -1,0 +1,82 @@
+---
+comments: true
+title: DelBay19 single generation selection (SGS) test
+date: '2020-07-02 12:00'
+tags:
+  - DelBay19
+  - deltap
+  - ouliter
+  - null model
+  - theta
+  - drift
+  - WGS
+categories:
+  - WGS data analysis
+---
+
+### Test for single-generation selection
+
+In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across Environments in Juvenile Sea Bream](https://www.mdpi.com/2073-4425/11/4/398/htm#app1-genes-11-00398), the author estimated the expected distribution of allele frequency changes (deltap) due to finite sample sizes in the absence of selection to generate null expectations.
+
+### Conceptional steps:
+
+1) a panmictic common gene pool of finite size (i.e. the real population)
+
+2) two samples of size N1 and N2 are drawn within the same generation
+
+3) compare the observed allele frequency difference - ΔP=abs(P1−P2) with the distribution of ΔP expected from random sampling effects (i.e. due to finite sample size effects) and obtain the p-values.    
+
+### Perform the SGS test for DelBay19 challenge experiment
+
+> The posterior probability distribution of 𝑍 in the common gene pool given X=𝑘 observed allele counts in N1 diploid individuals was used to obtain the null distribution of ΔP between the two samples of size N1 and N2. For that, we assumed that the two samples are drawn from the same common gene pool, and used the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2. Finally, the distribution of allele frequency differences between the two samples was computed and compared to the observed value of ΔP to estimate a P-value.
+
+I used "the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2". This is done by using the *sample* function in the R, which allows me to randomly draw two p (i.e. allele frequency) values based on probability distribution conditioned the first N1. Then I simply calculate the differences between two p values - i.e. deltap.
+
+```R
+# SGS test
+Rscript --verbose SGS_DelBay19.R
+
+# check the result
+require(data.table)
+library(ggplot2)
+# load the p-value results
+DT <- fread("p_value_list_all.txt")
+print(DT)
+                  V1       V2     V3
+      1: NC_035780.1     1466 0.5507
+      2: NC_035780.1     1472 0.3342
+      3: NC_035780.1     4241 0.1308
+      4: NC_035780.1     4277 0.8981
+      5: NC_035780.1     4928 0.5928
+     ---                            
+1885316: NC_035789.1 32597188 0.4721
+1885317: NC_035789.1 32597351 0.0956
+1885318: NC_035789.1 32597701 0.8153
+1885319: NC_035789.1 32597840 0.0950
+1885320: NC_035789.1 32597934 0.2616
+DT$V3 <- as.numeric(DT$V3)
+# measure the number of snp with p-value < 0.001
+length(DT$V3[DT$V3 < 0.001])
+[1] 35222
+# plot the distribution of p-values across the whole genome
+ggplot(data=DT, aes(DT$V3)) + 
+  geom_histogram(bins = 200)+
+  xlab("p-value")
+# obtain the p-value after fdr correction
+DT$V3 <- round(p.adjust((DT$V3), "fdr"), 5)
+length(DT$V3[DT$V3 < 0.001])
+[1] 11516
+```
+
+- p-value density plot. The left tail in the distribution sould include some false-positives.
+
+<img src="https://hzz0024.github.io/images/SGS/p-value_distribution.jpeg" alt="img" width="800"/>
+
+- Some questions that need to be addressed from this SGS test,
+
+1) The number of outliers after FDR correction is so high (11516). Actually all these p-values are 0, meaning that none of the deltap (10000 values) from the null-model is larger than the observed deltap. This looks not accurate. Perhaps I should use One-Sample Test to obtain the p-value.
+
+2) The accurate pi need to be corrected by the actual number of variant and invariant sites covered in global and window estimates. Anna Tigano did that and posted the script here https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD. I will follow her steps and edit the script for my data usage. This pi value is important to the SGS analyses. My current SGS analysis uses the global theta calcualted from tW(Watterson theta)/nSites, which only take the variant sites into account.
+
+
+

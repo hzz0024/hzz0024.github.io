@@ -4,6 +4,7 @@ library(hash)
 
 filename = 'REF_maf0.05_pctind0.7_cv30.mafs'
 obs_file = 'obs_deltap_cv30.output'
+outputfile = 'p_values.txt'
 
 dat <- read.delim(filename, header = TRUE, sep='\t')
 obs_dat <- read.delim(obs_file, header = TRUE, sep='\t')
@@ -31,7 +32,7 @@ draw_distribution <- function(n,k,M){
 }
 
 null_distribution <- function(n, k){
-  N1 = draw_distribution(n, k, 0.014) #chr5 global theta
+  N1 = draw_distribution(n, k, 0.194690902) #global theta
   num_sample = 10000
   sample_p1 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
   sample_p2 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
@@ -51,7 +52,7 @@ null_distribution <- function(n, k){
 # main 
 dic <- hash()
 p_values = c()
-sink("p_values.txt")
+sink(outputfile)
 for(i in seq(1,dim(dat)[1])){
   
   s = paste0(i,'/',dim(dat)[1])
@@ -71,17 +72,19 @@ for(i in seq(1,dim(dat)[1])){
   }
   
   p_value <- length(delta_ps[delta_ps>obs_delta])/length(delta_ps)
-  
+# check the status of obs_delta  
+#  if(p_value < 0.001){
+#    message('------')
+#    message(obs_delta)
+#  }
   flush.console()
   cat(p_value)
   cat('\n')
-  #p_values = c(p_values, p_value)
-  
   #hist(delta_ps, xlab="delta_p", main = "Null distribution of deltap from 10000 iterations ")
   #abline(v=obs_delta, col='red')
 }
 sink()
 
-p_values <- read.delim("p_values.txt",header=FALSE) #read p values from p_values.txt
+p_values <- read.delim(outputfile,header=FALSE) #read p values from p_values.txt
 out = data.frame(chromo=dat$chromo, position=dat$position, p_value=p_values)
 write.table(out, file = "p_value_list_all.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
