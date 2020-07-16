@@ -78,7 +78,7 @@ length(DT$V3[DT$V3 < 0.001])
 
 I also tried to use 99.9% percentile as a threshold to filer out the potential ouliters, it ends up with 50504 SNPs (still too much) 
 
-The One-Sample t-test behaves wired, which generate a lot of 1 and 0 p-values. This is probably due to that one-tailed test compares the means of non-model to the observed deltap but not the distribution. The confidence interval is close to the mean after 10000 repeated deltap calculation. 
+The One-Sample t-test behaves wired, which generate a lot of 1 and 0 p-values. This is probably due to that one-tailed t-test compares the means of non-model to the observed deltap but not the distribution. The confidence interval is close to the mean after 10000 repeated deltap calculation. 
 
 ```sh
 # simple code for one-tailed t-test 
