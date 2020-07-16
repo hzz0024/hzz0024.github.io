@@ -74,7 +74,17 @@ length(DT$V3[DT$V3 < 0.001])
 
 - Some questions that need to be addressed from this SGS test,
 
-1) The number of outliers after FDR correction is so high (11516). Actually all these p-values are 0, meaning that none of the deltap (10000 values) from the null-model is larger than the observed deltap. This looks not accurate. Perhaps I should use One-Sample Test to obtain the p-value.
+1) The number of outliers after FDR correction is so high (11516). Actually all these p-values are 0, meaning that none of the deltap (10000 values) from the null-model is larger than the observed deltap. This looks not accurate. Perhaps I should use One-Sample t-test to obtain the p-value.
+
+I also tried to use 99.9% percentile as a threshold to filer out the potential ouliters, it ends up with 50504 SNPs (still too much) 
+
+The One-Sample t-test behaves wired, which generate a lot of 1 and 0 p-values. This is probably due to that one-tailed test compares the means of non-model to the observed deltap but not the distribution. The confidence interval is close to the mean after 10000 repeated deltap calculation. 
+
+```sh
+# simple code for one-tailed t-test 
+# delta_ps is the list of deltap produced from the non-model, while obs_delta is the actual deltap from challenge experiment
+res = t.test(delta_ps, mu = obs_delta, alternative='less', conf.level = 0.95)
+```
 
 2) The pi need to be corrected by the actual number of variant and invariant sites covered in global and window estimates. Anna Tigano did that and posted the script here [https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD](https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD). I will follow her steps and edit the script for my data usage. This pi value is important to the SGS analyses. My current SGS analysis uses the global theta calcualted from tW(Watterson theta)/nSites, which only take the variant sites into account.
 
