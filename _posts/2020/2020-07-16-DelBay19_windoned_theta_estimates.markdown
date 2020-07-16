@@ -28,7 +28,11 @@ angsd -b $HOME/wgr_peromyscus/sample_lists/peer_goodbam_all_noout.txt \
 -out $HOME/wgr_peromyscus/angsd_results_peer/angsd_peer_global_noout \
 -P 24 -minMapQ 20 -minQ 20 -setMinDepth 13 -minInd 13 -GL 1 -minMaf 0.01 -SNP_pval 1e-6 \
 -doMaf 1 -doMajorMinor 1 -doPost 1 -doCounts 1 -doDepth 1 -doGlf 3 -doGeno 32 -dumpCounts 1 -doSaf 1 -fold 1
+```
 
+output: angsd_peer_global_noout_sites.txt - variants list from the global calling with stringent quality filter
+
+```sh
 angsd_peer_global_noout_allvar.sh - variant and invariant calling
 
 angsd -b $HOME/wgr_peromyscus/sample_lists/peer_goodbam_all_noout.txt \
@@ -36,7 +40,11 @@ angsd -b $HOME/wgr_peromyscus/sample_lists/peer_goodbam_all_noout.txt \
 -out $HOME/wgr_peromyscus/angsd_results_peer/angsd_peer_global_noout_allvar \
 -P 24 -minMapQ 20 -minQ 20 -setMinDepth 13 -minInd 13 -GL 1 \
 -doMaf 1 -doMajorMinor 1 -doPost 1 -doCounts 1 -doDepth 1
+```
 
+output: angsd_peer_global_noout_allvar.mafs - including all sites in the analysis (i.e. variant and invariant), need to to called again with angsd_peer_global_noout_allvar.sh
+
+```sh
 angsd_peer_pop.sh - recall snp within each popultion
 
 angsd -b $HOME/wgr_peromyscus/sample_lists/peer_goodbam_${POP}.txt \
@@ -46,9 +54,7 @@ angsd -b $HOME/wgr_peromyscus/sample_lists/peer_goodbam_${POP}.txt \
 -doMaf 1 -doMajorMinor 3 -doPost 1 -doCounts 1 -doDepth 1 -doGlf 3  -doGeno 32 -dumpCounts 1 -doSaf 1 -fold 1 -sites angsd_peer_global_noout_sites.txt
 ```
 
-angsd_peer_global_noout_sites.txt - variants list from the global calling with stringent quality filter     
-angsd_peer_global_noout_allvar.mafs - including all sites in the analysis (i.e. variant and invariant), need to to called again with angsd_peer_global_noout_allvar.sh
-angsd_peer_global_noout_folded.sfs.thetas.site - file contailing pi for each loci (i.e. tsv file in theta estimation output)
+output: angsd_peer_global_noout_folded.sfs.thetas.site - file contailing pi for each loci (i.e. tsv file in theta estimation output)
 
 1) step 1. split the reference genome into windows
 
