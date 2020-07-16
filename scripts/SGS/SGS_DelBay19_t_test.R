@@ -97,8 +97,8 @@ for(i in seq(1,dim(dat)[1])){
   #  stopifnot(res$conf.int[2] < obs_delta)
   #}
   
-  right_tail = quantile(delta_ps, .999)
-  left_tail = quantile(delta_ps, .001)
+  right_tail = quantile(delta_ps, .9999)
+  left_tail = quantile(delta_ps, .0001)
   
   if (obs_delta < left_tail | obs_delta > right_tail){
     cnt = cnt +  1
