@@ -28,8 +28,6 @@ In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across E
 
 ### Perform the SGS test for DelBay19 challenge experiment
 
-> The posterior probability distribution of 𝑍 in the common gene pool given X=𝑘 observed allele counts in N1 diploid individuals was used to obtain the null distribution of ΔP between the two samples of size N1 and N2. For that, we assumed that the two samples are drawn from the same common gene pool, and used the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2. Finally, the distribution of allele frequency differences between the two samples was computed and compared to the observed value of ΔP to estimate a P-value.
-
 I used "the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2". This is done by using the *sample* function in the R, which allows me to randomly draw two p (i.e. allele frequency) values based on probability distribution conditioned the first N1. Then I simply calculate the differences between two p values - i.e. deltap.
 
 ```R
@@ -87,4 +85,12 @@ res = t.test(delta_ps, mu = obs_delta, alternative='less', conf.level = 0.95)
 ```
 
 2) The pi need to be corrected by the actual number of variant and invariant sites covered in global and window estimates. Anna Tigano did that and posted the script here [https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD](https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD). I will follow her steps and edit the script for my data usage. This pi value is important to the SGS analyses. My current SGS analysis uses the global theta calcualted from tW(Watterson theta)/nSites, which only take the variant sites into account.
+
+3) It seems my current model is still different from the SGS approach proposed by Carine Rey in the Sea Bream paper. That is, in the sea bream paper, the author stated that 
+
+> The posterior probability distribution of 𝑍 in the common gene pool given X=𝑘 observed allele counts in N1 diploid individuals was used to obtain the null distribution of ΔP between the two samples of size N1 and N2. For that, we assumed that the two samples are drawn from the same common gene pool, and used the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2. Finally, the distribution of allele frequency differences between the two samples was computed and compared to the observed value of ΔP to estimate a P-value.
+
+In my current model, I only computed the ΔP WITHIN the N1 (i.e. control group) or N1+N2 (i.e. challenge + control) posterior probability distribution, but haven't taken the N2 sample size into account. I did this because the challenge and control groups have the similar sample size (50 vs. 48). I may need to modify this part.
+
+Three things need to be finished: 1) figure out the way to utilize local estimates of pi; 2) figure out the approprate way of null ΔP calculation; 3) incorporate the uncertainty in allele counts into the model.    
 
