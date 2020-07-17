@@ -119,7 +119,7 @@ Fitting of LD decay is highly unreliable at short distances (<50kb).
 
 <img src="https://hzz0024.github.io/images/ngsLD/REF_50_5bp.jpg" alt="img" width="800"/>
 
-Note that the LD decay is the averaged restuls, single point r^2 could be as high as ~1, for example, in REF chr 1,
+Note that the LD decay is the averaged result, single point estimate of r^2 could be as high as ~1, for example, in REF chr 1,
 
 | snp 1           | snp 2              | distance(bp) |   r^2    |
 |-----------------|--------------------|--------------|----------|
