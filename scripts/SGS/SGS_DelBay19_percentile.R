@@ -3,11 +3,15 @@ library(gtools)
 library(hash)
 
 filename = 'CHR_maf0.05_pctind0.7_cv30.mafs'
+challenge = 'CH_maf0.05_pctind0.7_cv30.mafs'
 obs_file = 'obs_deltap_cv30.output'
 outputfile = 'p_values.txt'
 
+dat2 <- read.delim(challenge, header = TRUE, sep='\t')
+n2s <- dat2$nInd*2
 dat <- read.delim(filename, header = TRUE, sep='\t')
 obs_dat <- read.delim(obs_file, header = TRUE, sep='\t')
+dat$n2 = n2s
 
 #dat = dat[dat$chromo==5,]
 #obs_dat= obs_dat[obs_dat$chromo==5,]
@@ -32,17 +36,18 @@ draw_distribution <- function(n,k,M){
   return(list("tajima" = tajima_points, "points" = points))
 }
 
-null_distribution <- function(n, k){
-  N1 = draw_distribution(n, k, 0.17085) #global theta
-  N2_k = sample(seq(1:(n-1))/n, 1, prob=N1$points, replace=TRUE) * n
-  N2 = draw_distribution(n, N2_k, 0.17085)
+null_distribution <- function(n, k, n2){
+  theta = 0.17085
+  N1 = draw_distribution(n, k, theta) #global theta
+  n2_k = sample(seq(1:(n-1))/n, 1, prob=N1$points, replace=TRUE) * n2
+  N2 = draw_distribution(n2, n2_k, theta)
   
   num_sample = 10000
   #set.seed(1)
   sample_p1 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
   #set.seed(0)
   #sample_p2 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
-  sample_p2 = sample(seq(1:(n-1))/n, num_sample, prob=N2$points, replace=TRUE)
+  sample_p2 = sample(seq(1:(n2-1))/n2, num_sample, prob=N2$points, replace=TRUE)
   
   delta_ps = c()
   for(j in seq(1,num_sample)){
@@ -65,15 +70,16 @@ for(i in seq(1,dim(dat)[1])){
   message(s,"\r",appendLF=FALSE)
   n=dat$nInd[i]*2
   k=floor(dat$nInd[i]*2*dat$knownEM[i])
+  n2=dat$n2[i]
   
   obs_delta=obs_dat$deltaP[i]
   
-  key = paste0(n, ' ', k)
+  key = paste0(n, ' ', k, ' ', n2)
   if(has.key(key, dic)){
     delta_ps <- dic[[key]]
   }
   else{
-    delta_ps = null_distribution(n=n, k=k)
+    delta_ps = null_distribution(n=n, k=k, n2=n2)
     dic[[key]] <- delta_ps
   }
   

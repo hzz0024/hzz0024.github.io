@@ -2,7 +2,7 @@
 library(gtools)
 library(hash)
 
-filename = 'REF_maf0.05_pctind0.7_cv30.mafs'
+filename = 'CHR_maf0.05_pctind0.7_cv30.mafs'
 obs_file = 'obs_deltap_cv30.output'
 outputfile = 'p_values.txt'
 
@@ -22,7 +22,8 @@ draw_distribution <- function(n,k,M){
   points = c()
   for(i in seq(1:(n-1))){
     p = i/n
-    upper_left = factorial(n)/(factorial(n - k)*factorial(k)) * p^k * (1-p)^(n-k)
+    #upper_left = factorial(n)/(factorial(n - k)*factorial(k)) * p^k * (1-p)^(n-k)
+    upper_left = exp(lfactorial(n)-(lfactorial(n - k)+lfactorial(k))) * p^k * (1-p)^(n-k)
     upper_right =  M * (1/i + 1/(n-i))/sum(tajima_points)
     res = upper_left * upper_right / (1/(n-1))
     points = c(points, res)
@@ -32,7 +33,7 @@ draw_distribution <- function(n,k,M){
 }
 
 null_distribution <- function(n, k){
-  N1 = draw_distribution(n, k, 0.194690902) #global theta
+  N1 = draw_distribution(n, k, 0.17085) #global theta
   num_sample = 10000
   sample_p1 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
   sample_p2 = sample(seq(1:(n-1))/n, num_sample, prob=N1$points, replace=TRUE)
