@@ -1,7 +1,7 @@
 ---
 comments: true
 title: DelBay19 single generation selection (SGS) test
-date: '2020-07-14 12:00'
+date: '2020-07-27 12:00'
 tags:
   - DelBay19
   - deltap
