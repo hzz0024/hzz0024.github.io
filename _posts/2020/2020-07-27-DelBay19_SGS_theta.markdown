@@ -52,9 +52,6 @@ Rscript deltaP_act.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/10_SGS/
 
 <img src="https://hzz0024.github.io/images/SGS/deltap.jpeg" alt="img" width="800"/>
 
-
-The pi need to be corrected by the actual number of variant and invariant sites covered in global and window estimates. Anna Tigano did that and posted the script here [https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD](https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD). I will follow her steps and edit the script for my data usage. This pi value is important to the SGS analyses. My current SGS analysis uses the global theta calcualted from tW(Watterson theta)/nSites, which only take the variant sites into account (addressed, need evaluate the correct window size later).
-
 comments: What is appropriate window size? It may be difficult to know without trying and comparing several (e.g. on one chromosome). How does StDev(theta) vary with window size. Maybe we want the window size where variance of theta is greatest?
   
 
