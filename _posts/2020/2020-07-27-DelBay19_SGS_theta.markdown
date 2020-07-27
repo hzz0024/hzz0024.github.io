@@ -24,11 +24,11 @@ In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across E
 
 2) two samples of size N1 (challenge + control, n = 98) and N2 (challenge, n = 50) are drawn within the same generation
 
-3) compare the observed allele frequency difference - ΔP=abs(P1−P2) with the distribution of ΔP expected from random sampling effects (i.e. due to finite sample size effects) and obtain the quantile outliers or p-values.    
+3) compare the observed allele frequency difference - ΔP=P2-P1 with the distribution of ΔP expected from random sampling effects (i.e. due to finite sample size effects) and obtain the quantile outliers or p-values.    
 
 ### Perform the SGS test for DelBay19 challenge experiment
 
-I used "the posterior probability distribution of Z conditioned the first sample of size N1 to predict the null distribution of allele counts in the second sample of size N2". This is done by using the *sample* function in the R, which allows me to randomly draw two p (i.e. allele frequency) values based on probability distribution in sample N1 and N2. Then I simply calculate the differences between two allele frequency values - i.e. deltap.
+I used the *sample* function in the R to randomly draw two p (i.e. allele frequency) values based on allele frequency probability distribution in sample N1 and N2. Then I simply calculate the differences between two allele frequency values - i.e. deltap.
 
 This time I incorporate the window-sized theta values into the SGS test. It is designed that each SNP in a window (in the test below I used the 200 bp as window size) will use the same theta value, and estimate the probability distribution of allele frequency in sample N1 and N2. A potential SNP outlier will be identified based on 99.9% quantile of the delta p distribution (two-side, positive or negative).
 
