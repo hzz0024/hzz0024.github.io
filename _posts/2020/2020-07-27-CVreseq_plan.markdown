@@ -1,7 +1,7 @@
 ---
 comments: true
-title: CVreseq outlier detection
-date: '2020-04-21 12:00'
+title: CVreseq data analyses plan
+date: '2020-07-27 12:00'
 tags:
   - CVreseq
   - theta
