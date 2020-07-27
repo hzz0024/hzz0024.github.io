@@ -18,6 +18,9 @@ Link below stores the code for pi correction borrowed from Anna's github, I need
 
 [https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD](https://github.com/atigano/Peromyscus_eremicus_genome/tree/master/variant_calling_ANGSD)
 
+
+### Part I. Theta correction commands
+
 - Files needed for this analyses:
 
 ```sh
@@ -156,37 +159,7 @@ awk '{if(/NA/)var="NA";else var=$4/$5;print var}' pi_peer_global_noout_log_${WIN
 done
 ```
 
-Details:
-
-1) MAF difference between variant and invariant
-
-```sh
-zcat CHR_maf0.05_pctind0.7_cv30.mafs.gz | head
-chromo	position	major	minor	anc	knownEM	pK-EM	nInd
-NC_035780.1	1466	A	C	A	0.065532	1.488809e-13	79
-NC_035780.1	1472	A	C	A	0.086632	8.248957e-14	69
-NC_035780.1	4241	C	T	C	0.285470	0.000000e+00	73
-NC_035780.1	4277	G	T	G	0.138528	0.000000e+00	74
-NC_035780.1	4928	C	A	A	0.187889	0.000000e+00	74
-NC_035780.1	4957	A	G	G	0.188722	0.000000e+00	73
-NC_035780.1	5102	C	A	C	0.098888	0.000000e+00	71
-NC_035780.1	5123	G	A	G	0.172121	0.000000e+00	74
-NC_035780.1	5184	G	T	G	0.283082	0.000000e+00	69
-
-chromo  position        major   minor   anc     knownEM nInd
-NC_035780.1 1462    T       A       T       0.000003        81
-NC_035780.1 1463    A       C       A       0.000003        80
-NC_035780.1 1464    C       A       C       0.000004        81
-NC_035780.1 1465    C       G       C       0.006619        80
-NC_035780.1 1466    A       C       A       0.065532        79
-NC_035780.1 1467    C       A       C       0.000004        78
-NC_035780.1 1468    T       A       T       0.000004        72
-NC_035780.1 1469    T       C       T       0.016252        70
-NC_035780.1 1470    T       C       T       0.016522        70
-NC_035780.1 1471    A       C       A       0.042522        70
-```
-
-2) An example showing the corrected theta (last column)
+An example showing the corrected theta (last column)
 
 ```sh
 head pi_peer_global_noout_log_200bwin_sites_corrected_NC_035780.1.txt
@@ -202,5 +175,9 @@ NC_035780.1	1400	1600	0.274983	34	0.00808774
 NC_035780.1	1600	1800	NA	0	NA
 NC_035780.1	1800	2000	NA	0	NA
 ```
+
+### Part II. Pick the right window size using single chromosome as an example
+
+
 
 

@@ -2,16 +2,21 @@
 library(gtools)
 library(hash)
 
+options(scipen=999)
+
 filename = 'CHR_maf0.05_pctind0.7_cv30.mafs'
 challenge = 'CH_maf0.05_pctind0.7_cv30.mafs'
 obs_file = 'obs_deltap_cv30.output'
 outputfile = 'p_values.txt'
+pi_file = 'pi_correct_all.txt'
 
 dat2 <- read.delim(challenge, header = TRUE, sep='\t')
 n2s <- dat2$nInd*2
 dat <- read.delim(filename, header = TRUE, sep='\t')
 obs_dat <- read.delim(obs_file, header = TRUE, sep='\t') # from ch - ref
 dat$n2 = n2s
+pi_dat <- read.delim(pi_file, header = FALSE, sep='\t') # from ch - ref
+
 
 #dat = dat[dat$chromo==5,]
 #obs_dat= obs_dat[obs_dat$chromo==5,]
@@ -36,9 +41,31 @@ draw_distribution <- function(n,k,M){
   return(list("tajima" = tajima_points, "points" = points))
 }
 
-null_distribution <- function(n, k, n2){
-  theta = 0.0091 #global theta
+
+theta_map = hash()
+
+save_theta <- function(pi_dat){
+  for(row in 1:nrow(pi_dat)){
+    
+    if(is.na(pi_dat[row, "V6"])){
+      next
+    }
+    
+    cur_chorm = pi_dat[row, "V1"]
+    cur_pos = pi_dat[row, "V2"]
+    cur_theta = formatC(pi_dat[row, "V6"], digits = 5, format = "f")
+    
+    theta_map[[paste0(cur_chorm,' ',cur_pos)]] = cur_theta
+
+  }
+}
+
+save_theta(pi_dat)
+
+null_distribution <- function(n, k, n2, theta){
+  #theta = 0.0091 #global theta
   N1 = draw_distribution(n, k, theta) 
+  # uncomment below if the expected allele count is drew from the N1 (i.e. best ref pop)
   n2_k = sample(seq(1:(n-1))/n, 1, prob=N1$points, replace=TRUE) * n2
   N2 = draw_distribution(n2, n2_k, theta)
   
@@ -62,9 +89,12 @@ null_distribution <- function(n, k, n2){
 
 # main 
 cnt = 0
+del_cnt = 0
 dic <- hash()
 p_values = c()
 sink(outputfile)
+
+
 for(i in seq(1,dim(dat)[1])){
   s = paste0(i,'/',dim(dat)[1])
   message(s,"\r",appendLF=FALSE)
@@ -72,27 +102,30 @@ for(i in seq(1,dim(dat)[1])){
   k=floor(dat$nInd[i]*2*dat$knownEM[i])
   n2=dat$n2[i]
   
+  cur_pos = dat$position[i] - dat$position[i]%%200
+  theta_key = paste0(dat$chromo[i],' ',cur_pos)
+  
+  
+  if(!has.key(theta_key, theta_map)){
+    del_cnt = del_cnt + 1
+    next
+    #message(theta_key)
+    #message(dat$position[i])
+  }
+ 
+  theta = theta_map[[theta_key]]
+  
   obs_delta=obs_dat$deltaP[i]
   
-  key = paste0(n, ' ', k, ' ', n2)
+  key = paste0(n, ' ', k, ' ', n2, ' ', theta)
   if(has.key(key, dic)){
     delta_ps <- dic[[key]]
   }
   else{
-    delta_ps = null_distribution(n=n, k=k, n2=n2)
+    delta_ps = null_distribution(n=n, k=k, n2=n2, theta=theta)
     dic[[key]] <- delta_ps
   }
   
-  if(FALSE){
-     DT = data.frame(delta_ps)
-     ggplot(data=DT, aes(delta_ps)) + 
-      geom_histogram(bins = 10)+
-      xlab("p-value")
-     write.csv(DT, 'DT.txt')
-     write.csv(obs_delta, 'obs_delta')
-     DT = read.csv('DT.txt')
-     break
-  }
   
   #if(obs_delta>0){
   #  res = t.test(delta_ps, mu = obs_delta, alternative='less', conf.level = 0.99)
@@ -101,7 +134,7 @@ for(i in seq(1,dim(dat)[1])){
   #}else{
   #  message('obs_delta is 0')
   #}
-
+  
   #if(res$p.value==0){
   #  stopifnot(res$conf.int[2] < obs_delta)
   #}
@@ -116,15 +149,10 @@ for(i in seq(1,dim(dat)[1])){
     cat(dat$position[i])
     cat('\n')
   }
+  
+  
   #p_value <- length(delta_ps[delta_ps>obs_delta])/length(delta_ps)
-  #p_value = res$p.value
 
-  #if(p_value==0){
-  #  message('p value is 0')
-  #}else if(p_value==1){
-  #  message('p value is 1')
-  #}
-   
   flush.console()
   #cat(p_value)
   #cat('\n')
@@ -137,6 +165,8 @@ for(i in seq(1,dim(dat)[1])){
 }
 sink()
 message(cnt)
+message(del_cnt)
+
 
 #p_values <- read.delim(outputfile,header=FALSE) #read p values from p_values.txt
 #out = data.frame(chromo=dat$chromo, position=dat$position, p_value=p_values)

@@ -22,7 +22,7 @@ mids = c()
 # create tags for deltap comparsion
 tags = c()
 # loop over snps
-num_snp = 386
+num_snp = 3664
 for(snp in seq(1,num_snp)){
   delta_Ps = deltaP_matix[snp,]
   q0 = unname(quantile(delta_Ps, probs=0.25))
@@ -70,7 +70,7 @@ DATA = data.frame(MIN=p0, MAX=p1)
 #DATA$MIN = 1- DATA$MIN
 #DATA$MAX = 1- DATA$MAX
 DATA = DATA[order(DATA$MIN),]
-num_snp = 386
+num_snp = 3664
 DATA$X = seq(1, num_snp)
 
 sp <- ggplot(DATA, aes(x=X, y=MIN)) +
@@ -85,11 +85,11 @@ sp + scale_x_continuous(name="SNP", limits=c(0, 400)) +
      subtitle = "ref allele = black, ch allele = red, actual deltap = yellow")
 
 ##################### reveal the relationship between deltap and start p, second plot #####################
-setwd("/Volumes/cornell/DelBay19_Hopper/permutation/4_deltap_plot/deltap_vs_p_plot2")
+#setwd("/Volumes/cornell/DelBay19_Hopper/permutation/4_deltap_plot/deltap_vs_p_plot2")
 library(ggplot2)
 # load the dataset
-ch_file = 'ch_ref_98_ch_doMAF_filter.mafs.output'
-ref_file = 'ch_ref_98_ref_doMAF_filter.mafs.output'
+ch_file = 'CH_maf0.05_pctind0.7_cv30.mafs.extracted'
+ref_file = 'CHR_maf0.05_pctind0.7_cv30.mafs.extracted'
 deltap_file = 'obs_deltap.output'
 # obtain the deltap from obs dataset
 ch = read.delim(ch_file, header = TRUE, sep = "\t", dec = ".")
@@ -102,15 +102,20 @@ DATA = data.frame(p=p0, abs_dp=dp)
 #DATA$MIN = 1- DATA$MIN
 #DATA$MAX = 1- DATA$MAX
 DATA = DATA[order(DATA$p),]
-num_snp = 386
+num_snp = 3664
 DATA$X = seq(1, num_snp)
 sp <- ggplot(DATA, aes(x=p, y=abs_dp)) +
   geom_point(size=.5)
   # add x and y-axis titles
-sp + scale_x_continuous(name="p", limits=c(0, 0.5)) +
-  scale_y_continuous(name="Deltap (absolute values)", limits=c(0, 0.5)) +
+sp + scale_x_continuous(name="p", limits=c(min(DATA$p), max(DATA$p))) +
+  scale_y_continuous(name="Deltap (absolute values)", limits=c(min(DATA$abs_dp), max(DATA$abs_dp))) +
   labs(title = "Deltap against reference allele p for the observation data",
        subtitle = "note deltap ranges from 0-0.5")
+
+
+
+
+
 # load the neutral datasets
 file1 <- list.files('.', pattern = "*.txt")
 file2 <- list.files('.', pattern = "*.extracted")
