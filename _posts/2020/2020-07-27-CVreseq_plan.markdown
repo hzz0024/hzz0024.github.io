@@ -24,6 +24,8 @@ Inspired by Sutherland et al. 2020, I'd like to identify the poential outliers u
 ---
 ### Pcadapt
 
+
+
 ---
 ### Bayescan
 
@@ -181,6 +183,10 @@ Again, SNP 5_11774642 is shared among three groups.
 2. The genomic location including containing or nearby these outliers (within 10 kb) need further investigation.
 
 3. Due to the limited sample size (6 for each populations), the Fst may not reflect the real genomic differentiation.
+
+To do list:
+
+- I have already generated the Fst and theta (both single SNP and window-sized) using this vcf file. Once I confirmed the common shared SNP oultiers, I will plot the these pattern along the potential oultiers.
 
 - Detecting runs of homozygosity (ROH)
 

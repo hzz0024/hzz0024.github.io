@@ -53,5 +53,7 @@ Rscript deltaP_act.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/10_SGS/
 <img src="https://hzz0024.github.io/images/SGS/deltap.jpeg" alt="img" width="800"/>
 
 Remained question: What is appropriate window size? It may be difficult to know without trying and comparing several (e.g. on one chromosome). How does StDev(theta) vary with window size. Maybe we want the window size where variance of theta is greatest?
+
+Are there any common shared outliers between SGS results and wild transect comparsions? How to determine the potential SNPs of selection in the wild transect?
   
 
