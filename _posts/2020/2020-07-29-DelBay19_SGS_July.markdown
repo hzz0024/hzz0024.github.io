@@ -68,10 +68,16 @@ length(dp[dp<0])
 
 <img src="https://hzz0024.github.io/images/SGS/delta_p_0729.jpeg" alt="img" width="800"/>
 
-Remained question: What is appropriate window size? It may be difficult to know without trying and comparing several (e.g. on one chromosome). How does StDev(theta) vary with window size. Maybe we want the window size where variance of theta is greatest?
+Remained question: 
 
-What is the genetic differntiation or diversity indice patterns along these potential outliers? 
+1) What is the repeatability of this model? Is 10000 times of drawing enough for outlier detection? 
 
-Are there any common shared outliers between SGS results and wild transect comparsions? How to determine the potential SNPs of selection in the wild transect? - association analysis and same SGS model for outlier identification in wild transect.
+So far I have performed this model twice using the same data, only 86 potential outliers overlapped in the two results. It is not unexpected as the posterior probability distribution of Z in sample N2 is largely depended on the k2, whereas k2 is a one-time draw from the N1 distribution. I will perform more test to identify the effect of drawing times.
+
+2) What is appropriate window size? It may be difficult to know without trying and comparing several (e.g. on one chromosome). How does StDev(theta) vary with window size. Maybe we want the window size where variance of theta is greatest?
+
+3) What is the genetic differntiation or diversity indice patterns along these potential outliers? 
+
+4) Are there any common shared outliers between SGS results and wild transect comparsions? How to determine the potential SNPs of selection in the wild transect? - could be association analysis or the same SGS model for outlier identification in wild transect.
   
 
