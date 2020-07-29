@@ -1,6 +1,6 @@
 ---
 comments: true
-title: DelBay19 single generation selection (SGS) test - corrected
+title: DelBay19 single generation selection (SGS) test - updates
 date: '2020-07-29 12:00'
 tags:
   - DelBay19
