@@ -59,10 +59,10 @@ python3 extract.py
 Rscript deltaP_act.R -d ~/SGS/local_theat_SGS_results -p CHR_maf0.05_pctind0.7_cv30.mafs.extracted -q CH_maf0.05_pctind0.7_cv30.mafs.extracted -t 1182 -o obs_deltap.output
 # number of outliers with postive change 
 length(dp[dp>0])
-549
+> 549
 # number of outliers with postive change 
 length(dp[dp<0])
-633
+> 633
 ```
 <img src="https://hzz0024.github.io/images/SGS/allele_0729.jpeg" alt="img" width="800"/>
 
