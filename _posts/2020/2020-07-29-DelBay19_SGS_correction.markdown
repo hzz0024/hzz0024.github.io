@@ -72,7 +72,7 @@ Remained question:
 
 1) What is the repeatability of this model? Is 10000 times of drawing enough for outlier detection? 
 
-So far I have performed this model twice using the same data, only 86 potential outliers overlapped in the two results. It is not unexpected as the posterior probability distribution of Z in sample N2 is largely depended on the k2, whereas k2 is a one-time draw from the N1 distribution. I will perform more test to identify the effect of drawing times.
+So far I have performed this model twice (1182 vs 1224 outliers) using the same data, only 86 potential outliers overlapped in the two results. It is not unexpected as the posterior probability distribution of Z in sample N2 is largely depended on the k2, whereas k2 is a one-time draw from the N1 distribution. It is expected that some of the 1182 outlier are false postives, and could be eliminated with p-value and FDR approach. Meanwhile, I will perform more test to identify the effect of drawing times.
 
 2) What is appropriate window size? It may be difficult to know without trying and comparing several (e.g. on one chromosome). How does StDev(theta) vary with window size. Maybe we want the window size where variance of theta is greatest?
 
