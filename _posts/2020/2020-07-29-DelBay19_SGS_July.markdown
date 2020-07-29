@@ -66,7 +66,7 @@ length(dp[dp<0])
 ```
 <img src="https://hzz0024.github.io/images/SGS/allele_0729.jpeg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/SGS/deltap_0729.jpeg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/SGS/delta_p_0729.jpeg" alt="img" width="800"/>
 
 Remained question: What is appropriate window size? It may be difficult to know without trying and comparing several (e.g. on one chromosome). How does StDev(theta) vary with window size. Maybe we want the window size where variance of theta is greatest?
 
