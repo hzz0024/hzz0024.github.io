@@ -64,6 +64,8 @@ Rscript deltaP_act.R -d ~/SGS/local_theat_SGS_results -p CHR_maf0.05_pctind0.7_c
 
 Remained question: What is appropriate window size? It may be difficult to know without trying and comparing several (e.g. on one chromosome). How does StDev(theta) vary with window size. Maybe we want the window size where variance of theta is greatest?
 
+What is the genetic differntiation or diversity indice patterns along these potential outliers? 
+
 Are there any common shared outliers between SGS results and wild transect comparsions? How to determine the potential SNPs of selection in the wild transect? - association analysis and same SGS model for outlier identification in wild transect.
   
 
