@@ -57,10 +57,10 @@ cat p_values_local.txt | wc -l
 python3 extract.py
 # calculate the actual delta p values for 1182 SNPs
 Rscript deltaP_act.R -d ~/SGS/local_theat_SGS_results -p CHR_maf0.05_pctind0.7_cv30.mafs.extracted -q CH_maf0.05_pctind0.7_cv30.mafs.extracted -t 1182 -o obs_deltap.output
-# number of outliers with postive change 
+# number of outliers with postive delta_p 
 length(dp[dp>0])
 > 549
-# number of outliers with postive change 
+# number of outliers with negative delta_p 
 length(dp[dp<0])
 > 633
 ```
