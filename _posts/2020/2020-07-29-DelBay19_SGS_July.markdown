@@ -38,7 +38,7 @@ In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across E
 
 5) The expected null distribution is compared to the observed value of Δp with quantile function or P-value estimation (not completed yet). A potential SNP outlier will be identified based on 99.9% quantile of the delta p distribution (two-side, positive or negative).
 
-### Important updates compared to SGS post last week [https://hzz0024.github.io/2020/07/27/DelBay19_SGS_theta.html](https://hzz0024.github.io/2020/07/27/DelBay19_SGS_theta.html)
+### Important updates compared to SGS post early this week [https://hzz0024.github.io/2020/07/27/DelBay19_SGS_theta.html](https://hzz0024.github.io/2020/07/27/DelBay19_SGS_theta.html)
 
 1) I discard the *hash* function in model as the same expected delta_p distribution will be repeatedly used for outlier detection. That is, once (n, k, n2_k, n2, theta) are same for two different SNPs, their null-distribution of delta_p will be identical (althought this is less likely to happen). This *hash* is initially designed to save the computational time. Now I just divide the total SNP list into 10 parts and run them parallelly for effeciency.
 
