@@ -28,7 +28,7 @@ In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across E
 
 ### Perform the SGS test for DelBay19 challenge experiment
 
-1) The posterior probability distribution of 𝑍 in the N1 are generated based on allele counts (k), sample size (n), and theta (sliding with 200 window-size). 
+1) The posterior probability distribution of 𝑍 in the N1 are generated based on allele counts (k), sample size (n), and theta (sliding with 200 window-size) produced from Angsd. 
 
 2) I use the *sample* function in the R to randomly draw a *p* (i.e. allele frequency) value based on posterior probability distribution of Z in sample N1. This *p* is used to predict the allele count in the sample size n2 (i.e. n2_k = *p* X n2 X 2, n2 = challenge group with 50 samples). 
 
