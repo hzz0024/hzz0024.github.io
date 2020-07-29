@@ -34,7 +34,7 @@ In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across E
 
 3) The posterior probability distribution of Z in sample N2 are generated based on n2_k, n2, and the same theta.
 
-4) The expected allele freqeuncy (p1 and p2) for N1 and N2 are drew using *sample* function, with delta_p = p2 - p1. The distribution of allele frequency differences (delta_p) between the two samples is recorded if necessary.  
+4) The expected allele freqeuncy (p1 and p2) for N1 and N2 are drew 1000 times using the *sample* function again. The distribution of allele frequency differences (delta_p) between the two samples is calculated with delta_p = p2 - p1 and recorded for potential outliers.  
 
 5) The expected null distribution is compared to the observed value of Δp with quantile function or P-value estimation (not completed yet). A potential SNP outlier will be identified based on 99.9% quantile of the delta p distribution (two-side, positive or negative).
 
@@ -42,7 +42,7 @@ In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across E
 
 1) I discard the *hash* function in model as the same expected delta_p distribution will be repeatedly used for outlier detection. That is, once (n, k, n2_k, n2, theta) are same for two different SNPs, their null-distribution of delta_p will be identical (althought this is less likely to happen). This *hash* is initially designed to save the computational time. Now I just divide the total SNP list into 10 parts and run them parallelly for effeciency.
 
-2) I double check the whole input and output files and found an important error - the observed delta_p file for outlier detection is wrongly calculated. It should be challenge - control but what I used is control - challenge. It would be easy to make mistake like this if I using a another R script (get_deltaP.R) for observed delta_p calculatioo. To prevent such mistakes in the future, I calculate the observed delta_p directly in my SGS code. Now the inputs for SGS model are just a theta and two maf (challenge and control) files. After these corrections I ran the model again. The results are shown below. 
+2) I double check the whole input and output files and found an important error - the observed delta_p file for outlier detection is wrongly calculated. It should be challenge - control but what I used is control - challenge. It would be easy to make mistake like this if I using a another R script (get_deltaP.R) for observed delta_p calculation. To prevent such mistakes in the future, I calculate the observed delta_p directly in my SGS code. Now the inputs for SGS model are just a theta and two maf (challenge and control) files. After these corrections I ran the model again. The results are shown below. 
 
 ```R
 # SGS test
@@ -57,6 +57,12 @@ cat p_values_local.txt | wc -l
 python3 extract.py
 # calculate the actual delta p values for 1182 SNPs
 Rscript deltaP_act.R -d ~/SGS/local_theat_SGS_results -p CHR_maf0.05_pctind0.7_cv30.mafs.extracted -q CH_maf0.05_pctind0.7_cv30.mafs.extracted -t 1182 -o obs_deltap.output
+# number of outliers with postive change 
+length(dp[dp>0])
+549
+# number of outliers with postive change 
+length(dp[dp<0])
+633
 ```
 <img src="https://hzz0024.github.io/images/SGS/allele_0729.jpeg" alt="img" width="800"/>
 
