@@ -34,7 +34,7 @@ In [Within-Generation Polygenic Selection Shapes Fitness-Related Traits across E
 
 3) The posterior probability distribution of Z in sample N2 are generated based on n2_k, n2, and the same theta.
 
-4) The expected allele freqeuncy (p1 and p2) for N1 and N2 are drew 1000 times using the *sample* function again. The distribution of allele frequency differences (delta_p) between the two samples is calculated with delta_p = p2 - p1 and recorded for potential outliers.  
+4) The expected allele freqeuncy for N1 (p1) and N2 (p2) are drew 1000 times using the *sample* function again. The distribution of allele frequency differences (delta_p) between the two samples is calculated with delta_p = p2 - p1 and recorded for potential outliers.  
 
 5) The expected null distribution is compared to the observed value of Δp with quantile function or P-value estimation (not completed yet). A potential SNP outlier will be identified based on 99.9% quantile of the delta p distribution (two-side, positive or negative).
 
