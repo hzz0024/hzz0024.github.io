@@ -20,14 +20,189 @@ The package pcadapt is a user-friendly tool to detect signs of local adaptation 
 3) computes robust Mahalanobis distances of these Z-scores to integrate all PCA dimensions in one multivariate distance for each variant      
 4) these distances approximately follow a chi-squared distribution, which enables derivation of one P-value for each genetic variant   
 
-Input: In pcadapt v4, the preferred format is now the PLINK “bed” format. Format “bed” is very compact, which stores each genotype using only 2 bits. The pcadapt also accecpt missing values (e.g. 9). I used the plink to convert the vcf to bed format. 
+Input: In pcadapt v4, the preferred format is now the PLINK “bed” format. Format “bed” is very compact, which stores each genotype using only 2 bits. One intesting feature of pcadapt v4 is that it's able to perform the outlier detection with pooled sequencing data. The pcadapt also accecpt missing values (e.g. 9). I used the plink to convert the vcf to bed format. 
+
+### data description
+
+We have three datasets, each with 12 individuals. They are:
+
+LA-LSSL (SL) vs. LA-OBOY (OBOYS2)
+Louisiana wild vs. selected line, source of oysters from selection from approx same environment (Oyster Bayou)
+
+DB-HSCS (CS) vs. DB-NEHD (NEH)
+Wild (Cape Shore, Delaware Bay wild high salinity) vs. selected (core line NEH)
+
+DB-HSCS (CS) vs. CB-DEBY (DEBY)
+Wild (Cape Shore, Delaware Bay wild high salinity) vs. Chesapeake Bay selected (initially from DB)
 
 ```sh
-plink --vcf DB_1.sort.vcf --biallelic-only --maf 0.05 --geno 0.5 --mind 0.5 --make-bed --out DB_1
-# the --geno 0.5 filter out snps with more than 50% missing genotypes
+# extrac the 30 samples from vcf file
+cat ALL
+OBOYS2_1
+OBOYS2_2
+OBOYS2_3
+OBOYS2_4
+OBOYS2_5
+OBOYS2_6
+SL_1
+SL_2
+SL_3
+SL_4
+SL_5
+SL_6
+NEH_1
+NEH_2
+NEH_3
+NEH_4
+NEH_5
+NEH_6
+CS_1
+CS_2
+CS_3
+CS_5
+CS_6
+CS_7
+DEBY_1
+DEBY_2
+DEBY_3
+DEBY_4
+DEBY_5
+DEBY_6
+CS_1
+CS_2
+CS_3
+CS_5
+CS_6
+CS_7
+
+for pop in ALL; do
+    vcftools --vcf CVreseq_chr.vcf --keep $pop --recode --recode-INFO-all --out $pop
+    grep "^#" $pop'.recode.vcf' > $pop'.sort.vcf' && grep -v "^#" $pop'.recode.vcf' | \
+    sort -V -k1,1 -k2,2n >> $pop'.sort.vcf'
+done
 ```
 
-One intesting feature of pcadapt v4 is that it's able to perform the outlier detection with pooled sequencing data.
+### data conversion
+
+```sh
+# before conversion, a python script addID.py is used to add the SNP ID (CHR + "_" + POS) to the vcf file
+fname = 'ALL.sort.vcf'
+outname = fname + '.out'
+
+idx = 0
+with open(fname, 'r') as f, open(outname, 'w') as w:
+    for l in f:
+        if l.startswith('#'):
+            pass
+        else:
+            idx += 1
+            ss = l.split()
+            chrom = ss[0]
+            pos = ss[1]
+            ID = chrom + '_' + pos
+            assert ss[2] == '.'
+            ss[2] = ID
+            l = '\t'.join(ss)
+            l += '\n'
+        w.write(l)
+
+python3 addID.py
+# filter out SNPs with maf < 0.05 and call rate < 50%, for the ALL population pair
+plink --vcf ALL.sort_ID.vcf --allow-extra-chr --biallelic-only --maf 0.05 --geno 0.5 --mind 0.5 --make-bed --out ALL_maf
+
+log below,
+
+PLINK v1.90b6.9 64-bit (4 Mar 2019)            www.cog-genomics.org/plink/1.9/
+(C) 2005-2019 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to ALL_maf.log.
+Options in effect:
+  --allow-extra-chr
+  --biallelic-only
+  --geno 0.5
+  --maf 0.05
+  --make-bed
+  --mind 0.5
+  --out ALL_maf
+  --vcf ALL.sort_ID.vcf
+
+63991 MB RAM detected; reserving 31995 MB for main workspace.
+--vcf: ALL_maf-temporary.bed + ALL_maf-temporary.bim + ALL_maf-temporary.fam
+written.
+334011 variants loaded from .bim file.
+30 people (0 males, 0 females, 30 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to ALL_maf.nosex .
+0 people removed due to missing genotype data (--mind).
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 30 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+0 variants removed due to missing genotype data (--geno).
+13139 variants removed due to minor allele threshold(s)
+(--maf/--max-maf/--mac/--max-mac).
+320872 variants and 30 people pass filters and QC.
+Note: No phenotypes present.
+--make-bed to ALL_maf.bed + ALL_maf.bim + ALL_maf.fam ... done.
+
+# LD pruning using plink
+plink --bfile ALL_maf --indep-pairwise 50 5 0.5 --out ALL_tmp
+
+log below,
+
+PLINK v1.90b6.9 64-bit (4 Mar 2019)            www.cog-genomics.org/plink/1.9/
+(C) 2005-2019 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to ALL_tmp.log.
+Options in effect:
+  --bfile ALL_maf
+  --indep-pairwise 50 5 0.5
+  --out ALL_tmp
+
+63991 MB RAM detected; reserving 31995 MB for main workspace.
+320872 variants loaded from .bim file.
+30 people (0 males, 0 females, 30 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to ALL_tmp.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 30 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+320872 variants and 30 people pass filters and QC.
+Note: No phenotypes present.
+Pruned 726 variants from chromosome 1, leaving 40803.
+Pruned 715 variants from chromosome 2, leaving 34627.
+Pruned 861 variants from chromosome 3, leaving 34244.
+Pruned 816 variants from chromosome 4, leaving 31668.
+Pruned 1432 variants from chromosome 5, leaving 61192.
+Pruned 406 variants from chromosome 6, leaving 14338.
+Pruned 487 variants from chromosome 7, leaving 19908.
+Pruned 712 variants from chromosome 8, leaving 28229.
+Pruned 954 variants from chromosome 9, leaving 39348.
+Pruned 217 variants from chromosome 10, leaving 9189.
+Pruning complete.  7326 of 320872 variants removed.
+Marker lists written to ALL_tmp.prune.in and ALL_tmp.prune.out .
+
+# extract the SNPs after pruning
+plink --bfile ALL_maf --extract ALL_tmp.prune.in --make-bed --out ALL_prun
+
+log below,
+
+PLINK v1.90b6.9 64-bit (4 Mar 2019)            www.cog-genomics.org/plink/1.9/
+(C) 2005-2019 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to ALL_prun.log.
+Options in effect:
+  --bfile ALL_maf
+  --extract ALL_tmp.prune.in
+  --make-bed
+  --out ALL_prun
+
+63991 MB RAM detected; reserving 31995 MB for main workspace.
+320872 variants loaded from .bim file.
+30 people (0 males, 0 females, 30 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to ALL_prun.nosex .
+--extract: 313546 variants remaining.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 30 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+313546 variants and 30 people pass filters and QC.
+Note: No phenotypes present.
+--make-bed to ALL_prun.bed + ALL_prun.bim + ALL_prun.fam ... done.
+```
 
 ### Using pcadapt to detect local adaptation
 
@@ -35,7 +210,7 @@ One intesting feature of pcadapt v4 is that it's able to perform the outlier det
 
 ```R
 # reading genotype data (“pcadapt”, “lfmm”, “vcf”, “bed”, “ped”, “pool”)
-path_to_file <- "./DB_1.bed"
+path_to_file <- "./ALL.bed"
 filename <- read.pcadapt(path_to_file, type = "bed")
 ```
 
@@ -43,18 +218,26 @@ filename <- read.pcadapt(path_to_file, type = "bed")
 
 ```R
 # 2.1 Scree plot
-x <- pcadapt(input = filename, K = 5)
+x <- pcadapt(input = filename, K = 10)
 # The eigenvalues that correspond to random variation lie on a straight line whereas the ones that correspond to population structure lie on a steep curve. It is recommended to keep PCs that correspond to eigenvalues to the left of the straight line (Cattell’s rule).
 plot(x, option = "screeplot")
 plot(x, option = "screeplot", K = 2)
+```
 
+<img src="https://hzz0024.github.io/images/pcadapt/k_10.jpeg" alt="img" width="800"/>
+
+k = 5 maybe the best k
+
+```R
 #2.2 Score plot: another option to choose the number of PCs is based on the ‘score plot’ that displays population structure.
 
-poplist.names <- c(rep("POP1", 6),rep("POP2", 6))
+poplist.names <- c(rep("POP1", 6),rep("POP2", 6), rep("POP3", 6),rep("POP4", 6), rep("POP5", 6))
 print(poplist.names)
 plot(x, option = "scores", pop = poplist.names)
 plot(x, option = "scores", i = 3, j = 4, pop = poplist.names)
 ```
+
+<img src="https://hzz0024.github.io/images/pcadapt/k_10.jpeg" alt="img" width="800"/>
 
 3) Computing the test statistic based on PCA
 
@@ -95,52 +278,51 @@ sum(is.na(x$pvalues))
 ```R
 # 4.1 Manhattan Plot
 plot(x , option = "manhattan")
+```
 
-# Q-Q Plot
+```R
+# 4.2 Q-Q Plot
 plot(x, option = "qqplot")
 ```
 
 
+
 This plot confirms that most of the p-values follow the expected uniform distribution. However, the smallest p-values are smaller than expected confirming the presence of outliers.
 
-5) Histograms of the test statistic and of the p-values
+```R
+# 4.3 Histograms of the test statistic and of the p-values
+hist(x$pvalues, xlab = "p-values", main = NULL, breaks = 50, col = "orange")
+# The presence of outliers is also visible when plotting a histogram of the test statistic 𝐷𝑗.
+plot(x, option = "stat.distribution")
+```
+
+
+An histogram of p-values confirms that most of the p-values follow an uniform distribution. The excess of small p-values indicates the presence of outliers.
 
 
 
+The presence of outliers is also visible when plotting a histogram of the test statistic 𝐷𝑗
 
-
-
-
-
-
-
-
-
-
-
+5) Choosing a cutoff for outlier detection
 
 ```R
-# SGS test
-Rscript --verbose SGS_DelBay19.R 
-
-# check the result
-
-cat p_values_local.txt | wc -l
-# the number of potential outliers
-4125 
-# extract the allele frequency values from N1 and N2
-python3 extract.py
-# calculate the actual delta p values for 4125 SNPs
-Rscript deltaP_act.R -d /Users/ryan/Documents/Ryan_workplace/DelBay19_HG/10_SGS/SGS/local_theat_SGS_results -p CHR_maf0.05_pctind0.7_cv30.mafs.extracted -q CH_maf0.05_pctind0.7_cv30.mafs.extracted -t 4125 -o obs_deltap.output
+# q-values
+qval <- qvalue(x$pvalues)$qvalues
+alpha <- 0.01
+outliers <- which(qval < alpha)
+length(outliers)
+# Benjamini-Hochberg Procedure
+padj <- p.adjust(x$pvalues,method="BH")
+alpha <- 0.1
+outliers <- which(padj < alpha)
+length(outliers)
+# Bonferroni correction
+padj <- p.adjust(x$pvalues,method="bonferroni")
+alpha <- 0.1
+outliers <- which(padj < alpha)
+length(outliers)
 ```
-<img src="https://hzz0024.github.io/images/SGS/allele_1.jpeg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/SGS/allele_2.jpeg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/SGS/deltap.jpeg" alt="img" width="800"/>
-
-Remained question: What is appropriate window size? It may be difficult to know without trying and comparing several (e.g. on one chromosome). How does StDev(theta) vary with window size. Maybe we want the window size where variance of theta is greatest?
-
-Are there any common shared outliers between SGS results and wild transect comparsions? How to determine the potential SNPs of selection in the wild transect?
   
 
