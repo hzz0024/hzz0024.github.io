@@ -56,12 +56,6 @@ NEH_3
 NEH_4
 NEH_5
 NEH_6
-CS_1
-CS_2
-CS_3
-CS_5
-CS_6
-CS_7
 DEBY_1
 DEBY_2
 DEBY_3
@@ -237,26 +231,26 @@ plot(x, option = "scores", pop = poplist.names)
 plot(x, option = "scores", i = 3, j = 4, pop = poplist.names)
 ```
 
-<img src="https://hzz0024.github.io/images/pcadapt/k_10.jpeg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/pcadapt/pca.jpeg" alt="img" width="800"/>
 
 3) Computing the test statistic based on PCA
 
 ```R
-x <- pcadapt(filename, K = 2)
+x <- pcadapt(filename, K = 5)
 
 summary(x)
->                Length Class  Mode   
->scores              24 -none- numeric
->singular.values      2 -none- numeric
->loadings        564134 -none- numeric
->zscores         564134 -none- numeric
->af              282067 -none- numeric
->maf             282067 -none- numeric
->chi2.stat       282067 -none- numeric
->stat            282067 -none- numeric
->gif                  1 -none- numeric
->pvalues         282067 -none- numeric
->pass            280464 -none- numeric
+                Length  Class  Mode   
+scores              150 -none- numeric
+singular.values       5 -none- numeric
+loadings        1567730 -none- numeric
+zscores         1567730 -none- numeric
+af               313546 -none- numeric
+maf              313546 -none- numeric
+chi2.stat        313546 -none- numeric
+stat             313546 -none- numeric
+gif                   1 -none- numeric
+pvalues          313546 -none- numeric
+pass             313546 -none- numeric
 
 scores is a (n,K) matrix corresponding to the projections of the individuals onto each PC.   
 singular.values is a vector containing the K ordered square root of the proportion of variance explained by each PC.   
@@ -271,7 +265,7 @@ pass A list of SNPs indices that are kept after exclusion based on the minor all
 stat is a vector of size L containing squared Mahalanobis distances by default.   
 # count how many "NA" values in the p-value column
 sum(is.na(x$pvalues))
-> 1603
+[1] 0
 ```
 
 4) Graphical tools
@@ -280,28 +274,35 @@ sum(is.na(x$pvalues))
 plot(x , option = "manhattan")
 ```
 
+<img src="https://hzz0024.github.io/images/pcadapt/manhattan.jpeg" alt="img" width="800"/>
+
 ```R
 # 4.2 Q-Q Plot
 plot(x, option = "qqplot")
 ```
 
-
+<img src="https://hzz0024.github.io/images/pcadapt/qqplot.jpeg" alt="img" width="800"/>
 
 This plot confirms that most of the p-values follow the expected uniform distribution. However, the smallest p-values are smaller than expected confirming the presence of outliers.
+
 
 ```R
 # 4.3 Histograms of the test statistic and of the p-values
 hist(x$pvalues, xlab = "p-values", main = NULL, breaks = 50, col = "orange")
+```
+
+<img src="https://hzz0024.github.io/images/pcadapt/qqplot.jpeg" alt="img" width="800"/>
+
+An histogram of p-values confirms that most of the p-values follow an uniform distribution. The excess of small p-values indicates the presence of outliers.
+
+```R
 # The presence of outliers is also visible when plotting a histogram of the test statistic 𝐷𝑗.
 plot(x, option = "stat.distribution")
 ```
 
+<img src="https://hzz0024.github.io/images/pcadapt/qqplot.jpeg" alt="img" width="800"/>
 
-An histogram of p-values confirms that most of the p-values follow an uniform distribution. The excess of small p-values indicates the presence of outliers.
-
-
-
-The presence of outliers is also visible when plotting a histogram of the test statistic 𝐷𝑗
+The presence of outliers is also visible when plotting a histogram of the test statistic 𝐷𝑗 (not sure how to interpreter it yet)
 
 5) Choosing a cutoff for outlier detection
 
@@ -311,16 +312,22 @@ qval <- qvalue(x$pvalues)$qvalues
 alpha <- 0.01
 outliers <- which(qval < alpha)
 length(outliers)
+
+[1] 2590
 # Benjamini-Hochberg Procedure
 padj <- p.adjust(x$pvalues,method="BH")
 alpha <- 0.1
 outliers <- which(padj < alpha)
 length(outliers)
+
+[1] 2590
 # Bonferroni correction
 padj <- p.adjust(x$pvalues,method="bonferroni")
 alpha <- 0.1
 outliers <- which(padj < alpha)
 length(outliers)
+
+[1] 667
 ```
 
 
