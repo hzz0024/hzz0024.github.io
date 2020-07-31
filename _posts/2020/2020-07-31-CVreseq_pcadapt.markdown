@@ -291,7 +291,7 @@ This plot confirms that most of the p-values follow the expected uniform distrib
 hist(x$pvalues, xlab = "p-values", main = NULL, breaks = 50, col = "orange")
 ```
 
-<img src="https://hzz0024.github.io/images/pcadapt/qqplot.jpeg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/pcadapt/hist.jpeg" alt="img" width="800"/>
 
 An histogram of p-values confirms that most of the p-values follow an uniform distribution. The excess of small p-values indicates the presence of outliers.
 
@@ -300,7 +300,7 @@ An histogram of p-values confirms that most of the p-values follow an uniform di
 plot(x, option = "stat.distribution")
 ```
 
-<img src="https://hzz0024.github.io/images/pcadapt/qqplot.jpeg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/pcadapt/stat.jpeg" alt="img" width="800"/>
 
 The presence of outliers is also visible when plotting a histogram of the test statistic 𝐷𝑗 (not sure how to interpreter it yet)
 
