@@ -316,20 +316,27 @@ length(outliers)
 [1] 2590
 # Benjamini-Hochberg Procedure
 padj <- p.adjust(x$pvalues,method="BH")
-alpha <- 0.1
+alpha <- 0.01
 outliers <- which(padj < alpha)
 length(outliers)
 
 [1] 2590
 # Bonferroni correction
 padj <- p.adjust(x$pvalues,method="bonferroni")
-alpha <- 0.1
+alpha <- 0.01
 outliers <- which(padj < alpha)
 length(outliers)
 
-[1] 667
+[1] 443
 ```
 
+Remained questions:
+
+1) what window size is appropriate for LD pruning? 
+
+2) what is the genetic differentian & diversity pattern along these potential outliers?
+
+3) Should I identify outliers based on popualtion pairs (e.g. LA-LSSL (SL) vs. LA-OBOY (OBOYS2))? It seems the pcadapt can handle cases with limited populaton structure. Need more search on it. 
 
   
 
