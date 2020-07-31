@@ -1,7 +1,7 @@
 ---
 comments: true
-title: DelBay19 single generation selection (SGS) test
-date: '2020-07-27 12:00'
+title: CVreseq pcadapt
+date: '2020-07-31 12:00'
 tags:
   - CVreseq
   - pcadapt
