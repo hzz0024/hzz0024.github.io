@@ -24,22 +24,47 @@ Inspired by Sutherland et al. 2020, I'd like to identify the poential outliers u
 ---
 ### Pcadapt
 
+To evaluate if LD might be an issue for the dataset, I made some plots to show the loadings (contributions of each SNP to the PC) and to evaluate if the loadings are clustered in a single or several genomic regions. 
+
+Population: LA-LSSL (SL) vs. LA-OBOY (OBOYS2) Louisiana wild vs. selected line
+
+SNP number after LD prunning: 14255; r^2: 0.1
+
 <img src="https://hzz0024.github.io/images/pcadapt/LA_r0.1_14255.jpeg" alt="img" width="800"/>
+
+SNP number after LD prunning: 27767; r^2: 0.2
 
 <img src="https://hzz0024.github.io/images/pcadapt/LA_r0.2_27767.jpeg" alt="img" width="800"/>
 
+SNP number after LD prunning: 56893; r^2: 0.3
+
 <img src="https://hzz0024.github.io/images/pcadapt/LA_r0.3_56893.jpeg" alt="img" width="800"/>
+
+SNP number after LD prunning: 96993; r^2: 0.4
 
 <img src="https://hzz0024.github.io/images/pcadapt/LA_r0.4_98693.jpeg" alt="img" width="800"/>
 
+SNP number after LD prunning: 159890; r^2: 0.5
+
 <img src="https://hzz0024.github.io/images/pcadapt/LA_r0.5_159890.jpeg" alt="img" width="800"/>
+
+SNP number after LD prunning: 213149; r^2: 0.6
 
 <img src="https://hzz0024.github.io/images/pcadapt/LA_r0.6_213149.jpeg" alt="img" width="800"/>
 
+SNP number after LD prunning: 251625; r^2: 0.7
+
 <img src="https://hzz0024.github.io/images/pcadapt/LA_r0.7_251625.jpeg" alt="img" width="800"/>
+
+SNP number after LD prunning: 264918; r^2: 0.8
 
 <img src="https://hzz0024.github.io/images/pcadapt/LA_r0.8_264918.jpeg" alt="img" width="800"/>
 
+The distribution of the loadings is evenly distributed in all plots, the loading pattern in r^2=0.2 looks good to me because it 1) largely captures the potential outliers based on PC loading values; 2) does not show the "dashed line" patter (posibilly due the linked SNPs); 3) output an reasonalable number of outliers
+
+I decide use r^2=0.2 for data filtering. 
+
+we can have a look at the genome scan, which correctly identifies regions involved in adaptation.
 
 ---
 ### Bayescan
