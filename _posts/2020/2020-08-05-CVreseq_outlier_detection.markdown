@@ -62,7 +62,7 @@ SNP number after LD prunning: 264918; r^2: 0.8
 
 The distribution of the loadings is evenly distributed in all plots, the loading pattern in r^2=0.2 looks good to me because it 1) largely captures the potential outliers based on PC loading values; 2) does not show the "dashed line" patter (posibilly due the linked SNPs); 3) output an reasonalable number of outliers
 
-I decide use r^2=0.2 for data filtering. 
+I then use the r^2=0.2 as a parameter for other data LD pruning. 
 
 we can have a look at the genome scan, which correctly identifies regions involved in adaptation.
 
