@@ -262,7 +262,7 @@ SNP 5_36361325 is only detected in CS-NEH comparsion, but SNPs in chromosome 5 a
 
 - Tajima'd
 
-Currently I am not able to plot the Tajima'd and pi in the same plot because the length of data are not identical due to some "nan" values (particular for Tajima's D). Need to find out the reason why some Tajima's values are nan and figure out the way of making dual y-axis plots. 
+Currently I am not able to plot the Tajima'd and pi in the same plot because the length of data are not identical due to some "nan" values (particular for Tajima's D). I need to figure out the way of making dual y-axis plots for both values. 
 
 Here I simplyly use SNP 8_36715103 as an example (values below are esimated using 1000 bp as window size) to show the results in a population pair (DB_1 here),
 
