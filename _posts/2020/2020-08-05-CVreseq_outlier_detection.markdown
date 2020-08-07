@@ -244,12 +244,14 @@ SNP: 8_36715103
 
 1000.windowed.pi
 
+CHR   Window_start  Window_end NO. SNPs pi    
 8	36714001	36715000	11	0.0040303   
 8	36715001	36716000	11	0.00418182     
 8	36717001	36718000	4	0.00140909 
 
 1000.Tajima.D
 
+CHR   Window_start  Window_end NO. SNPs Tajima'D   
 8	36714000	11	0.442939   
 8	36715000	11	0.61601   
 8	36716000	0	na     
