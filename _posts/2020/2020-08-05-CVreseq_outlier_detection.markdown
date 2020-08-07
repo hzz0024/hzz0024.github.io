@@ -198,7 +198,7 @@ Compare the results between populations from pcadapt results,
 [1] 5
 ```
 
-See if there is any SNP outliers shared by population pairs (from pcadapt results as none are shared by Bayescan methods) and among the methods,
+See if there is any SNP outliers shared by population pairs (from pcadapt results none are shared by Bayescan methods) and among the methods,
 
 ```sh
 > intersect(intersect(DB_1_list,DB_2_list), intersect(DB_1_list,Bas_DB_1$V1))
