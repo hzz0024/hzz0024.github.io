@@ -62,7 +62,7 @@ The distribution of the loadings is evenly distributed in all plots, the loading
 
 I then use the r^2=0.2 as a parameter for other data LD pruning. 
 
-we can have a look at the genome scan, which correctly identifies regions involved in adaptation.
+below are results for some common shared outliers
 
 ```sh
 > intersect(DB_1_list,DB_2_list)
