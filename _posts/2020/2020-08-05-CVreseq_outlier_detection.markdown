@@ -187,33 +187,6 @@ See if there is any SNP outliers shared by two populations (from pcadapt results
 [1] "2_656131"   "8_63266137"
 ```
 
-see vcftools [manual](https://vcftools.github.io/man_latest.html) and biostars [post](https://www.biostars.org/p/46858/) for detailed parameter explanation. Here the Fst values are estimated using Weir and Cockerham’s (1984) method
-
-- calculate the percentile and extract the SNP information
-
-A python script is made for this purpose, for example
-
-```python
-python3 percentile.py -i input -o output -p target_percentile
-```
-
-| Group	     |Populations|  Percentile  |  Fst threshold | No. outlier|
-| -----------|-----------|--------------|----------------|------------|
-|   LA       | SL-OBOYS2 |    99.9      |      0.70      |    269     |
-|   DB_1     | CS-NEH    |    99.9      |      0.73      |    260     |
-|   DB_2     | CS-DEBY   |    99.9      |      0.70      |    239     |
-
-Nubmber of shared outliers
-
-| Group	     |Fst ranges    | No. of shared outlier|
-| -----------|--------------|----------------------|
-|   LA-DB_1  |    0.8       |    2                 |
-|   LA-DB_2  |    0.8       |    1                 |
-| DB_1-DB_2  |    0.73-1    |    7                 |
-|DB_1-DB_2-LA|    0.8       |    1                 |
-
-Again, SNP 5_11774642 is shared among three groups.
-
 ---
 ### Conclusion and questions
 
