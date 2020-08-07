@@ -234,15 +234,6 @@ SNP 8_63266137 is shared by two methods (pcadatp and Bayescan) in CS-NEH compars
 <img src="https://hzz0024.github.io/images/outlier/8_63266137_LA.jpg" alt="img" width="800"/>
 
 
----
-### Conclusion and questions
-
-1. In general, outliers were found throughout the genome. Top outliers with the strongest evidence and consistent observations included SNP 5_11774642. 
- 
-2. The genomic location including containing or nearby these outliers (within 10 kb) need further investigation.
-
-3. Due to the limited sample size (6 for each populations), the Fst may not reflect the real genomic differentiation.
-
 
 
 
