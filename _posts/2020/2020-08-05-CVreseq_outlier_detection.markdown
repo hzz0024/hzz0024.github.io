@@ -66,13 +66,14 @@ I then use the r^2=0.2 as a parameter for other data LD pruning.
 
 we can have a look at the genome scan, which correctly identifies regions involved in adaptation.
 
+```sh
 > intersect(DB_1_list,DB_2_list)
 [1] "1_55485508" "2_2405242"  "2_59641818" "5_49795690" "7_53403"    "8_36715103" "9_50117923"
 > intersect(DB_1_list,LA_list)
 [1] "2_656131"   "3_54596543" "8_63266137" "9_12057031"
 > intersect(DB_2_list,LA_list)
 [1] "3_69917769" "5_25337621" "5_79382471" "8_10601236" "9_52331392"
-
+```
 ---
 ### Bayescan
 
