@@ -236,5 +236,5 @@ SNP 5_36361325 is only detected in CS-NEH comparsion, but this regions in this c
 
 <img src="https://hzz0024.github.io/images/outlier/5_36361325_LA.jpg" alt="img" width="800"/>
 
-
+- Tajima'd
 

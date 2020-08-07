@@ -79,5 +79,11 @@ So far I have performed this model twice (1182 vs 1224 outliers) using the same 
 3) What is the genetic differntiation or diversity indice patterns along these potential outliers? 
 
 4) Are there any common shared outliers between SGS results and wild transect comparsions? How to determine the potential SNPs of selection in the wild transect? - could be association analysis or the same SGS model for outlier identification in wild transect.
-  
 
+---
+
+Below are the observed delta_p distribution from two datasets.
+  
+<img src="https://hzz0024.github.io/images/SGS/obs_delta_p_1.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/SGS/obs_delta_p_2.jpg" alt="img" width="800"/>
