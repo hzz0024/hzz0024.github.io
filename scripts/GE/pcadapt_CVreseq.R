@@ -5,7 +5,7 @@ library(pcadapt)
 library(qvalue)
 library(vcfR)
 # 1. reading genotype data (“pcadapt”, “lfmm”, “vcf”, “bed”, “ped”, “pool”)
-path_to_file <- "./ALL_prun.bed"
+path_to_file <- "./LA_prun.bed"
 filename <- read.pcadapt(path_to_file, type = "bed")
 #path_to_file <- system.file("extdata", "geno3pops.bed", package = "pcadapt")
 #filename <- read.pcadapt(path_to_file, type = "bed")
@@ -95,9 +95,161 @@ x_cw <- pcadapt(filename, K = 2, method = "componentwise")
 summary(x_cw$pvalues)
 
 
+############################# DB_1
 
+library(pcadapt)
+library(qvalue)
+library(vcfR)
+# 1. reading genotype data (“pcadapt”, “lfmm”, “vcf”, “bed”, “ped”, “pool”)
+path_to_file <- "./DB_1_prun.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+x <- pcadapt(input = filename, K = 10)
+plot(x, option = "screeplot")
+plot(x, option = "screeplot", K = 2)
+poplist.names <- c(rep("CS", 6),rep("NEH", 6))
+print(poplist.names)
+plot(x, option = "scores", pop = poplist.names)
+plot(x, option = "scores", i = 3, j = 4, pop = poplist.names)
+x <- pcadapt(filename, K = 2)
+summary(x)
+plot(x , option = "manhattan")
+plot(x, option = "qqplot")
+hist(x$pvalues, xlab = "p-values", main = NULL, breaks = 50, col = "orange")
+plot(x, option = "stat.distribution")
+### Bonferroni correction
+path_to_file <- "./DB_1_prun.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+x <- pcadapt(filename, K = 2)
+padj <- p.adjust(x$pvalues,method="bonferroni")
+alpha <- 0.01DB_1_outliers <- which(padj < alpha)
+length(DB_1_outliers)
+DB_1_file = 'DB_1_prun.bim'
+DB_1_SNP = read.delim(DB_1_file, header = FALSE, sep = "\t", dec = ".")
+DB_1_list <- DB_1_SNP$V2[DB_1_outliers]
 
+path_to_file <- "./DB_2_prun.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+x <- pcadapt(filename, K = 2)
+padj <- p.adjust(x$pvalues,method="bonferroni")
+alpha <- 0.01DB_2_outliers <- which(padj < alpha)
+length(DB_2_outliers)
+DB_2_file = 'DB_2_prun.bim'
+DB_2_SNP = read.delim(DB_2_file, header = FALSE, sep = "\t", dec = ".")
+DB_2_list <- DB_2_SNP$V2[DB_2_outliers]
 
+######################################## formal run
+library(export)
+path_to_file <- "./LA_prun.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+par(mfrow = c(1, 2))
+x <- pcadapt(input = filename, K = 10)
+plot(x, option = "screeplot")
+graph2ppt(file = "LA_scteeplot",width=3.2,height=2.0)
+x <- pcadapt(filename, K = 2)
+plot(x , option = "manhattan")
+graph2ppt(file = "LA_manhattan",width=3.2,height=2.0)
+# Q-Q Plot
+plot(x, option = "qqplot")
+graph2ppt(file = "LA_qqplot",width=3.2,height=2.0)
+# pca
+poplist.names <- c(rep("OBOYS2", 6),rep("SL", 6))
+print(poplist.names)
+plot(x, option = "scores", pop = poplist.names)
+graph2ppt(file = "LA_pca",width=3.2,height=2.0)
+padj <- p.adjust(x$pvalues,method="BH")
+alpha <- 0.1
+LA_outliers <- which(padj < alpha)
+length(LA_outliers)
+# pc loading
+#par(mfrow = c(1, 2))
+#for (i in 1:2)
+#  plot(x$loadings[, i], pch = 19, cex = .1, ylab = paste0("Loadings PC", i), main=paste("No. oultiers",bf,"(bonferroni),",bh,"(FDR)") )
+LA_file = 'LA_prun.bim'
+LA_SNP = read.delim(LA_file, header = FALSE, sep = "\t", dec = ".")
+LA_list <- LA_SNP$V2[LA_outliers]
 
+########### DB_1
+library(export)
+path_to_file <- "./DB_1_prun.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+par(mfrow = c(1, 2))
+x <- pcadapt(input = filename, K = 10)
+plot(x, option = "screeplot")
+graph2ppt(file = "DB_1_scteeplot",width=3.2,height=2.0)
+x <- pcadapt(filename, K = 2)
+plot(x , option = "manhattan")
+graph2ppt(file = "DB_1_manhattan",width=3.2,height=2.0)
+# Q-Q Plot
+plot(x, option = "qqplot")
+graph2ppt(file = "DB_1_qqplot",width=3.2,height=2.0)
+# pca
+poplist.names <- c(rep("CS", 6),rep("NEH", 6))
+print(poplist.names)
+plot(x, option = "scores", pop = poplist.names)
+graph2ppt(file = "DB_1_pca",width=3.2,height=2.0)
+padj <- p.adjust(x$pvalues,method="BH")
+alpha <- 0.1
+DB_1_outliers <- which(padj < alpha)
+length(DB_1_outliers)
+DB_1_file = 'DB_1_prun.bim'
+DB_1_SNP = read.delim(DB_1_file, header = FALSE, sep = "\t", dec = ".")
+DB_1_list <- DB_1_SNP$V2[DB_1_outliers]
+########### DB_2
+library(export)
+path_to_file <- "./DB_2_prun.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+par(mfrow = c(1, 2))
+x <- pcadapt(input = filename, K = 10)
+plot(x, option = "screeplot")
+graph2ppt(file = "DB_2_scteeplot",width=3.2,height=2.0)
+x <- pcadapt(filename, K = 2)
+plot(x , option = "manhattan")
+graph2ppt(file = "DB_2_manhattan",width=3.2,height=2.0)
+# Q-Q Plot
+plot(x, option = "qqplot")
+graph2ppt(file = "DB_2_qqplot",width=3.2,height=2.0)
+# pca
+poplist.names <- c(rep("CS", 6),rep("DEBY", 6))
+print(poplist.names)
+plot(x, option = "scores", pop = poplist.names)
+graph2ppt(file = "DB_2_pca",width=3.2,height=2.0)
+padj <- p.adjust(x$pvalues,method="BH")
+alpha <- 0.1
+DB_2_outliers <- which(padj < alpha)
+length(DB_2_outliers)
+DB_2_file = 'DB_2_prun.bim'
+DB_2_SNP = read.delim(DB_2_file, header = FALSE, sep = "\t", dec = ".")
+DB_2_list <- DB_2_SNP$V2[DB_2_outliers]
 
+# read file from bayescan results
+Bas_LA = read.table("Bas_LA.txt", sep="\t")
+Bas_DB_1 = read.table("Bas_DB_1.txt", sep="\t")
+Bas_DB_2 = read.table("Bas_DB_2.txt", sep="\t")
+# check the common shared snps
+intersect(Bas_DB_1$V1,Bas_DB_2$V1)
+intersect(Bas_DB_1$V1,Bas_LA$V1)
+intersect(Bas_LA$V1,Bas_DB_2$V1)
+intersect(intersect(Bas_LA$V1,Bas_DB_1$V1), Bas_DB_2$V1)
+
+intersect(DB_1_list,Bas_DB_1$V1)
+length(intersect(DB_1_list,Bas_DB_1$V1))
+
+intersect(DB_2_list,Bas_DB_2$V1)
+length(intersect(DB_2_list,Bas_DB_2$V1))
+
+intersect(LA_list,Bas_LA$V1)
+length(intersect(LA_list,Bas_LA$V1))
+
+intersect(DB_1_list,DB_2_list)
+length(intersect(DB_1_list,DB_2_list))
+intersect(DB_1_list,LA_list)
+length(intersect(DB_1_list,LA_list))
+intersect(DB_2_list,LA_list)
+length(intersect(DB_2_list,LA_list))
+
+intersect(intersect(DB_2_list,LA_list), intersect(DB_1_list,Bas_DB_1$V1))
+
+intersect(intersect(DB_2_list,LA_list), intersect(DB_2_list,Bas_DB_2$V1))
+
+intersect(intersect(DB_2_list,LA_list), intersect(LA_list,Bas_LA$V1))
 

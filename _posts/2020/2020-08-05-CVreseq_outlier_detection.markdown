@@ -13,12 +13,10 @@ categories:
 
 Inspired by Sutherland et al. 2020, I'd like to identify the poential outliers under domestication selection using the thinned vcf data. Four methods will be used for data analysis. They are summarized below
 
-| 			 |Key parameters |   Status     |  
-| -----------|---------------|--------------|
-|   pcadapt  | k             |     done     |
-|   BayeScan | pr_odds       |     done     |
-| Percentile | percentile    |     done     |
-| outFlank   | k             |     done     |
+| 			 |Key parameters |
+| -----------|---------------|
+|   pcadapt  | k             |
+|   BayeScan | pr_odds       |
 
 
 ---
@@ -186,6 +184,55 @@ See if there is any SNP outliers shared by two populations (from pcadapt results
 > intersect(intersect(DB_1_list,LA_list), intersect(DB_1_list,Bas_DB_1$V1))
 [1] "2_656131"   "8_63266137"
 ```
+
+---
+### Examine the pi, Fst patterns in potential outliers
+
+For pi estimate in each population, I use vcftools with code below,
+
+```sh
+# for single snp diversity
+for pop in SL OBOYS2 CS NEH DEBY; do
+        vcftools --vcf $pop'_sort.vcf' --site-pi --out $pop
+done
+# diversity in windows
+for pop in SL OBOYS2 CS NEH DEBY; do
+    for win in 100 200 500 1000 5000; do
+        vcftools --vcf $pop'_sort.vcf' --window-pi $win --out $pop'_'$win
+    done
+done
+```
+
+Populations
+
+| pop   | Description                                    |
+|-------|------------------------------------------------|
+|SL     | Louisiana wild line                            |
+|OBOYS2 | Louisiana selected line                        |
+|NEH    |Delaware Bay selected NEH line                  |
+|DEBY   |Chesapeake Bay selected line (initially from DB)|
+|CS     | Cape Shore (Delaware Bay) wild line            |
+
+SNP 8_36715103 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and CS-DEBY using pcadatp
+
+> [1] "8_36715103"
+
+<img src="https://hzz0024.github.io/images/outlier/8_36715103_pi_DB_1.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/outlier/8_36715103_pi_DB_2.jpg" alt="img" width="800"/>
+
+SNP 2_656131 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and SL-OBOYS2 using pcadatp
+
+<img src="https://hzz0024.github.io/images/outlier/2_656131_DB_1.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/outlier/2_656131_LA.jpg" alt="img" width="800"/>
+
+SNP 8_63266137 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and SL-OBOYS2 using pcadatp
+
+<img src="https://hzz0024.github.io/images/outlier/8_63266137_DB_1.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/outlier/8_63266137_LA.jpg" alt="img" width="800"/>
+
 
 ---
 ### Conclusion and questions
