@@ -11,13 +11,10 @@ categories:
   - WGS data analysis
 ---
 
-Inspired by Sutherland et al. 2020, I'd like to identify the poential outliers under domestication selection using the thinned vcf data. Four methods will be used for data analysis. They are summarized below
-
 | 			 |Key parameters |
 | -----------|---------------|
 |   pcadapt  | k             |
-|   BayeScan | pr_odds       |
-
+|   BayeScan | pr_odds       |   
 
 ---
 ### Pcadapt
@@ -54,19 +51,33 @@ It seems the distribution of the loadings is evenly distributed among these plot
 
 I then use the r^2=0.2 as a parameter for other data LD pruning. 
 
-below are results for some common shared outliers
+| Group	     |Populations| 
+| -----------|-----------|
+|   LA       | SL-OBOYS2 |
+|   DB_1     | CS-NEH    |
+|   DB_2     | CS-DEBY   |
 
-LA pcadapt result (): 
+SL - Louisiana wild line   
+OBOYS2 - Louisiana selected line   
+NEH - Delaware Bay selected NEH line    
+DEBY - Chesapeake Bay selected line (initially from DB)    
+CS - Cape Shore (Delaware Bay) wild line 
+
+LA pcadapt result (666 outliers): 
 
 <img src="https://hzz0024.github.io/images/outlier/LA.jpg" alt="img" width="800"/>
 
-DB_1 pcadapt result (): 
+It is interesting that an potential individual outlier is identified from the PCA result, need to remove this one from further analysis (not done yet)
+
+DB_1 pcadapt result (637 outliers): 
 
 <img src="https://hzz0024.github.io/images/outlier/DB_1.jpg" alt="img" width="800"/>
 
-DB_2 pcadapt result (): 
+DB_2 pcadapt result (593 outliers): 
 
 <img src="https://hzz0024.github.io/images/outlier/DB_2.jpg" alt="img" width="800"/>
+
+below are results for some common shared outliers (DB_1_list, DB_2_list and LA_list are outlier list in the results)
 
 ```sh
 > intersect(DB_1_list,DB_2_list)
@@ -148,6 +159,9 @@ Here I'd like to compare the common shared outliers between two methods above.
 
 ```sh
 # DB_1_list is the result from pcadapt, Bas_DB_1$V1 is the result from bayescan. Same for the other populations.
+# intersect is the function in r to check common shared values in two or more vectors
+
+# first compare the methods but the same population pair
 > intersect(DB_1_list,Bas_DB_1$V1)
  [1] "1_30849333" "1_32752499" "1_58534084" "1_60259825" "2_656131"   "2_5071524"  "2_21500266" "2_45981261" "2_52157647" "3_40979403" "3_41730028" "3_70055986"
 [13] "4_15417342" "4_18695731" "4_18722099" "4_31415808" "4_34685619" "4_55313638" "4_57208049" "5_16630602" "5_17325109" "5_21286358" "5_27887499" "5_36361325"
@@ -164,7 +178,12 @@ length(intersect(DB_1_list,Bas_DB_1$V1))
  [1] "1_15977907" "2_31084149" "4_10967020" "5_32604685" "5_40191744" "5_93475688" "8_42853491" "9_22044992" "10_1206118" "10_7829874"
 > length(intersect(LA_list,Bas_LA$V1))
 [1] 10
-# compare the results from pcadapt
+```
+
+Compare the results between populations from pcadapt results,
+
+```sh
+
 > intersect(DB_1_list,DB_2_list)
 [1] "1_55485508" "2_2405242"  "2_59641818" "5_49795690" "7_53403"    "8_36715103" "9_50117923"
 > length(intersect(DB_1_list,DB_2_list))
@@ -179,7 +198,7 @@ length(intersect(DB_1_list,Bas_DB_1$V1))
 [1] 5
 ```
 
-See if there is any SNP outliers shared by two populations (from pcadapt results as none are shared by Bayescan methods) and between the methods,
+See if there is any SNP outliers shared by population pairs (from pcadapt results as none are shared by Bayescan methods) and among the methods,
 
 ```sh
 > intersect(intersect(DB_1_list,DB_2_list), intersect(DB_1_list,Bas_DB_1$V1))
@@ -190,7 +209,7 @@ See if there is any SNP outliers shared by two populations (from pcadapt results
 ```
 
 ---
-### Examine the pi, Fst patterns in potential outliers
+### Examine the pi patterns using potential outliers
 
 For pi estimate in each population, I use vcftools with code below,
 
@@ -207,24 +226,25 @@ for pop in SL OBOYS2 CS NEH DEBY; do
 done
 ```
 
-Populations
+| Group	     |Populations| 
+| -----------|-----------|
+|   LA       | SL-OBOYS2 |
+|   DB_1     | CS-NEH    |
+|   DB_2     | CS-DEBY   |
 
-| pop   | Description                                    |
-|-------|------------------------------------------------|
-|SL     | Louisiana wild line                            |
-|OBOYS2 | Louisiana selected line                        |
-|NEH    |Delaware Bay selected NEH line                  |
-|DEBY   |Chesapeake Bay selected line (initially from DB)|
-|CS     | Cape Shore (Delaware Bay) wild line            |
+SL - Louisiana wild line   
+OBOYS2 - Louisiana selected line   
+NEH - Delaware Bay selected NEH line    
+DEBY - Chesapeake Bay selected line (initially from DB)    
+CS - Cape Shore (Delaware Bay) wild line
 
 - pi distribution
 
-SNP 8_36715103 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and CS-DEBY using pcadatp
+SNP 8_36715103 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and CS-DEBY using pcadatp. 
 
 <img src="https://hzz0024.github.io/images/outlier/8_36715103_pi_DB_1.jpg" alt="img" width="800"/>
 
 <img src="https://hzz0024.github.io/images/outlier/8_36715103_pi_DB_2.jpg" alt="img" width="800"/>
-
 
 SNP 8_63266137 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and SL-OBOYS2 using pcadatp
 
@@ -242,7 +262,11 @@ SNP 5_36361325 is only detected in CS-NEH comparsion, but SNPs in chromosome 5 a
 
 - Tajima'd
 
-SNP: 8_36715103
+Currently I am not able to plot the Tajima'd and pi in the same plot because the length of data are not identical due to some "nan" values (particular for Tajima's D). Need to find out the reason why some Tajima's values are nan and figure out the way of making dual y-axis plots. 
+
+Here I simplyly use SNP 8_36715103 as an example (values below are esimated using 1000 bp as window size) to show the results in a population pair (DB_1 here),
+
+> Pi comparison
 
 > CS population 
 
@@ -253,24 +277,30 @@ CHR   Window_start  Window_end NO. SNPs pi
 8	36715001	36716000	11	0.00418182     
 8	36717001	36718000	4	0.00140909 
 
-1000.Tajima.D
-
-CHR   Window_start  Window_end NO. SNPs Tajima'D   
-8	36714000	11	0.442939   
-8	36715000	11	0.61601   
-8	36716000	0	na     
-
 > NEH population 
 
 1000.windowed.pi
 
 8	36714001	36715000	4	0.00131818   
 8	36715001	36716000	1	0.00030303    
-8	36717001	36718000	1	0.00030303   
+8	36717001	36718000	1	0.00030303 
+
+> Tajima.D comparison
+
+> CS population
+
+CHR   Window_start  Window_end NO. SNPs Tajima'D   
+8	36714000	11	0.442939   
+8	36715000	11	0.61601   
+8	36716000	0	na     
+
+> NEH population
 
 1000.Tajima.D
 
 8	3714000	0	nan   
 8	3715000	0	nan   
 8	3716000	0	nan     
+
+The pi is differnt at windows scale for this potential outlier. However, due to the nan values in NEH population I can not tell the difference. Need to check some other outilers.
 
