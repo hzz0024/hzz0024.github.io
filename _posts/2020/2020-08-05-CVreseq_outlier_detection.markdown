@@ -266,7 +266,7 @@ Currently I am not able to plot the Tajima'd and pi in the same plot because the
 
 Here I simplyly use SNP 8_36715103 as an example (values below are esimated using 1000 bp as window size) to show the results in a population pair (DB_1 here),
 
-> Pi comparison
+Pi comparison
 
 > CS population 1000.windowed.pi
 
@@ -284,7 +284,7 @@ Here I simplyly use SNP 8_36715103 as an example (values below are esimated usin
 |8	  |36715001	     |36716000	  | 1	    |0.00030303|     
 |8	  |36717001      |36718000	  | 1	    |0.00030303| 
 
-> Tajima.D comparison
+Tajima.D comparison
 
 > CS population 1000.windowed.tajima's D
 
