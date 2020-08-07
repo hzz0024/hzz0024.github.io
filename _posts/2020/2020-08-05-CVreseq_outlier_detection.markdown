@@ -215,17 +215,11 @@ Populations
 
 SNP 8_36715103 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and CS-DEBY using pcadatp
 
-> [1] "8_36715103"
 
 <img src="https://hzz0024.github.io/images/outlier/8_36715103_pi_DB_1.jpg" alt="img" width="800"/>
 
 <img src="https://hzz0024.github.io/images/outlier/8_36715103_pi_DB_2.jpg" alt="img" width="800"/>
 
-SNP 2_656131 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and SL-OBOYS2 using pcadatp
-
-<img src="https://hzz0024.github.io/images/outlier/2_656131_DB_1.jpg" alt="img" width="800"/>
-
-<img src="https://hzz0024.github.io/images/outlier/2_656131_LA.jpg" alt="img" width="800"/>
 
 SNP 8_63266137 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and SL-OBOYS2 using pcadatp
 
@@ -233,7 +227,13 @@ SNP 8_63266137 is shared by two methods (pcadatp and Bayescan) in CS-NEH compars
 
 <img src="https://hzz0024.github.io/images/outlier/8_63266137_LA.jpg" alt="img" width="800"/>
 
+SNP 5_36361325 is only detected in CS-NEH comparsion, but this regions in this chromosome 5 is constantly identified as outliers. I'd like to check the pi patterns for regions around this snp. 
 
+<img src="https://hzz0024.github.io/images/outlier/5_36361325_DB_1.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/outlier/5_36361325_DB_2.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/outlier/5_36361325_LA.jpg" alt="img" width="800"/>
 
 
 
