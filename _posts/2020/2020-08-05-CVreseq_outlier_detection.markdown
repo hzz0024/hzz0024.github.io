@@ -1,6 +1,6 @@
 ---
 comments: true
-title: CVreseq outlier detection
+title: Examine the potential CVreseq outliers
 date: '2020-08-05 12:00'
 tags:
   - CVreseq
@@ -22,9 +22,9 @@ Inspired by Sutherland et al. 2020, I'd like to identify the poential outliers u
 ---
 ### Pcadapt
 
-To evaluate if LD might be an issue for the dataset, I made some plots to show the loadings (contributions of each SNP to the PC) and to evaluate if the loadings are clustered in a single or several genomic regions. 
+To evaluate the LD effects for the outlier identification, I made some plots to show the loadings (contributions of each SNP to the PC) and to evaluate if the loadings are clustered in a single or several genomic regions. 
 
-Population: LA-LSSL (SL) vs. LA-OBOY (OBOYS2) Louisiana wild vs. selected line
+Using populations from LA as an example: LA-LSSL (SL) vs. LA-OBOY (OBOYS2) Louisiana wild vs. selected line
 
 SNP number after LD prunning: 14255; r^2: 0.1
 
@@ -50,19 +50,23 @@ SNP number after LD prunning: 213149; r^2: 0.6
 
 <img src="https://hzz0024.github.io/images/pcadapt/LA_r0.6_213149.jpeg" alt="img" width="800"/>
 
-SNP number after LD prunning: 251625; r^2: 0.7
-
-<img src="https://hzz0024.github.io/images/pcadapt/LA_r0.7_251625.jpeg" alt="img" width="800"/>
-
-SNP number after LD prunning: 264918; r^2: 0.8
-
-<img src="https://hzz0024.github.io/images/pcadapt/LA_r0.8_264918.jpeg" alt="img" width="800"/>
-
-The distribution of the loadings is evenly distributed in all plots, the loading pattern in r^2=0.2 looks good to me because it 1) largely captures the potential outliers based on PC loading values; 2) does not show the "dashed line" patter (posibilly due the linked SNPs); 3) output an reasonalable number of outliers
+It seems the distribution of the loadings is evenly distributed among these plots, the loading pattern in r^2=0.2 looks good because it 1) captures most of the potential outliers with heavy PC loading values; 2) does not show the "dashed line" patterns. The snps that contribute to this "dashed line" are also outliers to me, but due to the small sample size (6) they may share the same loading values. The main purpose of this post is to examine some of the most significant outlier across the genome, therefore I excluded those snps now; 3) output an reasonalable number of outliers
 
 I then use the r^2=0.2 as a parameter for other data LD pruning. 
 
 below are results for some common shared outliers
+
+LA pcadapt result (): 
+
+<img src="https://hzz0024.github.io/images/outlier/LA.jpg" alt="img" width="800"/>
+
+DB_1 pcadapt result (): 
+
+<img src="https://hzz0024.github.io/images/outlier/DB_1.jpg" alt="img" width="800"/>
+
+DB_2 pcadapt result (): 
+
+<img src="https://hzz0024.github.io/images/outlier/DB_2.jpg" alt="img" width="800"/>
 
 ```sh
 > intersect(DB_1_list,DB_2_list)

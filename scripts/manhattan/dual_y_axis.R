@@ -158,13 +158,20 @@ library(export)
 graph2ppt(file=name,width=10,height=7)
 
 
-
+#library
+library(latticeExtra)
+library(dplyr)
 
 # --> construct separate plots for each series
-obj1 <- xyplot(CS ~ pi, data, type = "l" , lwd=2)
-obj2 <- xyplot(NEH ~ pi, data, type = "l", lwd=2)
+d1<-read.table("CS_1000.windowed.pi", header=T, as.is=T, sep="\t")
+d2<-read.table("CS_1000.Tajima.D", header=T, as.is=T, sep="\t")
+
+obj1 <- xyplot(d1 ~ pi, data, type = "l" , lwd=2)
+obj2 <- xyplot(d1 ~ pi, data, type = "l", lwd=2)
+
+doubleYScale(obj1, obj2, text = c("obj1", "obj2") , add.ylab2 = TRUE)
 
 plot(pi,CS, pch = 16, col = 2)
 plot(pi,NEH, pch = 16, col = 3)
 # --> Make the plot with second y axis AND legend:
-doubleYScale(obj1, obj2, text = c("obj1", "obj2") , add.ylab2 = TRUE)
+d
