@@ -66,6 +66,13 @@ I then use the r^2=0.2 as a parameter for other data LD pruning.
 
 we can have a look at the genome scan, which correctly identifies regions involved in adaptation.
 
+> intersect(DB_1_list,DB_2_list)
+[1] "1_55485508" "2_2405242"  "2_59641818" "5_49795690" "7_53403"    "8_36715103" "9_50117923"
+> intersect(DB_1_list,LA_list)
+[1] "2_656131"   "3_54596543" "8_63266137" "9_12057031"
+> intersect(DB_2_list,LA_list)
+[1] "3_69917769" "5_25337621" "5_79382471" "8_10601236" "9_52331392"
+
 ---
 ### Bayescan
 
@@ -79,6 +86,29 @@ we can have a look at the genome scan, which correctly identifies regions involv
 The key parameter of Bayescan running is the pr_odds, which indicates how much more likely we think the neutral model is compared to the model with selection. For example a pr_odds = 10 indicates that we think the neutral model is 10 times more likely than the model with selection. With low pr_odds settings, the number of false positives is likely to be large unless we use a very stringent FDR
 threshold (see detailed parameter explaination and tutorial [here](http://evomicsorg.wpengine.netdna-cdn.com/wp-content/uploads/2016/01/BayeScan_BayeScEnv_exercises.pdf))
 
+- Data processing and running
+
+```sh
+# still using the LD prunned snp list _tmp.prune.in
+vcftools --vcf DB_1.sort.id.vcf --snps DB_1_tmp.prune.in --recode --out DB_1_prune
+# kept 24112 out of a possible 334011 Sites
+vcftools --vcf DB_2.sort.id.vcf --snps DB_2_tmp.prune.in --recode --out DB_2_prune
+# kept 28320 out of a possible 334011 Sites
+vcftools --vcf LA.sort.id.vcf --snps LA_tmp.prune.in --recode --out LA_prune
+# kept 27767 out of a possible 334011 Sites
+
+./vcf2genepop_hg.pl vcf=LA_prune.recode.vcf pops=LA,OBOYS2 > LA.gen
+./vcf2genepop_hg.pl vcf=DB_1_prune.recode.vcf pops=CS,NEH > DB_1.gen
+./vcf2genepop_hg.pl vcf=DB_2_prune.recode.vcf pops=CS,DEBY > DB_2.gen
+
+# next using PGSspider to convert the genepop to bayescan format
+
+# load the bayescan format files to the cluster and run 
+
+./BayeScan2.1_linux64bits LA_odds1 -o LA_odds1_output -pr_odds 1
+./BayeScan2.1_linux64bits DB_1_odds1 -o DB_1_odds1_output -pr_odds 1
+./BayeScan2.1_linux64bits DB_2_odds1 -o DB_2_odds1_output -pr_odds 1
+
 - Results
 
 In order to decide if a locus is a good candidate for being under the influence of
@@ -88,31 +118,22 @@ Here I generated six Bayescan outputs for LA, DB_1, and DB_2 comparsions, with p
 
 A python script was developed to filter out snps based on qvalues (FDR alpha value), the usage is shown below,
 
-```python
-python3 qvalue_filter.py -i LA_odd100_output_fst.txt -r LA_snplist.txt -o LA_bayescan_outlier.txt -q 0.1
+```sh
+python3 qvalue_filter.py -i LA_odds10_output_fst.txt -r LA_snplist.txt -o LA_bayescan_outlier.txt -q 0.1
+>[22] records has q value < 0.1.
 
->LA_odd100
->[14] records has q value < 0.1.
->LA_odd10
->[96] records has q value < 0.1.
->DB_1_odd100
->[0] records has q value < 0.1.
->DB_1_odd10
->[49] records has q value < 0.1.
->DB_2_odd100
->[17] records has q value < 0.1.
->DB_2_odd10
->[82] records has q value < 0.1.
+python3 qvalue_filter.py -i DB_1_odds10_output_fst.txt -r DB_1_snplist.txt -o DB_1_bayescan_outlier.txt -q 0.1
+>[58] records has q value < 0.1.
+
+python3 qvalue_filter.py -i DB_2_odds10_output_fst.txt -r DB_2_snplist.txt -o DB_2_bayescan_outlier.txt -q 0.1
+> [27] records has q value < 0.1.
 ```
 
 | Group	     |Populations|   pr_odds    |  qval threshold| No. outlier|
 | -----------|-----------|--------------|----------------|------------|
-|   LA       | SL-OBOYS2 |    100       |      0.1       |    14      |
-|   LA       | SL-OBOYS2 |    10        |      0.1       |    96      |
-|   DB_1     | CS-NEH    |    100       |      0.1       |     0      |
-|   DB_1     | CS-NEH    |    10        |      0.1       |    49      |
-|   DB_2     | CS-DEBY   |    100       |      0.1       |    17      |
-|   DB_2     | CS-DEBY   |    10        |      0.1       |    82      |
+|   LA       | SL-OBOYS2 |    10        |      0.1       |    22      |
+|   DB_1     | CS-NEH    |    10        |      0.1       |    58      |
+|   DB_2     | CS-DEBY   |    10        |      0.1       |    27      |
 
 SL - Louisiana wild line   
 OBOYS2 - Louisiana selected line   
@@ -120,72 +141,49 @@ NEH - Delaware Bay selected NEH line
 DEBY - Chesapeake Bay selected line (initially from DB)   
 CS - Cape Shore (Delaware Bay) wild line 
 
-Among these outliers, only one SNP (5_11774642) was shared between DB_2 (pr_odd 100) and LA (pr_odd 100) results.
-
-- Outlier plots
-
-Mahattan plot for SL-OBOYS2 (pr_odds 10)
-
-<img src="https://hzz0024.github.io/images/CVreseq_bayescan/odd10_LA.jpg" alt="img" width="800"/>
-
-Mahattan plot for SL-OBOYS2 (pr_odds 100)
-
-<img src="https://hzz0024.github.io/images/CVreseq_bayescan/odd100_LA.jpg" alt="img" width="800"/>
-
-Mahattan plot for CS-NEH (pr_odds 10)
-
-<img src="https://hzz0024.github.io/images/CVreseq_bayescan/odd10_DB_1.jpg" alt="img" width="800"/>
-
-Mahattan plot for CS-NEH (pr_odds 100)
-
-<img src="https://hzz0024.github.io/images/CVreseq_bayescan/odd100_DB_1.jpg" alt="img" width="800"/>
-
-Mahattan plot for CS-DEBY (pr_odds 10)
-
-<img src="https://hzz0024.github.io/images/CVreseq_bayescan/odd10_DB_2.jpg" alt="img" width="800"/>
-
-Mahattan plot for CS-DEBY (pr_odds 100)
-
-<img src="https://hzz0024.github.io/images/CVreseq_bayescan/odd100_DB_2.jpg" alt="img" width="800"/>
-
----
-### RDA
-
----
-### Percentile
-
-- get polymorphic loci for each comparsion
+Here I'd like to compare the common shared outliers between two methods above. 
 
 ```sh
-vcftools --vcf LA.recode.vcf --maf 0.05 --recode --recode-INFO-all --out LA_maf
->After filtering, kept 284587 out of a possible 334011 Sites
-
-vcftools --vcf DB_1.recode.vcf --maf 0.05 --recode --recode-INFO-all --out DB_1_maf
->After filtering, kept 282067 out of a possible 334011 Sites
-
-vcftools --vcf DB_2.recode.vcf --maf 0.05 --recode --recode-INFO-all --out DB_2_maf
->After filtering, kept 293946 out of a possible 334011 Sites
+# DB_1_list is the result from pcadapt, Bas_DB_1$V1 is the result from bayescan. Same for the other populations.
+> intersect(DB_1_list,Bas_DB_1$V1)
+ [1] "1_30849333" "1_32752499" "1_58534084" "1_60259825" "2_656131"   "2_5071524"  "2_21500266" "2_45981261" "2_52157647" "3_40979403" "3_41730028" "3_70055986"
+[13] "4_15417342" "4_18695731" "4_18722099" "4_31415808" "4_34685619" "4_55313638" "4_57208049" "5_16630602" "5_17325109" "5_21286358" "5_27887499" "5_36361325"
+[25] "5_41952828" "5_43217405" "5_53541677" "5_62075320" "5_65420222" "6_4960897"  "6_18975650" "6_35317580" "6_35394384" "6_42853582" "7_17539134" "7_26413160"
+[37] "7_49024371" "7_56713582" "8_28227013" "8_36715103" "8_57605961" "8_63266137"
+length(intersect(DB_1_list,Bas_DB_1$V1))
+[1] 42
+> intersect(DB_2_list,Bas_DB_2$V1)
+ [1] "2_9316508"  "2_21494062" "2_59711343" "3_20546749" "4_8027221"  "4_9429353"  "4_34547560" "5_19572926" "5_32632886" "5_48031603" "5_54049060" "5_65124487"
+[13] "6_7992530"  "6_14666712" "7_7204094"  "7_15410073" "8_15737746" "8_19629404" "8_34017649" "8_43295276" "9_22343202" "9_39026257" "9_81096281" "10_4996789"
+> length(intersect(DB_2_list,Bas_DB_2$V1))
+[1] 24
+> intersect(LA_list,Bas_LA$V1)
+ [1] "1_15977907" "2_31084149" "4_10967020" "5_32604685" "5_40191744" "5_93475688" "8_42853491" "9_22044992" "10_1206118" "10_7829874"
+> length(intersect(LA_list,Bas_LA$V1))
+[1] 10
+# compare the results from pcadapt
+> intersect(DB_1_list,DB_2_list)
+[1] "1_55485508" "2_2405242"  "2_59641818" "5_49795690" "7_53403"    "8_36715103" "9_50117923"
+> length(intersect(DB_1_list,DB_2_list))
+[1] 7
+> intersect(DB_1_list,LA_list)
+[1] "2_656131"   "3_54596543" "8_63266137" "9_12057031"
+> length(intersect(DB_1_list,LA_list))
+[1] 4
+> intersect(DB_2_list,LA_list)
+[1] "3_69917769" "5_25337621" "5_79382471" "8_10601236" "9_52331392"
+> length(intersect(DB_2_list,LA_list))
+[1] 5
 ```
 
-- estimate the Fst values using VCFtools 
+See if there is any SNP outliers shared by two populations (from pcadapt results as none are shared by Bayescan methods) and between the methods,
 
 ```sh
-./vcftools --vcf vcf_file1.vcf --weir-fst-pop individual_list_1.txt --weir-fst-pop individual_list_2.txt
+> intersect(intersect(DB_1_list,DB_2_list), intersect(DB_1_list,Bas_DB_1$V1))
+[1] "8_36715103"
 
-vcftools --vcf LA_maf.recode.vcf --weir-fst-pop SL --weir-fst-pop OBOYS2
-Weir and Cockerham mean Fst estimate: 0.024711
-Weir and Cockerham weighted Fst estimate: 0.036727
-After filtering, kept 284587 out of a possible 284587 Sites
-
-vcftools --vcf DB_1_maf.recode.vcf --weir-fst-pop CS --weir-fst-pop NEH
-Weir and Cockerham mean Fst estimate: 0.048347
-Weir and Cockerham weighted Fst estimate: 0.063669
-After filtering, kept 282067 out of a possible 282067 Sites
-
-vcftools --vcf DB_2_maf.recode.vcf --weir-fst-pop CS --weir-fst-pop DEBY
-Weir and Cockerham mean Fst estimate: 0.02112
-Weir and Cockerham weighted Fst estimate: 0.033042
-After filtering, kept 293946 out of a possible 293946 Sites
+> intersect(intersect(DB_1_list,LA_list), intersect(DB_1_list,Bas_DB_1$V1))
+[1] "2_656131"   "8_63266137"
 ```
 
 see vcftools [manual](https://vcftools.github.io/man_latest.html) and biostars [post](https://www.biostars.org/p/46858/) for detailed parameter explanation. Here the Fst values are estimated using Weir and Cockerham’s (1984) method
