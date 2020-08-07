@@ -246,13 +246,13 @@ SNP 8_36715103 is shared by two methods (pcadatp and Bayescan) in CS-NEH compars
 
 <img src="https://hzz0024.github.io/images/outlier/8_36715103_pi_DB_2.jpg" alt="img" width="800"/>
 
-SNP 8_63266137 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and SL-OBOYS2 using pcadatp
+SNP 8_63266137 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and SL-OBOYS2 using pcadatp. Here I zoom in (200k bp) to take a closer look at this loci due to the lack of values around this region. This loci looks like a false-positive as the observed pi values in SL-OBOYS2 (LA) is opposite from the expection, potentially due the individual outlier in the LA populaiton pair.
 
 <img src="https://hzz0024.github.io/images/outlier/8_63266137_DB_1.jpg" alt="img" width="800"/>
 
 <img src="https://hzz0024.github.io/images/outlier/8_63266137_LA.jpg" alt="img" width="800"/>
 
-SNP 5_36361325 is only detected in CS-NEH comparsion, but SNPs in chromosome 5 are constantly identified as outliers. I'd like to check the pi patterns for regions around this snp. 
+SNP 5_36361325 is only detected in CS-NEH comparsion, but SNPs in chromosome 5 are constantly identified as outliers. I'd like to check the pi patterns for regions around this snp. It looks like this outlier is population pair specific. I only observed elevated pi pattern in DB_1 population pair.
 
 <img src="https://hzz0024.github.io/images/outlier/5_36361325_DB_1.jpg" alt="img" width="800"/>
 
