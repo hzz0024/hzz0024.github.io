@@ -304,5 +304,5 @@ Tajima.D comparison
 |8	  |36717001      |36718000	  |0	    |na       |
 
 
- Here I observed Tajima's D in NEH domesticated population to be negative due to positive selection (or selective sweep), and positive in wild CS population. Need to check some other outilers.
+ Here I observed Tajima's D in NEH domesticated population to be negative due to positive selection (or selective sweep), and positive in the wild CS population. Need to check some other outilers.
 
