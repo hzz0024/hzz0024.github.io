@@ -240,7 +240,7 @@ CS - Cape Shore (Delaware Bay) wild line
 
 - pi distribution
 
-SNP 8_36715103 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and CS-DEBY using pcadatp. 
+SNP 8_36715103 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and CS-DEBY using pcadatp. The dashed line indicates the location of this snp. From the figure CS-NEH (DB_1), a lot of pi differences are shown around this outlier position. The wild CS population has increased pi at 36.5-36.8M genome region. However, in CS-DEBY I did not see this pattern, although this snp has also been identified as an outlier from population pair and method comparsions.
 
 <img src="https://hzz0024.github.io/images/outlier/8_36715103_pi_DB_1.jpg" alt="img" width="800"/>
 
