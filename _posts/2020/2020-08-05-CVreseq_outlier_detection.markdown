@@ -213,8 +213,9 @@ Populations
 |DEBY   |Chesapeake Bay selected line (initially from DB)|
 |CS     | Cape Shore (Delaware Bay) wild line            |
 
-SNP 8_36715103 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and CS-DEBY using pcadatp
+- pi distribution
 
+SNP 8_36715103 is shared by two methods (pcadatp and Bayescan) in CS-NEH comparsion, and shared by CS-NEH and CS-DEBY using pcadatp
 
 <img src="https://hzz0024.github.io/images/outlier/8_36715103_pi_DB_1.jpg" alt="img" width="800"/>
 
