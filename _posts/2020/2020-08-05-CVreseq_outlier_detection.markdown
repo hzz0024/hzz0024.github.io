@@ -119,9 +119,9 @@ vcftools --vcf LA.sort.id.vcf --snps LA_tmp.prune.in --recode --out LA_prune
 
 # load the bayescan format files to the cluster and run 
 
-./BayeScan2.1_linux64bits LA_odds1 -o LA_odds1_output -pr_odds 1
-./BayeScan2.1_linux64bits DB_1_odds1 -o DB_1_odds1_output -pr_odds 1
-./BayeScan2.1_linux64bits DB_2_odds1 -o DB_2_odds1_output -pr_odds 1
+./BayeScan2.1_linux64bits LA_odds10 -o LA_odds1_output -pr_odds 10
+./BayeScan2.1_linux64bits DB_1_odds10 -o DB_1_odds1_output -pr_odds 10
+./BayeScan2.1_linux64bits DB_2_odds10 -o DB_2_odds1_output -pr_odds 10
 
 - Results
 
