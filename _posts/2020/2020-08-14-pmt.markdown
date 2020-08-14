@@ -15,7 +15,7 @@ I put two plots here to illustrate the concept of this survival vector permutati
 
 <img src="https://hzz0024.github.io/images/pmt/design.jpg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/pmt/Data.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/pmt/format.jpg" alt="img" width="800"/>
 
 
 
