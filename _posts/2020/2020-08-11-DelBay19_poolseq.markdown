@@ -68,7 +68,6 @@ module load R/3.5.1
 module load popoolation2/1201
 perl /tools/popoolation2_1201/mpileup2sync.pl --fastq-type illumina --min-qual 20 --input COH_NB.mpileup --output COH_NB.sync
 
-
 module load R/3.5.1
 module load popoolation2/1201
 perl /tools/popoolation2_1201/mpileup2sync.pl --fastq-type illumina --min-qual 20 --input HC_NB.mpileup --output HC_NB.sync
@@ -79,13 +78,7 @@ perl /tools/popoolation2_1201/mpileup2sync.pl --fastq-type illumina --min-qual 2
 
 The output looks like this
 
-NC_035780.1     25      N       0:0:7:0:0:0     0:0:1:0:0:0
-NC_035780.1     26      N       12:0:0:0:0:0    2:0:0:0:0:0
-NC_035780.1     27      N       0:13:0:0:0:0    0:2:0:0:0:0
-NC_035780.1     28      N       14:0:0:0:0:0    2:0:0:0:0:0
-NC_035780.1     29      N       0:0:12:0:0:0    0:0:2:0:0:0
-NC_035780.1     30      N       1:0:0:10:0:0    0:0:0:2:0:0
-NC_035780.1     31      N       0:14:0:0:0:0    0:1:0:0:0:0
+NC_035780.1	319611	N	4:0:0:5:0:0	6:0:0:1:0:0
 
 col1: reference contig
 col2: position within the refernce contig
@@ -99,11 +92,44 @@ The allele frequencies are in the format A:T:C:G:N:del, i.e: count of bases 'A',
 
 ### Calculate allele frequency differences
 
+The exact allele frequency differences may be computed as follows:
+
 ```sh
 module load R/3.5.1
 module load popoolation2/1201
 perl /tools/popoolation2_1201/snp-frequency-diff.pl --input CH_REF.sync --output-prefix CH_REF1 --min-count 2 --min-coverage 5 --max-coverage 200
 ```
+
+This script creates two output files having two different extensions:
+
+rc: this file contains the major and minor alleles for every SNP in a concise format   
+pwc: this file contains the differences in allele frequencies for every pairwise comparision of the populations present in the synchronized file   
+
+An example outout of rc and pwc outputs look like this:
+
+```sh
+rc
+chr   pos     rc      allele_count    allele_states   deletion_sum    snp_type        major_alleles(maa)      minor_alleles(mia)      maa_1   maa_2   mia_1   mia_2
+NC_035780.1     319611  N       2       A/G     0       pop     GA      AG      5/9     6/7     4/9     1/7
+
+pwc
+chr   			pos     rc allele_count allele_states deletion_sum  snp_type  most_variable_allele diff:1-2
+NC_035780.1     319611  N       2       A/G     0       pop     G       0.413
+```
+
+I found the same snp result from angsd
+
+```sh
+file name: CH_maf0.05_pctind0.7_cv30.mafs
+chromo	position	major	minor	anc	knownEM	pK-EM	nInd
+NC_035780.1	319611	A	G	A	0.398816	44
+
+file name: REF_maf0.05_pctind0.7_cv30.mafs
+chromo	position	major	minor	anc	knownEM	pK-EM	nInd
+NC_035780.1	319611	A	G	A	0.324764	41
+```
+
+For the same snp, the allele difference from angsd is 0.399-0.325=0.074, while value from the popoolation2 is 5/9-1/7=0.413 (derived from here NC_035780.1	319611	N	4:0:0:5:0:0	6:0:0:1:0:0, order is A:T:C:G:N:del). It is a big difference! 
 
 ### Fisher's Exact Test for significance of absolute delta_p
 
