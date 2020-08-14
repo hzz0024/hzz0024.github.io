@@ -30,4 +30,31 @@ Their procedure for pool-seq data analysis:
    at least four reads for a base call    
    a minimum of 20 and a maximum of 200 total read counts for all populations    
 
+### Create a synchronized file
 
+Given that I already have the generated bam files, I skipped the first six steps. I just merge all the bam file from one popualtion with samtools.
+
+```sh
+module load samtools/1.7
+samtools merge HC.bam *.bam
+samtools merge ARN.bam *.bam
+samtools merge COH.bam *.bam
+samtools merge SR.bam *.bam
+samtools merge NB.bam *.bam
+samtools merge CH.bam *.bam
+samtools merge REF.bam *.bam
+```
+
+Note a warning message was shown in the log file: "PG tag "MarkDuplicates.9A" on read "NB551191:557:HVMVVBGXC:1:11112:14736:3819" encountered with no corresponding entry in header, tag lost. Unknown tags are only reported once per input file for each tag ID". The PG means the program information used for data producing. It seems there is some wrong with the header. For my current data analysis I will ignore this issue as it does not affect the output bam file. 
+
+Synchronized files are the main input files for PoPoolation2. They basically contain the allele frequencies for every population at every base in the reference genome in a concise format. Note that the synchronized file format contains the allele frequencies after filtering for base quality.
+
+```sh 
+#example in the tutorial file
+samtools mpileup -B map/pop1.bam map/pop2.bam > p1_p2.mpileup
+#for DelBay19 data
+module load samtools/1.7
+samtools mpileup -B CH.bam REF.bam > CH_REF.mpileup
+samtools mpileup -B HC.bam NB.bam > HC_NB.mpileup
+samtools mpileup -B COH.bam NB.bam > COH_NB.mpileup
+```
