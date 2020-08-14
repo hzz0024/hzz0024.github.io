@@ -1,0 +1,24 @@
+---
+comments: true
+title: DelBay19 outlier detection with survival vector method
+date: '2020-08-14 12:00'
+tags:
+  - DelBay19
+  - ouliter
+  - null model
+  - WGS
+categories:
+  - WGS data analysis
+---
+
+I put two plots here to illustrate the concept of this survival vector permutation method for outlier detection. 
+
+<img src="https://hzz0024.github.io/images/pmt/design.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/pmt/design.jpg" alt="img" width="800"/>
+
+
+
+
+   
+
