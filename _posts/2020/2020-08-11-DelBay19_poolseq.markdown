@@ -47,7 +47,7 @@ samtools merge REF.bam *.bam
 
 Note a warning message was shown in the log file: "PG tag "MarkDuplicates.9A" on read "NB551191:557:HVMVVBGXC:1:11112:14736:3819" encountered with no corresponding entry in header, tag lost. Unknown tags are only reported once per input file for each tag ID". The PG means the program information used for data producing. It seems there is some wrong with the header. For my current data analysis I will ignore this issue as it does not affect the output bam file. 
 
-Synchronized files are the main input files for PoPoolation2. They basically contain the allele frequencies for every population at every base in the reference genome in a concise format. Note that the synchronized file format contains the allele frequencies after filtering for base quality.
+Synchronized files are the main input files for PoPoolation2. They basically contain the allele frequencies for every population at every base in the reference genome in a concise format. Note that the synchronized file format contains the allele frequencies after filtering for base quality. Here I created three population pair for trial analysis.
 
 ```sh 
 #example in the tutorial file
