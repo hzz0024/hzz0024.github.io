@@ -129,7 +129,7 @@ chromo	position	major	minor	anc	knownEM	pK-EM	nInd
 NC_035780.1	319611	A	G	A	0.324764	41
 ```
 
-For the same snp, the allele difference from angsd is 0.399-0.325=0.074, while value from the popoolation2 is 5/9-1/7=0.413 (derived from here NC_035780.1	319611	N	4:0:0:5:0:0	6:0:0:1:0:0, order is A:T:C:G:N:del). It is a big difference! 
+For the same snp, the allele difference from angsd is 0.399-0.325=0.074, while value from the popoolation2 is 5/9-1/7=0.413 (derived from syc file - NC_035780.1	319611	N	4:0:0:5:0:0	6:0:0:1:0:0, order is A:T:C:G:N:del). It is a big difference! 
 
 ### Fisher's Exact Test for significance of absolute delta_p
 
