@@ -57,4 +57,60 @@ module load samtools/1.7
 samtools mpileup -B CH.bam REF.bam > CH_REF.mpileup
 samtools mpileup -B HC.bam NB.bam > HC_NB.mpileup
 samtools mpileup -B COH.bam NB.bam > COH_NB.mpileup
+# this step costs ~ 2 hours
+
+# using mpileup2sync.pl to convert the mpileup into sync format
+module load R/3.5.1
+module load popoolation2/1201
+perl /tools/popoolation2_1201/mpileup2sync.pl --fastq-type illumina --min-qual 20 --input CH_REF.mpileup --output CH_REF.sync
+
+module load R/3.5.1
+module load popoolation2/1201
+perl /tools/popoolation2_1201/mpileup2sync.pl --fastq-type illumina --min-qual 20 --input COH_NB.mpileup --output COH_NB.sync
+
+
+module load R/3.5.1
+module load popoolation2/1201
+perl /tools/popoolation2_1201/mpileup2sync.pl --fastq-type illumina --min-qual 20 --input HC_NB.mpileup --output HC_NB.sync
+
+# for each of the formating run it costs ~ 8 hours.
+
+# Note that Synchronizing the mpileup file is quite time consuming. To remove this bottleneck they implemented 'mpileup2sync' in Java multi-threading which is about 78x faster as the implementation in perl. However this option does not produce the right sync format file. May need further trial.
+
+The output looks like this
+
+NC_035780.1     25      N       0:0:7:0:0:0     0:0:1:0:0:0
+NC_035780.1     26      N       12:0:0:0:0:0    2:0:0:0:0:0
+NC_035780.1     27      N       0:13:0:0:0:0    0:2:0:0:0:0
+NC_035780.1     28      N       14:0:0:0:0:0    2:0:0:0:0:0
+NC_035780.1     29      N       0:0:12:0:0:0    0:0:2:0:0:0
+NC_035780.1     30      N       1:0:0:10:0:0    0:0:0:2:0:0
+NC_035780.1     31      N       0:14:0:0:0:0    0:1:0:0:0:0
+
+col1: reference contig
+col2: position within the refernce contig
+col3: reference character
+col4: allele frequencies of population number 1
+col5: allele frequencies of population number 2
+coln: allele frequencies of population number n
+
+The allele frequencies are in the format A:T:C:G:N:del, i.e: count of bases 'A', count of bases 'T',... and deletion count in the end (character '*' in the mpileup)
+```
+
+### Calculate allele frequency differences
+
+```sh
+module load R/3.5.1
+module load popoolation2/1201
+perl /tools/popoolation2_1201/snp-frequency-diff.pl --input CH_REF.sync --output-prefix CH_REF1 --min-count 2 --min-coverage 5 --max-coverage 200
+```
+
+### Fisher's Exact Test for significance of absolute delta_p
+
+The Fishers exact test can be used to test whether any differences in allele frequencies are statistically significant. At low coverages the absolute changes of allele frequencies or the Fst values may be strongly influenced by sampling effects, therefore the Fishers exact test may be used to identify significant changes in allele frequency.
+
+```sh
+module load R/3.5.1
+module load popoolation2/1201
+perl /tools/popoolation2_1201/fisher-test.pl --input CH_REF.sync --output CH_REF1.fet --min-count 2 --min-coverage 5 --max-coverage 200 --suppress-noninformative
 ```
