@@ -242,5 +242,7 @@ Below are two figures to show the delta_p and start allele frequency for the 96 
 
 - SGS and survival vector methods
 
-It looks that the distribution of p-value for these two method are "truncated". Someone has reported the same issue [here](https://github.com/StoreyLab/qvalue/issues/11). This is not surprising as most of the null model delta_p should be less than observed delta_p. Need look for alternative test for p-value generation.
+It looks that the distribution of p-value for these two method are "truncated". Someone has reported the same issue [here](https://github.com/StoreyLab/qvalue/issues/11). This is not surprising as most of the null model delta_p should be less than observed delta_p. Need look for alternative test for significance.
+
+A reference paper here [Genomic basis of parallel adaptation varies with divergence in Arabidopsis and its relatives](https://www.biorxiv.org/content/10.1101/2020.03.24.005397v1.full)
 
