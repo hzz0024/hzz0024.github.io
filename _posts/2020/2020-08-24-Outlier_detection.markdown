@@ -78,7 +78,7 @@ P-value histogram for 100k sampling result
 
 P-value histogram for 1 million sampling result
 
-<img src="https://hzz0024.github.io/images/outlier/SGS_local_1m_pvalue_hist.jpeg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/outlier/SGS_local_1M_pvalue_hist.jpeg" alt="img" width="800"/>
 
 Result for 100k sampling
 
@@ -115,17 +115,13 @@ Survival vector
 
 I put two plots here to illustrate the concept of this survival vector permutation method for outlier detection. 
 
-Survival vector model I 
-
-<img src="https://hzz0024.github.io/images/pmt/design.jpg" alt="img" width="800"/>
-
-Survival vector model II 
+<img src="https://hzz0024.github.io/images/pmt/design.jpg" alt="img" width="800"/> 
 
 <img src="https://hzz0024.github.io/images/pmt/format.jpg" alt="img" width="800"/>
 
-Here the survival vector model I is individual locus null model, which assumes the absence of selection on individual loci. It takes assumption that each genotype is independent and there is no selection on individual loci.
+Here the survival vector model I is individual locus null model, which assumes the absence of selection on individual loci. It takes assumption that each genotype is independent and there is no selection on individual loci. To approach that, I labeled the sequencing block (each block has sequencing counts for A, T, C, G) for each snp and randomly turn on/off some sequencing count blocks until 98-50 = 48 blocks remained in the dataset.  
 
-The second model is genome-wide null model, which assumes the absence of selection on any loci. It is useful to test if survival was wholly independent of genotypes. 
+The second model is genome-wide null model, which assumes the absence of selection on any loci. It is useful to test if survival was wholly independent of genotypes. Similar to survival vector model I, in model II, I labeled the sample and randomly turn on/off some samples (so that the whole sequencing block for this sample is gone) until 98-50 = 48 samples remained in the dataset. 
 
 Here I used both quantile and nominal p-value methods to calculate the significance. 
 
@@ -219,5 +215,5 @@ The survival vector II model is still under running.
 
 - Number of outliers
 
-| 
+
 
