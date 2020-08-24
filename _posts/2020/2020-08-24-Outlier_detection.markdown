@@ -229,7 +229,7 @@ I made a table to list the number of outliers from each method
 
 |     Method       | No. SNPs | p-value < 0.05 | fdr < 0.05 | fdr < 0.1  | 
 |------------------|----------|----------------|------------|------------|
-| CH vs. REF       | 1732036  |                |   96       |            | 
+| CH vs. REF       | 1732036  |   152978       |   96       |    478     | 
 | HC vs. NB        | 2083615  |   175197       |   61       |    442     | 
 
 The Fisher's exact approach is so far my most satisfied method. I will keep running these tests on different wild population pairs. With FDR < 0.05, I did not identify the common shared snps from CH vs. REF and HC vs. NB results. I will check the results with a FDR of 0.1 again.
