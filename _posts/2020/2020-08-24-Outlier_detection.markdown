@@ -24,7 +24,7 @@ Several methods are used for outlier detection and listed below,
 
 --- 
 
-Fisher's exact tests (two draws from a common pool approach))
+Fisher's exact tests (two draws from a common pool approach)
 
 I performed this test in two datasets: first is the challenge (CH) vs. reference (REF) group, second is the HC (Hope Creek) vs New Beds (NB) group.
 
@@ -41,7 +41,7 @@ P-value histogram for HC (Hope Creek) vs New Beds (NB)
 Result for challenge (CH) vs. reference (REF) 
 
 ```R
-length(which(p_value<0.05))
+> length(lfdr[lfdr<0.05])
 [1] 96
 ```
 
@@ -205,6 +205,8 @@ Results for survival vector I model
 > lfdr <- qobj$lfdr
 > length(lfdr[lfdr<0.2])
 [1] 4751
+> length(lfdr[lfdr<0.05])
+[1] 0
 ```
 
 The survival vector II model is still under running. 
@@ -215,5 +217,20 @@ The survival vector II model is still under running.
 
 - Number of outliers
 
+I made a table to list the number of outliers from each method
 
+|     Method       | p-value < 0.05 | fdr < 0.05 |  
+|------------------|----------------|------------|
+| Fisher's exact   |   175197       |   96       | 
+| SGS              |   345885       |  158338    |     
+| Survival vector I|   188505       |    0       |
+
+- Fisher's exact tests (two draws from a common pool approach)
+
+|     Method       | No. SNPs | p-value < 0.05 | fdr < 0.05 | fdr < 0.1  | 
+|------------------|----------|----------------|------------|------------|
+| CH vs. REF       | 1732036  |                |   96       |            | 
+| HC vs. NB        | 2083615  |   175197       |   61       |    442     | 
+
+The Fisher's exact approach is so far the most 
 
