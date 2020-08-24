@@ -24,7 +24,7 @@ Several methods are used for outlier detection and listed below,
 
 --- 
 
-Fisher's exact tests
+Fisher's exact tests (two draws from a common pool approach))
 
 I performed this test in two datasets: first is the challenge (CH) vs. reference (REF) group, second is the HC (Hope Creek) vs New Beds (NB) group.
 
@@ -56,7 +56,7 @@ Result for HC (Hope Creek) vs New Beds (NB)
 
 ---
 
-SGS
+SGS (two draws from a common pool approach)
 
 Scripts for SGS test, modified from Rey et al. 2020.  
 
@@ -111,7 +111,7 @@ length(which(p_value<0.05))
 
 ---
 
-Survival vector
+Survival vector (sequential sampling approach)
 
 I put two plots here to illustrate the concept of this survival vector permutation method for outlier detection. 
 
@@ -119,9 +119,9 @@ I put two plots here to illustrate the concept of this survival vector permutati
 
 <img src="https://hzz0024.github.io/images/pmt/format.jpg" alt="img" width="800"/>
 
-Here the survival vector model I is individual locus null model, which assumes the absence of selection on individual loci. It takes assumption that each genotype is independent and there is no selection on individual loci. To approach that, I labeled the sequencing block (each block has sequencing counts for A, T, C, G) for each snp and randomly turn on/off some sequencing count blocks until 98-50 = 48 blocks remained in the dataset.  
+Here the survival vector model I is individual locus null model, which assumes the absence of selection on individual loci. It takes assumption that each genotype is independent and there is no selection on individual loci. To approach that, I labeled the sequencing block (each block has sequencing counts for A, T, C, G) for each snp and randomly turn on/off some sequencing count blocks until 98-48 = 50 blocks remained in the dataset.  
 
-The second model is genome-wide null model, which assumes the absence of selection on any loci. It is useful to test if survival was wholly independent of genotypes. Similar to survival vector model I, in model II, I labeled the sample and randomly turn on/off some samples (so that the whole sequencing block for this sample is gone) until 98-50 = 48 samples remained in the dataset. 
+The second model is genome-wide null model, which assumes the absence of selection on any loci. It is useful to test if survival was wholly independent of genotypes. Similar to survival vector model I, in model II, I labeled the sample and randomly turn on/off some samples (so that the whole sequencing block for this sample is gone) until 98-48 = 50 samples remained in the dataset. 
 
 Here I used both quantile and nominal p-value methods to calculate the significance. 
 
