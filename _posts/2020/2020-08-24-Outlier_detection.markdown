@@ -232,5 +232,16 @@ I made a table to list the number of outliers from each method
 | CH vs. REF       | 1732036  |                |   96       |            | 
 | HC vs. NB        | 2083615  |   175197       |   61       |    442     | 
 
-The Fisher's exact approach is so far the most 
+The Fisher's exact approach is so far my most satisfied method. I will keep running these tests on different wild population pairs. With FDR < 0.05, I did not identify the common shared snps from CH vs. REF and HC vs. NB results. I will check the results with a FDR of 0.1 again.
+
+Below are two figures to show the delta_p and start allele frequency for the 96 potential outliers.
+
+<img src="https://hzz0024.github.io/images/outlier/Deltap_p_plot_1.jpeg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/outlier/Deltap_p_plot_2.jpeg" alt="img" width="800"/>
+
+- SGS and survival vector methods
+
+It looks that the distribution of p-value for these two method are "truncated". This is not surprising as most of the null model delta_p should be less than observed delta_p. Need look for alternative test for p-value generation, maybe t-test.  
+
 
