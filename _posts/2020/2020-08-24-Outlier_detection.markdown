@@ -238,7 +238,7 @@ Below are two figures to show the delta_p and start allele frequency for the 96 
 
 <img src="https://hzz0024.github.io/images/outlier/Deltap_p_plot_1.jpeg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/outlier/Deltap_p_plot_2.jpeg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/outlier/Deltap_p_plot_.jpeg" alt="img" width="800"/>
 
 - SGS and survival vector methods
 
