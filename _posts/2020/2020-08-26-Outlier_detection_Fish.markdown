@@ -92,3 +92,5 @@ In the figures above I put some lines to illustrate why delta_p against p0 have 
 
 <img src="https://hzz0024.github.io/images/Fish/ARN_COH_fdr02_random_sample.jpg" alt="img" width="800"/> 
 
+In the wild transect comparsions, however, there is no such constrains for the data distribution. This issue may come from two reasons. First is the MAF setting in the Angsd run. I set -doMaf as 0.05 for initial SNP calling across the whole populations (which creates a SNP list for downstream individual population running). The retalivaly high MAF setting may bias the allele frequency distribution in the individual population. Second is that I intially created the SNP lists seperately for the CH-REF and wild contrasts. Given that CH-REF has smaller sample size (N=98), I expect that more SNPs in the challenge or reference population are constrained by this MAF setting.
+
