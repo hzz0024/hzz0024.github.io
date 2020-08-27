@@ -143,3 +143,88 @@ In the wild transect comparsions, however, there is no such constrains for the d
 - SR vs. NB randomly sampling the same amount of SNPs 
 
 <img src="https://hzz0024.github.io/images/Fish/SR_NB_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
+
+---
+
+Notes:
+
+- Angsd command example
+
+```sh
+module load angsd/0.931
+###this script will work on bamfiles by population and calculate saf  & maf
+# maybe edit
+target="CH"
+NB_CPU=20 #change accordingly
+REGIONS="-rf chr_list.txt" #optional
+#REGIONS="" # to remove the options to focus on a limited number of regions
+
+#prepare variables - avoid to modify
+source /scratch/hzz0024/DelBay19_July/01_scripts/01_config.sh
+N_IND=$(wc -l $CH | cut -d " " -f 1)
+MIN_IND=$(($N_IND*7/10))
+
+echo "Ouput can be used for depth evaluation with all individuals listed in "$CH
+echo "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"
+echo "filter on allele frequency = "$MIN_MAF
+
+angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doMajorMinor 3 \
+      -anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH \
+      -sites CHR_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30 \
+      -out "/scratch/hzz0024/DelBay19_July/05_saf_maf_by_pop/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30"PERCENT_IND"_cv30"
+```
+
+- Check outliers
+
+Here I looked at one potential outlier in CH_REF and HC_NB comparison, and found four shared outliers with fdr < 0.2.
+
+```sh
+intersect(CH_REF_list, HC_NB_list)
+[1] "NC_035780.1_32280271" "NC_035780.1_32280434" "NC_035784.1_18028707" "NC_035786.1_8772371"
+```
+
+Allele frequency information from Angsd maf files
+
+```sh
+>NC_035784.1_18028707
+# CH vs REF
+> CH
+chromo  position  major minor anc knownEM nInd
+NC_035784.1 18028707  T C T 0.366273  45
+> REF
+NC_035784.1 18028707  T C T 0.110646  37
+
+# Wild contrasts
+>HC
+NC_035784.1 18028707  T C T 0.338600  41
+>NB
+NC_035784.1 18028707  T C T 0.092032  40
+
+>NC_035786.1_8772371
+# CH vs REF
+> CH
+chromo  position  major minor anc knownEM nInd
+NC_035786.1 8772371 C A A 0.494092  40
+> REF
+NC_035786.1 8772371 C A A 0.204234  43
+
+# Wild contrasts
+>HC
+NC_035786.1 8772371 C A A 0.130250  40
+>NB
+NC_035786.1 8772371 C A A 0.497266  36
+
+>NC_035780.1_32280271
+# CH vs REF
+> CH
+chromo  position  major minor anc knownEM nInd
+NC_035780.1 32280271  C T C 0.496700  38
+> REF
+NC_035780.1 32280271  C T C 0.172002  35
+
+# Wild contrasts
+>HC
+NC_035780.1 32280271  C T C 0.519852  40
+>NB
+NC_035780.1 32280271  C T C 0.194860  36
+```
