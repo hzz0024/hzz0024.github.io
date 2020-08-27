@@ -84,4 +84,11 @@ In the figures above I put some lines to illustrate why delta_p against p0 have 
 
 <img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr02_random_sample.jpg" alt="img" width="800"/>   
 
+- ARN vs. COH outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 1334)
+
+<img src="https://hzz0024.github.io/images/Fish/ARN_COH_fdr02.jpg" alt="img" width="800"/>
+
+- ARN vs. COH randomly sampling the same amount of SNPs 
+
+<img src="https://hzz0024.github.io/images/Fish/ARN_COH_fdr02_random_sample.jpg" alt="img" width="800"/> 
 
