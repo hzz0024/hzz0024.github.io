@@ -74,8 +74,6 @@ ref = read.delim(ref_file, header = TRUE, sep = "\t", dec = ".")
 p0 = ref$knownEM
 p1 = ch$knownEM
 DATA = data.frame(MIN=p0, MAX=p1)
-#DATA$MIN = 1- DATA$MIN
-#DATA$MAX = 1- DATA$MAX
 DATA = DATA[order(DATA$MIN),]
 num_snp = 3664
 DATA$X = seq(1, num_snp)
@@ -104,21 +102,16 @@ ref = read.delim(ref_file, header = FALSE, sep = "\t", dec = ".")
 deltap = ch$V6 - ref$V6
 p0 = ref$V6
 p1 = ch$V6
-DATA = data.frame(p=p0, abs_dp=deltap)
-#DATA$MIN = 1- DATA$MIN
-#DATA$MAX = 1- DATA$MAX
+DATA = data.frame(p=p0, delta_p=deltap)
 DATA = DATA[order(DATA$p),]
 num_snp = 96
-#DATA$X = seq(1, num_snp)
-sp <- ggplot(DATA, aes(x=p, y=abs_dp)) +
+sp <- ggplot(DATA, aes(x=p, y=delta_p)) +
   geom_point(size=.5)
 # add x and y-axis titles
 sp + scale_x_continuous(name="p", limits=c(min(DATA$p), max(DATA$p))) +
-  scale_y_continuous(name="Deltap (absolute values)", limits=c(min(DATA$abs_dp), max(DATA$abs_dp))) +
+  scale_y_continuous(name="Deltap (absolute values)", limits=c(min(DATA$delta_p), max(DATA$delta_p))) +
   labs(title = "Deltap against reference allele p for the observation data",
        subtitle = "note deltap ranges from 0-0.5")
-
-
 
 
 
