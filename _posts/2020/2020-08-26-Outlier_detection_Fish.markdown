@@ -13,7 +13,7 @@ categories:
 
 ### Fisher's exact tests (two draws from a common pool approach)
 
-I performed this test in both challenge vs. refernce and wild contrasts. 
+I performed the tests in both challenge vs. refernce and wild contrasts. 
 
 First is the challenge (CH) vs. reference (REF) group, 
 
@@ -21,7 +21,7 @@ P-value histogram for challenge (CH) vs. reference (REF)
 
 <img src="https://hzz0024.github.io/images/outlier/fisher_exact_chr_pvalue_hist.jpeg" alt="img" width="800"/>
 
-An example in wild transect comparison is the HC (Hope Creek) vs New Beds (NB) group.
+An example of wild transect comparison is the HC (Hope Creek) vs New Beds (NB) group.
 
 P-value histogram for HC (Hope Creek) vs New Beds (NB) 
 
