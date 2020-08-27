@@ -72,6 +72,16 @@ The detailed scripts are located in the DelBay_project/R_scripts/Fisher_exact/Fi
 
 <img src="https://hzz0024.github.io/images/Fish/CH_REF_fdr02_random_sample.jpg" alt="img" width="800"/>
 
+In the figures above I put some lines to illustrate why delta_p against p0 have shown such patterns.     
+1) it makes sense that all the dots should be located above the y= - x line. That is, for a given p0 with negative delta_p, p0 + delta_p >= 0.    
+2) it is weird to see that dots are constrained along the y= -2x + 1 and y -2x + 0.1 in the randomly sampling result. Theoretically, there is no constrain for the delta_p distribution. Let us take a look at the wild contrasts then. 
 
+- HC vs. NB outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 2796)
+
+<img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr02.jpg" alt="img" width="800"/>
+
+- HC vs. NB randomly sampling the same amount of SNPs 
+
+<img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr02_random_sample.jpg" alt="img" width="800"/>   
 
 
