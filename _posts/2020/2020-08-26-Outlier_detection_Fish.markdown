@@ -94,3 +94,52 @@ In the figures above I put some lines to illustrate why delta_p against p0 have 
 
 In the wild transect comparsions, however, there is no such constrains for the data distribution. This issue may come from two reasons. First is the MAF setting in the Angsd run. I set -doMaf as 0.05 for initial SNP calling across the whole populations (which creates a SNP list for downstream individual population running). The retalivaly high MAF setting may bias the allele frequency distribution in the individual population. Second is that I intially created the SNP lists seperately for the CH-REF and wild contrasts. Given that CH-REF has smaller sample size (N=98), I expect that more SNPs in the challenge or reference population are constrained by this MAF setting.
 
+### Relationship between p0 and p1 in potential outliers
+
+- CH vs. REF outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+
+<img src="https://hzz0024.github.io/images/Fish/CH_REF_fdr02_p0_p1.jpg" alt="img" width="800"/>
+
+- CH vs. REF randomly sampling the same amount of SNPs 
+
+<img src="https://hzz0024.github.io/images/Fish/CH_REF_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
+
+- HC vs. NB outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+
+<img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr02_p0_p1.jpg" alt="img" width="800"/>
+
+- HC vs. NB randomly sampling the same amount of SNPs 
+
+<img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
+
+- HC vs. ARN outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+
+<img src="https://hzz0024.github.io/images/Fish/HC_ARN_fdr02_p0_p1.jpg" alt="img" width="800"/>
+
+- HC vs. ARN randomly sampling the same amount of SNPs 
+
+<img src="https://hzz0024.github.io/images/Fish/HC_ARN_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
+
+- ARN vs. COH outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+
+<img src="https://hzz0024.github.io/images/Fish/ARN_COH_fdr02_p0_p1.jpg" alt="img" width="800"/>
+
+- ARN vs. COH randomly sampling the same amount of SNPs 
+
+<img src="https://hzz0024.github.io/images/Fish/ARN_COH_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
+
+- COH vs. SR outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+
+<img src="https://hzz0024.github.io/images/Fish/COH_SR_fdr02_p0_p1.jpg" alt="img" width="800"/>
+
+- COH vs. SR  randomly sampling the same amount of SNPs 
+
+<img src="https://hzz0024.github.io/images/Fish/COH_SR_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
+
+- SR vs. NB outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+
+<img src="https://hzz0024.github.io/images/Fish/SR_NB_fdr02_p0_p1.jpg" alt="img" width="800"/>
+
+- SR vs. NB randomly sampling the same amount of SNPs 
+
+<img src="https://hzz0024.github.io/images/Fish/SR_NB_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
