@@ -104,7 +104,7 @@ In the wild transect comparsions, however, there is no such constrains for the d
 
 <img src="https://hzz0024.github.io/images/Fish/CH_REF_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
 
-- HC vs. NB outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+- HC vs. NB outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 2796)
 
 <img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr02_p0_p1.jpg" alt="img" width="800"/>
 
@@ -112,7 +112,7 @@ In the wild transect comparsions, however, there is no such constrains for the d
 
 <img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
 
-- HC vs. ARN outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+- HC vs. ARN outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 1779)
 
 <img src="https://hzz0024.github.io/images/Fish/HC_ARN_fdr02_p0_p1.jpg" alt="img" width="800"/>
 
@@ -120,7 +120,7 @@ In the wild transect comparsions, however, there is no such constrains for the d
 
 <img src="https://hzz0024.github.io/images/Fish/HC_ARN_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
 
-- ARN vs. COH outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+- ARN vs. COH outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 1334)
 
 <img src="https://hzz0024.github.io/images/Fish/ARN_COH_fdr02_p0_p1.jpg" alt="img" width="800"/>
 
@@ -128,7 +128,7 @@ In the wild transect comparsions, however, there is no such constrains for the d
 
 <img src="https://hzz0024.github.io/images/Fish/ARN_COH_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
 
-- COH vs. SR outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+- COH vs. SR outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 1710)
 
 <img src="https://hzz0024.github.io/images/Fish/COH_SR_fdr02_p0_p1.jpg" alt="img" width="800"/>
 
@@ -136,7 +136,7 @@ In the wild transect comparsions, however, there is no such constrains for the d
 
 <img src="https://hzz0024.github.io/images/Fish/COH_SR_fdr02_p0_p1_random_sample.jpg" alt="img" width="800"/>
 
-- SR vs. NB outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
+- SR vs. NB outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3238)
 
 <img src="https://hzz0024.github.io/images/Fish/SR_NB_fdr02_p0_p1.jpg" alt="img" width="800"/>
 
