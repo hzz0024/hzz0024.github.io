@@ -27,6 +27,7 @@ CH="/scratch/hzz0024/DelBay19_July/02_info/ch_50.list"
 REF="/scratch/hzz0024/DelBay19_July/02_info/ref_48.list"
 CHR="/scratch/hzz0024/DelBay19_July/02_info/challenge_98.list"
 WILD="/scratch/hzz0024/DelBay19_July/02_info/wild_235.list"
+ALL="/scratch/hzz0024/DelBay19_July/02_info/ALL_333.list"
 HC="/scratch/hzz0024/DelBay19_July/02_info/HC_48.list"
 ARN="/scratch/hzz0024/DelBay19_July/02_info/ARN_47.list"
 COH="/scratch/hzz0024/DelBay19_July/02_info/COH_44.list"
@@ -79,58 +80,32 @@ create the bam file list for each population
 
 ```sh
 #!/bin/bash
-# write up the script for maxDepth evaluation 
+# write up the script for maxDepth evaluation
 # first echo is for results from masked genome, second one is from original genome
-for pop in CHR WILD
+for pop in CHR WILD ALL
 do
-    echo -e 'module load angsd/0.931\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_list.txt" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_HG/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\necho "Ouput of -doDepth can be used for depth evaluation with all individuals listed in "$'$pop'\necho "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"\necho "filter on allele frequency = "$MIN_MAF\n\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -anc $ANC_MASKED -remove_bads 1 -doQsDist 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF -maxDepth 2000 -b $'$pop' -out "/scratch/hzz0024/DelBay19_HG/03_depth/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_mask"' >> formal/'02_depth_'$pop'_mask.sh'
-    echo -e 'module load angsd/0.931\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_list.txt" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_HG/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\necho "Ouput of -doDepth can be used for depth evaluation with all individuals listed in "$'$pop'\necho "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"\necho "filter on allele frequency = "$MIN_MAF\n\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -anc $ANC -remove_bads 1 -doQsDist 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF -maxDepth 2000 -b $'$pop' -out "/scratch/hzz0024/DelBay19_HG/03_depth/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30"' >> formal/'02_depth_'$pop'_cv30.sh'
+    echo -e 'module load angsd/0.931\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_list.txt" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_July/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\necho "Ouput of -doDepth can be used for depth evaluation with all individuals listed in "$'$pop'\necho "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"\necho "filter on allele frequency = "$MIN_MAF\n\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -anc $ANC_MASKED -remove_bads 1 -doQsDist 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF -maxDepth 2000 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/03_depth/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_mask"' >> formal/'02_depth_'$pop'_mask.sh'
+    echo -e 'module load angsd/0.931\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_list.txt" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_July/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\necho "Ouput of -doDepth can be used for depth evaluation with all individuals listed in "$'$pop'\necho "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"\necho "filter on allele frequency = "$MIN_MAF\n\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -anc $ANC -remove_bads 1 -doQsDist 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF -maxDepth 2000 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/03_depth/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30"' >> formal/'02_depth_'$pop'_cv30.sh'
 done
 
 # An example script is shown below,
-
-#!/bin/bash
 module load angsd/0.931
-
-###this script will work on all bamfiles and calculate saf, maf & genotype likelihood
-#maybe edit
-# need to change $CHR at first echo part and angsd command
-# also change the target below
-target="CHR"
+# maybe edit
+target="ALL"
 NB_CPU=20 #change accordingly
 REGIONS="-rf chr_list.txt" #optional
 #REGIONS="" # to remove the options to focus on a limited number of regions
 
 #prepare variables - avoid to modify
-source /scratch/hzz0024/DelBay19_HG/01_scripts/01_config.sh
-N_IND=$(wc -l $CHR | cut -d " " -f 1)
+source /scratch/hzz0024/DelBay19_July/01_scripts/01_config.sh
+N_IND=$(wc -l $ALL | cut -d " " -f 1)
 MIN_IND=$(($N_IND*7/10))
 
-echo "Ouput of -doQsDist can be used for depth evaluation with  all individuals listed in $CHR"
-echo "keep loci with at leat one read for n individuals = $MIN_IND, which is 70% of total $N_IND individuals"
-echo "filter on allele frequency = $MIN_MAF"
+echo "Ouput of -doDepth can be used for depth evaluation with all individuals listed in "$ALL
+echo "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"
+echo "filter on allele frequency = "$MIN_MAF
 
-####Calculate the SAF, MAF and GL
-angsd -P $NB_CPU \
--doMaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 \
--doDepth 1 \
--anc $ANC -remove_bads 1 -doQsDist 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 \
--minInd $MIN_IND -minMaf $MIN_MAF -maxDepth 2000 \
--b $CHR -out "/scratch/hzz0024/DelBay19_HG/03_depth/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30"
-
-#main features
-# -P nb of threads
-# -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 1 samtools method - export GL in beagle format  -doGLF2)
-# -doMajorMinor 1 use the most frequent allele as major
-# -anc provide a ancestral sequence = reference in our case
-# -rf (file with the region written) work on a defined region : OPTIONAL
-# -b (bamlist) input file
-# -out  output file
-
-#main filters
-#filter on bam files -remove_bads (remove files with flag above 255) -minMapQ minimum mapquality -minQ (minimum quality of reads?)
-#filter on frequency -minInd (minimum number of individuals with at least one read at this locus) we set it to 70%
-#filter on allele frequency -minMaf, set to 0.05
+angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -anc $ANC -remove_bads 1 -doQsDist 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF -maxDepth 2000 -b $ALL -out "/scratch/hzz0024/DelBay19_July/03_depth/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30"
 ```
 
 - Output 
@@ -142,41 +117,40 @@ WILD walltime: 38991 s
 |-----|----|---|---------|
 |CHR  |205 |60 | 384     |
 |WILD |353 |203| 962     |
+|ALL  |    |   |         |
 
-### 4) create maf, saf, and beagle files for challenge and wild datasets
+### 4) create maf, saf, and beagle files for challenge (n=98), wild (n=235) and ALL (n=333) datasets
 
 ```sh
 #!/bin/bash
 # Read a string with spaces using for loop
-for pop in CHR
+for pop in ALL
 do
-    echo -e 'module load angsd/0.931\n###this script will work on bamfiles by population and calculate saf & maf\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_list.txt" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_July/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\necho "Ouput can be used for depth evaluation with all individuals listed in "$'$pop'\necho "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"\necho "filter on allele frequency = "$MIN_MAF\n\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 2 -anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF $REGIONS -setMaxDepth 384 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30"\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 2 -anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -minInd $MIN_IND $REGIONS -setMaxDepth 384 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_allvar"\n#main features\n# -P nb of threads\n# -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 1 samtools method - export GL in beagle format  -doGLF2)\n# -doMajorMinor 1 use the most frequent allele as major\n# -anc provide a ancestral sequence = reference in our case\n# -rf (file with the region written) work on a defined region : OPTIONAL\n# -b (bamlist) input file\n# -out  output file\n\n#main filters\n#filter on bam files -remove_bads (remove files with flag above 255) -minMapQ minimum mapquality -minQ minimum quality of reads\n#filter on frequency -minInd (minimum number of individuals with at least one read at this locus) we set it to 70%\n#filter on allele frequency -minMaf, set to 0.05\n\n#extract SNP which passed the MIN_MAF and PERCENT_IND filters & their Major-minor alleles\n#order the sites file by chromosome names\n#makes a region file matching the sites files and with same order\n#index sites file\necho "from the maf file, extract a list of SNP chr, positoin, major all, minor all"\ncd /scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all\nzcat "$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30.mafs.gz | tail -n +2 > FILE_cv30.tmp && mv FILE_cv30.tmp "$target"_snplist_cv30\nawk '\''{print $1,$2,$3,$4}'\'' "$target"_snplist_cv30 > "$target"_sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth3dv_snplist_4col_cv30\nangsd sites index "$target"_sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth3dv_snplist_4col_cv30' >> formal/'04_saf_maf_al_all_'$pop'_cv30_noinvers.sh'
-    echo -e 'module load angsd/0.931\n###this script will work on bamfiles by population and calculate saf & maf\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_list.txt" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_July/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\necho "Ouput can be used for depth evaluation with all individuals listed in "$'$pop'\necho "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"\necho "filter on allele frequency = "$MIN_MAF\n\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 2 -anc $ANC_MASKED -remove_bads 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF $REGIONS -setMaxDepth 384 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_mask"\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 2 -anc $ANC_MASKED -remove_bads 1 -minMapQ 30 -minQ 20 -minInd $MIN_IND $REGIONS -setMaxDepth 384 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_mask_allvar"\n#main features\n# -P nb of threads\n# -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 1 samtools method - export GL in beagle format  -doGLF2)\n# -doMajorMinor 1 use the most frequent allele as major\n# -anc provide a ancestral sequence = reference in our case\n# -rf (file with the region written) work on a defined region : OPTIONAL\n# -b (bamlist) input file\n# -out  output file\n\n#main filters\n#filter on bam files -remove_bads (remove files with flag above 255) -minMapQ minimum mapquality -minQ minimum quality of reads\n#filter on frequency -minInd (minimum number of individuals with at least one read at this locus) we set it to 70%\n#filter on allele frequency -minMaf, set to 0.05\n\n#extract SNP which passed the MIN_MAF and PERCENT_IND filters & their Major-minor alleles\n#order the sites file by chromosome names\n#makes a region file matching the sites files and with same order\n#index sites file\necho "from the maf file, extract a list of SNP chr, positoin, major all, minor all"\ncd /scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all\nzcat "$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_mask.mafs.gz | tail -n +2 > FILE_mask.tmp && mv FILE_mask.tmp "$target"_snplist_mask\nawk '\''{print $1,$2,$3,$4}'\'' "$target"_snplist_mask > "$target"_sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth3dv_snplist_4col_mask\nangsd sites index "$target"_sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth3dv_snplist_4col_mask' >> formal/'04_saf_maf_al_all_'$pop'_mask_noinvers.sh'
+    echo -e 'module load angsd/0.931\n###this script will work on bamfiles by population and calculate saf & maf\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_list.txt" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_July/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\necho "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"\necho "filter on allele frequency = "$MIN_MAF\n\nangsd -P $NB_CPU -doMaf 1 -doVcf 1 -dosaf 1 -doPost 1 -doIBS 1 -doCov 1 -makematrix 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 4 -anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF $REGIONS -setMaxDepth 962 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30"\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 2 -anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -minInd $MIN_IND $REGIONS -setMaxDepth 962 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_allvar"\n#main features\n# -P nb of threads\n# -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 1 samtools method - export GL in beagle format  -doGLF2)\n# -doMajorMinor 1 use the most frequent allele as major\n# -anc provide a ancestral sequence = reference in our case\n# -rf (file with the region written) work on a defined region : OPTIONAL\n# -b (bamlist) input file\n# -out  output file\n\n#main filters\n#filter on bam files -remove_bads (remove files with flag above 255) -minMapQ minimum mapquality -minQ minimum quality of reads\n#filter on frequency -minInd (minimum number of individuals with at least one read at this locus) we set it to 70%\n#filter on allele frequency -minMaf, set to 0.05\n\n#extract SNP which passed the MIN_MAF and PERCENT_IND filters & their Major-minor alleles\n#order the sites file by chromosome names\n#makes a region file matching the sites files and with same order\n#index sites file\necho "from the maf file, extract a list of SNP chr, positoin, major all, minor all"\ncd /scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all\nzcat "$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30.mafs.gz | tail -n +2 > FILE_cv30.tmp && mv FILE_cv30.tmp "$target"_snplist_cv30\nawk '\''{print $1,$2,$3,$4}'\'' "$target"_snplist_cv30 > "$target"_sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth3dv_snplist_4col_cv30\nangsd sites index "$target"_sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth3dv_snplist_4col_cv30' >> formal/'04_saf_maf_al_all_'$pop'_cv30_noinvers.sh'
+
+    echo -e 'module load angsd/0.931\n###this script will work on bamfiles by population and calculate saf & maf\n# maybe edit\ntarget="'$pop'"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_list.txt" #optional\n#REGIONS="" # to remove the options to focus on a limited number of regions\n\n#prepare variables - avoid to modify\nsource /scratch/hzz0024/DelBay19_July/01_scripts/01_config.sh\nN_IND=$(wc -l $'$pop' | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\necho "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"\necho "filter on allele frequency = "$MIN_MAF\n\nangsd -P $NB_CPU -doMaf 1 -doVcf 1 -dosaf 1 -doPost 1 -doIBS 1 -doCov 1 -makematrix 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 4 -anc $ANC_MASKED -remove_bads 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF $REGIONS -setMaxDepth 962 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_mask"\nangsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 2 -anc $ANC_MASKED -remove_bads 1 -minMapQ 30 -minQ 20 -minInd $MIN_IND $REGIONS -setMaxDepth 962 -b $'$pop' -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_mask_allvar"\n#main features\n# -P nb of threads\n# -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 1 samtools method - export GL in beagle format  -doGLF2)\n# -doMajorMinor 1 use the most frequent allele as major\n# -anc provide a ancestral sequence = reference in our case\n# -rf (file with the region written) work on a defined region : OPTIONAL\n# -b (bamlist) input file\n# -out  output file\n\n#main filters\n#filter on bam files -remove_bads (remove files with flag above 255) -minMapQ minimum mapquality -minQ minimum quality of reads\n#filter on frequency -minInd (minimum number of individuals with at least one read at this locus) we set it to 70%\n#filter on allele frequency -minMaf, set to 0.05\n\n#extract SNP which passed the MIN_MAF and PERCENT_IND filters & their Major-minor alleles\n#order the sites file by chromosome names\n#makes a region file matching the sites files and with same order\n#index sites file\necho "from the maf file, extract a list of SNP chr, positoin, major all, minor all"\ncd /scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all\nzcat "$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_mask.mafs.gz | tail -n +2 > FILE_mask.tmp && mv FILE_mask.tmp "$target"_snplist_mask\nawk '\''{print $1,$2,$3,$4}'\'' "$target"_snplist_mask > "$target"_sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth3dv_snplist_4col_mask\nangsd sites index "$target"_sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth3dv_snplist_4col_mask' >> formal/'04_saf_maf_al_all_'$pop'_mask_noinvers.sh'
 done
 
 # An example script is shown below,
 
 module load angsd/0.931
-###this script will work on bamfiles by population and calculate saf  & maf
+###this script will work on bamfiles by population and calculate saf & maf
 # maybe edit
-target="CHR"
+target="ALL"
 NB_CPU=20 #change accordingly
 REGIONS="-rf chr_list.txt" #optional
 #REGIONS="" # to remove the options to focus on a limited number of regions
 
 #prepare variables - avoid to modify
 source /scratch/hzz0024/DelBay19_July/01_scripts/01_config.sh
-N_IND=$(wc -l $CHR | cut -d " " -f 1)
+N_IND=$(wc -l $ALL | cut -d " " -f 1)
 MIN_IND=$(($N_IND*7/10))
 
-echo "Ouput can be used for depth evaluation with all individuals listed in "$CHR
 echo "keep loci with at leat one read for n individuals = "$MIN_IND", which is 70% of total "$N_IND" individuals"
 echo "filter on allele frequency = "$MIN_MAF
 
-angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 2 -anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -minInd $MIN_IND -minMaf $MIN_MAF -setMaxDepth 384 -SNP_pval 1e-6 -b $CHR -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30"
-
-angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 2 -anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -minInd $MIN_IND -setMaxDepth 384 -b $CHR -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_allvar"
-
+angsd -P $NB_CPU -doMaf 1 -doVcf 1 -dosaf 1 -doPost 1 -doIBS 1 -doCov 1 -makematrix 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 4 -anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -minInd $MIN_IND -minMaf $MIN_MAF $REGIONS -setMaxDepth 962 -b $ALL -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30"
+angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -dumpCounts 2 -anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -minInd $MIN_IND $REGIONS -setMaxDepth 962 -b $ALL -out "/scratch/hzz0024/DelBay19_July/04_saf_maf_gl_all/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_allvar"
 #main features
 # -P nb of threads
 # -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 1 samtools method - export GL in beagle format  -doGLF2)
@@ -192,6 +166,7 @@ angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 -d
 #filter on allele frequency -minMaf, set to 0.05
 
 #extract SNP which passed the MIN_MAF and PERCENT_IND filters & their Major-minor alleles
+#order the sites file by chromosome names
 #makes a region file matching the sites files and with same order
 #index sites file
 echo "from the maf file, extract a list of SNP chr, positoin, major all, minor all"
