@@ -147,11 +147,11 @@ Detailed maf file (frist five SNPs)
 
 |   chromo   | position  |  major    |   minor   |   anc   |    knownEM   |   nInd   |
 |------------|-----------|-----------|-----------|---------|--------------|----------|
-|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.122847   |    29    |
-|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.207482   |    35    |
-|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.092357   |    37    |
-|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.426569   |    38    |
-|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.337988   |    39    |
+|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.122847   |    40    |
+|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.207482   |    38    |
+|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.092357   |    42    |
+|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.426569   |    43    |
+|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.337988   |    43    |
 
 - test 3 MAF with -doMajorMinor 3 and -sites, with same quality filters as test 1 
 
@@ -178,6 +178,89 @@ Detailed maf file (frist five SNPs)
 |NC_035784.1 | 12021201  | C         |      A    |    C    |   0.080898   |    37    |
 |NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383985   |    38    |
 |NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324701   |    39    |
+
+- test 4-6 using the same command except -rt is not provided
+
+- test 4 MAF with −doMajorMinor 5, −doMaf 2 no -rf (see Stahlke et al. 2020)
+
+−doMajorMinor 4 ----- use the reference allele as the major allele      
+−doMaf 2 ----- calculate allele frequencies assuming a fixed major allele and an unknown minor allele
+
+```sh
+angsd -P $NB_CPU -doMaf 2 -dosaf 1 -GL 1 -domajorminor 5 \
+-anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH \
+-sites test_snp.list -out test/test1
+```
+
+Number of SNPs: 18001
+
+Allele frequency range:
+
+|   Mean   |    Max    |    Min    |
+|----------|-----------|-----------|
+| 0.239076 | 0.999999  | 0.000000  |
+
+Detailed maf file (frist five SNPs)
+
+|   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
+|------------|-----------|-----------|-----------|---------|--------------|----------|
+|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.103948   |    29    |
+|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.198417   |    35    |
+|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.080898   |    37    |
+|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383985   |    38    |
+|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324701   |    39    |
+
+- test 5 MAF with -doMajorMinor 3 and -sites no -rf (see Fang et al. 2020)
+
+```sh
+angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
+-anc $ANC -b $CH \
+-sites test_snp.list -out test/test2
+```
+
+Number of SNPs: 18001
+
+Allele frequency range:
+
+|   Mean   |    Max    |    Min    |
+|----------|-----------|-----------|
+| 0.198444 | 0.712840  | 0.000000  |
+
+Detailed maf file (frist five SNPs)
+
+|   chromo   | position  |  major    |   minor   |   anc   |    knownEM   |   nInd   |
+|------------|-----------|-----------|-----------|---------|--------------|----------|
+|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.122847   |    40    |
+|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.207482   |    38    |
+|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.092357   |    42    |
+|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.426569   |    43    |
+|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.337988   |    43    |
+
+- test 6 MAF with -doMajorMinor 3 and -sites, with same quality filters as test 1, and no -rf  
+
+```sh
+angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
+-anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH \
+-sites test_snp.list -out test/test3
+```
+
+Number of SNPs: 18001
+
+Allele frequency range:
+
+|   Mean   |    Max    |    Min    |
+|----------|-----------|-----------|
+| 0.17908  | 0.698007  | 0.000001  |
+
+Detailed maf file (frist five SNPs)
+
+|   chromo   | position  |  major    |   minor   |   anc   |    knownEM   |   nInd   |
+|------------|-----------|-----------|-----------|---------|--------------|----------|
+|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.103945   |    29    |
+|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.198410   |    35    |
+|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.080892   |    37    |
+|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383976   |    38    |
+|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324695   |    39    |
 
 - what SNPs make the differences?
 
@@ -210,14 +293,20 @@ Table for easier comparsion
 |   chromo   | position  |  major    |   minor   |   anc   |              |   nInd   |
 |------------|-----------|-----------|-----------|---------|--------------|----------|
 |   test 1   |           |           |           |         |  unknownEM   |          |
-|NC_035784.1 | 12004160  | T         |      A    |    T    |   0.999999   |    36    |
-|NC_035784.1 | 12021111  | T         |      C    |    T    |   0.999999   |    31    |
+|NC_035784.1 | 12926755  | T         |      A    |    T    |   0.999999   |    36    |
+|NC_035784.1 | 13399467  | T         |      C    |    T    |   0.999999   |    31    |
 |   test 2   |           |           |           |         |   knownEM    |          |
-|NC_035784.1 | 12021201  | A         |      T    |    T    |   0.000001   |    40    |
-|NC_035784.1 | 12021211  | C         |      A    |    T    |   0.172622   |    45    |
+|NC_035784.1 | 12926755  | A         |      T    |    T    |   0.000001   |    40    |
+|NC_035784.1 | 13399467  | C         |      A    |    T    |   0.172622   |    45    |
 |   test 3   |           |           |           |         |   knownEM    |          |
-|NC_035784.1 | 12021201  | A         |      T    |    T    |   0.000001   |    36    |
-|NC_035784.1 | 12021211  | C         |      A    |    T    |   0.170746   |    38    |
-
-
-
+|NC_035784.1 | 12926755  | A         |      T    |    T    |   0.000003   |    36    |
+|NC_035784.1 | 13399467  | C         |      A    |    T    |   0.170746   |    38    |
+|   test 4   |           |           |           |         |   knownEM    |          |
+|NC_035784.1 | 12926755  | T         |      A    |    T    |   0.999999   |    36    |
+|NC_035784.1 | 13399467  | T         |      C    |    T    |   0.999999   |    31    |
+|   test 5   |           |           |           |         |  knownEM     |          |
+|NC_035784.1 | 12926755  | A         |      T    |    T    |   0.000001   |    40    |
+|NC_035784.1 | 13399467  | C         |      A    |    T    |   0.172622   |    45    |
+|   test 6   |           |           |           |         |  knownEM     |          |
+|NC_035784.1 | 12926755  | A         |      T    |    T    |   0.000003   |    36    |
+|NC_035784.1 | 13399467  | C         |      A    |    T    |   0.170746   |    38    |
