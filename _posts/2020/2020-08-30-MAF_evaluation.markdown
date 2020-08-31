@@ -145,7 +145,7 @@ Allele frequency range:
 
 Detailed maf file (frist five SNPs)
 
-|   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
+|   chromo   | position  |  major    |   minor   |   anc   |    knownEM   |   nInd   |
 |------------|-----------|-----------|-----------|---------|--------------|----------|
 |NC_035784.1 | 12004160  | T         |      C    |    T    |   0.122847   |    29    |
 |NC_035784.1 | 12021111  | A         |      T    |    A    |   0.207482   |    35    |
@@ -171,7 +171,7 @@ Allele frequency range:
 
 Detailed maf file (frist five SNPs)
 
-|   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
+|   chromo   | position  |  major    |   minor   |   anc   |    knownEM   |   nInd   |
 |------------|-----------|-----------|-----------|---------|--------------|----------|
 |NC_035784.1 | 12004160  | T         |      C    |    T    |   0.103948   |    29    |
 |NC_035784.1 | 12021111  | A         |      T    |    A    |   0.198417   |    35    |
@@ -207,15 +207,15 @@ NC_035784.1	13399467	C	A	T	0.170746	38
 
 Table for easier comparsion
 
-|   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
+|   chromo   | position  |  major    |   minor   |   anc   |              |   nInd   |
 |------------|-----------|-----------|-----------|---------|--------------|----------|
-|   test 1   |           |           |           |         |              |          |
+|   test 1   |           |           |           |         |  unknownEM   |          |
 |NC_035784.1 | 12004160  | T         |      A    |    T    |   0.999999   |    36    |
 |NC_035784.1 | 12021111  | T         |      C    |    T    |   0.999999   |    31    |
-|   test 2   |           |           |           |         |              |          |
+|   test 2   |           |           |           |         |   knownEM    |          |
 |NC_035784.1 | 12021201  | A         |      T    |    T    |   0.000001   |    40    |
 |NC_035784.1 | 12021211  | C         |      A    |    T    |   0.172622   |    45    |
-|   test 3   |           |           |           |         |              |          |
+|   test 3   |           |           |           |         |   knownEM    |          |
 |NC_035784.1 | 12021201  | A         |      T    |    T    |   0.000001   |    36    |
 |NC_035784.1 | 12021211  | C         |      A    |    T    |   0.170746   |    38    |
 
