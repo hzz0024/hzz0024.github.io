@@ -28,12 +28,14 @@ In this post I collected some Angsd parameters from the related literatures. The
 
 - Fuller et al. 2020. Population genetics of the coral Acropora millepora: Toward genomic prediction of bleaching [link](https://science.sciencemag.org/content/sci/suppl/2020/07/15/369.6501.eaba4674.DC1/aba4674-Fuller-SM.pdf)
 
+This science paper shows some interesting analyses with low-coverage sequencing data (~ 1.43 X). Maybe useful for my downstream analyses.
+
+Not very informative in terms of Angsd running though.
+ 
+- Calfee et al 2020 (Graham Coop lab). Selection and hybridization shaped the Africanized honey bee invasion of the Americas [link](https://www.biorxiv.org/content/10.1101/2020.03.17.994632v2.full.pdf)
+
+"Using the software ANGSD, we identified a set of SNPs with minor allele frequency ≥ 5% in the combined sample based on read counts (-doMajorMinor 2 -doCounts 1). We excluded unplaced scaffolds (<5Mb total) and applied standard quality filters for SNP calling (base quality ≥ 20, mapping quality ≥ 30, total read depth ≤ 5500 (∼2x mean), and coverage across individuals ≥ 50%). "
 
 
-### Plot the delta_p against start p
-
-- CH vs. REF outliers identified from the Fisher's exact test with fdr < 0.2 ( n = 3829)
-
-<img src="https://hzz0024.github.io/images/Fish/CH_REF_fdr02.jpg" alt="img" width="800"/>
 
 
