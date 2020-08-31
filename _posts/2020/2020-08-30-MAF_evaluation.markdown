@@ -301,7 +301,7 @@ Table for easier comparsion
 |   test 3   |           |           |           |         |   knownEM    |          |
 |NC_035784.1 | 12926755  | A         |      T    |    T    |   0.000003   |    36    |
 |NC_035784.1 | 13399467  | C         |      A    |    T    |   0.170746   |    38    |
-|   test 4   |           |           |           |         |   knownEM    |          |
+|   test 4   |           |           |           |         |   unknownEM  |          |
 |NC_035784.1 | 12926755  | T         |      A    |    T    |   0.999999   |    36    |
 |NC_035784.1 | 13399467  | T         |      C    |    T    |   0.999999   |    31    |
 |   test 5   |           |           |           |         |  knownEM     |          |
