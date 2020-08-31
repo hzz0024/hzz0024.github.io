@@ -98,7 +98,7 @@ cat test_snp.list | wc -l
 zcat test1.mafs.gz | awk '{print $6}' | tail -n +2| awk '{if(min==""){min=max=$1}; if($1>max) {max=$1}; if($1<min) {min=$1}; total+=$1; count+=1} END {print total/count, max, min}'
 ```
 
-- test 1 MAF with −doMajorMinor 5, −doMaf 2, and -sites (see Stahlke et al. 2020)
+- test 1 MAF with −doMajorMinor 5, −doMaf 2 (see Stahlke et al. 2020)
 
 −doMajorMinor 4 ----- use the reference allele as the major allele      
 −doMaf 2 ----- calculate allele frequencies assuming a fixed major allele and an unknown minor allele
@@ -127,7 +127,7 @@ Detailed maf file (frist five SNPs)
 |NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383985   |    38    |
 |NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324701   |    39    |
 
-- test 2 MAF with -doMajorMinor 1 (see Fang et al. 2020)
+- test 2 MAF with -doMajorMinor 3 and -sites (see Fang et al. 2020)
 
 ```sh
 angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
@@ -153,7 +153,7 @@ Detailed maf file (frist five SNPs)
 |NC_035784.1 | 12021211  | T         |      A    |    T    |   0.426569   |    38    |
 |NC_035784.1 | 12021217  | A         |      C    |    A    |   0.337988   |    39    |
 
-- test 3 MAF with -doMajorMinor 1 and some other filters 
+- test 3 MAF with -doMajorMinor 3 and -sites, with same quality filters as test 1 
 
 ```sh
 angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
