@@ -117,7 +117,7 @@ WILD walltime: 38991 s
 |-----|----|---|---------|
 |CHR  |205 |60 | 384     |
 |WILD |353 |203| 962     |
-|ALL  |    |   |         |
+|ALL  |777 |210| 1407    |
 
 ### 4) create maf, saf, and beagle files for challenge (n=98), wild (n=235) and ALL (n=333) datasets
 
