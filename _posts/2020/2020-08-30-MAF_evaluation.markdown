@@ -78,3 +78,146 @@ angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doMajorMinor 3 -anc $ANC \
 - Wilder et al 2020 Footprints of local adaptation span hundreds of linked genes in the Atlantic silverside genome. [link](https://onlinelibrary.wiley.com/doi/full/10.1002/evl3.189)
 
 > ANGSD version 0.912......Major and minor alleles, minor allele frequencies (MAF), and FST were estimated in ANGSD from genotype likelihoods for each SNP with data for at least 10 individuals per population (Korneliussen et al. 2014)." 
+
+---
+
+### Small test focusing on the potential outliers
+
+A text file is created for -rf usage, which spans ~2M bp in chromosome NC_035784.1
+
+
+```sh
+cat rf_test.txt
+> NC_035784.1:12000000-14000000
+# create a snp list within this region
+cat ALL_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30 | grep -A 18000 "NC_035784.1 12004160" > test_snp.list
+cat test_snp.list | wc -l
+> 18001
+# start from NC_035784.1 12004160 to NC_035784.1 14075213
+# code to estimate the mean, min and max
+zcat test1.mafs.gz | awk '{print $6}' | tail -n +2| awk '{if(min==""){min=max=$1}; if($1>max) {max=$1}; if($1<min) {min=$1}; total+=$1; count+=1} END {print total/count, max, min}'
+```
+
+- test 1 MAF with −doMajorMinor 5, −doMaf 2, and -sites (see Stahlke et al. 2020)
+
+−doMajorMinor 4 ----- use the reference allele as the major allele      
+−doMaf 2 ----- calculate allele frequencies assuming a fixed major allele and an unknown minor allele
+
+```sh
+angsd -P $NB_CPU -doMaf 2 -dosaf 1 -GL 1 -domajorminor 5 \
+-anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH \
+-sites test_snp.list $REGIONS -out test/test1
+```
+
+Number of SNPs: 17420
+
+Allele frequency range:
+
+|   Mean   |    Max    |    Min    |
+|----------|-----------|-----------|
+|  0.23868 | 0.999999  | 0.000000  |
+
+Detailed maf file (frist five SNPs)
+
+|   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
+|------------|-----------|-----------|-----------|---------|--------------|----------|
+|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.103948   |    29    |
+|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.198417   |    35    |
+|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.080898   |    37    |
+|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383985   |    38    |
+|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324701   |    39    |
+
+- test 2 MAF with -doMajorMinor 1 (see Fang et al. 2020)
+
+```sh
+angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
+-anc $ANC -b $CH \
+-sites test_snp.list $REGIONS -out test/test2
+```
+
+Number of SNPs: 17420
+
+Allele frequency range:
+
+|   Mean   |    Max    |    Min    |
+|----------|-----------|-----------|
+| 0.198521 | 0.712840  | 0.000000  |
+
+Detailed maf file (frist five SNPs)
+
+|   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
+|------------|-----------|-----------|-----------|---------|--------------|----------|
+|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.122847   |    29    |
+|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.207482   |    35    |
+|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.092357   |    37    |
+|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.426569   |    38    |
+|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.337988   |    39    |
+
+- test 3 MAF with -doMajorMinor 1 and some other filters 
+
+```sh
+angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
+-anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH \
+-sites test_snp.list $REGIONS -out test/test3
+```
+
+Number of SNPs: 17420
+
+Allele frequency range:
+
+|   Mean   |    Max    |    Min    |
+|----------|-----------|-----------|
+| 0.178849 | 0.698007  | 0.000001  |
+
+Detailed maf file (frist five SNPs)
+
+|   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
+|------------|-----------|-----------|-----------|---------|--------------|----------|
+|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.103948   |    29    |
+|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.198417   |    35    |
+|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.080898   |    37    |
+|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383985   |    38    |
+|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324701   |    39    |
+
+- what SNPs make the differences?
+
+Let us take a look at those SNPs with allele frequency of 0.999999
+
+```sh
+zcat test1.mafs.gz | grep "0.999999"
+NC_035784.1	12926755	T	A	T	0.999999	36
+NC_035784.1	13399467	T	C	T	0.999999	31
+```
+
+How about others?
+
+```sh
+# test 2
+zcat test2.mafs.gz | grep "12926755"
+NC_035784.1	12926755	A	T	T	0.000001	40
+zcat test2.mafs.gz | grep "13399467"
+NC_035784.1	13399467	C	A	T	0.172622	45
+
+# test 3
+zcat test3.mafs.gz | grep "12926755"
+NC_035784.1	12926755	A	T	T	0.000003	36
+zcat test3.mafs.gz | grep "13399467"
+NC_035784.1	13399467	C	A	T	0.170746	38
+```
+
+Table for easier comparsion
+
+|   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
+|------------|-----------|-----------|-----------|---------|--------------|----------|
+|   test 1   |           |           |           |         |              |          |
+|NC_035784.1 | 12004160  | T         |      A    |    T    |   0.999999   |    36    |
+|NC_035784.1 | 12021111  | T         |      C    |    T    |   0.999999   |    31    |
+|   test 2   |           |           |           |         |              |          |
+|NC_035784.1 | 12021201  | A         |      T    |    T    |   0.000001   |    40    |
+|NC_035784.1 | 12021211  | C         |      A    |    T    |   0.172622   |    45    |
+|   test 3   |           |           |           |         |              |          |
+|NC_035784.1 | 12021201  | A         |      T    |    T    |   0.000001   |    36    |
+|NC_035784.1 | 12021211  | C         |      A    |    T    |   0.170746   |    38    |
+
+
+
