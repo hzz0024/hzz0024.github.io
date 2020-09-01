@@ -10,7 +10,7 @@ categories:
   - WGS data analysis
 ---
 
-In this post I collected some Angsd parameters from the related literatures. Some of the paper are inspiring for data analyses using Angsd outputs. The main purpose of doing it to figure out why allele frequency values in the mafs file do not go beyond 0.8. Is it due to some technical problems? Or just a refection to the data itself?
+In this post I collected some Angsd parameters from the related literatures. Some of the paper are inspiring. The main purpose of doing it to figure out why allele frequency values in the mafs file do not go beyond 0.8. Is it due to some technical problems? Or just a refection to the data itself?
 
 --- 
 
@@ -85,7 +85,6 @@ angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doMajorMinor 3 -anc $ANC \
 
 A text file is created for -rf usage, which spans ~2M bp in chromosome NC_035784.1
 
-
 ```sh
 cat rf_test.txt
 > NC_035784.1:12000000-14000000
@@ -94,219 +93,146 @@ cat ALL_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30 | grep -A 1800
 cat test_snp.list | wc -l
 > 18001
 # start from NC_035784.1 12004160 to NC_035784.1 14075213
-# code to estimate the mean, min and max
+# bash command to estimate the mean, min and max allele frequency in the maf outputs
 zcat test1.mafs.gz | awk '{print $6}' | tail -n +2| awk '{if(min==""){min=max=$1}; if($1>max) {max=$1}; if($1<min) {min=$1}; total+=$1; count+=1} END {print total/count, max, min}'
 ```
 
-- test 1 MAF with −doMajorMinor 5, −doMaf 2 (see Stahlke et al. 2020)
+- test 1 MAF with −doMajorMinor 5, −doMaf 2 (similar to Castruita et al. 2020)
 
-−doMajorMinor 4 ----- use the reference allele as the major allele      
+−doMajorMinor 5 ----- use the ancestral allele as the major allele      
 −doMaf 2 ----- calculate allele frequencies assuming a fixed major allele and an unknown minor allele
 
 ```sh
 angsd -P $NB_CPU -doMaf 2 -dosaf 1 -GL 1 -domajorminor 5 \
--anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH \
+-anc $ANC -minQ 20 -b $CH \
 -sites test_snp.list $REGIONS -out test/test1
 ```
 
-Number of SNPs: 17420
+Number of SNPs: 17419
 
 Allele frequency range:
 
 |   Mean   |    Max    |    Min    |
 |----------|-----------|-----------|
-|  0.23868 | 0.999999  | 0.000000  |
+|  0.263902| 0.999999  | 0.000000  |
 
 Detailed maf file (frist five SNPs)
 
 |   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
 |------------|-----------|-----------|-----------|---------|--------------|----------|
-|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.103948   |    29    |
-|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.198417   |    35    |
-|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.080898   |    37    |
-|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383985   |    38    |
-|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324701   |    39    |
+|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.125158   |    39    |
+|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.211960   |    38    |
+|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.090226   |    42    |
+|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.443017   |    43    |
+|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.339384   |    43    |
 
-- test 2 MAF with -doMajorMinor 3 and -sites (see Fang et al. 2020)
+- test 2 MAF with -doMajorMinor 3 and -doMaf 1. Same as [Claire's code](https://github.com/clairemerot/angsd_pipeline/blob/master/01_scripts/06_saf_maf_by_pop_maxdepth.sh) and [Nicolas's code](https://github.com/therkildsen-lab/genomic-data-analysis/blob/master/scripts/get_maf_per_pop.sh)
 
 ```sh
 angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
--anc $ANC -b $CH \
+-anc $ANC -minQ 20 -b $CH \
 -sites test_snp.list $REGIONS -out test/test2
 ```
 
-Number of SNPs: 17420
+Number of SNPs: 17419
 
 Allele frequency range:
 
 |   Mean   |    Max    |    Min    |
 |----------|-----------|-----------|
-| 0.198521 | 0.712840  | 0.000000  |
+| 0.198844 | 0.707927  | 0.000000  |
 
 Detailed maf file (frist five SNPs)
 
 |   chromo   | position  |  major    |   minor   |   anc   |    knownEM   |   nInd   |
 |------------|-----------|-----------|-----------|---------|--------------|----------|
-|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.122847   |    40    |
-|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.207482   |    38    |
-|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.092357   |    42    |
-|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.426569   |    43    |
-|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.337988   |    43    |
+|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.125153   |    39    |
+|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.211954   |    38    |
+|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.090220   |    42    |
+|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.443018   |    43    |
+|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.339376   |    43    |
 
-- test 3 MAF with -doMajorMinor 3 and -sites, with same quality filters as test 1 
 
-```sh
-angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
--anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH \
--sites test_snp.list $REGIONS -out test/test3
-```
+- Do SNP shows allele frequency larger then 0.8, or even fixed? 
 
-Number of SNPs: 17420
-
-Allele frequency range:
-
-|   Mean   |    Max    |    Min    |
-|----------|-----------|-----------|
-| 0.178849 | 0.698007  | 0.000001  |
-
-Detailed maf file (frist five SNPs)
-
-|   chromo   | position  |  major    |   minor   |   anc   |    knownEM   |   nInd   |
-|------------|-----------|-----------|-----------|---------|--------------|----------|
-|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.103948   |    29    |
-|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.198417   |    35    |
-|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.080898   |    37    |
-|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383985   |    38    |
-|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324701   |    39    |
-
-- test 4-6 using the same command except -rt is not provided
-
-- test 4 MAF with −doMajorMinor 5, −doMaf 2 no -rf (see Stahlke et al. 2020)
-
-−doMajorMinor 4 ----- use the reference allele as the major allele      
-−doMaf 2 ----- calculate allele frequencies assuming a fixed major allele and an unknown minor allele
+Yes, SNPs with allele frequencies > 0.8 are observed in the test 1 resutls (with −doMajorMinor 5, −doMaf 2). I decide to take a look at those SNPs with high allele frequency
 
 ```sh
-angsd -P $NB_CPU -doMaf 2 -dosaf 1 -GL 1 -domajorminor 5 \
--anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH \
--sites test_snp.list -out test/test1
+zcat test1.mafs.gz | grep "0.999998"
+NC_035784.1	12926755	T	A	T	0.999998	39
+NC_035784.1	13399467	T	C	T	0.999998	36
 ```
 
-Number of SNPs: 18001
-
-Allele frequency range:
-
-|   Mean   |    Max    |    Min    |
-|----------|-----------|-----------|
-| 0.239076 | 0.999999  | 0.000000  |
-
-Detailed maf file (frist five SNPs)
-
-|   chromo   | position  |  major    |   minor   |   anc   |  unknownEM   |   nInd   |
-|------------|-----------|-----------|-----------|---------|--------------|----------|
-|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.103948   |    29    |
-|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.198417   |    35    |
-|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.080898   |    37    |
-|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383985   |    38    |
-|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324701   |    39    |
-
-- test 5 MAF with -doMajorMinor 3 and -sites no -rf (see Fang et al. 2020)
-
-```sh
-angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
--anc $ANC -b $CH \
--sites test_snp.list -out test/test2
-```
-
-Number of SNPs: 18001
-
-Allele frequency range:
-
-|   Mean   |    Max    |    Min    |
-|----------|-----------|-----------|
-| 0.198444 | 0.712840  | 0.000000  |
-
-Detailed maf file (frist five SNPs)
-
-|   chromo   | position  |  major    |   minor   |   anc   |    knownEM   |   nInd   |
-|------------|-----------|-----------|-----------|---------|--------------|----------|
-|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.122847   |    40    |
-|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.207482   |    38    |
-|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.092357   |    42    |
-|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.426569   |    43    |
-|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.337988   |    43    |
-
-- test 6 MAF with -doMajorMinor 3 and -sites, with same quality filters as test 1, and no -rf  
-
-```sh
-angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -domajorminor 3 \
--anc $ANC -remove_bads 1 -minMapQ 30 -minQ 20 -b $CH \
--sites test_snp.list -out test/test3
-```
-
-Number of SNPs: 18001
-
-Allele frequency range:
-
-|   Mean   |    Max    |    Min    |
-|----------|-----------|-----------|
-| 0.17908  | 0.698007  | 0.000001  |
-
-Detailed maf file (frist five SNPs)
-
-|   chromo   | position  |  major    |   minor   |   anc   |    knownEM   |   nInd   |
-|------------|-----------|-----------|-----------|---------|--------------|----------|
-|NC_035784.1 | 12004160  | T         |      C    |    T    |   0.103945   |    29    |
-|NC_035784.1 | 12021111  | A         |      T    |    A    |   0.198410   |    35    |
-|NC_035784.1 | 12021201  | C         |      A    |    C    |   0.080892   |    37    |
-|NC_035784.1 | 12021211  | T         |      A    |    T    |   0.383976   |    38    |
-|NC_035784.1 | 12021217  | A         |      C    |    A    |   0.324695   |    39    |
-
-- what SNPs make the differences?
-
-Let us take a look at those SNPs with allele frequency of 0.999999
-
-```sh
-zcat test1.mafs.gz | grep "0.999999"
-NC_035784.1	12926755	T	A	T	0.999999	36
-NC_035784.1	13399467	T	C	T	0.999999	31
-```
-
-How about others?
+How about same SNPs from test 2?
 
 ```sh
 # test 2
 zcat test2.mafs.gz | grep "12926755"
-NC_035784.1	12926755	A	T	T	0.000001	40
+NC_035784.1	12926755	A	T	T	0.000001	39
 zcat test2.mafs.gz | grep "13399467"
-NC_035784.1	13399467	C	A	T	0.172622	45
-
-# test 3
-zcat test3.mafs.gz | grep "12926755"
-NC_035784.1	12926755	A	T	T	0.000003	36
-zcat test3.mafs.gz | grep "13399467"
-NC_035784.1	13399467	C	A	T	0.170746	38
+NC_035784.1	13399467	C	A	T	0.182822	43
 ```
 
-Table for easier comparsion
+It seems for SNP NC_035784.1_13399467, Angsd will calculate allele frequency (p) for different alternative alleles. In test1 it estimate the p of C, while in test2 the A allele is used for p calculation. The reason why this happend is due the setting of −doMajorMinor 5 in test1 (i.e. force the major allelel according to your ancestral states) and −doMajorMinor 3 (major and minor alleles are predefined for the desired sites). Besides, result of test2 prefers to report the minor allele frequencies (see NC_035784.1_12926755)
 
-|   chromo   | position  |  major    |   minor   |   anc   |              |   nInd   |
-|------------|-----------|-----------|-----------|---------|--------------|----------|
-|   test 1   |           |           |           |         |  unknownEM   |          |
-|NC_035784.1 | 12926755  | T         |      A    |    T    |   0.999999   |    36    |
-|NC_035784.1 | 13399467  | T         |      C    |    T    |   0.999999   |    31    |
-|   test 2   |           |           |           |         |   knownEM    |          |
-|NC_035784.1 | 12926755  | A         |      T    |    T    |   0.000001   |    40    |
-|NC_035784.1 | 13399467  | C         |      A    |    T    |   0.172622   |    45    |
-|   test 3   |           |           |           |         |   knownEM    |          |
-|NC_035784.1 | 12926755  | A         |      T    |    T    |   0.000003   |    36    |
-|NC_035784.1 | 13399467  | C         |      A    |    T    |   0.170746   |    38    |
-|   test 4   |           |           |           |         |   unknownEM  |          |
-|NC_035784.1 | 12926755  | T         |      A    |    T    |   0.999999   |    36    |
-|NC_035784.1 | 13399467  | T         |      C    |    T    |   0.999999   |    31    |
-|   test 5   |           |           |           |         |  knownEM     |          |
-|NC_035784.1 | 12926755  | A         |      T    |    T    |   0.000001   |    40    |
-|NC_035784.1 | 13399467  | C         |      A    |    T    |   0.172622   |    45    |
-|   test 6   |           |           |           |         |  knownEM     |          |
-|NC_035784.1 | 12926755  | A         |      T    |    T    |   0.000003   |    36    |
-|NC_035784.1 | 13399467  | C         |      A    |    T    |   0.170746   |    38    |
+- Compare between populations and different parameters
+
+```sh
+#column headers
+chromo	position  major	minor anc  frequency  nInd
+#SNP ID
+snp NC_035784.1_12926755
+#parameters and detailed information for specific SNP
+-domajorminor 5 -domaf 2 
+pop_CH  NC_035784.1	12926755	T	A	T	0.999998	39
+pop_REF NC_035784.1	12926755	T	A	T	0.952048	39
+-domajorminor 5 -domaf 1 
+pop_CH  NC_035784.1	12926755	T	A	T	0.999998	39
+pop_REF NC_035784.1	12926755	T	A	T	0.952048	39
+-domajorminor 3 -domaf 1 
+pop_CH  NC_035784.1	12926755	A	T	T	0.000001	39
+pop_REF NC_035784.1	12926755	A	T	T	0.047948	39
+-domajorminor 3 -domaf 2 
+pop_CH  NC_035784.1	12926755	A	T	T	0.000001	39
+pop_REF NC_035784.1	12926755	A	T	T	0.047804	39
+-domajorminor 1 -domaf 1 
+pop_CH  NC_035784.1	12926755	A	C	T	0.000001	39
+pop_REF NC_035784.1	12926755	A	T	T	0.047948	39
+-domajorminor 1 -domaf 2 
+pop_CH  NC_035784.1	12926755	A	C	T	0.000001	39
+pop_REF NC_035784.1	12926755	A	T	T	0.047804	39
+
+#column headers
+chromo	position  major	minor anc  frequency  nInd
+#SNP ID
+snp NC_035784.1_13399467
+#parameters and detailed information for specific SNP
+-domajorminor 5 -domaf 2 
+pop_CH  NC_035784.1	13399467	T	C	T	0.999997	36
+pop_REF NC_035784.1	13399467	T	C	T	1.000000	42
+-domajorminor 5 -domaf 1 
+pop_CH  NC_035784.1	13399467	T	C	T	0.999997	36
+pop_REF NC_035784.1	13399467	T	C	T	1.000000	42
+-domajorminor 3 -domaf 1 
+pop_CH  NC_035784.1	13399467	C	A	T	0.182822	43
+pop_REF NC_035784.1	13399467	C	A	T	0.108496	45
+-domajorminor 3 -domaf 2 
+pop_CH  NC_035784.1	13399467	C	A	T	0.182827	43
+pop_REF NC_035784.1	13399467	C	A	T	0.108500	45
+-domajorminor 1 -domaf 1 
+pop_CH  NC_035784.1	13399467	C	A	T	0.182822	43
+pop_REF NC_035784.1	13399467	C	A	T	0.108496	45
+-domajorminor 1 -domaf 2 
+pop_CH  NC_035784.1	13399467	C	A	T	0.182827	43
+pop_REF NC_035784.1	13399467	C	A	T	0.108500	45
+```
+
+1) From the comparsion above it seems there is no big difference between the -doMaf 1 and 2.    
+2) -domajorminor 3 and -domajorminor 5 may report for different alleles, and result from -domajorminor 3 always report the lower p value of fixed allele.     
+3) -domajorminor 1 and -domajorminor 3 may infer different minor alleles with low p, which make sense.      
+4) SNP like NC_035784.1_13399467 will show three allele in the maf result, which are major, minor and anc alleles. I tried to use -skipTriallelic 1 to remove this loci in the test data but failed, indicing this is not a triallelic locus.     
+5) the major and minor allele status are consistant across populations (e.g. CH and REF here)    
+
+Overall, it sounds the original methods for mafs data creation is correct. It would be interesting to test the results from -domajorminor 5 -domaf 2 settings.
+
+I also asked questions related [here](https://github.com/ANGSD/angsd/issues/342). I look farward to hearing some thoughts about the best way to approach allele frequency values.
