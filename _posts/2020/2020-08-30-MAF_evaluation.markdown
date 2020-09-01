@@ -233,6 +233,6 @@ pop_REF NC_035784.1	13399467	C	A	T	0.108500	45
 4) SNP like NC_035784.1_13399467 will show three allele in the maf result, which are major, minor and anc alleles. I tried to use -skipTriallelic 1 to remove this loci in the test data but failed, indicing this is not a triallelic locus.     
 5) the major and minor allele status are consistant across populations (e.g. CH and REF here)    
 
-Overall, it sounds the original methods for mafs data creation is correct. It would be interesting to test the results from -domajorminor 5 -domaf 2 settings.
+Overall, it sounds the original methods for mafs data creation are correct. It would be interesting to test the results from -domajorminor 5 -domaf 2 settings.
 
 I also asked questions related [here](https://github.com/ANGSD/angsd/issues/342). I look farward to hearing some thoughts about the best way to approach allele frequency values.
