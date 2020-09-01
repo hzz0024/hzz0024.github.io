@@ -235,4 +235,4 @@ pop_REF NC_035784.1	13399467	C	A	T	0.108500	45
 
 Overall, it sounds the original methods for mafs data creation are correct. It would be interesting to test the results from -domajorminor 5 -domaf 2 settings.
 
-I also asked questions related [here](https://github.com/ANGSD/angsd/issues/342). I look farward to hearing some thoughts about the best way to approach allele frequency values.
+I also asked questions [here](https://github.com/ANGSD/angsd/issues/342). I look farward to hearing some thoughts about the best way to approach allele frequency values.
