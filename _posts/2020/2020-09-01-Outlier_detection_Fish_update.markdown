@@ -33,7 +33,7 @@ The R script of Fisher’s combined probability is located in GitHub/DelBay_proj
 
 ### SNPs and Allele Frequency Files (mafs.gz)
 
-The regenerated dataset includes 1,934,038 SNPs. After global Angsd calling, this SNP list is used for indivudal population SNP creation.
+The regenerated dataset includes 1,934,038 SNPs after global Angsd calling. This SNP list is used for indivudal population SNP dataset creation.
 
 Two strategies are used for allele frequency data creation,
 
@@ -99,7 +99,7 @@ Manhattan plot of 1% FDR for CH vs. REF + HC vs. SR. Red points showmarkers at 1
 
 - CH vs. REF & HC vs. SR delta_p
 
-Let us look at the delta_p range. Because this is a combined p-value method, which means that the delta_p in one population may be small and but very large in the other population. In such case, I'd like to check the sum of absolute delta_p for each SNP. 
+Let's look at the delta_p range. Because this is a combined p-value method, which means that the delta_p in one population may be small and but very large in the other population. In such case, I'd like to check the sum of absolute delta_p for each SNP. 
 
 First check the overall delta_p patterns,
 
