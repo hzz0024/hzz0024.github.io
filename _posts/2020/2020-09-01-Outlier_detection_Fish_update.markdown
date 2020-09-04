@@ -1,7 +1,7 @@
 ---
 comments: true
 title: DelBay19 Fishers' exact test update
-date: '2020-09-01 12:00'
+date: '2020-09-04 12:00'
 tags:
   - DelBay19
   - ouliter
