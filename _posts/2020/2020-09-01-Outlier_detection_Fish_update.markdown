@@ -87,7 +87,7 @@ Overall, I deceide to continue using do31 method to produce allele frequency dat
 
 ### Fisher’s combined probability test
 
-- CH vs. REF & HC vs. SR
+- CH vs. REF & HC vs. SR manhattan plot
 
 Manhattan plot of 5% FDR for CH vs. REF + HC vs. SR. Red points showmarkers at 5% FDR according to the Fisher’s combined probability test (n = 5234)
 
@@ -96,6 +96,36 @@ Manhattan plot of 5% FDR for CH vs. REF + HC vs. SR. Red points showmarkers at 5
 Manhattan plot of 1% FDR for CH vs. REF + HC vs. SR. Red points showmarkers at 1% FDR according to the Fisher’s combined probability test (n = 87)
 
 <img src="https://hzz0024.github.io/images/Fish/CH_REF_HC_SR_plot_0.01.jpg" alt="img" width="800"/>
+
+- CH vs. REF & HC vs. SR delta_p
+
+Let us look at the delta_p range. Because this is a combined p-value method, which means that the delta_p in one population may be small and but very large in the other population. In such case, I'd like to check the sum of absolute delta_p for each SNP. 
+
+First check the overall delta_p patterns,
+
+```R
+delta_p_a = CH$knownEM - REF$knownEM
+delta_p_b = SR$knownEM - HC$knownEM
+sum( (abs(delta_p_a) + abs(delta_p_b)) > 0.3)
+> 21006
+length(delta_p_a)
+> 1934038
+sum( (abs(delta_p_a) + abs(delta_p_a)) > 0.3)/length(delta_p_a)
+> 0.01086121
+```
+
+This means only 21006 out of 1934038 (1%) SNPs have a sum of delta_p larger than 0.3. What about this ratio in the outliers?
+
+```R
+sum( (abs(deltap) + abs(deltap2)) > 0.3)
+> 85
+length(deltap)
+> 87
+sum( (abs(deltap) + abs(deltap2)) > 0.3)/length(deltap)
+> 0.9770115
+```
+
+This means only 85 out of 87 (98%) outliers SNPs have a sum of delta_p larger than 0.3. This ratio is pretty larger than the overall patters. I also randomly pickup up 87 SNPs and examined the propotion of SNPs with sum delta_p > 0.3 and the ratio is 0 (with only a few trial). Overall, the results suggest that Fisher’s combined probability method is useful to find out the outliers.  
 
 HC vs. SR delta_p against p0. Here Black dots are SNPs with absolute delta_p < 0.1, blue dots with  0.1 <= abs(delta_p) < 0.2, gray dots with abs(delta_p) >= 0.2
 
@@ -106,7 +136,7 @@ CH vs. REF delta_p against p0. This figure is used to trace the movement of SNPs
 <img src="https://hzz0024.github.io/images/Fish/HC_SR_fisher2.jpg" alt="img" width="800"/>
 
 
-- CH vs. REF & HC vs. NB
+- CH vs. REF & HC vs. NB manhattan plot
 
 Manhattan plot of 5% FDR for CH vs. REF + HC vs. NB. Red points showmarkers at 5% FDR according to the Fisher’s combined probability test (n = 5940)
 
@@ -115,6 +145,8 @@ Manhattan plot of 5% FDR for CH vs. REF + HC vs. NB. Red points showmarkers at 5
 Manhattan plot of 1% FDR for CH vs. REF + HC vs. NB. Red points showmarkers at 1% FDR according to the Fisher’s combined probability test (n = 171)
 
 <img src="https://hzz0024.github.io/images/Fish/CH_REF_HC_NB_plot_0.01.jpg" alt="img" width="800"/>
+
+- CH vs. REF & HC vs. NB delta_p
 
 HC vs. NB delta_p against p0. Here Black dots are SNPs with absolute delta_p < 0.1, blue dots with  0.1 <= abs(delta_p) < 0.2, gray dots with abs(delta_p) >= 0.2
 
