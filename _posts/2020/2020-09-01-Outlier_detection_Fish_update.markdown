@@ -79,7 +79,7 @@ Using challenge population (n=50) as an example,
    
 One benefit of using do52 is that there is no constrain in allele frequency range (from 0-1). However, when I check the major/minor allele consistence across different populations, it appears that the same SNP will sometimes have different minor alleles due to the uncertainy in minor allele determination. 
 
-On the other hand, because we fix the major and minor alleles using a SNP list, these alleles are always consistent across populations, which is good for delta_p comparsion. One drawback of using this result may be the constrain of frequency ranges (ususally less than 0.8). 
+On the other hand, for do31, because we fix the major and minor alleles using a SNP list, these alleles are always consistent across populations, which is good for delta_p comparsion. One drawback of using this result may be the constrain of frequency ranges (ususally less than 0.8). 
 
 Overall, I deceide to continue using do31 method to produce allele frequency data. 
 
