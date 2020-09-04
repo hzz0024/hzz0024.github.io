@@ -89,11 +89,11 @@ Overall, I deceide to continue using do31 method to produce allele frequency dat
 
 - CH vs. REF & HC vs. SR
 
-Manhattan plot of 5% FDR for CH vs. REF + HC vs. SR. Red points showmarkers at 5% FDR according to the Fisher’s combined probability test (n = 5940)
+Manhattan plot of 5% FDR for CH vs. REF + HC vs. SR. Red points showmarkers at 5% FDR according to the Fisher’s combined probability test (n = 5234)
 
 <img src="https://hzz0024.github.io/images/Fish/CH_REF_HC_SR_plot_0.05.jpg" alt="img" width="800"/>
 
-Manhattan plot of 1% FDR for CH vs. REF + HC vs. SR. Red points showmarkers at 1% FDR according to the Fisher’s combined probability test (n = 171)
+Manhattan plot of 1% FDR for CH vs. REF + HC vs. SR. Red points showmarkers at 1% FDR according to the Fisher’s combined probability test (n = 87)
 
 <img src="https://hzz0024.github.io/images/Fish/CH_REF_HC_SR_plot_0.01.jpg" alt="img" width="800"/>
 
@@ -102,11 +102,11 @@ Manhattan plot of 1% FDR for CH vs. REF + HC vs. SR. Red points showmarkers at 1
 
 - CH vs. REF & HC vs. NB
 
-Manhattan plot of 5% FDR for CH vs. REF + HC vs. NB. Red points showmarkers at 5% FDR according to the Fisher’s combined probability test (n = 5234)
+Manhattan plot of 5% FDR for CH vs. REF + HC vs. NB. Red points showmarkers at 5% FDR according to the Fisher’s combined probability test (n = 5940)
 
 <img src="https://hzz0024.github.io/images/Fish/CH_REF_HC_NB_plot_0.05.jpg" alt="img" width="800"/>
 
-Manhattan plot of 1% FDR for CH vs. REF + HC vs. NB. Red points showmarkers at 1% FDR according to the Fisher’s combined probability test (n = 87)
+Manhattan plot of 1% FDR for CH vs. REF + HC vs. NB. Red points showmarkers at 1% FDR according to the Fisher’s combined probability test (n = 171)
 
 <img src="https://hzz0024.github.io/images/Fish/CH_REF_HC_NB_plot_0.01.jpg" alt="img" width="800"/>
 
