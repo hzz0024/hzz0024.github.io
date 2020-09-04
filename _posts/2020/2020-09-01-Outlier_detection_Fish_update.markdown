@@ -125,7 +125,7 @@ sum( (abs(deltap) + abs(deltap2)) > 0.3)/length(deltap)
 > 0.9770115
 ```
 
-This means only 85 out of 87 (98%) outliers SNPs have a sum of delta_p larger than 0.3. This ratio is pretty larger than the overall patters. I also randomly pickup up 87 SNPs and examined the propotion of SNPs with sum delta_p > 0.3 and the ratio is 0 (with only a few trial). Overall, the results suggest that Fisher’s combined probability method is useful to find out the outliers.  
+This means 85 out of 87 (98%) outlier markers have a sum of delta_p larger than 0.3. This ratio is pretty larger than the overall pattern (1%). I also randomly pickup up 87 SNPs and examined the propotion of markers with sum delta_p > 0.3 and the ratio is 0 (with aournd 20 trials). Overall, the results suggest that Fisher’s combined probability method is useful to find out the outliers.  
 
 HC vs. SR delta_p against p0. Here Black dots are SNPs with absolute delta_p < 0.1, blue dots with  0.1 <= abs(delta_p) < 0.2, gray dots with abs(delta_p) >= 0.2
 
