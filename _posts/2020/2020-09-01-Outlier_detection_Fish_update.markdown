@@ -70,7 +70,7 @@ Using challenge population (n=50) as an example,
    |--------------------------------------------------|------------------------------------------------------|
    |do52$Major = do31$Minor, do52$Minor = do31$Major  | NC_035780.1 19095 T G T 0.89514 G T T 0.104855       | 
 
-3) other condition such as
+3) other condition (No. SNP = 17036) such as
 
    | Condition                                        | Chr/Pos/do52$Major/Minor/Anc/p/do$31Major/Minor/Anc/p|
    |--------------------------------------------------|------------------------------------------------------|
@@ -79,7 +79,7 @@ Using challenge population (n=50) as an example,
    
 One benefit of using do52 is that there is no constrain in allele frequency range (from 0-1). However, when I check the major/minor allele consistence across different populations, it appears that the same SNP will sometimes have different minor alleles due to the uncertainy in minor allele determination. 
 
-On the other hand, for do31, because we fix the major and minor alleles using a SNP list, these alleles are always consistent across populations, which is good for delta_p comparsion. One drawback of using this result may be the constrain of frequency ranges (ususally less than 0.8). 
+On the other hand, for do31, because we fix the major and minor alleles using a SNP list, these major/minor alleles are always consistent across populations, which is good for delta_p comparsion. One drawback of using this result may be the constrain of frequency ranges (ususally less than 0.8). 
 
 Overall, I deceide to continue using do31 method to produce allele frequency data. 
 
