@@ -112,11 +112,11 @@ Manhattan plot of 1% FDR for CH vs. REF + HC vs. NB. Red points showmarkers at 1
 
 HC vs. NB delta_p against p0. 
 
-<img src="https://hzz0024.github.io/images/Fish/HC_NB_ffisher1.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Fish/HC_NB_fisher1.jpg" alt="img" width="800"/>
 
 CH vs. REF delta_p against p0. 
 
-<img src="https://hzz0024.github.io/images/Fish/HC_NB_ffisher2.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Fish/HC_NB_fisher2.jpg" alt="img" width="800"/>
 
 
 
