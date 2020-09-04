@@ -110,11 +110,11 @@ Manhattan plot of 1% FDR for CH vs. REF + HC vs. NB. Red points showmarkers at 1
 
 <img src="https://hzz0024.github.io/images/Fish/CH_REF_HC_NB_plot_0.01.jpg" alt="img" width="800"/>
 
-HC vs. NB delta_p against p0. 
+HC vs. NB delta_p against p0. Here Black dots are SNPs with absolute delta_p < 0.1, blue dots with  0.1 <= abs(delta_p) < 0.2, gray dots with abs(delta_p) >= 0.2
 
 <img src="https://hzz0024.github.io/images/Fish/HC_NB_fisher1.jpg" alt="img" width="800"/>
 
-CH vs. REF delta_p against p0. 
+CH vs. REF delta_p against p0. This figure is used to trace the movement of SNPs in the HC vs. NB contrast.
 
 <img src="https://hzz0024.github.io/images/Fish/HC_NB_fisher2.jpg" alt="img" width="800"/>
 
