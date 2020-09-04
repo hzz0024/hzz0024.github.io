@@ -156,7 +156,13 @@ CH vs. REF delta_p against p0. This figure is used to trace the movement of SNPs
 
 <img src="https://hzz0024.github.io/images/Fish/HC_NB_fisher2.jpg" alt="img" width="800"/>
 
+Lastly, I checked the common shared outliers among CH vs. REF & HC vs. SR and CH vs. REF & HC vs. NB.
 
+|Group compared           | fdr < 0.01  | 
+|-------------------------|-------------|
+|CH vs. REF & HC vs. SR   |      87     |
+|CH vs. REF & HC vs. NB   |      171    |
+|Shared                   |      39     |
 
 
 
