@@ -188,7 +188,7 @@ Delta_p for 39 common shared outliers
 
 <img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr01_p0_p1_39.jpg" alt="img" width="800"/>
 
-It seems that 
+It seems that p-values from the CH-REF test are dominating the combined p-values for 39 shared outliers. 
 
 The p-value comparison is listed [here](https://docs.google.com/spreadsheets/d/1t92YkmMeVKzV_mQ1KilT8pHRxTCmWmTFGveKGyTJVzA/edit?usp=sharing)
 
