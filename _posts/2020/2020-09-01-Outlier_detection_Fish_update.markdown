@@ -156,13 +156,42 @@ CH vs. REF delta_p against p0. This figure is used to trace the movement of SNPs
 
 <img src="https://hzz0024.github.io/images/Fish/HC_NB_fisher2.jpg" alt="img" width="800"/>
 
-Lastly, I checked the common shared outliers among CH vs. REF & HC vs. SR and CH vs. REF & HC vs. NB.
+After then, I checked the common shared outliers among CH vs. REF & HC vs. SR and CH vs. REF & HC vs. NB.
 
 |Group compared           | fdr < 0.01  | 
 |-------------------------|-------------|
 |CH vs. REF & HC vs. SR   |      87     |
 |CH vs. REF & HC vs. NB   |      171    |
 |Shared                   |      39     |
+
+---
+
+### Plot the delta_p trend
+
+Delta_p for 170 outliers in CH-REF-HC-NB Fisher’s test
+
+<img src="https://hzz0024.github.io/images/Fish/CH_REF_fdr01_p0_p1_170.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr01_p0_p1_170.jpg" alt="img" width="800"/>
+
+Delta_p for 87 outliers in CH-REF-HC-SR Fisher’s test
+
+<img src="https://hzz0024.github.io/images/Fish/CH_REF_fdr01_p0_p1_87.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/Fish/HC_SR_fdr01_p0_p1_87.jpg" alt="img" width="800"/>
+
+Delta_p for 39 common shared outliers
+
+<img src="https://hzz0024.github.io/images/Fish/CH_REF_fdr01_p0_p1_39.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/Fish/HC_SR_fdr01_p0_p1_39.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/Fish/HC_NB_fdr01_p0_p1_39.jpg" alt="img" width="800"/>
+
+It seems that 
+
+The p-value comparison is listed [here](https://docs.google.com/spreadsheets/d/1t92YkmMeVKzV_mQ1KilT8pHRxTCmWmTFGveKGyTJVzA/edit?usp=sharing)
+
 
 
 
