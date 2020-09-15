@@ -97,11 +97,11 @@ Manhattan plot for SR vs. REF + COH vs. ARN. Red dashed line indicates 10% FDR t
 
 Manhattan plot for CH vs. REF + HC vs. SR. Red dashed line indicates 10% FDR threshold (No. of outliers = 11)
 
-<img src="https://hzz0024.github.io/images/Fish/manhattan_REF_CH_SR_HC_z.jpeg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Fish/manhattan_REF-CH-SR-HC_z.jpeg" alt="img" width="800"/>
 
 Manhattan plot for CH vs. REF + HC vs. NB. Red dashed line indicates 10% FDR threshold (No. of outliers = 31)
 
-<img src="https://hzz0024.github.io/images/Fish/manhattan_REF_CH_NB_HC_z.jpeg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Fish/manhattan_REF-CH-NB-HC_z.jpeg" alt="img" width="800"/>
 
 Manhattan plot for SR vs. REF + COH vs. ARN. Red dashed line indicates 10% FDR threshold (No. of outliers = 0) 
 
