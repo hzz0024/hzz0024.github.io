@@ -213,3 +213,20 @@ regions with significant clustering of peaks (FDR < 0.1), dark green bars identi
 Manhattan plot for SR vs. REF + COH vs. ARN. No outliers < FDR 5% in this case.  
 
 <img src="https://hzz0024.github.io/images/Fish_boot/hard_SR-REF-COH-ARN_bootstrap.jpg" alt="img" width="800"/>
+
+Looks like the bootstrap analysis need further optimization. At least those green bars should not show in the control group (SR vs. REF + COH vs. ARN).
+
+---
+
+### Check SNP related SNPs
+
+Some of the outliers were clustered in particular regions in the genomes. For example,
+
+SNPs 5_16551904 and 5_16552716 are located closely and consistently shown in the shared outliers, and gene associated with these two SNPs are actin-depolymerizing factor 1-like (location = NC_035784.1: 16551175..16553910, https://www.ncbi.nlm.nih.gov/gene/111134891). This gene has been reported as  an actin-binding protein that controls actin assembly and has also been reported in Manila clam hemocytes (belong to cell structure and motility, GO:0003779). See [Roberts et al. 2009. Analysis of Genes Isolated from Plated Hemocytes of the Pacific Oyster, Crassostreas gigas](https://link.springer.com/content/pdf/10.1007/s10126-008-9117-6.pdf) 
+
+
+
+
+
+
+
