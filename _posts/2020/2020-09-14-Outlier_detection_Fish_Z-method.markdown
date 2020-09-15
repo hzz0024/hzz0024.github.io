@@ -31,7 +31,7 @@ fisher.method=function(ps) {
 } 
 ```
 
-Here the *df* sould be *df=2 x length(ps)* but not *df=length(2 x ps)*. The detailed explanation can be found in this post: [https://brainder.org/2012/05/11/the-logic-of-the-fisher-method-to-combine-p-values/]. I am not sure how this might impact the results in coral heat selection results, but this does impact the number of outliers in my datasets.
+Here the *df* sould be *df=2 x length(ps)* but not *df=length(2 x ps)*. The detailed explanation can be found in this post: [https://brainder.org/2012/05/11/the-logic-of-the-fisher-method-to-combine-p-values/]. I am not sure how this might impact the results in coral heat selection part, but this does impact the number of outliers in my datasets.
 
 2) According to [Whitlock (2005)](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1420-9101.2005.00917.x), the weighted Z-test (also called ‘Stouffer’s method) is more power and more precision than does Fisher’s test. It favours symmetric rejection and is less sensitive to a single low p-value, requiring more consistently low p-values to yield a low combined p-value.
 
