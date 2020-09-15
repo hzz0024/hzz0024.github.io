@@ -203,9 +203,10 @@ m_b
 
 I performed a bootstrap analysis to demonstate how rare peaks are following the method in [Dixon et al. (2015) Genomic determinants of coral heat tolerance across latitudes](https://science.sciencemag.org/content/348/6242/1460). 
 
-An example looks like this,
+An example output from Fisher's test looks like this,
 
-Manhattan plot for CH vs. REF + HC vs. SR. Note that the Red dots indicates outliers < FDR 5% threshold (No. of outliers = 10)
+Manhattan plot for CH vs. REF + HC vs. SR. Note that the Red dots indicates outliers < FDR 5% threshold (No. of outliers = 10). Light green bars identify
+regions with significant clustering of peaks (FDR < 0.1), dark green bars identify regions with significant clustering of peaks (FDR < 0.05, according to 100,000 bootstrapped replicates).
 
 <img src="https://hzz0024.github.io/images/Fish_boot/hard_REF-CH-SR-HC_bootstrap.jpg" alt="img" width="800"/>
 
