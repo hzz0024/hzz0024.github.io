@@ -132,6 +132,18 @@ java -jar snpEff.jar eff mygenome 24.recode.vcf > 24_annotation.vcf
 
 <img src="https://hzz0024.github.io/images/SNP_annotation/DelBay19_Fish_fdr0.05_outliers.jpg" alt="img" width="800"/>
 
+|Chromosome	 | Length    | Variants |  Variants rate|
+|------------|-----------|----------|---------------|
+|1	         |65,668,440 |	6	    | 10,944,740    |
+|3	         |77,061,148 |	2	    | 38,530,574    |
+|4	         |59,691,872 |	2	    | 29,845,936    |
+|5        	 |98,698,416 |	10      | 9,869,841     |
+|7	         |57,830,854 |	1	    | 57,830,854    |
+|8	         |75,944,018 |	2	    | 37,972,009    |
+|10	         |32,650,045 |	1	    | 32,650,045    |
+|Total	     |467,544,793|	24	    | 19,481,033    |
+
+
 |Type (alphabetical order)	| 	Count |	Percent |
 |---------------------------|---------|---------|
 |DOWNSTREAM	                |	13	  | 13.542% |
