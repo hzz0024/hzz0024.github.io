@@ -118,6 +118,31 @@ with open(fname, 'r') as f, open(outname, 'w') as w:
 vcftools --vcf ALL_maf0.05_pctind0.7_cv30_reformat.vcf --snps Fisher_fdr_0.05_24_snp.list --recode --recode-INFO-all --out 24
 ```
 
+---
+
+### Annotate the SNPs
+
+```sh
+java -jar snpEff.jar eff mygenome 24.recode.vcf > 24_annotation.vcf
+```
+
+--- 
+
+### Interpret the annotation results
+
+<img src="https://hzz0024.github.io/images/SNP_annotation/DelBay19_Fish_fdr0.05_outliers.jpg" alt="img" width="800"/>
+
+|Type (alphabetical order)	| 	Count |	Percent |
+|---------------------------|---------|---------|
+|DOWNSTREAM	                |	13	  | 13.542% |
+|EXON	 	                |   12	  |  12.5%  |
+|INTERGENIC	 	            |   5	  |  5.208% |
+|INTRON	 	                |   49	  | 51.042% |
+|UPSTREAM	 	            |   12	  | 12.5%   |
+|UTR_3_PRIME	            | 	4	  | 4.167%  |
+|UTR_5_PRIME	 	        |   1	  | 1.042%  |
+
+
 
 
 
