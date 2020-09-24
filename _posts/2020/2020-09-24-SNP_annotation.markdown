@@ -26,7 +26,97 @@ Features:
 5) HGVS notation      
 6) Sequence Ontology standardized terms      
 
+---
 
+### Reference genome configuration for annotation 
+
+Unfortunately, it does not include the Crassostrea virginica genome. Therefore, I have to manually configure the C. virginica genome for my own usage. The detailed manual is [here](https://pcingola.github.io/SnpEff/SnpEff_manual.html#run). Below are the detailed steps for genome configuiration,
+
+1) Add a genome to the configuration file
+
+```sh
+vi snpEffect.config 
+# Add the following lines below the Databases & Genomes section
+#-------------------------------------------------------------------------------
+# Databases & Genomes
+#
+# One entry per genome version.
+#
+# For genome version 'ZZZ' the entries look like
+#   ZZZ.genome              : Real name for ZZZ (e.g. 'Human')
+#   ZZZ.reference           : [Optional] Comma separated list of URL to site/s where information for building ZZZ database was extracted.
+#   ZZZ.chrName.codonTable  : [Optional] Define codon table used for chromosome 'chrName' (Default: 'codon.Standard')
+#
+#-------------------------------------------------------------------------------
+
+# my genome
+mygenome.genome : Crassostrea_virginica
+```
+2) Building a database from the GTF files
+
+```sh
+# rename the gtf file 
+mv ref_C_virginica-3.0_nDNA.gtf genes.gtf
+
+# rename the fasta file
+mv cv30.fa sequences.fa
+
+# create the genome folder in the data 
+mkdir mygenome
+cp genes.gtf data/mygenome
+cp sequences.fa data/mygenome
+
+Note: the gtf and fa files must be named as genes.gtf and sequences.fa
+```
+
+3) Using snpEff.jar to build the refernece genome
+
+```sh
+java -jar snpEff.jar build -gtf22 -v mygenome
+```
+
+---
+
+### Vcf file prepariation
+
+- Shell script to convert the chromosome id
+
+```sh
+for i in *.vcf; do
+sed -i.bak 's/NC_035780.1/1/g;s/NC_035781.1/2/g;s/NC_035782.1/3/g;s/NC_035783.1/4/g;s/NC_035784.1/5/g;s/NC_035785.1/6/g;s/NC_035786.1/7/g;s/NC_035787.1/8/g;s/NC_035788.1/9/g;s/NC_035789.1/10/g;s/NC_007175.2/11/g' $i
+done
+```
+
+- Python script useful to add the SNP id to the vcf file (produced from Angsd)
+
+```python
+# change the fname to target vcf file
+fname = 'XXXXXXXX.vcf'
+outname = fname + '.out'
+
+idx = 0
+with open(fname, 'r') as f, open(outname, 'w') as w:
+    for l in f:
+        if l.startswith('#'):
+            pass
+        else:
+            idx += 1
+            ss = l.split()
+            chrom = ss[0]
+            pos = ss[1]
+            ID = chrom + '_' + pos
+            assert ss[2] == '.'
+            ss[2] = ID
+            l = '\t'.join(ss)
+            l += '\n'
+        w.write(l)
+```
+
+- Using vcftools to extract the target SNPs
+
+```sh
+vcftools --vcf ALL_maf0.05_pctind0.7_cv30_reformat.vcf --snps Fisher_fdr_0.05_24_snp.list --recode --recode-INFO-all --out 24
+```
 
 
 
