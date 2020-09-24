@@ -130,8 +130,6 @@ java -jar snpEff.jar eff mygenome 24.recode.vcf > 24_annotation.vcf
 
 ### Interpret the annotation results
 
-<img src="https://hzz0024.github.io/images/SNP_annotation/DelBay19_Fish_fdr0.05_outliers.jpg" alt="img" width="800"/>
-
 |Chromosome	 | Length    | Variants |  Variants rate|
 |------------|-----------|----------|---------------|
 |1	         |65,668,440 |	6	    | 10,944,740    |
@@ -142,6 +140,8 @@ java -jar snpEff.jar eff mygenome 24.recode.vcf > 24_annotation.vcf
 |8	         |75,944,018 |	2	    | 37,972,009    |
 |10	         |32,650,045 |	1	    | 32,650,045    |
 |Total	     |467,544,793|	24	    | 19,481,033    |
+
+<img src="https://hzz0024.github.io/images/SNP_annotation/DelBay19_Fish_fdr0.05_outliers.jpg" alt="img" width="800"/>
 
 
 |Type (alphabetical order)	| 	Count |	Percent |
