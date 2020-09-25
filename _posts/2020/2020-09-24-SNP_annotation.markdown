@@ -141,9 +141,19 @@ java -jar snpEff.jar eff mygenome 24.recode.vcf > 24_annotation.vcf
 |10	         |32,650,045 |	1	    | 32,650,045    |
 |Total	     |467,544,793|	24	    | 19,481,033    |
 
-<img src="https://hzz0024.github.io/images/SNP_annotation/DelBay19_Fish_fdr0.05_outliers.jpg" alt="img" width="800"/>
+Number of effects: 96. Here Effects are categorized by 'impact': {High, Moderate, Low, Modifier}. A list of "impact" are pre-defined categories to help users find more significant variants (see [snpeff input/output files](https://pcingola.github.io/SnpEff/se_inputoutput/#effect-prediction-details)). Below are the tables for "Number of effects" and "Number of effects by region"
 
-Number of effects: 96. Here Effects are categorized by 'impact': {High, Moderate, Low, Modifier}. A list of "impact" are pre-defined categories to help users find more significant variants (see [snpeff input/output files](https://pcingola.github.io/SnpEff/se_inputoutput/#effect-prediction-details)).
+<img src="https://hzz0024.github.io/images/SNP_annotation/impact.jpg" alt="img" width="800"/>
+
+- Number of effects
+
+|Type (alphabetical order)	|	Count |	Percent |
+|---------------------------|---------|---------|
+|LOW	                    |  	7	  | 7.292%  |
+|MODERATE	                |	4	  | 4.167%  |
+|MODIFIER	 	            |  85	  |88.542%  |
+
+- Number of effects by region (table followed by figure)
 
 |Type (alphabetical order)	| 	Count |	Percent |
 |---------------------------|---------|---------|
@@ -154,6 +164,8 @@ Number of effects: 96. Here Effects are categorized by 'impact': {High, Moderate
 |UPSTREAM	 	            |   12	  | 12.5%   |
 |UTR_3_PRIME	            | 	4	  | 4.167%  |
 |UTR_5_PRIME	 	        |   1	  | 1.042%  |
+
+<img src="https://hzz0024.github.io/images/SNP_annotation/DelBay19_Fish_fdr0.05_outliers.jpg" alt="img" width="800"/>
 
 Here I only focused on the mumber of SNP in the exon regions, which is 12. 
 
