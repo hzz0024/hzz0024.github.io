@@ -167,7 +167,7 @@ Number of effects: 96. Here Effects are categorized by 'impact': {High, Moderate
 
 <img src="https://hzz0024.github.io/images/SNP_annotation/DelBay19_Fish_fdr0.05_outliers.jpg" alt="img" width="800"/>
 
-Here I only focused on the mumber of effects in the exon regions, which is 12. 
+Here I focused on the mumber of effects in the exon regions, which is 12. 
 
 |Type (alphabetical order) |   Count  | Percent |
 |--------------------------|----------|---------|
