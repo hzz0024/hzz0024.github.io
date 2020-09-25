@@ -175,5 +175,5 @@ Here I only focused on the mumber of SNP in the exon regions, which is 12.
 |NONSENSE                  |    1     |	 8.33%  |
 |SILENT	                   |    7     | 58.33%  |
 
-
+The annotation results (ANN) are listed [here](https://docs.google.com/spreadsheets/d/19TCyi7zKxK7OC6TFrPtCR4DkcgOBqLe20pV2jQw5Jkk/edit?usp=sharing)
 
