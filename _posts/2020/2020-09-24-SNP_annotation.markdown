@@ -143,6 +143,7 @@ java -jar snpEff.jar eff mygenome 24.recode.vcf > 24_annotation.vcf
 
 <img src="https://hzz0024.github.io/images/SNP_annotation/DelBay19_Fish_fdr0.05_outliers.jpg" alt="img" width="800"/>
 
+Number of effects: 96. Here Effects are categorized by 'impact': {High, Moderate, Low, Modifier}. A list of "impact" are pre-defined categories to help users find more significant variants (see [snpeff input/output files](https://pcingola.github.io/SnpEff/se_inputoutput/#effect-prediction-details)).
 
 |Type (alphabetical order)	| 	Count |	Percent |
 |---------------------------|---------|---------|
@@ -154,7 +155,13 @@ java -jar snpEff.jar eff mygenome 24.recode.vcf > 24_annotation.vcf
 |UTR_3_PRIME	            | 	4	  | 4.167%  |
 |UTR_5_PRIME	 	        |   1	  | 1.042%  |
 
+Here I only focused on the mumber of SNP in the exon regions, which is 12. Among them,
 
+|Type (alphabetical order) |   Count  | Percent |
+|--------------------------|----------|---------|
+|MISSENSE                  |    4     |	33.33%  |
+|NONSENSE                  |    1     |	 8.33%  |
+|SILENT	                   |    7     | 58.33%  |
 
 
 
