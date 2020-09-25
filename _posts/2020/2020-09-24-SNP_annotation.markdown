@@ -175,9 +175,9 @@ Here I focused on the mumber of effects in the exon regions, which is 12.
 |NONSENSE                  |    1     |	 8.33%  |
 |SILENT	                   |    7     | 58.33%  |
 
-The annotation results (ANN) are listed [here](https://docs.google.com/spreadsheets/d/19TCyi7zKxK7OC6TFrPtCR4DkcgOBqLe20pV2jQw5Jkk/edit?usp=sharing)
+The annotation results (ANN) are listed [here](https://docs.google.com/spreadsheets/d/19TCyi7zKxK7OC6TFrPtCR4DkcgOBqLe20pV2jQw5Jkk/edit?usp=sharing). I searched the gene name for the 1st annotation result (1st ANN). 
 
-Note that in the table more than one annotation could be reported for each SNP, and these annotations are sorted by
+Note that in this ANN table more than one annotation could be reported for each SNP, and these annotations are sorted by
 
 1) Putative impact: Effects having higher putative impact are first.    
 2) Effect type: Effects assumed to be more deleterious effects first.     
