@@ -155,7 +155,7 @@ Number of effects: 96. Here Effects are categorized by 'impact': {High, Moderate
 |UTR_3_PRIME	            | 	4	  | 4.167%  |
 |UTR_5_PRIME	 	        |   1	  | 1.042%  |
 
-Here I only focused on the mumber of SNP in the exon regions, which is 12. Among them,
+Here I only focused on the mumber of SNP in the exon regions, which is 12. 
 
 |Type (alphabetical order) |   Count  | Percent |
 |--------------------------|----------|---------|
