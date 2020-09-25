@@ -167,15 +167,7 @@ Number of effects: 96. Here Effects are categorized by 'impact': {High, Moderate
 
 <img src="https://hzz0024.github.io/images/SNP_annotation/DelBay19_Fish_fdr0.05_outliers.jpg" alt="img" width="800"/>
 
-Here I focused on the mumber of effects in the exon regions, which is 12. 
-
-|Type (alphabetical order) |   Count  | Percent |
-|--------------------------|----------|---------|
-|MISSENSE                  |    4     |	33.33%  |
-|NONSENSE                  |    1     |	 8.33%  |
-|SILENT	                   |    7     | 58.33%  |
-
-The annotation results (ANN) are listed [here](https://docs.google.com/spreadsheets/d/19TCyi7zKxK7OC6TFrPtCR4DkcgOBqLe20pV2jQw5Jkk/edit?usp=sharing). I searched the gene name for the 1st annotation result (1st ANN). 
+The annotation results (ANN) are listed [here](https://docs.google.com/spreadsheets/d/19TCyi7zKxK7OC6TFrPtCR4DkcgOBqLe20pV2jQw5Jkk/edit?usp=sharing). I searched gene names for the 1st annotation result (1st ANN). 
 
 Note that in this ANN table more than one annotation could be reported for each SNP, and these annotations are sorted by
 
