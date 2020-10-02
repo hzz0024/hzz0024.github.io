@@ -1,7 +1,7 @@
 ---
 comments: true
 title: uncover the relationship between delta_p and hyposalinity tolerance allele
-date: '2020-09-14 12:00'
+date: '2020-10-01 12:00'
 tags:
   - DelBay19
   - ouliter
@@ -72,6 +72,7 @@ Therefore, if I calculate the delta_p for each outlier in the WILD constrast, al
 - Challenge group after switching the target allele
 
 <img src="https://hzz0024.github.io/images/outlier/REF_CH_fdr1_p0_p12.jpg" alt="img" width="800"/>
+
 
 
 
