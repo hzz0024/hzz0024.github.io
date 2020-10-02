@@ -65,7 +65,7 @@ Therefore, if I calculate the delta_p for each outlier in the WILD constrast, al
 | 5_52873868 | 0.749064 | 0.490743 | 0.258321  |
 | 7_42579646 | 0.889271 | 0.581095 | 0.308176  |
 
-- Challenge group before identifying the hyposalinity tolerance allele
+- Challenge group before identifying the hyposalinity tolerance allele from the SR-HC wild contrasts
 
 <img src="https://hzz0024.github.io/images/outlier/REF_CH_fdr1_p0_p11.jpg" alt="img" width="800"/>
 
@@ -77,7 +77,7 @@ Therefore, if I calculate the delta_p for each outlier in the WILD constrast, al
 
 Above are delta_p plot for 10 outliers identified in REF-CH vs SR-HC contrasts. Now I'd like to look at the modified delta_p patterns for REF-CH vs NB-HC contrasts (16 outliers).
 
-- Challenge group before identifying the hyposalinity tolerance allele
+- Challenge group before identifying the hyposalinity tolerance allele from the NB-HC wild contrasts
 
 <img src="https://hzz0024.github.io/images/outlier/REF_CH_fdr5_p0_p1_NB_HC_old.jpg" alt="img" width="800"/>
 
