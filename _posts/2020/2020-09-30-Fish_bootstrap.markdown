@@ -177,7 +177,7 @@ Rscript --vanilla --slave fit_LDdecay.R --ld_files LD.list --out ALL_chr5_k50_ma
 
 <img src="https://hzz0024.github.io/images/ngsLD/ALL_chr5_k50_max10k.jpg" alt="img" width="800"/>
 
-Another way to determine the window size may be the average protein coding "gene" size. As mentioned in the recent paper by Stern and Lee [Evolutionary origins of genomic adaptations in an invasive copepod](https://static-content.springer.com/esm/art%3A10.1038%2Fs41559-020-1201-y/MediaObjects/41559_2020_1201_MOESM1_ESM.pdf), "The window size of 10 kb was chosen capture selection targets on the same ‘gene’ and surrounding genomic region, given an average protein coding ‘gene’ size of ~8.5 kb in the *E. affinis* genome."
+Another way to determine the window size may be the average protein coding "gene" size. As mentioned in the recent balancing selection paper by Stern and Lee [Evolutionary origins of genomic adaptations in an invasive copepod](https://static-content.springer.com/esm/art%3A10.1038%2Fs41559-020-1201-y/MediaObjects/41559_2020_1201_MOESM1_ESM.pdf), "The window size of 10 kb was chosen capture selection targets on the same ‘gene’ and surrounding genomic region, given an average protein coding ‘gene’ size of ~8.5 kb in the *E. affinis* genome."
 
 For eastern oyster, the average "gene" size is 10,828 bp [https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Crassostrea_virginica/100/](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Crassostrea_virginica/100/), which roughly equals 25 SNP/window.
 
