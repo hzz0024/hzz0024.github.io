@@ -216,57 +216,32 @@ Manhattan plot for SR vs. REF + COH vs. ARN. No outliers < FDR 5% in this case.
 
 Looks like the bootstrap analysis need further optimization. At least those green bars should not show in the control group (SR vs. REF + COH vs. ARN).
 
-In order to adjust the window SNP density, I calculate the average length between SNPs,
-
-```sh
-for i in {0..9}; do
-echo "chr $i"
-cat ALL_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30 |grep "NC_03578$i.1" | awk -F ' ' '{print $2}' | head -n 1
-cat ALL_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30 |grep "NC_03578$i.1" | awk -F ' ' '{print $2}' | tail -n 1
-done
-
-chr 1
-start 1466
-end 65640332
-chr 2
-start 23617
-end 61743264
-chr 3
-start 44088
-end 76219443
-chr 4
-start 146974
-end 59618701
-chr 5
-start 212281
-end 98684645
-chr 6
-start 67761
-end 51092571
-chr 7
-start 10954
-end 57827871
-chr 8
-start 50363
-end 75634506
-chr 9
-start 230804
-end 104102130
-chr 10
-start 196012
-end 32597966
-```
 The total SNPs spans 65638866+61719647+76175355+59471727+(98472364-19600000)+(51024810-14600000)+57816917+75584143+103871326+32401954=647977109 bp = 647.98 Mb
 
 Average length per SNP is 647977109/1934038 = 335.038 bp
 
 According to this, 
 
+15000 SNP ~ 5M bp
 15 SNP ~ 5000 bp
 2 SNP ~ 600 bp
 
-The coral paper used 15 SNP/window, corresponding (475 Mb/13622) * 15 ~ 500000 bp, which equals ~ 1500 SNPs/window in my dataset (note genome size of coral *Acropora millepora* is recently published by [Fuller et al. 2020. Population genetics of the coral Acropora millepora: Toward genomic prediction of bleaching](https://science.sciencemag.org/content/369/6501/eaba4674?rss=1))
+The coral paper used 15 SNP/window, corresponding (475 Mb/1448) * 15 ~ 4.92M bp/window, which equals ~ 15000 SNPs/window in my dataset (note genome size of coral *Acropora millepora* is recently published by [Fuller et al. 2020. Population genetics of the coral Acropora millepora: Toward genomic prediction of bleaching](https://science.sciencemag.org/content/369/6501/eaba4674?rss=1))
 
+However, this is just rough estimate the distance among SNPs. I wrote an R script to calculate the average distance (bp) for each SNP window (e.g. 15 SNPs/window). The script can be found in the *DelBay_project/R_script/Calculate_window_size/cal_window_size.R*
+
+| Chromosome   |15 SNP/window|    25     |     50    |     150   |     1500  |    10000  |
+|--------------|-------------|-----------|-----------|-----------|-----------|-----------|
+|1             | 3603        | 6013      | 12041     |  36442    |  361938   |  2370021  |
+|2             | 3155        | 5234      | 10487     |  31483    |  313958   |  2159153  |
+|3             | 3621        | 6057      | 12072     |  36247    |  361699   |  2423132  |
+|4             | 3147        | 5246      | 10488     |  31466    |  314667   |  2076772  |
+|5             | 3625        | 6024      | 12067     |  36150    |  362800   |  2432094  |
+|6             | 51783       | 86249     | 172387    | 521769    | 5153410   | 30395754  |
+|7             | 11421       | 19037     |  38134    | 115216    | 1134255   | 7558580   |
+|8             | 10515       |  17542    | 35121     | 105259    | 1050089   |  6964755  |
+|9             | 11760       | 19602     | 39351     | 119879    | 1172390   | 8060879   |
+|10            | 17715       | 29511     | 59023     | 177082    | 1715049   | 11492948  |
 
 ---
 
