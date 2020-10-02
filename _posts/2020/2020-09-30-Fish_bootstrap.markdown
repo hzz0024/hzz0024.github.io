@@ -46,6 +46,18 @@ Instead, I tried to use the p-values AFTER fdr adjustment as the target values f
 
 <img src="https://hzz0024.github.io/images/Fish_boot/REF-CH-SR-HC_50_bootstrap.jpg" alt="img" width="800"/>
 
+- REF-CH-SR-HC bootstrap results with 150 SNP/window
+
+<img src="https://hzz0024.github.io/images/Fish_boot/REF-CH-SR-HC_150_bootstrap.jpg" alt="img" width="800"/>
+
+- REF-CH-SR-HC bootstrap results with 1500 SNP/window
+
+<img src="https://hzz0024.github.io/images/Fish_boot/REF-CH-SR-HC_1500_bootstrap.jpg" alt="img" width="800"/>
+
+- REF-CH-SR-HC bootstrap results with 10000 SNP/window
+
+<img src="https://hzz0024.github.io/images/Fish_boot/REF-CH-SR-HC_10000_bootstrap.jpg" alt="img" width="800"/>
+
 - REF-CH-NB-HC bootstrap results with 15 SNP/window
 
 <img src="https://hzz0024.github.io/images/Fish_boot/REF-CH-NB-HC_15_bootstrap.jpg" alt="img" width="800"/>
@@ -57,6 +69,18 @@ Instead, I tried to use the p-values AFTER fdr adjustment as the target values f
 - REF-CH-NB-HC bootstrap results with 50 SNP/window
 
 <img src="https://hzz0024.github.io/images/Fish_boot/REF-CH-NB-HC_50_bootstrap.jpg" alt="img" width="800"/>
+
+- REF-CH-NB-HC bootstrap results with 150 SNP/window
+
+<img src="https://hzz0024.github.io/images/Fish_boot/REF-CH-NB-HC_150_bootstrap.jpg" alt="img" width="800"/>
+
+- REF-CH-NB-HC bootstrap results with 1500 SNP/window
+
+<img src="https://hzz0024.github.io/images/Fish_boot/REF-CH-NB-HC_1500_bootstrap.jpg" alt="img" width="800"/>
+
+- REF-CH-NB-HC bootstrap results with 10000 SNP/window
+
+<img src="https://hzz0024.github.io/images/Fish_boot/REF-CH-NB-HC_10000_bootstrap.jpg" alt="img" width="800"/>
 
 - control group (SR-REF-COH-ARN) bootstrap results with 15 SNP/window
 
@@ -70,6 +94,18 @@ Instead, I tried to use the p-values AFTER fdr adjustment as the target values f
 
 <img src="https://hzz0024.github.io/images/Fish_boot/SR-REF-COH-ARN_50_bootstrap.jpg" alt="img" width="800"/>
 
+- control group (SR-REF-COH-ARN) bootstrap results with 150 SNP/window
+
+<img src="https://hzz0024.github.io/images/Fish_boot/SR-REF-COH-ARN_150_bootstrap.jpg" alt="img" width="800"/>
+
+- control group (SR-REF-COH-ARN) bootstrap results with 1500 SNP/window
+
+<img src="https://hzz0024.github.io/images/Fish_boot/SR-REF-COH-ARN_1500_bootstrap.jpg" alt="img" width="800"/>
+
+- control group (SR-REF-COH-ARN) bootstrap results with 10000 SNP/window
+
+<img src="https://hzz0024.github.io/images/Fish_boot/SR-REF-COH-ARN_10000_bootstrap.jpg" alt="img" width="800"/>
+
 ---
 
 In order to pick up the best window size, I calculate the average length for multiple window size (i.e. how many SNP per window but not the genomic span length),
@@ -81,6 +117,7 @@ cat ALL_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30 |grep "NC_0357
 cat ALL_sites_all_maf0.05_pctind0.7_maxdepth3dv_snplist_4col_cv30 |grep "NC_03578$i.1" | awk -F ' ' '{print $2}' | tail -n 1
 done
 ```
+
 | Chromosome   |  start      |    end    | total bp  |    
 |--------------|-------------|-----------|-----------|
 |1             | 1466        | 65640332  | 65638866  |
@@ -142,7 +179,7 @@ Rscript --vanilla --slave fit_LDdecay.R --ld_files LD.list --out ALL_chr5_k50_ma
 
 Another way to determine the window size may be the average protein coding "gene" size. As mentioned in the recent paper by Stern and Lee [Evolutionary origins of genomic adaptations in an invasive copepod](https://static-content.springer.com/esm/art%3A10.1038%2Fs41559-020-1201-y/MediaObjects/41559_2020_1201_MOESM1_ESM.pdf), "The window size of 10 kb was chosen capture selection targets on the same ‘gene’ and surrounding genomic region, given an average protein coding ‘gene’ size of ~8.5 kb in the *E. affinis* genome."
 
-For eastern oyster, the average "gene" size is 10,828 bp [https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Crassostrea_virginica/100/](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Crassostrea_virginica/100/)
+For eastern oyster, the average "gene" size is 10,828 bp [https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Crassostrea_virginica/100/](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Crassostrea_virginica/100/), which roughly equals 25 SNP/window.
 
 
 
