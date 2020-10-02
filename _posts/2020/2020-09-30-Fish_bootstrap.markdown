@@ -138,12 +138,12 @@ Average length per SNP is 647977109/1934038 = 335.038 bp
 
 According to this,
 
-15000 SNP ~ 5M bp
-10000 SNP ~ 3M bp
-1500 SNP ~ 500k bp
-50 SNP ~ 17k bp
-25 SNP ~ 8k bp
-15 SNP ~ 5k bp
+15000 SNP ~ 5M bp      
+10000 SNP ~ 3M bp       
+1500 SNP ~ 500k bp       
+50 SNP ~ 17k bp       
+25 SNP ~ 8k bp       
+15 SNP ~ 5k bp       
 
 The coral paper used 15 SNP/window, corresponding (475 Mb/1448) * 15 ~ 4.92M bp/window, which equals ~ 15000 SNPs/window in my dataset (note genome size of coral *Acropora millepora* is recently published by [Fuller et al. 2020. Population genetics of the coral Acropora millepora: Toward genomic prediction of bleaching](https://science.sciencemag.org/content/369/6501/eaba4674?rss=1))
 
