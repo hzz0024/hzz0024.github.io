@@ -1,0 +1,50 @@
+---
+comments: true
+title: Check the flanking regions of outliers
+date: '2020-10-11 12:00'
+tags:
+  - DelBay19
+  - ouliter
+  - WGS
+  - SFS
+categories:
+  - WGS data analysis
+---
+
+This post is created to show some complementary results for outliers flanking regions. Here the outliers were previously identified from the Fisher's combined probability test.
+
+- SFS
+
+Site frequency spectrum (SFS), is the distribution of the allele frequencies of a given set of loci (SNPs) in a population or sample. Usually, the demographic history of a population and natural selection could affect allele frequency dynamics, and these effects are reflected in the shape of the allele frequency spectrum. 
+
+In Angsd, three maf filtering parameters were used to check the SFS distribution, they are: 0(no filter), 0.01, 0.05. Here I focus on the challenge population (CH) and chromosome 5 region at 1-1000000 (NC_035784.1:1-1000000)
+
+```sh
+# Angsd command for saf generation with maf 0, 0.01, and 0.05
+MIN_MAF=0
+angsd -P $NB_CPU -dosaf 1 -doMaf 1 -doCounts 1 -GL 1 -doMajorMinor 1 -anc $ANC -remove_bads 1 -minInd 10 -setMaxDepth 100 -minMapQ 30 -minQ 20 -b $CH $REGIONS -out "/scratch/hzz0024/DelBay19_Sep/12_random_forest/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_chr5"
+
+MIN_MAF=0.01
+angsd -P $NB_CPU -dosaf 1 -doMaf 1 -doCounts 1 -GL 1 -doMajorMinor 1 -anc $ANC -remove_bads 1 -minMaf 0.01 -minInd 10 -setMaxDepth 100 -minMapQ 30 -minQ 20 -b $CH $REGIONS -out "/scratch/hzz0024/DelBay19_Sep/12_random_forest/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_chr5"
+
+MIN_MAF=0.05
+angsd -P $NB_CPU -dosaf 1 -doMaf 1 -doCounts 1 -GL 1 -doMajorMinor 1 -anc $ANC -remove_bads 1 -minMaf 0.05 -minInd 10 -setMaxDepth 100 -minMapQ 30 -minQ 20 -b $CH $REGIONS -out "/scratch/hzz0024/DelBay19_Sep/12_random_forest/"$target"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_cv30_chr5"
+```
+
+|                          | No filter | MAF 0.01 | MAF 0.05 |
+|--------------------------|-----------|----------|----------|
+| Total number of sites    | 630725    | 630725   | 630725   |
+| Number of sites retained | 239647    | 21291    | 9140     |
+
+
+- SFS test plot
+
+<img src="https://hzz0024.github.io/images/SFS/sfs_final.jpeg" alt="img" width="800"/>
+
+- Random sample allele frequency
+
+<img src="https://hzz0024.github.io/images/SFS/sample_plot.jpeg" alt="img" width="800"/>
+
+
+
+
