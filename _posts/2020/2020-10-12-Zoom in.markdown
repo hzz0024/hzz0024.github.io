@@ -79,6 +79,10 @@ Let us start with chr5:15407830-16927227, an outlier window (with 10K SNP/window
 
 <img src="https://hzz0024.github.io/images/dxy/chr5_10K_16551904_16552716.jpeg" alt="img" width="800"/>
 
+- Plotting the dxy for each group comparsion. Green zone is the bootstrap outlier with 150 SNPs/window (chr5: 16544428 - 16554078). Red dots are two single-SNP oultiers 5_16551904 and 5_16552716.
+
+<img src="https://hzz0024.github.io/images/dxy/chr5_150_16551904_16552716.jpeg" alt="img" width="800"/>
+
 - Plotting the dxy for each group comparsion. Green zone is the bootstrap outlier with 25 SNPs/window (chr5: 16551755 - 16552962). Red dots are two single-SNP oultiers 5_16551904 and 5_16552716.
 
 <img src="https://hzz0024.github.io/images/dxy/chr5_25_16551904_16552716.jpeg" alt="img" width="800"/>
