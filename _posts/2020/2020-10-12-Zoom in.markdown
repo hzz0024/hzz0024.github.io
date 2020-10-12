@@ -1,23 +1,25 @@
 ---
 comments: true
-title: Check the SFS
-date: '2020-10-11 12:00'
+title: Check the flanking regions of outliers
+date: '2020-10-12 12:00'
 tags:
   - DelBay19
   - ouliter
   - WGS
-  - SFS
+  - Fisher
 categories:
   - WGS data analysis
 ---
 
-This post is created to show some test on SFS. 
+This post is created to show some complementary results for outliers flanking regions. Here the outliers were previously identified from the Fisher's combined probability test.
 
-- SFS
+|   Test       | fdr < 0.1 | fdr < 0.05| fdr < 0.01| fdr < 0.1 | fdr < 0.05| fdr < 0.01|
+|--------------|-----------|-----------|-----------|-----------|-----------|-----------|
+|              |   Fisher  |   Fisher  |  Fisher   | Z method  | Z method  |  Z method |
+|REF-CH-SR-HC  |     11    |  4        |      0    |     41    | 10        |      1    |
+|REF-CH-NB-HC  |     31    |  8        |      1    |     32    | 16        |      6    |
+|SR-REF-COH-ARN|      0    |  0        |      0    |     20    | 0         |      0    |
 
-Site frequency spectrum (SFS), is the distribution of the allele frequencies of a given set of loci (SNPs) in a population or sample. Usually, the demographic history of a population and natural selection could affect allele frequency dynamics, and these effects are reflected in the shape of the allele frequency spectrum. 
-
-In Angsd, three maf filtering parameters were used to check the SFS distribution, they are: 0(no filter), 0.01, 0.05. Here I focus on the challenge population (CH) and chromosome 5 region at 1-1000000 (NC_035784.1:1-1000000)
 
 ```sh
 # Angsd command for saf generation with maf 0, 0.01, and 0.05
