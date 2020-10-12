@@ -92,7 +92,17 @@ Let us start with chr5:15407830-16927227, an outlier window (with 10K SNP/window
 <img src="https://hzz0024.github.io/images/dxy/chr5_25_16551904_16552716.jpeg" alt="img" width="800"/>
 
 
+---
 
+Plotting steps:
+
+1) prepare the SNP list for a window: here is the 1 unit before and after the window (in csv file). For example, for 1500 SNP/window in chr5: 16544428 - 16554078, the covered regions should be xlim = c(16377719, 16669307).
+
+2) prepare the single snp outliers (in csv file). Here is 5_16551904 and 5_16552716
+
+3) modifiy the manhattan.R if necessary. Find it in DelBay_project/R_scripts/Dxy/manhattan.R
+
+4) run the R code outlier_dxy_plot.R. Find it in DelBay_project/R_scripts/Dxy/oulier_dxy_plot.R
 
 
 
