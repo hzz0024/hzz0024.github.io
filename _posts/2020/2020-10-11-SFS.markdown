@@ -41,7 +41,7 @@ angsd -P $NB_CPU -dosaf 1 -doMaf 1 -doCounts 1 -GL 1 -doMajorMinor 1 -anc $ANC -
 
 <img src="https://hzz0024.github.io/images/SFS/sfs_final.jpeg" alt="img" width="800"/>
 
-- Random sample allele frequency
+- Random sample allele frequency (50 SNPs with sample function in R)
 
 <img src="https://hzz0024.github.io/images/SFS/sample_plot.jpeg" alt="img" width="800"/>
 
