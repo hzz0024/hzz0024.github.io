@@ -73,7 +73,7 @@ cat REF-CH-NB-HC_10000_autput_bars.txt
 "7" "5_39538914" "5_40762320" "hard"
 ```
 
-Let us start with chr5:15407830-16927227, an outlier window (with 10K SNP/window for bootstrap) shared by both REF-CH-SR-HC and REF-CH-NB-HC groups in Fisher's approach and shown in the REF-CH-NB-HC result by Z method. In this window, two SNPs have been identified as single-SNP outliers: 5_16551904 and 5_16552716. Specifically, SNP 5_16552716 is also identified as an outlier shared by both groups (e.g. REF-CH-SR-HC and REF-CH-NB-HC) and methods (Fisher and Z methods). In addition, a gene named actin-depolymerizing factor 1-like is linked to these two SNPs (spans from 16551175 to 16553910,[https://www.ncbi.nlm.nih.gov/gene/?term=LOC111134891](https://www.ncbi.nlm.nih.gov/gene/?term=LOC111134891))
+Let us start with chr5:15407830-16927227, an outlier window (with 10K SNP/window for bootstrap) shared by both REF-CH-SR-HC and REF-CH-NB-HC groups in Fisher's approach and shown in the REF-CH-NB-HC result by Z method. In this window, two SNPs have been identified as single-SNP outliers: 5_16551904 and 5_16552716. Specifically, SNP 5_16552716 is also identified as an outlier shared by both groups (e.g. REF-CH-SR-HC and REF-CH-NB-HC) and methods (Fisher and Z methods). In addition, a gene named *actin-depolymerizing factor 1-like* is linked to these two SNPs (spans from 16551175 to 16553910,[https://www.ncbi.nlm.nih.gov/gene/?term=LOC111134891](https://www.ncbi.nlm.nih.gov/gene/?term=LOC111134891)). The SNP annotation link is [here](https://docs.google.com/spreadsheets/d/19TCyi7zKxK7OC6TFrPtCR4DkcgOBqLe20pV2jQw5Jkk/edit?usp=sharing)
 
 - produce dxy plots for each group comparsion. Green zone is the outlier window with 10K SNPs. Red dots are two single-SNP oultiers.
 
