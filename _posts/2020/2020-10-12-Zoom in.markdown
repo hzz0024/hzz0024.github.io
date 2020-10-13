@@ -95,9 +95,13 @@ Let us start with chr5:15407830-16927227, an outlier window (with 10K SNP/window
 
 #### Tajima's D plots
 
-- Plotting the Tajima'D and dxy for CH-REF contrasts. Green zone is the bootstrap outlier with 150 SNPs/window (chr5: 16544428 - 16554078). Red dots are two single-SNP oultiers 5_16551904 and 5_16552716. 
+- Plotting the Tajima'D and dxy for CH-REF contrasts. Green zone is the bootstrap outlier with 150 SNPs/window (chr5: 16544428 - 16554078). Red dots are two single-SNP oultiers 5_16551904 and 5_16552716. Tajima'D is calculated in 10K window.
 
-<img src="https://hzz0024.github.io/images/dxy/CH_REF_chr5_150" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/dxy/CH_REF_chr5_150_10K" alt="img" width="800"/>
+
+- Plotting the Tajima'D and dxy for CH-REF contrasts. Green zone is the bootstrap outlier with 150 SNPs/window (chr5: 16544428 - 16554078). Red dots are two single-SNP oultiers 5_16551904 and 5_16552716. Tajima'D is calculated in 1000 bp window.
+
+<img src="https://hzz0024.github.io/images/dxy/CH_REF_chr5_150_1000" alt="img" width="800"/>
 
 ---
 
