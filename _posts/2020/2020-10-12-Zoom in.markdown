@@ -233,9 +233,7 @@ for POP in CH REF HC ARN COH SR NB; do
 done
 ```
 
-### Theta estimates correction
-
-1) step 1. split the reference genome into windows
+#### Theta estimates correction
 
 ```sh
 module load bedtools/2.29.0
