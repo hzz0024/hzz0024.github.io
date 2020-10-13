@@ -109,9 +109,19 @@ Let us start with chr5:15407830-16927227, an outlier window (with 10K SNP/window
 
 <img src="https://hzz0024.github.io/images/dxy/CH_REF_chr5_theta_150_1000.jpg" alt="img" width="800"/>
 
+Thoughts: 
+
+1) Overall, it looks like the windows around single-SNP outliers have increased dxy patterns. By zooming in at 150 SNPs/window, it becomes more clear.
+
+2) We expect positive selection to give us a negative Tajima’s D in a population that doesn’t have any demographic changes going on, and positive Tajima’s D in the case of balancing selection. As shown in the Tajima's plots, both CH and REF populations have positive Tajima'D for most of the window estimates. In comparision to the REF population, the CH population harbors higher Tajima's D in the outlier regions, perhaps suggesting a stronger balancing selection in this population?
+
+3) When looking at the theta plot, CH shows higher nucleotide diversity than REF in the outlier windows. Need to figure out the relationship between balancing selection and diversity patterns. The paper [Long-term balancing selection drives evolution of immunity genes in Capsella](https://elifesciences.org/articles/43606) looks fun to read.
+
 ---
 
-Dxy plotting steps:
+Some notes for plotting (just in case I forget it sometime in the future)
+
+- Dxy plotting steps:
 
 1) prepare the SNP list for a window: here is the 1 unit before and after the window (in csv file). For example, for 1500 SNP/window in chr5: 16544428 - 16554078, the covered regions should be xlim = c(16377719, 16669307).
 
@@ -120,8 +130,6 @@ Dxy plotting steps:
 3) modifiy the manhattan.R if necessary. Find it in DelBay_project/R_scripts/Dxy/manhattan.R
 
 4) run the R code outlier_dxy_plot.R. Find it in DelBay_project/R_scripts/Dxy/oulier_dxy_plot.R
-
---- 
 
 Below are some notes and script for theta estimates.
 
