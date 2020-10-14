@@ -15,7 +15,7 @@ This post is created to show some complementary results for outliers flanking re
 
 |   Test       | fdr < 0.1 | fdr < 0.05| fdr < 0.01| fdr < 0.1 | fdr < 0.05| fdr < 0.01|
 |--------------|-----------|-----------|-----------|-----------|-----------|-----------|
-|              |   Fisher  |   Fisher  |  Fisher   | Z method  | Z method  |  Z method |
+|              | Z method  | Z method  | Z method  | Fisher    | Fisher    |  Fisher   |
 |REF-CH-SR-HC  |     11    |  4        |      0    |     41    | 10        |      1    |
 |REF-CH-NB-HC  |     31    |  8        |      1    |     32    | 16        |      6    |
 |SR-REF-COH-ARN|      0    |  0        |      0    |     20    | 0         |      0    |
