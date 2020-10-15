@@ -19,7 +19,7 @@ I will start by literature review, trying to find some technical difficults of T
 
 - Long-term balancing selection drives evolution of immunity genes in Capsella by Koenig et al. 2019. eLIFE
 
-- *"Because the calling of trans-specific SNPs (tsSNPs) is particularly sensitive to mismapping errors in repetitive sequences, we applied a set of stringent filters, resulting in 74% of the C. rubella reference genome remaining accessible to base calling in both species, with almost half (47%) of the masked sites in the repeat rich pericentromeric regions. "*
+*"Because the calling of trans-specific SNPs (tsSNPs) is particularly sensitive to mismapping errors in repetitive sequences, we applied a set of stringent filters, resulting in 74% of the C. rubella reference genome remaining accessible to base calling in both species, with almost half (47%) of the masked sites in the repeat rich pericentromeric regions. "*
 
 
 
