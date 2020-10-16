@@ -14,7 +14,7 @@ categories:
 
 Different maf filtering parameters (0.01, 0.05 and 0.2) were set to reproduce the datasets. Below are the number of SNPs,
 
-|               | maf < 0.01 | maf < 0.01| maf < 0.01| 
+|               | maf < 0.01 | maf < 0.05| maf < 0.2 | 
 |---------------|------------|-----------|-----------|
 | Total SNPs    | 566214907  | 566214907 |566214907  |
 | Number of SNPs| 4969475    | 1934038   | 627518    | 
