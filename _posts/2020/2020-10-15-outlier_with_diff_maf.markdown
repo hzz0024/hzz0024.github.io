@@ -50,7 +50,7 @@ angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doMajorMinor 3 -anc $ANC -minQ 20 -b $
 |REF-CH-NB-HC(maf<0.2)   |     36    |  12       |      6    |     133   | 19        |      9    |
 |SR-REF-COH-ARN(maf<0.2) |     13    |  0        |      0    |      48   | 13        |      0    |
 
-Any shared loci between maf 0.05 and 0.01?
+Any shared loci between maf 0.05 and 0.2?
 
 REF-CH-SR-HC(maf<0.05) and REF-CH-SR-HC(maf<0.2) 
 
