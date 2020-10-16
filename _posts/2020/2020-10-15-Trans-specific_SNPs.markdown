@@ -47,7 +47,7 @@ Yes, a recent paper - [Detection of Shared Balancing Selection in the Absence of
 
 - Detection of Shared Balancing Selection in the Absence of Trans-Species Polymorphism by Xiaoheng Cheng, Michael DeGiorgio. 2019. MBE [link](https://academic.oup.com/mbe/article/36/1/177/5150441)
 
-Another software, [BalLeRMix](https://github.com/bioXiaoheng/BalLeRMix) is developed to includes multiple Mixture Model approach for the robust detection of balancing selection. 
+Another software, [BalLeRMix](https://github.com/bioXiaoheng/BalLeRMix) is developed to include multiple Mixture Model approach for the robust detection of balancing selection. 
 
 - Flexible Mixture Model Approaches That Accommodate Footprint Size Variability for Robust Detection of Balancing Selectio by Xiaoheng Cheng, Michael DeGiorgio. MBE. 2020 [link](https://academic.oup.com/mbe/advance-article/doi/10.1093/molbev/msaa134/5848012) 
 
