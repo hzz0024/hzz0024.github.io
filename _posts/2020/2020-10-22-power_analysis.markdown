@@ -15,6 +15,10 @@ categories:
 
 In this post I performed the power analysis for Fisher and weighted Z-test (also called ‘Stouffer’s method, see [Whitlock (2005)](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1420-9101.2005.00917.x)) approaches. The major difference between these two is that during the p-value combination step, the Z method favours symmetric rejection and is less sensitive to a single low p-value, requiring more consistently low p-values to yield a low combined p-value.
 
+The idea comes from the simulation study in Rey et al. 2020 
+
+<img src="https://hzz0024.github.io/images/power/Rey et al 2020.jpeg" alt="img" width="800"/>
+
 Key features in the simulation,
 
 - Delta_p Levene's model
@@ -154,7 +158,7 @@ We may have less power to detect the outliers under low start P and low selectio
 
 Some quesions remained in this analysis,
 
-1) Why the delta_p in Levene's model is alway positive? Where does equation come from? I borrowed this equation from Rey et al 2020 but no clues about its origin yet. Levene's paper can be found [here](https://www.journals.uchicago.edu/doi/pdfplus/10.1086/281792).
+1) Why the delta_p in Levene's equation is alway positive? Where does equation come from? I borrowed this equation from Rey et al 2020 but no clues about its origin yet. Levene's paper can be found [here](https://www.journals.uchicago.edu/doi/pdfplus/10.1086/281792).
 
 2) If negative delta_ps are shown due to drift effect, to what extent they appeared in the dataset?
 
