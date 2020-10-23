@@ -154,7 +154,7 @@ We may have less power to detect the outliers under low start P and low selectio
 
 Some quesions remained in this analysis,
 
-1) Why the delta_p in Levene's model is alway positive? Levene's paper can be found [here](https://www.journals.uchicago.edu/doi/pdfplus/10.1086/281792)
+1) Why the delta_p in Levene's model is alway positive? Where does equation come from? I borrowed this equation from Rey et al 2020 but no clues about its origin yet. Levene's paper can be found [here](https://www.journals.uchicago.edu/doi/pdfplus/10.1086/281792).
 
 2) If negative delta_ps are shown due to drift effect, to what extent they appeared in the dataset?
 
