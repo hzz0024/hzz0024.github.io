@@ -148,7 +148,7 @@ Lastly, the combined p-value vector was adjusted with FDR. I counted how many p-
 
 <img src="https://hzz0024.github.io/images/power/50_50_diff.jpeg" alt="img" width="800"/> 
 
-Overall, it looks that the Fisher's combined method has little difference to Z approache, wherears the sample size of N (start population size) and K (size after selection) have a large impact on the power.
+Overall, it looks that the Fisher's combined method has little difference to Z approach, wherears the sample size of N (start population size) and K (size after selection) have a large impact on the power.
 
 Some quesions remained in this analysis,
 
