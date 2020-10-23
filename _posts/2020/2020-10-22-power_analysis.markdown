@@ -150,6 +150,8 @@ Lastly, the combined p-value vector was adjusted with FDR. I counted how many p-
 
 Overall, it looks that the Fisher's combined method has little difference to Z approach, wherears the sample size of N (start population size) and K (size after selection) have a large impact on the power.
 
+We may have less power to detect the outliers under low start P and low selection coefficient situtions.
+
 Some quesions remained in this analysis,
 
 1) Why the delta_p in Levene's model is alway positive?
