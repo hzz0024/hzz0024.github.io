@@ -148,7 +148,15 @@ Lastly, the combined p-value vector was adjusted with FDR. I counted how many p-
 
 <img src="https://hzz0024.github.io/images/power/50_50_diff.jpeg" alt="img" width="800"/> 
 
+Overall, it looks that the Fisher's combined method has little difference to Z approache, wherears the sample size of N (start population size) and K (size after selection) have a large impact on the power.
 
+Some quesions remained in this analysis,
+
+1) Why the delta_p in Levene's model is alway positive?
+
+2) If negative delta_ps are shown due to drift effect, to what extent they appeared in the dataset?
+
+3) Any other equation can be used for delta_p modeling? See some references [here](http://ww2.tnstate.edu/ganter/BIO416%2006%20Genotype.html).
 
 
 
