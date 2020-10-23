@@ -40,9 +40,9 @@ angsd -P $NB_CPU -doMaf 1 -dosaf 1 -GL 1 -doMajorMinor 3 -anc $ANC -minQ 20 -b $
 |   Test                 | fdr < 0.1 | fdr < 0.05| fdr < 0.01| fdr < 0.1 | fdr < 0.05| fdr < 0.01|
 |------------------------|-----------|-----------|-----------|-----------|-----------|-----------|
 |                        | Z method  | Z method  | Z method  | Fisher    | Fisher    |  Fisher   |
-|REF-CH-SR-HC(maf<0.01)  |           |           |           |           |           |           |
-|REF-CH-NB-HC(maf<0.01)  |           |           |           |           |           |           |
-|SR-REF-COH-ARN(maf<0.01)|           |           |           |           |           |           |
+|REF-CH-SR-HC(maf<0.01)  |     2     |  1        |      0    |     7     | 1         |    0      |
+|REF-CH-NB-HC(maf<0.01)  |     6     |  2        |      1    |     16    | 8         |    3      |
+|SR-REF-COH-ARN(maf<0.01)|     0     |  0        |      0    |     0     | 0         |    0      |
 |REF-CH-SR-HC(maf<0.05)  |     11    |  4        |      0    |     41    | 10        |      1    |
 |REF-CH-NB-HC(maf<0.05)  |     31    |  8        |      1    |     32    | 16        |      6    |
 |SR-REF-COH-ARN(maf<0.05)|      0    |  0        |      0    |     20    | 0         |      0    |
