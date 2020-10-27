@@ -29,3 +29,8 @@ From the figures above we can see that although increasing the cutoff threshold 
 
 - Threshold for p-value in the bootstrap
 
+Here I compared the results from two p-value cutoffs（0.1 and 0.15) for light colored bars, and found no differences. Note that the y-axis is different but all other contents are the same.
+
+<img src="https://hzz0024.github.io/images/Fish_boot/cmp4.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/Fish_boot/cmp5.jpg" alt="img" width="800"/>
