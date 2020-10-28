@@ -379,7 +379,7 @@ SNP of interests:
 | 1   | 32280271 | 0.156459 | 0.334038  | 2.12E-05   | 0.198264 | 0.305885  | 9.66E-05   | 0.01542089 |REF-CH-NB-HC|
 | 1   | 32280434 | 0.099958 | 0.355383  | 8.96E-07   | 0.209391 | 0.322564  | 2.98E-05   | 0.0004941  |REF-CH-NB-HC|
 | 7   | 42579646 | 0.418905 | -0.308176 | 7.56E-05   | 0.580153 | -0.338127 | 1.48E-05   | 0.01720265 |REF-CH-SR-HC|
-| 5   | 16552716 | 0.240718 | 0.431699  | 9.23E-08   | 0.44956  | 0.186446  | 0.02406891 | 0.04547856 |REF-CH-NB-HC|
+| 5   | 12625464 | 0.210122 | 0.259265  | 0.00174878 | 0.199263 | 0.349009  | 3.21E-06   | 0.02441336 |REF-CH-NB-HC|
 
 - delta_p plots for regions around SNP 1_32280271 and 1_32280434
 
@@ -391,7 +391,8 @@ Plotting the delta_p for each group comparsion. Green zone is the bootstrap outl
 
 <img src="https://hzz0024.github.io/images/delta_p/Mahattan_ch7_delta_p_150.jpg" alt="img" width="800"/>
 
+- delta_p plots for regions around SNP 5_12625464. 
 
-
+<img src="https://hzz0024.github.io/images/delta_p/Mahattan_5_12625464_delta_p_150.jpg" alt="img" width="800"/>
 
 
