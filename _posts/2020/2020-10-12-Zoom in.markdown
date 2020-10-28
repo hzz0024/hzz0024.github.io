@@ -336,9 +336,9 @@ In the example outlier above it highlighted a extreme delta_p in the challenge b
 | 10  | 11389354 | 0.349358 | -0.138355 | 1          | 0.067155 | 0.380729  | 1.34E-08   | 0.03534465 | 
  
 C_p0 - inital allele frequency in REF population       
-C_delta_p - delta_p in CH vs REF group (i.e. CH-REF)      
+C_delta_p - delta_p in CH vs REF group (i.e. CH minus REF)      
 C_p_value - independent fisher's p-value for CH-REF     
-W_p0 - inital allele frequency in SR (from SR-HC) or NB (from NB-HC) population       
+W_p0 - inital allele frequency in SR (from SR-HC contrast) or NB (from NB-HC contrast) population       
 W_delta_p - delta_p in wild group (i.e. SR-HC or NB-HC)     
 W_p_value - independent fisher's p-value for wild contrasts (i.e. SR-HC or NB-HC)    
 cmb_p - combined p-values either from Fisher's or Z methods         
