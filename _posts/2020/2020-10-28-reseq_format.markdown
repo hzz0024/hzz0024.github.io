@@ -187,10 +187,14 @@ Target domestic vs wild contrast: OBOYS2 (Louisiana selected line) vs. SL (Louis
 
 - pi compared between original and masked datasets
 
-<img src="https://hzz0024.github.io/images/CVreseq/SL_chr2_5000.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/CVreseq/SL_pi_chr2_w5000.jpg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/CVreseq/OBOYS2_chr2_5000.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/CVreseq/OBOYS2_pi_chr2_w5000.jpg" alt="img" width="800"/>
 
+- Tajima's D compared between original and masked datasets
 
+<img src="https://hzz0024.github.io/images/CVreseq/SL_TajimaD_chr2_w5000.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/CVreseq/OBOYS2_TajimaD_chr2_w5000.jpg" alt="img" width="800"/>
 
 
