@@ -102,7 +102,7 @@ mv SNP.ORIGINAL.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.sort.vcf.out SNP.ORIGINA
 mv Thinned.SNP.TRSdp5g1FnDNAmaf052alleles.thinnedMatrixAndMetaData5000Window_exclude_LM.sort.vcf.out Thinned.SNP.TRSdp5g1FnDNAmaf052alleles.thinnedMatrixAndMetaData5000Window_exclude_LM.format.vcf
 ```
 
-- check common snps between thinned and masked vcf files
+- Check common snps between thinned and masked vcf files
 
 1) check common snps using vcftools
 
@@ -146,7 +146,7 @@ vcftools --vcf SNP.ORIGINAL.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf -
 vcftools --vcf SNP.ORIGINAL.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --keep OBOYS2 --snps common_chr2.txt --chr 2 --recode --recode-INFO-all --out OBOYS2_chr2_original
 ```
 
-- Check Pi and Tajima's D
+- Estimate Pi and Tajima's D
 
 ```sh
 #Pi 
@@ -169,3 +169,28 @@ for pop in OBOYS2_chr2_mask SL_chr2_mask OBOYS2_chr2_original SL_chr2_original; 
     done
 done
 ```
+
+---
+
+Now let us move back to our questions:
+
+#### Question 1: how many SNPs in Katie’s LD-thinned SNP list are also SNPs in the “masked” vcfs? If most of them are still SNPs in “masked” then we can do some preliminary comparisons with the intersection SNPs that occur in both.
+
+LD-thinned SNP list: 334011      
+Common SNPs in the vcf with masked genome: 240908      
+Percent: 240908/334011 = 72.13%     
+
+#### Question 2: It would be great to see, for a single chromosome with strong haplotig content (LG 1-5), a plot of sliding window pie and Tajima’s D, compared between original and masked datasets (compared for one wild population and also for one related domesticated strain).
+
+Target chromosome: chromosome 2   
+Target domestic vs wild contrast: OBOYS2 (Louisiana selected line) vs. SL (Louisiana wild line)
+
+- pi compared between original and masked datasets
+
+<img src="https://hzz0024.github.io/images/delta_p/SL_chr2_5000.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/delta_p/OBOYS2_chr2_5000.jpg" alt="img" width="800"/>
+
+
+
+
