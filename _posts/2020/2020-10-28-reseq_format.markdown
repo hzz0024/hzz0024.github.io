@@ -229,7 +229,9 @@ Target domestic vs wild contrast: OBOYS2 (Louisiana selected line) vs. SL (Louis
 
 <img src="https://hzz0024.github.io/images/CVreseq/OBOYS2_TajimaD_chr2_w5000.jpg" alt="img" width="800"/>
 
-Here we can see that the chr2 pi estimates from the masked genome are generally higher than ones produced with the original genome, particular in genome regions with diversity peak. For Tajima's D, theoretically it should show no differences between original and masked results, as both Tajima’s estimator of pi and Watterson’s estimator of S changes. However, I saw minor cluster of changes (either up or down changed) around regions chr2 2e+7. 
+Here we can see that the chr2 pi estimates from the masked genome are generally higher than ones produced with the original genome, particular in genome regions with diversity peak. It is not unexpected as the haplotigs will have ~1/2 the expected coverage of diplotigs and have less heterzogosity. 
+
+ For Tajima's D, theoretically it should show no differences between original and masked results, as both Tajima’s estimator of pi and Watterson’s estimator of S changes. However, I saw minor cluster of changes (either up or down changed) around regions chr2 2e+7. 
 
 #### Question 3: PCA for the shared SNPlist in the original vs masked datasets (wild only, including vs excluding LM). With each of these, we are trying to tell what analyses are sensitive to haplotigs. 
 
