@@ -233,6 +233,27 @@ Here we can see that the chr2 pi estimates from the masked genome are generally 
 
 #### Question 3: PCA for the shared SNPlist in the original vs masked datasets (wild only, including vs excluding LM). With each of these, we are trying to tell what analyses are sensitive to haplotigs. 
 
+The thinned vcf file is obtained from this PATH: /home/mph75_0001/shared/CVreseq/n_vcf/Thinned.SNP.TRSdp5g1FnDNAmaf052alleles.thinnedMatrixAndMetaData5000Window_exclude_LM.vcf.gz
+
+Number of populations in this vcf: 16
+
+HI - Maine_HI     
+SM - Maine_SM    
+HC - DelBay_HC    
+CS - DelBay_CS    
+CLP - ChesBay_CLP    
+HCVA - ChesBay_HC_VA    
+SL - Louisiana_SL    
+CL - Louisiana_CL    
+LM - Mexico_LM    
+UMFS - Maine_Sel_UMFS         
+NEH - DelBay_Sel_NEH             
+DEBY - Ches_Sel_DEBY      
+LOLA - Ches_Sel_LOLA         
+OBOYS2 - Louisiana_Sel      
+HG - Inbred_RU_HG           
+NG - Inbred_REU_NG       
+
 - PCA for all 16 populations with masked dataset
 
 <img src="https://hzz0024.github.io/images/CVreseq/All_mask.jpg" alt="img" width="800"/>
