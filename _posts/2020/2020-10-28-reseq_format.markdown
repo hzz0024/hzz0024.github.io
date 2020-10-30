@@ -254,19 +254,19 @@ OBOYS2 - Louisiana_Sel
 HG - Inbred_RU_HG           
 NG - Inbred_REU_NG       
 
-- PCA for all 16 populations with masked dataset
+- PCA for all 16 populations with masked dataset (chr2)
 
 <img src="https://hzz0024.github.io/images/CVreseq/All_mask.jpg" alt="img" width="800"/>
 
-- PCA for all 16 populations with original dataset
+- PCA for all 16 populations with original dataset (chr2)
 
 <img src="https://hzz0024.github.io/images/CVreseq/All_original.jpg" alt="img" width="800"/>
 
-- PCA for 15 populations with masked dataset (no LM)
+- PCA for 15 populations with masked dataset (no LM, chr2)
 
 <img src="https://hzz0024.github.io/images/CVreseq/All_mask_no_LM.jpg" alt="img" width="800"/>
 
-- PCA for 15 populations with original dataset (no LM)
+- PCA for 15 populations with original dataset (no LM, chr2)
 
 <img src="https://hzz0024.github.io/images/CVreseq/All_original_no_LM.jpg" alt="img" width="800"/>
  
@@ -275,3 +275,8 @@ By comparing the PCA result initially identified using thinned whole genome data
 It require a longer time to prepare the all chromosomes for PCA plotting. However, based on what I have done, it seems there is no PCA differences between masked or original datasets. 
 
 <img src="https://hzz0024.github.io/images/CVreseq/Lotterhos_PCA.jpg" alt="img" width="800"/>
+
+My PCA results with different PCs (all 16 populations with original dataset of chr2)
+
+<img src="https://hzz0024.github.io/images/CVreseq/pcs.jpg" alt="img" width="800"/>
+
