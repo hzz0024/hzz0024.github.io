@@ -170,6 +170,15 @@ for pop in OBOYS2_chr2_mask SL_chr2_mask OBOYS2_chr2_original SL_chr2_original; 
 done
 ```
 
+- Prepare the vcf files for PCA plotting
+
+```sh
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --snps common_chr2.txt --chr 2 --recode --recode-INFO-all --out All_mask
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --snps common_chr2.txt --remove LM --chr 2 --recode --recode-INFO-all --out All_mask_no_LM
+vcftools --vcf Thinned.SNP.TRSdp5g1FnDNAmaf052alleles.thinnedMatrixAndMetaData5000Window_exclude_LM.format.vcf --snps common_chr2.txt --chr 2 --recode --recode-INFO-all --out All_original
+vcftools --vcf Thinned.SNP.TRSdp5g1FnDNAmaf052alleles.thinnedMatrixAndMetaData5000Window_exclude_LM.format.vcf --snps common_chr2.txt --remove LM --chr 2 --recode --recode-INFO-all --out All_original_no_LM
+```
+
 ---
 
 Now let us move back to our questions:
@@ -196,5 +205,25 @@ Target domestic vs wild contrast: OBOYS2 (Louisiana selected line) vs. SL (Louis
 <img src="https://hzz0024.github.io/images/CVreseq/SL_TajimaD_chr2_w5000.jpg" alt="img" width="800"/>
 
 <img src="https://hzz0024.github.io/images/CVreseq/OBOYS2_TajimaD_chr2_w5000.jpg" alt="img" width="800"/>
+
+Here we can see that the chr2 pi estimates from the masked genome are generally higher than ones produced with the original genome, particular in genome regions with diversity peak. For Tajima's D, theoretically it should show no differences between original and masked results, as both Tajima’s estimator of pi and Watterson’s estimator of S changes. However, I saw minor cluster of changes (either up or down changed) in the around regions 2e+7. 
+
+#### Question 3: PCA for the shared SNPlist in the original vs masked datasets (wild only, including vs excluding LM). With each of these, we are trying to tell what analyses are sensitive to haplotigs. 
+
+- PCA for all 16 populations with masked dataset
+
+<img src="https://hzz0024.github.io/images/CVreseq/All_mask.jpg" alt="img" width="800"/>
+
+- PCA for all 16 populations with original dataset
+
+<img src="https://hzz0024.github.io/images/CVreseq/All_original.jpg" alt="img" width="800"/>
+
+- PCA for 15 populations with masked dataset (no LM)
+
+<img src="https://hzz0024.github.io/images/CVreseq/All_mask_no_LM.jpg" alt="img" width="800"/>
+
+- PCA for 15 populations with original dataset (no LM)
+
+<img src="https://hzz0024.github.io/images/CVreseq/All_original_no_LM.jpg" alt="img" width="800"/>
 
 
