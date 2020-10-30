@@ -235,7 +235,7 @@ Here we can see that the chr2 pi estimates from the masked genome are generally 
 
 #### Question 3: PCA for the shared SNPlist in the original vs masked datasets (wild only, including vs excluding LM). With each of these, we are trying to tell what analyses are sensitive to haplotigs. 
 
-The thinned vcf file is obtained from this PATH: /home/mph75_0001/shared/CVreseq/n_vcf/Thinned.SNP.TRSdp5g1FnDNAmaf052alleles.thinnedMatrixAndMetaData5000Window_exclude_LM.vcf.gz (Note: although this file is named "exclude_LM" I found LM population from Mexico in the file)
+The thinned vcf file is obtained from this PATH: /home/mph75_0001/shared/CVreseq/n_vcf/Thinned.SNP.TRSdp5g1FnDNAmaf052alleles.thinnedMatrixAndMetaData5000Window_exclude_LM.vcf.gz (Note: although this file is named "exclude_LM" I found LM population of Mexico in the file)
 
 Number of populations in this vcf: 16
 
