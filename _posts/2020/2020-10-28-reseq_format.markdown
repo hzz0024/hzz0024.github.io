@@ -179,6 +179,29 @@ vcftools --vcf Thinned.SNP.TRSdp5g1FnDNAmaf052alleles.thinnedMatrixAndMetaData50
 vcftools --vcf Thinned.SNP.TRSdp5g1FnDNAmaf052alleles.thinnedMatrixAndMetaData5000Window_exclude_LM.format.vcf --snps common_chr2.txt --remove LM --chr 2 --recode --recode-INFO-all --out All_original_no_LM
 ```
 
+- Perform PCA analysis (with plink and gcta)
+
+```sh
+for FILE in *.vcf
+do
+  echo $FILE
+  entry=${FILE%.vcf}
+  echo $entry
+  mkdir $entry
+  ./plink --vcf $FILE --make-bed --out snp --chr-set 10 no-xy --double-id
+  ./gcta64 --make-grm --out snp.gcta --bfile snp --autosome-num 10
+  ./gcta64 --grm snp.gcta --pca 20 --out snp.gcta
+  Rscript draw.R $entry
+  echo $FILE
+  echo '*************FINISH**************'
+done
+
+#programs needed in the path /GitHub/DelBay_project/R_scripts/Reseq_PCA
+draw.R
+pca.plot2d.r
+gcta64
+plink
+```
 ---
 
 Now let us move back to our questions:
