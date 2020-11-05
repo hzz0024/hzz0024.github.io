@@ -1,15 +1,39 @@
 devtools::install_github("whitlock/OutFLANK")
 library(OutFLANK)  # outflank package
 library(vcfR)
+library(bigsnpr)
+
+bedfile = "SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.noLM.bed"
+#snp_readBed(bedfile)
+
+obj.bed = bed(bedfile)
+
+ind.keep <- bed_clumping(
+  obj.bed,
+  ind.row = rows_along(obj.bed),
+  S = NULL,
+  thr.r2 = 0.2,
+  size = 5,
+  exclude = NULL,
+  ncores = 1
+)
+
+
+
 
 data("sim1a")
 str(sim1a)
+sim1a$pop
+sim1a$envi
 # calculate Fst
 my_fst <- MakeDiploidFSTMat(t(sim1a$G), locusNames = sim1a$position, popNames = sim1a$pop)
 head(my_fst)
 plot(my_fst$He, my_fst$FST)
 plot(my_fst$FST, my_fst$FSTNoCorr)
 abline(0,1)
+data("which_pruned")
+head(which_pruned)
+
 
 
 DB_1_vcf <- read.vcfR("DB_1_prune.recode.vcf" , verbose = FALSE )
