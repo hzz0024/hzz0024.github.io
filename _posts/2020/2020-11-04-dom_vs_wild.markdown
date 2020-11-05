@@ -80,5 +80,20 @@ str(obj.bigSNP, max.level = 2, strict.width = "cut")
 G   <- obj.bigSNP$genotypes
 
 # Note that most of the algorithms of this package don’t handle missing values. 
-# I used snp_fastImputeSimple() to impute missing values of genotyped variants.
+# I used snp_fastImputeSimple() to impute missing values of genotyped variants, methods are
+# "random" (sampling according to allele frequencies),
+# "mean0" (rounded mean), 
+# "mean2" (rounded mean to 2 decimal places),
+# "mode" (most frequent call)
 G2 <- snp_fastImputeSimple(G, method = c("random"))
+G[, 10224] # some missing values
+# [1]  1  0  1  0  0  0  1  1  1  0  0  1  1  1  1  1  1  0  1  1  1  0  1  0  0  0  1  1  1  1  0  0  0  0  0  2  1  0 NA  2  0  0  1  1  0  1
+#[47]  0  1  1  1  0  1  1  0  1  0  0  2  2  2  2  0  2  1  1  0  0  1  0  1  0  1  0  1  0  1  1  0  1  0  1  1  1  2  2
+G2[, 10224] # no missing values anymore
+# [1] 1 0 1 0 0 0 1 1 1 0 0 1 1 1 1 1 1 0 1 1 1 0 1 0 0 0 1 1 1 1 0 0 0 0 0 2 1 0 0 2 0 0 1 1 0 1 0 1 1 1 0 1 1 0 1 0 0 2 2 2 2 0 2 1 1 0 0 1 0 1
+# [71] 0 1 0 1 0 1 1 0 1 0 1 1 1 2 2
+```
+
+- LD clumping
+
+
