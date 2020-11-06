@@ -291,7 +291,7 @@ path_to_file <- "./ALL.bed"
 filename <- read.pcadapt(path_to_file, type = "bed")
 ```
 
-2) pcadapt
+2) pcadapt using all populations
 
 ```sh
 ################# start pcadapt #################
@@ -338,3 +338,68 @@ hist(x$pvalues, xlab = "p-values", main = NULL, breaks = 50, col = "orange")
 ```
 
 <img src="https://hzz0024.github.io/images/outflank/p-value.jpeg" alt="img" width="800"/>
+
+```sh
+Using 0.01 as the cutoff
+# q-values
+qval <- qvalue(x$pvalues)$qvalues
+alpha <- 0.01
+outliers <- which(qval < alpha)
+length(outliers)
+[1] 2160
+# Benjamini-Hochberg Procedure
+padj <- p.adjust(x$pvalues,method="BH")
+alpha <- 0.01
+outliers <- which(padj < alpha)
+length(outliers)
+[1] 2077
+# Bonferroni correction
+padj <- p.adjust(x$pvalues,method="bonferroni")
+alpha <- 0.01
+outliers <- which(padj < alpha)
+length(outliers)
+[1] 571
+
+Using 0.05 as the cutoff
+#alpha <- 0.05
+outliers <- which(qval < alpha)
+length(outliers)
+[1] 4026
+# Benjamini-Hochberg Procedure
+padj <- p.adjust(x$pvalues,method="BH")
+alpha <- 0.05
+outliers <- which(padj < alpha)
+length(outliers)
+[1] 3858
+# Bonferroni correction
+padj <- p.adjust(x$pvalues,method="bonferroni")
+alpha <- 0.05
+outliers <- which(padj < alpha)
+length(outliers)
+[1] 697
+```
+
+3) pcadapt using based on dom-wild constrasts
+
+```sh
+vcftools --vcf pcadapt.recode.vcf --keep CS_DEBY --recode --recode-INFO-all --out CS_DEBY
+vcftools --vcf pcadapt.recode.vcf --keep SL_OBOYS2 --recode --recode-INFO-all --out SL_OBOYS2
+vcftools --vcf pcadapt.recode.vcf --keep CS_NEH --recode --recode-INFO-all --out CS_NEH
+plink --vcf CS_DEBY.recode.vcf --double-id --make-bed --out CS_DEBY
+plink --vcf SL_OBOYS2.recode.vcf --double-id --make-bed --out SL_OBOYS2
+plink --vcf CS_NEH.recode.vcf --double-id --make-bed --out CS_NEH
+```
+
+Results:
+
+|           | qvalue | Benjamini-Hochberg | Bonferroni |
+|-----------|--------|--------------------|------------|
+| alpha     | 0.01   |                    |            |
+| CS_DEBY   | 7212   | 7212               | 3154       |
+| CS_NEH    | 3490   | 3490               | 976        |
+| SL_OBOYS2 | 6147   | 5753               | 2066       |
+| alpha     | 0.05   |                    |            |
+| CS_DEBY   | 10398  | 10398              | 3673       |
+| CS_NEH    | 5522   | 5522               | 1077       |
+| SL_OBOYS2 | 9819   | 9177               | 2152       |
+
