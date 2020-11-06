@@ -264,3 +264,5 @@ Now I have wild population one group and the domestic ones another. Still the re
 - p-value distribution on the right tail
 
 <img src="https://hzz0024.github.io/images/outflank/p_value_2pop.jpeg" alt="img" width="800"/>
+
+number of SNPs flaged as outliers: 601800
