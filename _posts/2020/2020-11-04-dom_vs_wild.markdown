@@ -237,6 +237,7 @@ hist(out_trim$results$pvaluesRightTail)
 <img src="https://hzz0024.github.io/images/outflank/pvaluerighttail.jpeg" alt="img" width="800"/>
 
 ```R
+# Using estimated neutral mean FST and df to calculate P-values for all loci
 P1 <- pOutlierFinderChiSqNoCorr(my_fst, Fstbar = out_trim$FSTNoCorrbar, 
                                 dfInferred = out_trim$dfInferred, qthreshold = 0.05, Hmin=0.1)
 length(P1$OutlierFlag[P1$OutlierFlag==TRUE])
