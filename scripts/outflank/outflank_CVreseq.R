@@ -2,21 +2,60 @@ devtools::install_github("whitlock/OutFLANK")
 library(OutFLANK)  # outflank package
 library(vcfR)
 library(bigsnpr)
+library(ggplot2)
 
 bedfile = "SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.noLM.bed"
-#snp_readBed(bedfile)
+# this will create a .rds file
+obj.bed <- bed(bedfile)
+# Attach the "bigSNP" object in R session
+obj.bigSNP <- snp_attach("SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.noLM.rds")
+# See how it looks like
+str(obj.bigSNP, max.level = 2, strict.width = "cut")
+# Get aliases for useful slots
+G <- obj.bigSNP$genotypes
+SNPs <- obj.bigSNP$map$marker.ID
+CHR <- obj.bigSNP$map$chromosome
+POS <- obj.bigSNP$map$physical.pos
+# Note that most of the algorithms of this package don’t handle missing values. 
+# I used snp_fastImputeSimple() to impute missing values of genotyped variants.
+G2 <- snp_fastImputeSimple(G, method = c("random"))
+#G4 <- snp_fastImputeSimple(G)
+#G3 <- snp_fastImputeSimple(G, method = c("mode"))
+SIZE <- c(20, 50, 100, 200, 500)
+ind_keeps = list()
 
-obj.bed = bed(bedfile)
+for(i in seq(length(SIZE))){
+  size_ = SIZE[i]
+  ind.keep_ <- snp_clumping(
+    G2,
+    infos.chr = CHR,
+    infos.pos = POS,
+    ind.row = rows_along(G2),
+    S = NULL,
+    thr.r2 = 0.2,
+    size = size_,
+    exclude = NULL,
+    ncores = 1
+  )
+  ind_keeps[[i]] = ind.keep_
+}
 
-ind.keep <- bed_clumping(
-  obj.bed,
-  ind.row = rows_along(obj.bed),
-  S = NULL,
-  thr.r2 = 0.2,
-  size = 5,
-  exclude = NULL,
-  ncores = 1
-)
+index <- ind_keeps[[5]]
+write.table(obj.bigSNP$map$marker.ID[index], file = "SNP_thinned.txt", sep = "\t",
+            row.names = FALSE, quote = F, col.names=FALSE)
+#ind.keep <- snp_autoSVD(
+#  G2,
+#  infos.chr = CHR,
+#  infos.pos = POS,
+#  thr.r2 = 0.2,
+#  size = 200,
+#)
+
+
+
+
+
+
 
 
 
