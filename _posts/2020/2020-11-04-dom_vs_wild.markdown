@@ -330,7 +330,7 @@ plot(x , option = "manhattan")
 plot(x, option = "qqplot")
 ```
 
-<img src="https://hzz0024.github.io/images/outflank/PC3_PC4.jpeg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/outflank/manhattan.jpeg" alt="img" width="800"/>
 
 ```sh
 # Histograms of the test statistic and of the p-values
