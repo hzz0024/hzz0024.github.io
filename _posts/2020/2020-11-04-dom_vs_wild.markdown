@@ -395,7 +395,7 @@ Results:
 |           | qvalue | Benjamini-Hochberg | Bonferroni |
 |-----------|--------|--------------------|------------|
 | alpha     | 0.01   |                    |            |
-| CS_DEBY   | 7212   | 7212               | 3154       |
+| CS_DEBY   | 6562   | 6524               | 2494       |
 | CS_NEH    | 3490   | 3490               | 976        |
 | SL_OBOYS2 | 6147   | 5753               | 2066       |
 | alpha     | 0.05   |                    |            |
