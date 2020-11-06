@@ -244,3 +244,23 @@ length(P1$OutlierFlag[P1$OutlierFlag==TRUE])
 ```
 
 Number of outliers: 712647 (unrealistic number)
+
+- what if change the population labeling
+
+```sh
+obj.bigSNP$pop <- rep(c(1,2,2,2,1), each = 6)
+```
+
+Now I have wild population one group and the domestic ones another. Still the results are not promising.
+
+- Check the Fst fit
+
+<img src="https://hzz0024.github.io/images/outflank/Fst_dist_2pop.jpeg" alt="img" width="800"/>
+
+- Check the Fst fit on the right tail
+
+<img src="https://hzz0024.github.io/images/outflank/rightail_2pop.jpeg" alt="img" width="800"/>
+
+- p-value distribution on the right tail
+
+<img src="https://hzz0024.github.io/images/outflank/p_value_2pop.jpeg" alt="img" width="800"/>
