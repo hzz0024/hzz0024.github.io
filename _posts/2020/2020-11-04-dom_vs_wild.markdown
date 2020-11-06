@@ -67,7 +67,7 @@ Features of the output vcf file:
 - Convert vcf to plink
 
 ```sh
-plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.LDclumping.dom_wild.maf05.nomissing
+plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing
 ```
 
 - Process the bed file using (bigsnpr)[https://github.com/privefl/bigsnpr]
@@ -95,18 +95,18 @@ POS <- obj.bigSNP$map$physical.pos
 # "mean0" (rounded mean), 
 # "mean2" (rounded mean to 2 decimal places),
 # "mode" (most frequent call)
-G2 <- snp_fastImputeSimple(G, method = c("random"))
-G[, 10224] # a missing value in the whole dataset (NA here)
+#G2 <- snp_fastImputeSimple(G, method = c("random"))
+#G[, 10224] # a missing value in the whole dataset (NA here)
 # [1]  1  0  1  0  0  0  1  1  1  0  0  1  1  1  1  1  1  0  1  1  1  0  1  0  0  0  1  1  1  1  0  0  0  0  0  2  1  0 NA  2  0  0  1  1  0  1
 #[47]  0  1  1  1  0  1  1  0  1  0  0  2  2  2  2  0  2  1  1  0  0  1  0  1  0  1  0  1  0  1  1  0  1  0  1  1  1  2  2
-G2[, 10224] # no missing values anymore in the whole dataset
+#G2[, 10224] # no missing values anymore in the whole dataset
 # [1] 1 0 1 0 0 0 1 1 1 0 0 1 1 1 1 1 1 0 1 1 1 0 1 0 0 0 1 1 1 1 0 0 0 0 0 2 1 0 0 2 0 0 1 1 0 1 0 1 1 1 0 1 1 0 1 0 0 2 2 2 2 0 2 1 1 0 0 1 0 1
 # [71] 0 1 0 1 0 1 1 0 1 0 1 1 1 2 2
 ```
 
 - LD clumping
 
-See (here)[Why clumping should be preferred over pruning] for why I used clumping over pruning. In short, pruning may remove SNPs in a way that leave regions of the genome with no representative SNP at all.
+See(here)[Why clumping should be preferred over pruning] for why I used clumping over pruning. In short, pruning may remove SNPs in a way that leave regions of the genome with no representative SNP at all.
 
 ```sh
 # loop over different window size (in kb) for snp clumping
@@ -144,12 +144,12 @@ Masked: 6413937 (contracted vcf file size: 17G)
 
 SNPs after clumping (note I only used 5 domestic and wild populations here)
 
-|  Size (in KB)    | 20     | 50     | 100    | 200    | 500    |
-|------------------|--------|--------|--------|--------|--------|
-|  SNP retained    | 877095 | 720064 | 630192 | 560894 | 495020 |
-|  %   retained    | 13.67% | 11.23% | 9.83%  | 8.74%  | 7.72%  |
+|  Size (in KB)    | 20     | 50     | 100    | 200    | 500   |
+|------------------|--------|--------|--------|--------|-------|
+|  SNP retained    | 452784 | 310805 | 227423 | 162055 | 99466 |
+|  %   retained    | 7.06%  | 4.85%  | 3.55%  | 2.53%  | 1.55% |
 
-For initial test purpose, I used 200k bp as the thin-window for dataset clumping. The result thinned dataset still has much larger number of SNPs than the previous thinned one (334K SNPs).
+For initial test purpose, I used 50k bp as the thin-window for dataset clumping and ended up with 310805 SNPs for outflank analysis.
 
 #### Outlier detection
 
