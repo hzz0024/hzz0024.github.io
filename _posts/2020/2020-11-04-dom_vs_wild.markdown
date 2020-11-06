@@ -1,6 +1,6 @@
 ---
 comments: true
-title: Resequencing data formating and examination
+title: Outlier detection in dom vs wild constrasts
 date: '2020-11-04 12:00'
 tags:
   - Reseq

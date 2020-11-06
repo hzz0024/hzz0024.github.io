@@ -62,11 +62,13 @@ for(i in seq(length(obj.bigSNP$genotypes[,1]))){
   newm[i,]=obj.bigSNP$genotypes[i,]
 }
 # add pop information
-obj.bigSNP$pop <- rep(c(seq(1,5)), each = 6)
+#obj.bigSNP$pop <- rep(c(seq(1,5)), each = 6)
+
+obj.bigSNP$pop <- rep(c(1,2,2,2,1), each = 6)
 # calculate FST on all the loci in our dataset.
 my_fst <- MakeDiploidFSTMat(newm, locusNames = obj.bigSNP$map$physical.pos, popNames = obj.bigSNP$pop)
-
-out_trim <- OutFLANK(my_fst[ind_keeps[[5]],], NumberOfSamples=5, qthreshold = 0.05, Hmin = 0.1)
+# Using OutFLANK() function to estimate the parameters on the neutral FST distribution
+out_trim <- OutFLANK(my_fst[ind_keeps[[1]],], NumberOfSamples=5, qthreshold = 0.05, Hmin = 0.1)
 str(out_trim)
 
 OutFLANKResultsPlotter(out_trim, withOutliers = TRUE,
@@ -78,10 +80,10 @@ OutFLANKResultsPlotter(out_trim , withOutliers = TRUE,
                          TRUE, RightZoomFraction = 0.15, titletext = NULL)
 
 hist(out_trim$results$pvaluesRightTail)
-
+# Using estimated neutral mean FST and df to calculate P-values for all loci
 P1 <- pOutlierFinderChiSqNoCorr(my_fst, Fstbar = out_trim$FSTNoCorrbar, 
                                 dfInferred = out_trim$dfInferred, qthreshold = 0.05, Hmin=0.1)
-
+length(P1$OutlierFlag[P1$OutlierFlag==TRUE])
 my_out <- P1$OutlierFlag==TRUE
 plot(P1$He, P1$FST, pch=19, col=rgb(0,0,0,0.1))
 points(P1$He[my_out], P1$FST[my_out], col="blue")
@@ -90,10 +92,9 @@ head(my_fst)
 plot(my_fst$He, my_fst$FST)
 plot(my_fst$FST, my_fst$FSTNoCorr)
 abline(0,1)
-data("which_pruned")
-head(which_pruned)
 
-dat <- read.vcfR("" , verbose = FALSE )
+
+dat <- read.vcfR("SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.recode.vcf.gz")# , verbose = FALSE 
 geno <- extract.gt(dat) # Character matrix containing the genotypes
 position <- getPOS(dat) # Positions in bp
 chromosome <- getCHROM(dat) # Chromosome information
@@ -125,5 +126,11 @@ OutFLANKResultsPlotter(out_trim , withOutliers = TRUE,
 hist(out_trim$results$pvalues)
 hist(out_trim$results$pvaluesRightTail)
 #### Run OutFLANK on all loci ####
-P1 <- pOutlierFinderChiSqNoCorr(my_fst, Fstbar = out_trim$FSTNoCorrbar, 
+P1 <- pOutlierFinderChiSqNoCorr(my_fst, Fstbar = out_trim$FSTNoCorrbar,
                                 dfInferred = out_trim$dfInferred, qthreshold = 0.05, Hmin=0.1)
+
+################# start pcadapt #################
+
+
+
+
