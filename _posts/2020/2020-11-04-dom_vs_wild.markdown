@@ -44,6 +44,38 @@ CS - Cape Shore (Delaware Bay) wild line
 
 
 ```sh
+cat dom_wild.txt
+# SL_1
+# SL_2
+# SL_3
+# SL_4
+# SL_5
+# SL_6
+# OBOYS2_1
+# OBOYS2_2
+# OBOYS2_3
+# OBOYS2_4
+# OBOYS2_5
+# OBOYS2_6
+# CS_1
+# CS_2
+# CS_3
+# CS_5
+# CS_6
+# CS_7
+# NEH_1
+# NEH_2
+# NEH_3
+# NEH_4
+# NEH_5
+# NEH_6
+# DEBY_1
+# DEBY_2
+# DEBY_3
+# DEBY_4
+# DEBY_5
+# DEBY_6
+
 grep -v "^#" SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.vcf |wc -l
 # Masked: 6413937 (contracted vcf file size: 17G)
 
@@ -135,9 +167,9 @@ Key parameters here:
 infos.chr: vector of integers specifying each SNP's chromosome.
 infos.pos: vector of integers specifying the physical position on a chromosome (in base pairs) of each SNP.      
 thr.r2: threshold over the squared correlation between two SNPs. Default is 0.2.      
-size: for one SNP, window size around this SNP to compute correlations. Default is 100 / thr.r2 for clumping (0.2 -> 500; 0.1 -> 1000; 0.5 -> 200). If not providing infos.pos (NULL, the default), this is a window in number of SNPs, otherwise it is a window in kb (genetic distance).  
+size: for one SNP, window size around this SNP to compute correlations. Default is 100 / thr.r2 for clumping (0.2 -> 500; 0.1 -> 1000; 0.5 -> 200). If not providing infos.pos (NULL, the default), this is a window in number of SNPs, otherwise it is a window in kb (genetic distance).   
 
-Note SNP number of each VCF file are:
+Note SNP number of each VCF file are:     
 
 Original: 4734919 (contracted vcf file size: 13G)      
 Masked: 6413937 (contracted vcf file size: 17G)      
@@ -151,43 +183,7 @@ SNPs after clumping (note I only used 5 domestic and wild populations here)
 
 For initial test purpose, I used 50k bp as the thin-window for dataset clumping and ended up with 310805 SNPs for outflank analysis.
 
-#### Outlier detection
-
-```sh
-vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.LDclumping.dom_wild.recode.vcf --snps SNP_thinned.txt --keep dom_wild.txt --recode --recode-INFO-all --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.thinned.dom_wild
-
-cat dom_wild.txt
-# SL_1
-# SL_2
-# SL_3
-# SL_4
-# SL_5
-# SL_6
-# OBOYS2_1
-# OBOYS2_2
-# OBOYS2_3
-# OBOYS2_4
-# OBOYS2_5
-# OBOYS2_6
-# CS_1
-# CS_2
-# CS_3
-# CS_5
-# CS_6
-# CS_7
-# NEH_1
-# NEH_2
-# NEH_3
-# NEH_4
-# NEH_5
-# NEH_6
-# DEBY_1
-# DEBY_2
-# DEBY_3
-# DEBY_4
-# DEBY_5
-# DEBY_6
-```        
+#### Outlier detection        
 
 Outflank needs to use estimates of Fst that have not been corrected for sample size adjustments. In order to properly average Fst over loci, Outflank also needs the numerator and denominator of the Fst calculation.
 
@@ -201,6 +197,49 @@ When run Outflank, some parameters need to be set.
 
 4) qthreshold sets the threshold for whether a locus is deemed an "outlier" (5% by default). These q-values are calculated based on the right-tail p-values for each locus.     
 
+```R
+################# start outflank #################
+str(obj.bigSNP)
+# create a new matrix to store the genotypes in bigsnpr
+newm = matrix(nrow=length(obj.bigSNP$genotypes[,1]), ncol=length(obj.bigSNP$genotypes[1,]))
+for(i in seq(length(obj.bigSNP$genotypes[,1]))){
+  newm[i,]=obj.bigSNP$genotypes[i,]
+}
+# add pop information
+obj.bigSNP$pop <- rep(c(seq(1,5)), each = 6)
+# calculate FST on all the loci in our dataset.
+my_fst <- MakeDiploidFSTMat(newm, locusNames = obj.bigSNP$map$physical.pos, popNames = obj.bigSNP$pop)
+# Using OutFLANK() function to estimate the parameters on the neutral FST distribution
+out_trim <- OutFLANK(my_fst[ind_keeps[[2]],], NumberOfSamples=5, qthreshold = 0.05, Hmin = 0.1)
+str(out_trim)
+# Check the fit
+OutFLANKResultsPlotter(out_trim, withOutliers = TRUE,
+                       NoCorr = TRUE, Hmin = 0.1, binwidth = 0.001, Zoom =
+                         FALSE, RightZoomFraction = 0.05, titletext = NULL)
+```
 
+<img src="https://hzz0024.github.io/images/outflank/Fst_distribution.jpeg" alt="img" width="800"/>
 
+```R
+# check the fit of right tail:
+OutFLANKResultsPlotter(out_trim , withOutliers = TRUE,
+                       NoCorr = TRUE, Hmin = 0.1, binwidth = 0.001, Zoom =
+                         TRUE, RightZoomFraction = 0.15, titletext = NULL)
 
+```
+
+<img src="https://hzz0024.github.io/images/outflank/Fst_righttail.jpeg" alt="img" width="800"/>
+
+```R
+hist(out_trim$results$pvaluesRightTail)
+```
+
+<img src="https://hzz0024.github.io/images/outflank/pvaluerighttail.jpeg" alt="img" width="800"/>
+
+```R
+P1 <- pOutlierFinderChiSqNoCorr(my_fst, Fstbar = out_trim$FSTNoCorrbar, 
+                                dfInferred = out_trim$dfInferred, qthreshold = 0.05, Hmin=0.1)
+length(P1$OutlierFlag[P1$OutlierFlag==TRUE])
+```
+
+Number of outliers: 712647 (unrealistic number)
