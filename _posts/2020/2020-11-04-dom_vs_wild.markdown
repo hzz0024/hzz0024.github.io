@@ -318,3 +318,23 @@ plot(x, option = "scores", i = 3, j = 4, pop = poplist.names)
 <img src="https://hzz0024.github.io/images/outflank/PC1_PC2.jpeg" alt="img" width="800"/>
 
 <img src="https://hzz0024.github.io/images/outflank/PC3_PC4.jpeg" alt="img" width="800"/>
+
+```sh
+# Computing the test statistic based on PCA
+x <- pcadapt(filename, K = 3)
+# count how many "NA" values in the p-value column
+sum(is.na(x$pvalues))
+# Manhattan Plot
+plot(x , option = "manhattan")
+# Q-Q Plot
+plot(x, option = "qqplot")
+```
+
+<img src="https://hzz0024.github.io/images/outflank/PC3_PC4.jpeg" alt="img" width="800"/>
+
+```sh
+# Histograms of the test statistic and of the p-values
+hist(x$pvalues, xlab = "p-values", main = NULL, breaks = 50, col = "orange")
+```
+
+<img src="https://hzz0024.github.io/images/outflank/p-value.jpeg" alt="img" width="800"/>

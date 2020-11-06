@@ -40,7 +40,7 @@ for(i in seq(length(SIZE))){
   ind_keeps[[i]] = ind.keep_
 }
 # 1-5 the index list
-index <- ind_keeps[[5]]
+index <- ind_keeps[[2]]
 # output the index list
 write.table(obj.bigSNP$map$marker.ID[index], file = "SNP_thinned.txt", sep = "\t",
             row.names = FALSE, quote = F, col.names=FALSE)
@@ -52,24 +52,6 @@ write.table(obj.bigSNP$map$marker.ID[index], file = "SNP_thinned.txt", sep = "\t
 #   size = 50,
 # )
 
-
-################# pcadapt ##################
-
-G1 <- FBM.code256(dim(G[,index])[1], dim(G[,index])[2], code = CODE_012)
-G1[] <- geno
-
-newG = matrix(nrow=dim(G)[1], ncol=dim(G)[2])
-for(i in seq(length(obj.bigSNP$genotypes[,1]))){
-  newm[i,]=obj.bigSNP$genotypes[i,]
-}
-
-snp_pcadapt(
-  G,
-  U.row,
-  ind.row = rows_along(G),
-  ind.col = cols_along(G),
-  ncores = 1
-)
 ################# start outflank #################
 
 #data("sim1a")
@@ -87,7 +69,7 @@ obj.bigSNP$pop <- rep(c(1,2,2,2,1), each = 6)
 # calculate FST on all the loci in our dataset.
 my_fst <- MakeDiploidFSTMat(newm, locusNames = obj.bigSNP$map$physical.pos, popNames = obj.bigSNP$pop)
 # Using OutFLANK() function to estimate the parameters on the neutral FST distribution
-out_trim <- OutFLANK(my_fst[ind_keeps[[1]],], NumberOfSamples=5, qthreshold = 0.05, Hmin = 0.1)
+out_trim <- OutFLANK(my_fst[ind_keeps[[2]],], NumberOfSamples=5, qthreshold = 0.05, Hmin = 0.1)
 str(out_trim)
 
 OutFLANKResultsPlotter(out_trim, withOutliers = TRUE,
@@ -149,7 +131,22 @@ P1 <- pOutlierFinderChiSqNoCorr(my_fst, Fstbar = out_trim$FSTNoCorrbar,
                                 dfInferred = out_trim$dfInferred, qthreshold = 0.05, Hmin=0.1)
 
 ################# start pcadapt #################
-
-
-
-
+install.packages("pcadapt")
+library("pcadapt")
+path_to_file <- "./pcadapt.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+# Scree plot
+x <- pcadapt(input = filename, K = 10)
+# The eigenvalues that correspond to random variation lie on a straight line whereas the ones that correspond to population structure lie on a steep curve. It is recommended to keep PCs that correspond to eigenvalues to the left of the straight line (Cattell’s rule).
+plot(x, option = "screeplot")
+# Score plot: another option to choose the number of PCs is based on the ‘score plot’ that displays population structure.
+poplist.names <- c(rep("Louisiana_SL", 6),rep("Louisiana_Sel", 6), rep("DelBay_Sel_NEH", 6),rep("Ches_Sel_DEBY", 6), rep("DelBay_CS", 6))
+print(poplist.names)
+plot(x, option = "scores", pop = poplist.names)
+plot(x, option = "scores", i = 3, j = 4, pop = poplist.names)
+# Computing the test statistic based on PCA
+x <- pcadapt(filename, K = 3)
+# count how many "NA" values in the p-value column
+sum(is.na(x$pvalues))
+# Manhattan Plot
+plot(x , option = "manhattan")
