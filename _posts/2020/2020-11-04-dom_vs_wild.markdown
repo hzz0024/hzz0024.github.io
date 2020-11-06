@@ -13,7 +13,7 @@ categories:
 
 #### LD pruning
 
-- Prepare the masked domestic-wild constrasts vcf file. 
+1) Prepare the masked domestic-wild constrasts vcf file. 
 
 Total number of populations in masked vcf file: 16
 
@@ -96,7 +96,7 @@ Features of the output vcf file:
 3) include 30 domestic vs wild contrast samples
 4) after filtering, kept 5533417 out of 6413937 sites
 
-- Convert vcf to plink
+2) Convert vcf to plink
 
 ```sh
 plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing
@@ -136,7 +136,7 @@ POS <- obj.bigSNP$map$physical.pos
 # [71] 0 1 0 1 0 1 1 0 1 0 1 1 1 2 2
 ```
 
-- LD clumping
+3) LD clumping
 
 See(here)[Why clumping should be preferred over pruning] for why I used clumping over pruning. In short, pruning may remove SNPs in a way that leave regions of the genome with no representative SNP at all.
 
@@ -183,7 +183,7 @@ SNPs after clumping (note I only used 5 domestic and wild populations here)
 
 For initial test purpose, I used 50k bp as the thin-window for dataset clumping and ended up with 310805 SNPs for outflank analysis.
 
-#### Outlier detection        
+#### Outlier detection with outflank      
 
 Outflank needs to use estimates of Fst that have not been corrected for sample size adjustments. In order to properly average Fst over loci, Outflank also needs the numerator and denominator of the Fst calculation.
 
@@ -196,6 +196,8 @@ When run Outflank, some parameters need to be set.
 3) NumberOfSaples is the number of populations sampled.
 
 4) qthreshold sets the threshold for whether a locus is deemed an "outlier" (5% by default). These q-values are calculated based on the right-tail p-values for each locus.     
+
+1) first trial using 5 populations and 50k bp thinned dataset
 
 ```R
 ################# start outflank #################
@@ -251,7 +253,7 @@ Number of outliers: 712647 (unrealistic number)
 obj.bigSNP$pop <- rep(c(1,2,2,2,1), each = 6)
 ```
 
-Now I have wild population one group and the domestic ones another. Still the results are not promising.
+2) Now I have wild population one group and the domestic ones another. Still the results are not promising.
 
 - Check the Fst fit
 
@@ -266,3 +268,53 @@ Now I have wild population one group and the domestic ones another. Still the re
 <img src="https://hzz0024.github.io/images/outflank/p_value_2pop.jpeg" alt="img" width="800"/>
 
 number of SNPs flaged as outliers: 601800
+
+
+#### Outlier detection with pcadapt
+
+Prepare the dataset, again I used the thinned data with 50k bp as a window size.
+
+```sh
+# extract the thinnd list with 310805 SNPs
+vcftools --gzvcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.recode.vcf.gz --snps SNP_thinned.txt --recode --recode-INFO-all --out pcadapt
+# convert into bed format
+plink --vcf pcadapt.recode.vcf --double-id --make-bed --out pcadapt
+```
+
+Perform pcadapt analysis
+
+1) load the data
+
+```sh
+# reading genotype data (“pcadapt”, “lfmm”, “vcf”, “bed”, “ped”, “pool”)
+path_to_file <- "./ALL.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+```
+
+2) pcadapt
+
+```sh
+################# start pcadapt #################
+install.packages("pcadapt")
+library("pcadapt")
+path_to_file <- "./pcadapt.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+# Scree plot
+x <- pcadapt(input = filename, K = 10)
+# The eigenvalues that correspond to random variation lie on a straight line whereas the ones that correspond to population structure lie on a steep curve. It is recommended to keep PCs that correspond to eigenvalues to the left of the straight line (Cattell’s rule).
+plot(x, option = "screeplot")
+```
+
+<img src="https://hzz0024.github.io/images/outflank/scree_plot.jpeg" alt="img" width="800"/>
+
+```sh
+# Score plot: another option to choose the number of PCs is based on the ‘score plot’ that displays population structure.
+poplist.names <- c(rep("Louisiana_SL", 6),rep("Louisiana_Sel", 6), rep("DelBay_Sel_NEH", 6),rep("Ches_Sel_DEBY", 6), rep("DelBay_CS", 6))
+print(poplist.names)
+plot(x, option = "scores", pop = poplist.names)
+plot(x, option = "scores", i = 3, j = 4, pop = poplist.names)
+```
+    
+<img src="https://hzz0024.github.io/images/outflank/PC1_PC2.jpeg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/outflank/PC3_PC4.jpeg" alt="img" width="800"/>

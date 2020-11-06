@@ -51,6 +51,25 @@ write.table(obj.bigSNP$map$marker.ID[index], file = "SNP_thinned.txt", sep = "\t
 #   thr.r2 = 0.2,
 #   size = 50,
 # )
+
+
+################# pcadapt ##################
+
+G1 <- FBM.code256(dim(G[,index])[1], dim(G[,index])[2], code = CODE_012)
+G1[] <- geno
+
+newG = matrix(nrow=dim(G)[1], ncol=dim(G)[2])
+for(i in seq(length(obj.bigSNP$genotypes[,1]))){
+  newm[i,]=obj.bigSNP$genotypes[i,]
+}
+
+snp_pcadapt(
+  G,
+  U.row,
+  ind.row = rows_along(G),
+  ind.col = cols_along(G),
+  ncores = 1
+)
 ################# start outflank #################
 
 #data("sim1a")
