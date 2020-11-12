@@ -3,6 +3,7 @@ library(OutFLANK)  # outflank package
 library(vcfR)
 library(bigsnpr)
 library(ggplot2)
+library(plyr)
 
 bedfile = "SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.bed"
 # this will create a .rds file
@@ -131,7 +132,7 @@ P1 <- pOutlierFinderChiSqNoCorr(my_fst, Fstbar = out_trim$FSTNoCorrbar,
                                 dfInferred = out_trim$dfInferred, qthreshold = 0.05, Hmin=0.1)
 
 ################# start pcadapt #################
-install.packages("pcadapt")
+#install.packages("pcadapt")
 library("pcadapt")
 path_to_file <- "./pcadapt.bed"
 filename <- read.pcadapt(path_to_file, type = "bed")
@@ -150,3 +151,81 @@ x <- pcadapt(filename, K = 3)
 sum(is.na(x$pvalues))
 # Manhattan Plot
 plot(x , option = "manhattan")
+# Q-Q Plot
+plot(x, option = "qqplot")
+# Histograms of the test statistic and of the p-values
+hist(x$pvalues, xlab = "p-values", main = NULL, breaks = 50, col = "orange")
+# The presence of outliers is also visible when plotting a histogram of the test statistic 𝐷𝑗.
+plot(x, option = "stat.distribution")
+
+# Choosing a cutoff for outlier detection
+# q-values
+qval <- qvalue(x$pvalues)$qvalues
+alpha <- 0.05
+outliers <- which(qval < alpha)
+length(outliers)
+
+# Benjamini-Hochberg Procedure
+padj_BH <- p.adjust(x$pvalues,method="BH")
+alpha <- 0.05
+outliers <- which(padj_BH < alpha)
+length(outliers)
+
+# Bonferroni correction
+padj_BF <- p.adjust(x$pvalues,method="bonferroni")
+alpha <- 0.05
+outliers <- which(padj_BF < alpha)
+length(outliers)
+
+file_name = 'pcadapt.bim' 
+SNP_ID = read.delim(file_name, header = FALSE, sep='\t')
+all_df <- cbind(SNP_ID, padj)
+colnames(all_df) <- c("SNP_ID", "padj_BH", "padj_BF")
+
+
+path_to_file <- "./CS_NEH.bed"
+filename <- read.pcadapt(path_to_file, type = "bed")
+x <- pcadapt(input = filename, K = 10)
+#plot(x, option = "screeplot")
+# Score plot: another option to choose the number of PCs is based on the ‘score plot’ that displays population structure.
+#poplist.names <- c(rep("DelBay_CS", 6),rep("Ches_Sel_DEBY", 6))
+#poplist.names <- c(rep("Louisiana_SL", 6),rep("Louisiana_Sel", 6), rep("DelBay_Sel_NEH", 6),rep("Ches_Sel_DEBY", 6), rep("DelBay_CS", 6))
+#print(poplist.names)
+#plot(x, option = "scores", pop = poplist.names)
+#plot(x, option = "scores", i = 3, j = 4, pop = poplist.names)
+# Computing the test statistic based on PCA
+x <- pcadapt(filename, K = 2)
+# count how many "NA" values in the p-value column
+#sum(is.na(x$pvalues))
+# Manhattan Plot
+#plot(x , option = "manhattan")
+# Q-Q Plot
+#plot(x, option = "qqplot")
+# Histograms of the test statistic and of the p-values
+#hist(x$pvalues, xlab = "p-values", main = NULL, breaks = 50, col = "orange")
+# The presence of outliers is also visible when plotting a histogram of the test statistic 𝐷𝑗.
+#plot(x, option = "stat.distribution")
+
+# Choosing a cutoff for outlier detection
+# q-values
+qval <- qvalue(x$pvalues)$qvalues
+alpha <- 0.01
+outliers <- which(qval < alpha)
+length(outliers)
+
+# Benjamini-Hochberg Procedure
+padj <- p.adjust(x$pvalues,method="BH")
+alpha <- 0.01
+outliers <- which(padj < alpha)
+length(outliers)
+
+# Bonferroni correction
+padj <- p.adjust(x$pvalues,method="bonferroni")
+alpha <- 0.01
+CS_NEH <- which(padj < alpha)
+length(CS_NEH)
+
+intersect(intersect(SL_OBOYS2, CS_DEBY), CS_NEH)
+
+
+          
