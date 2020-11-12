@@ -144,9 +144,13 @@ plot(x, option = "screeplot")
 poplist.names <- c(rep("Louisiana_SL", 6),rep("Louisiana_Sel", 6), rep("DelBay_Sel_NEH", 6),rep("Ches_Sel_DEBY", 6), rep("DelBay_CS", 6))
 print(poplist.names)
 plot(x, option = "scores", pop = poplist.names)
-plot(x, option = "scores", i = 3, j = 4, pop = poplist.names)
+plot(x, option = "scores", i = 1, j = 4, pop = poplist.names)
 # Computing the test statistic based on PCA
 x <- pcadapt(filename, K = 3)
+plot(x, option = "scores", pop = poplist.names)
+
+x <- pcadapt(filename, K = 10)
+plot(x, option = "scores", pop = poplist.names)
 # count how many "NA" values in the p-value column
 sum(is.na(x$pvalues))
 # Manhattan Plot

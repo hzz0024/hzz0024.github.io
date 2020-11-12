@@ -19,7 +19,9 @@ SL - Louisiana wild line
 OBOYS2 - Louisiana selected line     
 NEH - Delaware Bay selected NEH line      
 DEBY - Chesapeake Bay selected line (initially from DB)       
-CS - Cape Shore (Delaware Bay) wild line        
+CS - Cape Shore (Delaware Bay) wild line  
+
+Among them, DEBY originally from Delaware Bay (source material), brought to Chesapeake Bay (CB) for selection in 1980s, some bottlenecks in hatchery, DEBY kept in different environment in CB since 80s. CS is sourced from Cape Shore at Delaware Bay (wild high salinity).     
 
 - Features of the vcf file:
 
@@ -28,9 +30,9 @@ CS - Cape Shore (Delaware Bay) wild line
 3) only include 30 domestic vs wild contrast samples
 4) after filtering, kept 5,533,417 out of 6,413,937 sites
 
-|                                 Vcf file                                         |   No. SNPs  |
-|----------------------------------------------------------------------------------|-------------|
-|SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing|   5533417   |
+|                                 Vcf file                                         |   No. SNPs    |
+|----------------------------------------------------------------------------------|---------------|
+|SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing|   5,533,417   |
 
 2) Convert vcf to plink
 
@@ -38,7 +40,7 @@ CS - Cape Shore (Delaware Bay) wild line
 plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing
 ```
 
-- Process the bed file using (bigsnpr)[https://github.com/privefl/bigsnpr]
+- Process the bed file using [bigsnpr](https://github.com/privefl/bigsnpr)
 
 ```R
 library(bigsnpr)
@@ -58,18 +60,53 @@ CHR <- obj.bigSNP$map$chromosome
 POS <- obj.bigSNP$map$physical.pos
 ```
 
-#### Outlier detection with outflank      
+#### Outlier detection with thinned SNPs (best practice)
 
-Outflank needs to use estimates of Fst that have not been corrected for sample size adjustments. In order to properly average Fst over loci, Outflank also needs the numerator and denominator of the Fst calculation.
+See Supplementary Material of Katies's paper for method details [The effect of neutral recombination variation on genome scans for selection](https://gsajournals.figshare.com/articles/Supplemental_Material_for_Lotterhos_2019/7973438)
 
-When run Outflank, some parameters need to be set. 
+In short, for each SNP, the PCAdapt computes a Mahalanobis distance on a vector of z-scores thatcorresponds to the z-scores obtained when regressing a SNP by the K PCs. The neutralparameterization in this case are the PC axes that describe population genetic structure. P-values for each locus are obtained from a chi-squared distribution with K degrees of freedom......The best practice was implemented by using the quasi-independent thinned set of SNPs to estimate the PC axes, and then using these estimate −log10P-values from the regression for all SNPs with MAF > 0.05*
 
-1) LeftTrimFraction and RightTrimFraction (5% by default). This setting ensure that the lowest and highest Fst values to remove before estimating the shape of the neutral Fst distribution through likelihood.     
-       
-2) Hmin is the threshold for expected heterozygosity (10% by default). Loci with low He have distribution of Fst very different from loci with higher He and need to be removed.
+See Katie's Github for code details [https://github.com/TestTheTests/TTT_RecombinationGenomeScans/blob/master/src/b_Proc_Sims.R](https://github.com/TestTheTests/TTT_RecombinationGenomeScans/blob/master/src/b_Proc_Sims.R)
 
-3) NumberOfSaples is the number of populations sampled.
+|  PC used         | No. outliers (bonferroni)| 
+|------------------|--------------------------|
+|  1               |           32             |
+|  1-3             |          155             | 
+|  1-5             |           83             | 
 
-4) qthreshold sets the threshold for whether a locus is deemed an "outlier" (5% by default). These q-values are calculated based on the right-tail p-values for each locus.     
+- Best practice with PC1-3
+
+<img src="https://hzz0024.github.io/images/pcadapt/Mahattan_BP_PC1-3.jpg" alt="img" width="800"/>
+
+- Best practice with PC1-5
+
+<img src="https://hzz0024.github.io/images/pcadapt/Mahattan_BP_PC1-5.jpg" alt="img" width="800"/>
+
+- Best practice with PC1 only
+
+<img src="https://hzz0024.github.io/images/pcadapt/Mahattan_BP_PC1.jpg" alt="img" width="800"/>
+
+#### Outlier detection with all SNPs (naive method)
+
+The nave approach was evaluated using the −log10P-values that resulted from running the algorithm on all SNPs with MAF > 0.05. 
+
+|  PC used         | No. outliers (bonferroni)| 
+|------------------|--------------------------|
+|  1               |           2512           |
+|  1-3             |           27408          |
+|  1-5             |           46243          |
+
+- Naive with PC1-3
+
+<img src="https://hzz0024.github.io/images/pcadapt/Mahattan_naive_PC1-3.jpg" alt="img" width="800"/>
+
+- Naive with PC1-5
+
+<img src="https://hzz0024.github.io/images/pcadapt/Mahattan_naive_PC1-5.jpg" alt="img" width="800"/>
+
+- Naive with PC1 only
+
+<img src="https://hzz0024.github.io/images/pcadapt/Mahattan_naive_PC1.jpg" alt="img" width="800"/>
+     
 
 
