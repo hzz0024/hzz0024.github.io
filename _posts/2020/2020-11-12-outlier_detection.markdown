@@ -119,3 +119,10 @@ The nave approach was evaluated using the −log10P-values that resulted from ru
 
 The results above is generated from the whole dom-wild popultions (5 pop with 30 individuals). 
 
+Now focus on the pairwise comparsions.
+
+```sh
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --max-missing 1 --keep CS_NEH --recode --recode-INFO-all --out CS_NEH
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --max-missing 1 --keep SL_OBOYS2 --recode --recode-INFO-all --out SL_OBOYS2
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --max-missing 1 --keep CS_DEBY --recode --recode-INFO-all --out CS_DEBY
+```
