@@ -74,11 +74,11 @@ See Katie's Github for code details [https://github.com/TestTheTests/TTT_Recombi
 |  1-3             |          155             | 
 |  1-5             |           83             | 
 
-- Best practice with PC1-3
+- Best practice with K=3
 
 <img src="https://hzz0024.github.io/images/pcadapt/Mahattan_BP_PC1-3.jpg" alt="img" width="800"/>
 
-- Best practice with PC1-5
+- Best practice with K=5
 
 <img src="https://hzz0024.github.io/images/pcadapt/Mahattan_BP_PC1-5.jpg" alt="img" width="800"/>
 
@@ -96,11 +96,11 @@ The nave approach was evaluated using the −log10P-values that resulted from ru
 |  1-3             |           27408          |
 |  1-5             |           46243          |
 
-- Naive with PC1-3
+- Naive with K=3
 
 <img src="https://hzz0024.github.io/images/pcadapt/Mahattan_naive_PC1-3.jpg" alt="img" width="800"/>
 
-- Naive with PC1-5
+- Naive with K=5
 
 <img src="https://hzz0024.github.io/images/pcadapt/Mahattan_naive_PC1-5.jpg" alt="img" width="800"/>
 
