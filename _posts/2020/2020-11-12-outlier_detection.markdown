@@ -68,6 +68,13 @@ In short, for each SNP, the PCAdapt computes a Mahalanobis distance on a vector 
 
 See Katie's Github for code details [https://github.com/TestTheTests/TTT_RecombinationGenomeScans/blob/master/src/b_Proc_Sims.R](https://github.com/TestTheTests/TTT_RecombinationGenomeScans/blob/master/src/b_Proc_Sims.R)
 
+Figures below are PCA plots produced by first few PCs in the thinned dataset
+
+<img src="https://hzz0024.github.io/images/outflank/PC1_PC2.jpeg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/outflank/PC3_PC4.jpeg" alt="img" width="800"/>
+
+
 |  PC used         | No. outliers (bonferroni)| 
 |------------------|--------------------------|
 |  1               |           32             |
