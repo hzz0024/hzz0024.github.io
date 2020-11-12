@@ -64,7 +64,7 @@ POS <- obj.bigSNP$map$physical.pos
 
 See Supplementary Material of Katies's paper for method details [The effect of neutral recombination variation on genome scans for selection](https://gsajournals.figshare.com/articles/Supplemental_Material_for_Lotterhos_2019/7973438)
 
-In short, for each SNP, the PCAdapt computes a Mahalanobis distance on a vector of z-scores thatcorresponds to the z-scores obtained when regressing a SNP by the K PCs. The neutralparameterization in this case are the PC axes that describe population genetic structure. P-values for each locus are obtained from a chi-squared distribution with K degrees of freedom......The best practice was implemented by using the quasi-independent thinned set of SNPs to estimate the PC axes, and then using these estimate −log10P-values from the regression for all SNPs with MAF > 0.05*
+In short, for each SNP, the PCAdapt computes a Mahalanobis distance on a vector of z-scores that corresponds to the z-scores obtained when regressing a SNP by the K PCs. The neutralparameterization in this case are the PC axes that describe population genetic structure. P-values for each locus are obtained from a chi-squared distribution with K degrees of freedom......The best practice was implemented by using the quasi-independent thinned set of SNPs to estimate the PC axes, and then using these estimate −log10P-values from the regression for all SNPs with MAF > 0.05*
 
 See Katie's Github for code details [https://github.com/TestTheTests/TTT_RecombinationGenomeScans/blob/master/src/b_Proc_Sims.R](https://github.com/TestTheTests/TTT_RecombinationGenomeScans/blob/master/src/b_Proc_Sims.R)
 
@@ -88,7 +88,7 @@ See Katie's Github for code details [https://github.com/TestTheTests/TTT_Recombi
 
 #### Outlier detection with all SNPs (naive method)
 
-The nave approach was evaluated using the −log10P-values that resulted from running the algorithm on all SNPs with MAF > 0.05. 
+The nave approach was evaluated using the −log10P-values that resulted from running the algorithm on all SNPs with MAF > 0.05. The p-value peaks in the naive results should occur at the inversion regions in the genome (chr 5 and 6).
 
 |  PC used         | No. outliers (bonferroni)| 
 |------------------|--------------------------|
@@ -108,5 +108,7 @@ The nave approach was evaluated using the −log10P-values that resulted from ru
 
 <img src="https://hzz0024.github.io/images/pcadapt/Mahattan_naive_PC1.jpg" alt="img" width="800"/>
      
+---
 
+The results above is generated from the whole dom-wild popultions (5 pop with 30 individuals). 
 
