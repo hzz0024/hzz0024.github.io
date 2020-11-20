@@ -48,7 +48,7 @@ See Katie's Github for code details [https://github.com/TestTheTests/TTT_Recombi
 plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.thin1K.vcf.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.thin1K
 ```
 
-Figures below are PCA plots produced by first few PCs in the thinned dataset 
+Figures below are PCA plots produced by first few PCs using thinned dataset 
 
 - window size of 500K bp
 
@@ -68,7 +68,7 @@ Figures below are PCA plots produced by first few PCs in the thinned dataset
 
 <img src="https://hzz0024.github.io/images/pcadapt/1K_PCs.jpg" alt="img" width="800"/>
 
-outlier were identified as bonferroni corrected p-value < 0.05
+Number of outlier identified with Best Practice (bonferroni p-value < 0.05)
 
 |  PC used         | No. outliers (win = 500K)| No. outliers (win = 5K)| No. outliers (win = 1K)| 
 |------------------|--------------------------|------------------------|------------------------|
