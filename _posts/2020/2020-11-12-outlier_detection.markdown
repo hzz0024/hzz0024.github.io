@@ -121,8 +121,94 @@ The results above is generated from the whole dom-wild popultions (5 pop with 30
 
 Now focus on the pairwise comparsions.
 
+Number of SNPs retained after LD-clumping (with the function snp_autoSVD)
+
 ```sh
-vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --max-missing 1 --keep CS_NEH --recode --recode-INFO-all --out CS_NEH
-vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --max-missing 1 --keep SL_OBOYS2 --recode --recode-INFO-all --out SL_OBOYS2
-vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --max-missing 1 --keep CS_DEBY --recode --recode-INFO-all --out CS_DEBY
+# generate pairwise contrast vcf
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --keep SL_OBOYS2 --max-missing 1 --recode --recode-INFO-all --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.SL_OBOYS2
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --keep CS_NEH --max-missing 1 --recode --recode-INFO-all --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_NEH
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --keep CS_DEBY --max-missing 1 --recode --recode-INFO-all --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_DEBY
+# convert to bed format
+module load plink/1.90
+plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_DEBY.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_DEBY
+plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_NEH.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_NEH
+plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.SL_OBOYS2.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.SL_OBOYS2
+# this R script is used to create the prunning snp list for each pairwise population
+setwd("~/Documents/Ryan_workplace/CVreseq_pcadapt/")
+bedfile = "SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_DEBY.bed"
+snp_readBed(bedfile)
+# this will create a .rds file
+obj.bigSNP <- snp_attach("SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_DEBY.rds")
+G <- obj.bigSNP$genotypes
+SNPs <- obj.bigSNP$map$marker.ID
+CHR <- obj.bigSNP$map$chromosome
+POS <- obj.bigSNP$map$physical.pos
+# obtain the "bed" snp index during pruning and manually store them into a txt file
+newpc <- snp_autoSVD(G, infos.chr = CHR, infos.pos = POS)
+which_pruned =  attr(newpc, which="subset")
+SNP_list <- SNPs[which_pruned]
+write.table(SNP_list, file = "CS_DEBY_pruned_SNP_list.txt", sep = "\t", quote = FALSE,
+            row.names = FALSE, col.names = FALSE)
+
+bedfile = "SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_NEH.bed"
+snp_readBed(bedfile)
+# this will create a .rds file
+obj.bigSNP <- snp_attach("SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.CS_NEH.rds")
+G <- obj.bigSNP$genotypes
+SNPs <- obj.bigSNP$map$marker.ID
+CHR <- obj.bigSNP$map$chromosome
+POS <- obj.bigSNP$map$physical.pos
+# obtain the "bed" snp index during pruning and manually store them into a txt file
+newpc <- snp_autoSVD(G, infos.chr = CHR, infos.pos = POS)
+which_pruned =  attr(newpc, which="subset")
+SNP_list <- SNPs[which_pruned]
+write.table(SNP_list, file = "CS_NEH_pruned_SNP_list.txt", sep = "\t", quote = FALSE,
+            row.names = FALSE, col.names = FALSE)
+
+bedfile = "SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.SL_OBOYS2.bed"
+snp_readBed(bedfile)
+# this will create a .rds file
+obj.bigSNP <- snp_attach("SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.maf05.nomissing.SL_OBOYS2.rds")
+G <- obj.bigSNP$genotypes
+SNPs <- obj.bigSNP$map$marker.ID
+CHR <- obj.bigSNP$map$chromosome
+POS <- obj.bigSNP$map$physical.pos
+# obtain the "bed" snp index during pruning and manually store them into a txt file
+newpc <- snp_autoSVD(G, infos.chr = CHR, infos.pos = POS)
+which_pruned =  attr(newpc, which="subset")
+SNP_list <- SNPs[which_pruned]
+write.table(SNP_list, file = "SL_OBOYS2_pruned_SNP_list.txt", sep = "\t", quote = FALSE,
+            row.names = FALSE, col.names = FALSE)
 ```
+
+|Population contrast          | SNPs retained            | 
+|-----------------------------|--------------------------|
+|CS_DEBY_pruned_SNP_list.txt  |           13406          |
+|CS_NEH_pruned_SNP_list.txt   |           11224          |
+|SL_OBOYS2_pruned_SNP_list.txt|           16710          |
+
+- PCAdapt analysis with thinned SNP sets only
+
+```sh
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --snps SL_OBOYS2_pruned_SNP_list.txt --keep SL_OBOYS2 --max-missing 1 --recode --recode-INFO-all --out Thinned.SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.nomissing.FIL.format.SL_OBOYS2
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --snps CS_NEH_pruned_SNP_list.txt --keep CS_NEH --max-missing 1 --recode --recode-INFO-all --out Thinned.SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.nomissing.FIL.format.CS_NEH
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.vcf --maf 0.05 --snps CS_DEBY_pruned_SNP_list.txt --keep CS_DEBY --max-missing 1 --recode --recode-INFO-all --out Thinned.SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.nomissing.FIL.format.CS_DEBY
+module load plink/1.90
+plink --vcf Thinned.SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.nomissing.FIL.format.SL_OBOYS2.recode.vcf --double-id --make-bed --out Thinned.SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.nomissing.FIL.format.SL_OBOYS2
+plink --vcf Thinned.SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.nomissing.FIL.format.CS_NEH.recode.vcf --double-id --make-bed --out Thinned.SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.nomissing.FIL.format.CS_NEH
+plink --vcf Thinned.SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.nomissing.FIL.format.CS_DEBY.recode.vcf --double-id --make-bed --out Thinned.SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.nomissing.FIL.format.CS_DEBY
+```
+
+|Population contrast          | No. outliers (bonferroni)| 
+|-----------------------------|--------------------------|
+|CS_DEBY                      |           13406          |
+|CS_NEH                       |           11224          |
+|SL_OBOYS2                    |           16710          |
+
+- PCAdapt analysis with Best Practice (BP) 
+
+|Population contrast          | No. outliers (bonferroni)| 
+|-----------------------------|--------------------------|
+|CS_DEBY                      |           3718           |
+|CS_NEH                       |           1520           |
+|SL_OBOYS2                    |           7823           |
