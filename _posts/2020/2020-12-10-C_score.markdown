@@ -74,3 +74,128 @@ In all cases, the C-score and likelihood-based estimation of the number of genes
 For continuously-distributed data, this may be in the form of p-values, Fst, GWAS-effect sizes, or other metrics, but whatever form of datam it is critical to rescale it so that larger values indicate greater evidence of adaptation. For example, for p-values, a -1 \* log10 transformation is appropriate.
 
 For binary data, a value of 1 should be used to represent “adaptation” and a value of 0 to represent “no adaptation”.
+
+#### Calculating C-scores and p-values for all pairwise contrasts
+
+Here I calculate the C-score (with single_c_hyper function) and p-values (with single_p_hyper) for all pairwise contrasts. I convert the input ZFst into binary data, with outlier windows marked as "1", and neutral window as "0". Note that I only test C-score on 10K bp window results, as the union outliter windows results have unequal length of the columns.
+
+R code is shown below,
+
+```R
+setwd("/Volumes/cornell/CVreseq_hudson_fst")
+library(hash)
+library(dgconstraint)
+options(scipen=999)
+library("gtools")
+
+# headname = "CL_OBOYS2_noinvers."
+# titlename = 'CL vs OBOYS2'
+hudson_fst <- function(headname, titlename){
+  jpeg(paste0('C_score/',headname,"sliding.zfst.hudson.jpg"), width = 16, height = 9, units = 'in', res = 300)
+  par(mfrow=c(2,2))
+  for(win in c(1000, 5000, 10000)){
+    name = paste0(headname, win, "bp.", "s", win/5, ".csv")
+    DT = read.delim(name, header = TRUE, sep=',')
+    mid_pos <- round((DT$start + DT$end)/2)
+    id = paste0(DT$scaffold,'_',mid_pos)
+    DT <- as.data.frame(cbind(DT,mid_pos, id))
+    #DT <- DT[complete.cases(DT), ]
+    DT[,9][DT[,9]<0] = 0.000001 #@chnage
+    zfst <- (DT[,9] - mean(DT[,9], na.rm=T))/(sd(DT[,9], na.rm = T))# @change
+    dat <- data.frame(chr=DT$scaffold, start=DT$start, end=DT$end, mid_pos=DT$mid_pos, SNP=DT$id, fst=DT[,9], zfst = zfst) # @change
+    dat$chr <- as.numeric(dat$chr)
+    dat$mid_pos <- as.numeric(dat$mid_pos)
+    dat$fst <- as.numeric(dat$fst)
+    dat$zfst <- as.numeric(dat$zfst)
+    # calculate the 99.9% quantile
+    thred=quantile(dat$zfst, 0.999, na.rm=T)
+    cnt = length(dat[dat$zfst>thred[[1]],1])
+    outlier = dat[dat$zfst>thred[[1]],5]
+    print(paste0("Number of outlier in ", titlename," at 99.9% quantile is ", cnt, " (window size ", win, ")" ))
+    #manhattan(dat, chr="chr",bp="mid_pos",p="zfst", highlight1 = outlier, logp=FALSE, cex.axis = 1, ylim = c(0, max(dat$zfst, na.rm=T)+0.2), #subset(dat, chr == 8)
+    #          col=c("grey","black"),genomewideline=F, suggestiveline=F,
+    #          ylab="ZFst", cex.lab=1.5, main = paste0(titlename, " ZFst window size:", win, ' bp'), cex.main=1.5)
+    sliding_DT = data.frame(Chromosome=dat$chr, Start=dat$start, End=dat$end, Fst=dat$fst, ZFst=dat$zfst, outlier=dat$zfst>thred[[1]]) #@changed at 12/10/2020 to output the ZFst for each window
+    write.table(sliding_DT, file = paste0('C_score/',headname,"sliding.all.",win, "bp.txt"), sep = "\t", quote = FALSE,
+                row.names = FALSE, col.names = TRUE) #@changed at 12/10/2020 to output the ZFst for each window
+    }
+}
+
+hudson_fst("SL_OBOYS2_noinvers.", "SL vs OBOYS2")
+hudson_fst("SL_LOLA_noinvers.", "SL vs LOLA")
+hudson_fst("NEH_UMFS_noinvers.", "NEH vs UMFS")
+hudson_fst("CS_UMFS_noinvers.", "CS vs UMFS")
+hudson_fst("CS_NEH_noinvers.", "CS vs NEH")
+hudson_fst("CS_HC_noinvers.", "CS vs HC")
+hudson_fst("CS_DEBY_noinvers.", "CS vs DEBY")
+hudson_fst("CL_OBOYS2_noinvers.", "CL vs OBOYS2")
+
+win = 10000
+heads = c("SL_OBOYS2_noinvers.","SL_LOLA_noinvers.","NEH_UMFS_noinvers.","CS_UMFS_noinvers.",'CS_DEBY_noinvers.', 'CS_NEH_noinvers.','CL_OBOYS2_noinvers.',"CS_HC_noinvers.")
+combs = combinations(8, 2, 1:8)
+for(i in 1:length(combs[,1])){
+  print(combs[i,])
+  print(heads[combs[i,1]])
+  print(heads[combs[i,2]])
+  headname1 = heads[combs[i,1]]
+  DT1 = read.delim(paste0('C_score/',headname1,"sliding.all.",win, "bp.txt"), header = TRUE, sep='\t')
+  headname2 = heads[combs[i,2]]
+  DT2 = read.delim(paste0('C_score/',headname2,"sliding.all.",win, "bp.txt"), header = TRUE, sep='\t')
+  
+  DT1$ZFst[which(DT1$outlier==FALSE)] = 0
+  DT2$ZFst[which(DT2$outlier==FALSE)] = 0
+  
+  DT1$ZFst[which(DT1$outlier==TRUE)] = 1
+  DT2$ZFst[which(DT2$outlier==TRUE)] = 1
+
+  del_idx = c(which(is.na(DT1$ZFst)), which(is.na(DT2$ZFst)))
+  
+  #re1 = single_c_chisq(DT1$ZFst[-del_idx], DT2$ZFst[-del_idx], num_permute=10000, na.rm = F)
+  #print(paste0("C-score is ",re1))
+  #re2 = single_p_chisq(DT1$ZFst[-del_idx], DT2$ZFst[-del_idx], num_permute=10000, na.rm = F)
+  #print(paste0("p-value is ",re2))
+  re3 = single_c_hyper(DT1$ZFst[-del_idx], DT2$ZFst[-del_idx], na.rm = F)
+  print(paste0("C-score is ",re3))
+  re4 = single_p_hyper(DT1$ZFst[-del_idx], DT2$ZFst[-del_idx], na.rm = F)
+  print(paste0("p-value is ",re4))
+}
+
+```
+
+C-score result table
+
+|           | SL_OBOYS2 | SL_LOLA    | NEH_UMFS   | CS_UMFS    | CS_DEBY    | CS_NEH     | CL_OBOYS2  | CS_HC      |
+|-----------|-----------|------------|------------|------------|------------|------------|------------|------------|
+| SL_OBOYS2 | NA        | -0.3914669 | -0.3659321 | -0.3993192 | -0.3991668 | -0.3920125 | 61.0498489 | -0.3809665 |
+| SL_LOLA   | NA        | NA         | -0.3744969 | -0.4013264 | -0.4048833 | -0.3927816 | 2.1865265  | -0.3809665 |
+| NEH_UMFS  | NA        | NA         | NA         | 30.2704312 | -0.3923697 | 56.1562865 | -0.3576131 | 2.34477775 |
+| CS_UMFS   | NA        | NA         | NA         | NA         | 14.5144146 | 99.0380041 | -0.3903455 | 2.29259669 |
+| CS_DEBY   | NA        | NA         | NA         | NA         | NA         | 4.60201794 | -0.3853698 | 10.0641103 |
+| CS_NEH    | NA        | NA         | NA         | NA         | NA         | NA         | -0.3831877 | 7.47106173 |
+| CL_OBOYS2 | NA        | NA         | NA         | NA         | NA         | NA         | NA         | -0.3552847 |
+| CS_HC     | NA        | NA         | NA         | NA         | NA         | NA         | NA         | NA         |
+
+
+Heatmap for C-score
+
+<img src="https://hzz0024.github.io/images/C_score/Chyper.png" alt="img" width="800"/>
+
+p-value result table
+
+|           | SL_OBOYS2 | SL_LOLA | NEH_UMFS | CS_UMFS  | CS_DEBY  | CS_NEH     | CL_OBOYS2  | CS_HC      |
+|-----------|-----------|---------|----------|----------|----------|------------|------------|------------|
+| SL_OBOYS2 | NA        | 1       | 1        | 1        | 1        | 1          | 9.79E-46   | 1          |
+| SL_LOLA   | NA        | NA      | 1        | 1        | 1        | 1          | 0.14031204 | 1          |
+| NEH_UMFS  | NA        | NA      | NA       | 1.35E-19 | 1        | 3.54E-41   | 1          | 0.12728042 |
+| CS_UMFS   | NA        | NA      | NA       | NA       | 1.84E-08 | 8.32E-85   | 1          | 0.13139277 |
+| CS_DEBY   | NA        | NA      | NA       | NA       | NA       | 0.01142054 | 1          | 1.60E-05   |
+| CS_NEH    | NA        | NA      | NA       | NA       | NA       | NA         | 1          | 4.51E-04   |
+| CL_OBOYS2 | NA        | NA      | NA       | NA       | NA       | NA         | NA         | 1          |
+| CS_HC     | NA        | NA      | NA       | NA       | NA       | NA         | NA         | NA         |
+
+Heatmap for p-value
+
+<img src="https://hzz0024.github.io/images/C_score/pvalue.png" alt="img" width="800"/>
+
+
+
