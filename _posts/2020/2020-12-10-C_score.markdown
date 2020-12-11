@@ -1,0 +1,32 @@
+---
+comments: true
+title: C_score to quantify constrained (parallel) evolution
+date: '2020-12-10 12:00'
+tags:
+  - vcf
+  - dgconstraint
+  - outlier
+  - parallel evolution 
+categories:
+  - CVreseq
+---
+
+#### What is C-score?
+
+C-score is a indice that quantify the repeated observation of convergent adaptation [Yeaman et al 2018](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007717). Here convergence means overlap genetic variation that arises as a product of multiple routs to adaptation [Laruson et al 2020](https://doi.org/10.1016/j.tree.2020.04.009). High values of the C-score occur with high repeatability, which means that some constraints exist that limit the number of viable genotypes that can give rise to an adaptive phenotype. 
+
+#### How to obtain C-scores?
+
+A null model hypothesizing that no diversity constraints and all genes potentially give rise to variation and contribute to adaptation is needed C-score calculation. Yeaman et al. used different notation to present different properties of the genomic basis of trait variation (with two species as an example):
+
+- the number of loci in the genome of each species is n<sub>x</sub>, and n<sub>y</sub>, with the number of orthologous loci shared by both species being n<sub>s</sub>;         
+
+- the adaptive trait is controlled by g<sub>x</sub> and g<sub>y</sub> loci in each species, with g<sub>s</sub> shared loci (i.e. the loci in which mutations will give rise to phenotypic variation in the trait, hereafter the “mutational target”); 
+
+- of the g loci that give rise to variation, only a subset have the potential to contribute to adaptation due to the combined effect of all constraints, represented by ga<sub>x</sub> and ga<sub>y</sub>, with ga<sub>s</sub> shared loci (the “effective adaptive target”); 
+
+- in a given bout of adaptation, the number of loci that contribute to adaptation in each lineage is a<sub>x</sub> and a<sub>y</sub>, with a<sub>s</sub> orthologous loci contributing in both lineages.
+
+
+
+ 

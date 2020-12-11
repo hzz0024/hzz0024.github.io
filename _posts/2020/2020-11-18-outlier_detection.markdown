@@ -101,6 +101,50 @@ Number of outlier identified with Best Practice (bonferroni p-value < 0.05)
 
 <img src="https://hzz0024.github.io/images/pcadapt/Mahattan_all_BP_outlier_PC1_1K.jpg" alt="img" width="800"/>
 
+---
+
+#### Explore the 1K window for outlier identification
+
+Note: inversions.masked.bed is the the inversions called by [Delly](https://github.com/dellytools/delly) (the SV variant caller used for the CNVs)
+
+```sh
+# extract inversions only
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.vcf --bed inversions.masked.bed --recode --recode-INFO-all --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.invers
+plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.invers.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.invers
+# extract non-inversion from the vcf file
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.vcf --exclude-bed inversions.masked.bed --recode --recode-INFO-all --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.noinvers
+plink --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.noinvers.recode.vcf --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.noinvers
+```
+
+Code used to eliminate the chr5 and chr6 inversions
+
+```sh
+plink --bfile SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.noinvers --exclude range chr1.txt --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.noinvers_nochr56invers
+
+cat chr1.txt
+
+5 60600000 80200000 chr5
+6 29900000 44500000 chr6
+
+# to keep the chr5 and 6 inversion
+plink --bfile SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.noinvers --exclude range chr.txt --double-id --make-bed --out SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.format.dom_wild.maf05.nomissing.noinvers_chr56invers
+
+cat chr.txt
+
+1 1 65644315 chr1
+2 1 61751371 chr2
+3 1 77053199 chr3
+4 1 58754694 chr4
+5 1 60600000 chr51
+5 80200000 98632791 chr52
+6 1 29900000 ch61
+6 44500000 51169664 chr62
+7 1 57829119 chr7
+8 1 75928414 chr8
+9 1 104144669 chr9
+10 1 32637058 chr10
+```
+
 #### Zoom in outliers
 
 1) Prepare the VCF files

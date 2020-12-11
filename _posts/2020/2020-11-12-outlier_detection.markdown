@@ -95,7 +95,7 @@ Figures below are PCA plots produced by first few PCs in the thinned dataset
 
 #### Outlier detection with all SNPs (naive method)
 
-The nave approach was evaluated using the −log10P-values that resulted from running the algorithm on all SNPs with MAF > 0.05. The p-value peaks in the naive results should occur at the inversion regions in the genome (chr 5 and 6).
+The naive approach was evaluated using the −log10P-values that resulted from running the algorithm on all SNPs with MAF > 0.05. The p-value peaks in the naive results should occur at the inversion regions in the genome (chr 5 and 6).
 
 |  PC used         | No. outliers (bonferroni)| 
 |------------------|--------------------------|
