@@ -44,4 +44,33 @@ As shown in the example above, four example datasets are generated to represent 
 
 Both the Cchisq and Chyper indices show the highest scores for scenario C, because it has the smallest probability of occurring by chance if all genes had equal probabilities of contributing to adaptation. The index also identifies scenario C as most constrained in terms of the smallest proportion genes potentially contributing to adaptation. The  index also shows that this proportion is equal for scenarios B & D, despite differences in the probability of the observed repeatabilities occurring by chance (as per the C-scores).
 
+#### Calculating C-scores using R package dgconstraint
 
+The dgconstraint R package provides functions for calculating C-scores [https://github.com/samyeaman/dgconstraint](https://github.com/samyeaman/dgconstraint).
+
+- Installation
+
+```R
+library(devtools)
+install_github("samyeaman/dgconstraint")
+# Then load the package in R:
+library(dgconstraint)
+```
+
+- Overall
+
+There are two broad ways to use this package:
+
+For a single pair of lineages. Simple functions are provided that will output statistics for a given pair of lineages. These two lineages are passed to the functions as separate vectors of equal length, where each entry has information aout a given gene (or SNP, window, etc.). It is vitally importatnt in such cases that the two vectors are sorted in the same way, so that the first entry in one vector represents the same gene/SNP/window as the first entry in the second vector and so on. This approach allows you to customize calculation of C-scores, which may be more desireable when more complex designs are used that involve treatments, comparisons among combinations of lineages separated by different distances on a phylogeny, etc.
+
+For a data set containing multiple lineages. All-in-one functions are provided that will output statistics by conducting all pairwise comparisons among the input lineages. In this case, the functions assume that the input data has lineages in columns and genes (or SNPs, windows, etc.) in rows.
+
+The developed functions accept either continuously-distributed data, or binary data.
+
+In all cases, the C-score and likelihood-based estimation of the number of genes that potentially contribute to adaptation require input data that provides evidence about which genes are likely involved in adaptation.
+
+- Important notes
+
+For continuously-distributed data, this may be in the form of p-values, Fst, GWAS-effect sizes, or other metrics, but whatever form of datam it is critical to rescale it so that larger values indicate greater evidence of adaptation. For example, for p-values, a -1 \* log10 transformation is appropriate.
+
+For binary data, a value of 1 should be used to represent “adaptation” and a value of 0 to represent “no adaptation”.
