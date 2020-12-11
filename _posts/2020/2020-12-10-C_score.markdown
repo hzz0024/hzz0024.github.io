@@ -29,6 +29,17 @@ A null model hypothesizing that no diversity constraints and all genes potential
 
 In practice, we typically have little prior knowledge about which genes have the potential to contribute to either adaptation (ga<sub>s</sub>) or standing variation in the trait (g<sub>s</sub>), but we can draw inferences about how these parameters constrain the diversity of adaptive responses by testing hypotheses and comparing the observed amount of overlap (a<sub>s</sub>) to the amount expected under a given null hypothesis (ā<sub>s</sub>), where the expected amount of overlap is ā<sub>s</sub> = a<sub>x</sub>a<sub>y</sub>/ga<sub>s</sub>.
 
+Multiple methods of C-score estimation have proposed:
+
+1) quantify diversity constraints in pairwise contrasts;        
+2) quantify diversity constraints in multiple lineages;           
+3) quantify diversity constraints with continuous data (e.g., FST, p-values, Bayes factors);        
+4) quantify proportion of the genome that can potentially contribute to adaptation          
+
+#### Simple example
+
+<img src="https://hzz0024.github.io/images/C_score/journal.pgen.1007717.g003.PNG" alt="img" width="800"/>
 
 
- 
+
+
