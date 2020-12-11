@@ -27,6 +27,8 @@ A null model hypothesizing that no diversity constraints and all genes potential
 
 - in a given bout of adaptation, the number of loci that contribute to adaptation in each lineage is a<sub>x</sub> and a<sub>y</sub>, with a<sub>s</sub> orthologous loci contributing in both lineages.
 
+In practice, we typically have little prior knowledge about which genes have the potential to contribute to either adaptation (ga<sub>s</sub>) or standing variation in the trait (g<sub>s</sub>), but we can draw inferences about how these parameters constrain the diversity of adaptive responses by testing hypotheses and comparing the observed amount of overlap (a<sub>s</sub>) to the amount expected under a given null hypothesis (ā<sub>s</sub>), where the expected amount of overlap is ā<sub>s</sub> = a<sub>x</sub>a<sub>y</sub>/ga<sub>s</sub>.
+
 
 
  
