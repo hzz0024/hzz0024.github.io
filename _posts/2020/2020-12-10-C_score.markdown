@@ -40,6 +40,8 @@ Multiple methods of C-score estimation have proposed:
 
 <img src="https://hzz0024.github.io/images/C_score/journal.pgen.1007717.g003.PNG" alt="img" width="800"/>
 
+As shown in the example above, four example datasets are generated to represent either randomly drawn complements of genes with adapted mutations (A) or highly convergent datasets drawn from a smaller (B) or larger (C & D) pool of genes that potentially contribute to trait variation (g<sub>s</sub>), with differing numbers of loci contributing to adaptation. Scenario C is the most constrained, as it exhibits the same amount of overlap as B, but this overlap is drawn from a larger pool of genes so it is less likely to occur by chance.
 
+Both the Cchisq and Chyper indices show the highest scores for scenario C, because it has the smallest probability of occurring by chance if all genes had equal probabilities of contributing to adaptation. The index also identifies scenario C as most constrained in terms of the smallest proportion genes potentially contributing to adaptation. The  index also shows that this proportion is equal for scenarios B & D, despite differences in the probability of the observed repeatabilities occurring by chance (as per the C-scores).
 
 
