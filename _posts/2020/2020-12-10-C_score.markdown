@@ -91,7 +91,7 @@ library("gtools")
 # headname = "CL_OBOYS2_noinvers."
 # titlename = 'CL vs OBOYS2'
 hudson_fst <- function(headname, titlename){
-  jpeg(paste0('C_score/',headname,"sliding.zfst.hudson.jpg"), width = 16, height = 9, units = 'in', res = 300)
+  #jpeg(paste0('C_score/',headname,"sliding.zfst.hudson.jpg"), width = 16, height = 9, units = 'in', res = 300)
   par(mfrow=c(2,2))
   for(win in c(1000, 5000, 10000)){
     name = paste0(headname, win, "bp.", "s", win/5, ".csv")
@@ -197,12 +197,44 @@ Heatmap for p-value
 
 <img src="https://hzz0024.github.io/images/C_score/pvalue.png" alt="img" width="800"/>
 
-Here the highest C-score occurs at CS_NEH and CS_UMFS pair (C-score = 99), followed by CL_OBOYS2 and SL_OBOYS2 pair (C-score = 61). Although the C-score is used to refer diversity constraints in independent bouts of adaptation, the shared populations in contrasts should provide some information about the extent of repeatibility. 
+#### Results
 
-Previously I did not find the overlap outliers in Dermo and/or MSX tolerance/resistance group. This is also proved by C-score results here. As shown in the table/figure, the C-score estimation among CL_OBOYS2, CS_DEBY, and CS_NEH show little or no signal of repeatability, except the CS_NEH and CS_DEBY comparsion. Below is the ZFst outlier plots for these three groups.
+I copied the target contrast here as the reference:
+
+- Recent domestication        
+LA wild SL(low) --> LOLA selected ~4 generations at low salinity in Chesapeake, some Atlantic introgression         
+
+- Dermo and/or MSX tolerance/resistance selected for         
+LA wild CL(mod) --> OBOY dermo challenged and in Grand Isle LA, maintained at mod salinity CL        
+CS DelBay (hi) --> DEBY selected in ChesBay (18-23 psu, dermo, MSX) with some Gulf introgression        
+CS DelBay (hi, geographically closest to Long Is Sound) --> NEH (LIS source with ROD pressure) selected for both dermo and MSX        
+
+- ROD tolerance/resistance and fast growth in short summer        
+CS DelBay (hi, geographically closest to Long Is Sound) --> UMFS selected for ROD & fast growth in cold        
+
+- Selective line contrast        
+UMFS selected for dermo, MSX, ROD & fast growth in cold --> NEH (LIS source with ROD pressure) selected for both dermo and MSX        
+
+---
+
+Here the highest C-score occurs at CS_NEH and CS_UMFS pair (C-score = 99), followed by CL_OBOYS2 and SL_OBOYS2 pair (C-score = 61). Although C-score is used to refer diversity constraints in independent bouts of adaptation, the shared populations in contrasts at least should provide some information about the extent of repeatibility. 
+
+<img src="https://hzz0024.github.io/images/C_score/High_Cscore.png" alt="img" width="800"/>
+
+Previously I find little number of overlap outliers using three Dermo and/or MSX tolerance/resistance contrasts. This is also proved by C-score results. As shown in the table/figure, the C-score estimation among CL_OBOYS2, CS_DEBY, and CS_NEH show little or no signal of repeatability, except the CS_NEH and CS_DEBY comparsion (C-score = 4.60, p-value = 0.01). Below is the ZFst outlier plots (10Kb sliding winodw with step size of 2Kb) for these three groups.
 
 <img src="https://hzz0024.github.io/images/C_score/dermo.png" alt="img" width="800"/>
 
+Although most population contrasts in C-score calculation are not indepedent, I did observe positive C-score in some indepedent contrasts, such as CS_HC vs NEH_UMFS (C-score = 2.34, p-value = 0.127), CL_OBOYS2 vs SL_LOLA (C-score = 2.19, p-value = 0.127, 0.140), suggesting the exists of repeatability among these contrasts. 
 
+<img src="https://hzz0024.github.io/images/C_score/indep.png" alt="img" width="800"/>
 
+CS_HC is a ground-truth constrast within DelBay that only seperated by salinity, while populations in NEH_UMFS contrast has complex selection background. It would be hard to interpret the outcome here. Same for CL_OBOYS2 and SL_LOLA results, may need some discussion with the group.
 
+#### Additional work
+
+1) The accuracy of the indices developed here will critically depend on the correct identification of the genes contributing to adaptation. we might expect Cchisq to increase with increasing stringency of the outlier cutoffs, as this would be expected to reduce false positives (but also increase false negatives). A simple test may be worth for this test.
+
+2) In the "practical considerations in implementation" section, author mentioned that *"While studying adaptation across multiple pairs of populations can greatly increase the power to detect signatures of selection when all populations are adapting via the same loci, such methods are inherently unable to detect idiosyncratic patterns where different populations of a given species are adapting via different loci. By its very nature, it may be very difficult, if not impossible to detect local adaptation in traits with high GT- or GF-redundancy, as each pair of populations may be differentiated via a different set of loci. If local adaptation is much more readily detected when it arises repeatedly within a lineage, then it will be difficult to identify conclusive cases with low C-scores, causing an overestimation of the prevalence of highly repeated adaptation."* Given the complex backgroud of tested population, we need be cautious about low C-scores.
+
+3) So far I only test the overlapping window results, it might be helpful to perform another round test for non-overlapping window results.
