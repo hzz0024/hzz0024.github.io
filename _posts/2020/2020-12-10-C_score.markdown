@@ -197,5 +197,12 @@ Heatmap for p-value
 
 <img src="https://hzz0024.github.io/images/C_score/pvalue.png" alt="img" width="800"/>
 
+Here the highest C-score occurs at CS_NEH and CS_UMFS pair (C-score = 99), followed by CL_OBOYS2 and SL_OBOYS2 pair (C-score = 61). Although the C-score is used to refer diversity constraints in independent bouts of adaptation, the shared populations in contrasts should provide some information about the extent of repeatibility. 
+
+Previously I did not find the overlap outliers in Dermo and/or MSX tolerance/resistance group. This is also proved by C-score results here. As shown in the table/figure, the C-score estimation among CL_OBOYS2, CS_DEBY, and CS_NEH show little or no signal of repeatability, except the CS_NEH and CS_DEBY comparsion. Below is the ZFst outlier plots for these three groups.
+
+<img src="https://hzz0024.github.io/images/C_score/dermo.png" alt="img" width="800"/>
+
+
 
 
