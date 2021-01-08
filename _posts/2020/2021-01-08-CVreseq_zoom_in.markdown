@@ -19,3 +19,5 @@ The major difference between these two figures are part B. The first one draws s
 
 <img src="https://hzz0024.github.io/images/Zoom-in/Zoom_in_salinity_selection_V3_01082021.jpg" alt="img" width="800"/>
 
+<img src="https://hzz0024.github.io/images/C_score/indep.png" alt="img" width="800"/>
+
