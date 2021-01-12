@@ -15,7 +15,7 @@ Below are two draft figures to show the Genomic context and detailed manhattan p
 
 The major difference between these two figures are part B. The first one draws spline based on linear regression between x (position) and y (Fst or H-diff), whereas the second one based on mean measured within 1000 bp windows (either Fst or H-diff).
 
-<img src="https://hzz0024.github.io/images/Zoom-in/V2_01072021.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Zoom_in/V2_01072021.jpg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/Zoom-in/V3_01082021.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Zoom_in/V3_01082021.jpg" alt="img" width="800"/>
 
