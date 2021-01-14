@@ -24,8 +24,6 @@ Features:
 5) HGVS notation      
 6) Sequence Ontology standardized terms      
 
----
-
 ### Reference genome configuration for annotation 
 
 Unfortunately, it does not include the *Crassostrea virginica* genome. Therefore, I have to manually configure the *C. virginica* genome for my own usage. The detailed manual is [here](https://pcingola.github.io/SnpEff/SnpEff_manual.html#run). Below are the detailed steps for genome configuiration,
@@ -73,8 +71,6 @@ Note: the gtf and fa files must be named as genes.gtf and sequences.fa
 java -jar snpEff.jar build -gtf22 -v mygenome
 ```
 
----
-
 ### Vcf file prepariation
 
 - Shell script to convert the chromosome id
@@ -116,15 +112,11 @@ with open(fname, 'r') as f, open(outname, 'w') as w:
 vcftools --vcf ALL_maf0.05_pctind0.7_cv30_reformat.vcf --snps Fisher_fdr_0.05_24_snp.list --recode --recode-INFO-all --out 24
 ```
 
----
-
 ### Annotate the SNPs
 
 ```sh
 java -jar snpEff.jar eff mygenome 24.recode.vcf > 24_annotation.vcf
 ```
-
---- 
 
 ### Interpret the annotation results
 
@@ -186,7 +178,104 @@ Annovar is an efficient software tool to utilize update-to-date information to f
 3) Filter-based annotation: identify variants that are documented in specific databases, for example, whether a variant is reported in dbSNP, what is the allele frequency in the 1000 Genome Project, find intergenic variants with GERP++ score<2 or CADD>10, or many other annotations on specific mutations.       
 4) Other functionalities: Retrieve the nucleotide sequence in any user-specific genomic positions in batch, identify a candidate gene list for Mendelian diseases from exome data, and other utilities.   
 
+- software
 
+```sh
+ANNOVAR  
+│  annotate_variation.pl #main function perl script，functions include download the database, and provide three annotation options
+│  coding_change.pl #used to infer the changes in protein
+│  convert2annovar.pl #format conversion
+│  retrieve_seq_from_fasta.pl 
+│  table_annovar.pl #annotate script
+│  variants_reduction.pl #filter script
+├─example #example data
+└─humandb #human reference database
+```
 
+### Reference genome configuration for annotation 
 
+We need the target reference genome and the annotation file (gtf or gff3 format) for configuration. 
+
+To do that, we need a tool called gtfToGenePred
+
+```sh
+wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/gtfToGenePred
+
+# convert gtf to GenePred file
+gtfToGenePred -genePredExt ref_C_virginica-3.0_top_level.gtf cv30_refGene.txt
+
+# now I renamed the fasta file for Cv genome
+mv sequences.fa cv30.fasta #sequences.fa is the Cv genome from NCBI (including the mtDNA)
+
+# build Annovar annotation .fa file
+perl retrieve_seq_from_fasta.pl --format refGene --seqfile cv30.fasta cv30_refGene.txt --out cv30_refGeneMrna.fa
+NOTICE: Reading region file cv30_refGene.txt ... Done with 67854 regions from 10 chromosomes
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished reading 11 sequences from cv30.fasta
+NOTICE: Finished writting FASTA for 67854 genomic regions to cv30_refGeneMrna.fa
+WARNING: 323 gene regions do not have complete ORF (for example, rna21952NC_035782.1:75306911, rna39851NC_035785.1:592075, rna13971NC_035782.1:4701034, rna20922NC_035782.1:66982090, rna55635NC_035787.1:61676868)
+```
+
+Now we have two files ready for annotation
+
+```sh
+ANNOVAR  
+│  cv30_refGene.fa
+│  cv30_refGene.txt
+```
+
+### Vcf file formatting
+
+```sh
+perl convert2annovar.pl -format vcf4 95.outlier.SNPs.inversion.recode.vcf > 95.outlier.SNPs.inversion.avinput
+NOTICE: Finished reading 2365 lines from VCF file
+NOTICE: A total of 2269 locus in VCF file passed QC threshold, representing 2269 SNPs (1175 transitions and 1094 transversions) and 0 indels/substitutions
+NOTICE: Finished writing 40 SNP genotypes (19 transitions and 21 transversions) and 0 indels/substitutions for 1 sample
+```
+
+### Annotate the SNPs
+
+```sh
+perl annotate_variation.pl -geneanno -dbtype refGene -out 95.outlier.SNPs.inversion -build cv30 95.outlier.SNPs.inversion.avinput pepperdb/
+# -geneanno: gene based annotation
+# -dbtype refGene:  based on refGene database 
+# -out zunla: extension file name
+
+perl annotate_variation.pl -geneanno -dbtype refGene -out 95.outlier.SNPs.inversion -build cv30 95.outlier.SNPs.inversion.avinput ./
+NOTICE: Output files are written to 95.outlier.SNPs.inversion.variant_function, 95.outlier.SNPs.inversion.exonic_variant_function
+NOTICE: Reading gene annotation from ./cv30_refGene.txt ... Done with 67854 transcripts (including 7653 without coding sequence annotation) for 39493 unique genes
+NOTICE: Processing next batch with 40 unique variants in 40 input lines
+NOTICE: Reading FASTA sequences from ./cv30_refGeneMrna.fa ... Done with 1 sequences
+WARNING: A total of 323 sequences will be ignored due to lack of correct ORF annotation
+```
+
+### Interpret the annotation results
+
+Two output files are generated: 95.outlier.SNPs.inversion.variant_function and 95.outlier.SNPs.inversion.exonic_variant_function
+
+.variant_function file: the first and second column annotate variant effects on gene structure and the genes that are affected, yet the other columns are reproduced from input file
+
+```sh
+less 95.outlier.SNPs.inversion.variant_function
+intronic        gene10030       NC_035782.1     33707167        33707167        T       A       het     14647.8 16
+intergenic      gene10032(dist=19243),gene10033(dist=28933)     NC_035782.1     33756008        33756008        A       T       het     15369.8 20
+intergenic      gene10032(dist=19313),gene10033(dist=28863)     NC_035782.1     33756078        33756078        T       G       het     15505.8 13
+intergenic      gene10033(dist=20000),gene10035(dist=174578)    NC_035782.1     33870358        33870358        G       A       het     16895.7 19
+intergenic      gene10033(dist=27418),gene10035(dist=167160)    NC_035782.1     33877776        33877776        G       A       het     13750.5 24
+```
+
+.exonic_variant_function file: the first, second and third column annotate variant line number in input file, the variant effects on coding sequences and the gene/transcript being affected, yet the other columns are reproduced from input file.
+
+```sh
+less 95.outlier.SNPs.inversion.exonic_variant_function
+line20  nonsynonymous SNV       gene10035:rna16990:exon70:c.A11072T:p.N3691I,   NC_035782.1     34469267        34469267        A       T       het     14527.4 11
+```
 
