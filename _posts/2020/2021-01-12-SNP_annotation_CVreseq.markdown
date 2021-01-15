@@ -259,7 +259,7 @@ Great! This is what I want. Now proceed with the annotation step.
 ### Annotate the SNPs
 
 ```sh
-perl annotate_variation.pl -geneanno -dbtype refGene -out 95.outlier.SNPs.inversion -build cv30 95.outlier.SNPs.inversion.avinput pepperdb/
+perl annotate_variation.pl -geneanno -dbtype refGene -out 95.outlier.SNPs.inversion -build cv30 95.outlier.SNPs.inversion.avinput ./
 # -geneanno: gene based annotation
 # -dbtype refGene:  based on refGene database 
 # -out zunla: extension file name
@@ -278,6 +278,8 @@ Two output files are generated: 95.outlier.SNPs.inversion.variant_function and 9
 
 .variant_function file: the first and second column annotate *variant effects on gene structure and the genes that are affected*, yet the other columns are reproduced from input file
 
+The first column tells whether the variant hit exons or hit intergenic regions, or hit introns, or hit a non-coding RNA genes. If the variant is exonic/intronic/ncRNA, the second column gives the gene name (if multiple genes are hit, comma will be added between gene names); if not, the second column will give the two neighboring genes and the distance to these neighboring genes. [https://doc-openbio.readthedocs.io/projects/annovar/en/latest/user-guide/gene/](https://doc-openbio.readthedocs.io/projects/annovar/en/latest/user-guide/gene/). 
+
 ```sh
 less 95.outlier.SNPs.inversion.variant_function
 intronic        gene10030       NC_035782.1     33707167        33707167        T       A       het     14647.8 16
@@ -287,7 +289,23 @@ intergenic      gene10033(dist=20000),gene10035(dist=174578)    NC_035782.1     
 intergenic      gene10033(dist=27418),gene10035(dist=167160)    NC_035782.1     33877776        33877776        G       A       het     13750.5 24
 ```
 
-.exonic_variant_function file: the first, second and third column annotate variant line number in input file, the *variant effects on coding sequences and the gene/transcript being affected*, yet the other columns are reproduced from input file.
+.exonic_variant_function file contains the amino acid changes as a result of the exonic variant. Note that only exonic variants are annotated in this file, so the first column gives the line # in the original input file. The second field tells the functional consequences of the variant (possible values in this fields include: nonsynonymous SNV, synonymous SNV, frameshift insertion, frameshift deletion, nonframeshift insertion, nonframeshift deletion, frameshift block substitution, nonframshift block substitution). The third column contains the gene name, the transcript identifier and the sequence change in the corresponding transcript.
+
+More detailed explanation of these exonic_variant_functoin annotations are given below
+
+| Annotation                       | Precedence | Explanation                                                                                                                                                                                                                                                                                         | Sequence Ontology                  |   |
+|----------------------------------|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|---|
+| frameshift insertion             | 1          | an insertion of one or more nucleotides that cause frameshift changes in protein coding sequence                                                                                                                                                                                                    | frameshift_elongation (SO:0001909) |   |
+| frameshift deletion              | 2          | a deletion of one or more nucleotides that cause frameshift changes in protein coding sequence                                                                                                                                                                                                      | frameshift_truncation (SO:0001910) |   |
+| frameshift block substitution    | 3          | a block substitution of one or more nucleotides that cause frameshift changes in protein coding sequence                                                                                                                                                                                            | frameshift_variant (SO:0001589)    |   |
+| stopgain                         | 4          | a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate creation of stop codon at the variant site. For frameshift mutations, the creation of stop codon downstream of the variant will not be counted as "stopgain"! | stop_gained (SO:0001587)           |   |
+| stoploss                         | 5          | a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate elimination of stop codon at the variant site                                                                                                                 | stop_lost (SO:0001578)             |   |
+| nonframeshift insertion          | 6          | an insertion of 3 or multiples of 3 nucleotides that do not cause frameshift changes in protein coding sequence                                                                                                                                                                                     | inframe_insertion (SO:0001821)     |   |
+| nonframeshift deletion           | 7          | a deletion of 3 or mutliples of 3 nucleotides that do not cause frameshift changes in protein coding sequence                                                                                                                                                                                       | inframe_deletion (SO:0001822)      |   |
+| nonframeshift block substitution | 8          | a block substitution of one or more nucleotides that do not cause frameshift changes in protein coding sequence                                                                                                                                                                                     | inframe_variant (SO:0001650)       |   |
+| nonsynonymous SNV                | 9          | a single nucleotide change that cause an amino acid change                                                                                                                                                                                                                                          | missense_variant (SO:0001583)      |   |
+| synonymous SNV                   | 10         | a single nucleotide change that does not cause an amino acid change                                                                                                                                                                                                                                 | synonymous_variant (SO:0001819)    |   |
+| unknown                          | 11         | unknown function (due to various errors in the gene structure definition in the database file)                                                                                                                                                                                                      | sequence_variant (SO:0001060)      |   |
 
 ```sh
 less 95.outlier.SNPs.inversion.exonic_variant_function
