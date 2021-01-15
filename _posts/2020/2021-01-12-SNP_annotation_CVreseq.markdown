@@ -335,4 +335,3 @@ line671 nonsynonymous SNV gene10035:rna16990:exon14:c.A1952T:p.N651I, NC_035782.
 1) -csvout  output the csv file (comma-delimited file).      
 2) -operation followed by some arguments: g = gene-based; gx = gene-based with cross-reference (need provide -xref argument); r = region-based; f = filter-based.      
 3) -withfreq  This is a very important argument. with this option the output file should contain all loci from the input file   
-4) 
