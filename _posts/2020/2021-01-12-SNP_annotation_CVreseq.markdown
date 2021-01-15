@@ -221,14 +221,14 @@ NOTICE: Finished reading 11 sequences from cv30.fasta
 NOTICE: Finished reading 11 sequences from cv30.fasta
 NOTICE: Finished reading 11 sequences from cv30.fasta
 NOTICE: Finished writting FASTA for 67854 genomic regions to cv30_refGeneMrna.fa
-WARNING: 323 gene regions do not have complete ORF (for example, rna21952NC_035782.1:75306911, rna39851NC_035785.1:592075, rna13971NC_035782.1:4701034, rna20922NC_035782.1:66982090, rna55635NC_035787.1:61676868)
+WARNING: 323 gene regions do not have complete ORF (for example, rna27094NC_035783.1:42604388, rna771NC_035780.1:8169903, rna20375NC_035782.1:62198604, rna1433NC_035780.1:13287469, rna22265NC_035783.1:1908843)
 ```
 
 Now we have two files ready for annotation
 
 ```sh
 ANNOVAR  
-│  cv30_refGene.fa
+│  cv30_refGeneMrna.fa
 │  cv30_refGene.txt
 ```
 
@@ -240,6 +240,21 @@ NOTICE: Finished reading 2365 lines from VCF file
 NOTICE: A total of 2269 locus in VCF file passed QC threshold, representing 2269 SNPs (1175 transitions and 1094 transversions) and 0 indels/substitutions
 NOTICE: Finished writing 40 SNP genotypes (19 transitions and 21 transversions) and 0 indels/substitutions for 1 sample
 ```
+
+Code above can only produce 40 SNPs for downstream annotation. Why?
+
+From the Annovar site [https://doc-openbio.readthedocs.io/projects/annovar/en/latest/user-guide/input/](https://doc-openbio.readthedocs.io/projects/annovar/en/latest/user-guide/input/), the author mentioned that "By default, only the first sample in VCF file will be written to output file. The input VCF file contains seven loci, but many of them do not have non-reference genotypes for the first sample, and that is why the output contains only 3 variants." It seems convert2annovar.pl can only format the loci with non-reference genotypes. 
+
+However, with the argument of *-withfreq*, this script could output all SNPs in the original input Vcf file.
+
+```sh
+perl convert2annovar.pl -format vcf4 95.outlier.SNPs.inversion.recode.vcf -outfile 95.outlier.SNPs.inversion.avinput -allsample -withfreq
+NOTICE: Finished reading 2365 lines from VCF file
+NOTICE: A total of 2269 locus in VCF file passed QC threshold, representing 2269 SNPs (1175 transitions and 1094 transversions) and 0 indels/substitutions
+NOTICE: Finished writing allele frequencies based on 2269 SNP genotypes (1175 transitions and 1094 transversions) and 0 indels/substitutions for 1 samples
+```
+
+Great! This is what I want. Now proceed with the annotation step.
 
 ### Annotate the SNPs
 
@@ -261,7 +276,7 @@ WARNING: A total of 323 sequences will be ignored due to lack of correct ORF ann
 
 Two output files are generated: 95.outlier.SNPs.inversion.variant_function and 95.outlier.SNPs.inversion.exonic_variant_function
 
-.variant_function file: the first and second column annotate variant effects on gene structure and the genes that are affected, yet the other columns are reproduced from input file
+.variant_function file: the first and second column annotate *variant effects on gene structure and the genes that are affected*, yet the other columns are reproduced from input file
 
 ```sh
 less 95.outlier.SNPs.inversion.variant_function
@@ -272,10 +287,16 @@ intergenic      gene10033(dist=20000),gene10035(dist=174578)    NC_035782.1     
 intergenic      gene10033(dist=27418),gene10035(dist=167160)    NC_035782.1     33877776        33877776        G       A       het     13750.5 24
 ```
 
-.exonic_variant_function file: the first, second and third column annotate variant line number in input file, the variant effects on coding sequences and the gene/transcript being affected, yet the other columns are reproduced from input file.
+.exonic_variant_function file: the first, second and third column annotate variant line number in input file, the *variant effects on coding sequences and the gene/transcript being affected*, yet the other columns are reproduced from input file.
 
 ```sh
 less 95.outlier.SNPs.inversion.exonic_variant_function
 line20  nonsynonymous SNV       gene10035:rna16990:exon70:c.A11072T:p.N3691I,   NC_035782.1     34469267        34469267        A       T       het     14527.4 11
 ```
 
+- Useful options:
+
+1) -csvout  output the csv file (comma-delimited file).      
+2) -operation followed by some arguments: g = gene-based; gx = gene-based with cross-reference (need provide -xref argument); r = region-based; f = filter-based.      
+3) -withfreq  This is a very important argument. with this option the output file should contain all loci from the input file   
+4) 
