@@ -280,13 +280,27 @@ Two output files are generated: 95.outlier.SNPs.inversion.variant_function and 9
 
 The first column tells whether the variant hit exons or hit intergenic regions, or hit introns, or hit a non-coding RNA genes. If the variant is exonic/intronic/ncRNA, the second column gives the gene name (if multiple genes are hit, comma will be added between gene names); if not, the second column will give the two neighboring genes and the distance to these neighboring genes. [https://doc-openbio.readthedocs.io/projects/annovar/en/latest/user-guide/gene/](https://doc-openbio.readthedocs.io/projects/annovar/en/latest/user-guide/gene/). 
 
+More detailed explanation of variant annotations are given below,
+
+| Value      | Default precedence | Explanation                                                                                                           | Sequence Ontology                          |
+|------------|--------------------|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| exonic     | 1                  | variant overlaps a coding                                                                                             | exon_variant (SO:0001791)                  |
+| splicing   | 1                  | variant is within 2-bp of a splicing junction (use -splicing_threshold to change this)                                | splicing_variant (SO:0001568)              |
+| ncRNA      | 2                  | variant overlaps a transcript without coding annotation in the gene definition (see Notes below for more explanation) | non_coding_transcript_variant (SO:0001619) |
+| UTR5       | 3                  | variant overlaps a 5' untranslated region                                                                             | 5_prime_UTR_variant (SO:0001623)           |
+| UTR3       | 3                  | variant overlaps a 3' untranslated region                                                                             | 3_prime_UTR_variant (SO:0001624)           |
+| intronic   | 4                  | variant overlaps an intron                                                                                            | intron_variant (SO:0001627)                |
+| upstream   | 5                  | variant overlaps 1-kb region upstream of transcription start site                                                     | upstream_gene_variant (SO:0001631)         |
+| downstream | 5                  | variant overlaps 1-kb region downtream of transcription end site (use -neargene to change this)                       | downstream_gene_variant (SO:0001632)       |
+| intergenic | 6                  | variant is in intergenic region                                                                                       | intergenic_variant (SO:0001628)            |
+
 ```sh
-less 95.outlier.SNPs.inversion.variant_function
-intronic        gene10030       NC_035782.1     33707167        33707167        T       A       het     14647.8 16
-intergenic      gene10032(dist=19243),gene10033(dist=28933)     NC_035782.1     33756008        33756008        A       T       het     15369.8 20
-intergenic      gene10032(dist=19313),gene10033(dist=28863)     NC_035782.1     33756078        33756078        T       G       het     15505.8 13
-intergenic      gene10033(dist=20000),gene10035(dist=174578)    NC_035782.1     33870358        33870358        G       A       het     16895.7 19
-intergenic      gene10033(dist=27418),gene10035(dist=167160)    NC_035782.1     33877776        33877776        G       A       het     13750.5 24
+head -n 5  95.outlier.SNPs.inversion.variant_function
+intronic  gene10029 NC_035782.1 33693099  33693099  A T 0 16827.2 22
+intronic  gene10029 NC_035782.1 33693296  33693296  A G 0 11462.4 21
+intronic  gene10029 NC_035782.1 33693459  33693459  T G 0 17380.4 31
+intronic  gene10029 NC_035782.1 33693556  33693556  A G 0 18352.1 24
+intronic  gene10029 NC_035782.1 33693572  33693572  C T 0 19123.6 20
 ```
 
 .exonic_variant_function file contains the amino acid changes as a result of the exonic variant. Note that only exonic variants are annotated in this file, so the first column gives the line # in the original input file. The second field tells the functional consequences of the variant (possible values in this fields include: nonsynonymous SNV, synonymous SNV, frameshift insertion, frameshift deletion, nonframeshift insertion, nonframeshift deletion, frameshift block substitution, nonframshift block substitution). The third column contains the gene name, the transcript identifier and the sequence change in the corresponding transcript.
@@ -308,8 +322,12 @@ More detailed explanation of these exonic_variant_functoin annotations are given
 | unknown                          | 11         | unknown function (due to various errors in the gene structure definition in the database file)                                                                                                                                                                                                      | sequence_variant (SO:0001060)      |
 
 ```sh
-less 95.outlier.SNPs.inversion.exonic_variant_function
-line20  nonsynonymous SNV       gene10035:rna16990:exon70:c.A11072T:p.N3691I,   NC_035782.1     34469267        34469267        A       T       het     14527.4 11
+head -n 5 95.outlier.SNPs.inversion.exonic_variant_function
+line60  nonsynonymous SNV gene10032:rna16980:exon3:c.A434C:p.E145A, NC_035782.1 33735790  33735790  A C 0 20275.3 11
+line397 nonsynonymous SNV gene10035:rna16990:exon2:c.A88T:p.I30F, NC_035782.1 34055840  34055840  A T 0 13493.1 23
+line415 nonsynonymous SNV gene10035:rna16990:exon3:c.C242T:p.A81V,  NC_035782.1 34075009  34075009  C T 0 15876 20
+line511 nonsynonymous SNV gene10035:rna16990:exon6:c.G677A:p.G226D, NC_035782.1 34109058  34109058  G A 0 20133.2 14
+line671 nonsynonymous SNV gene10035:rna16990:exon14:c.A1952T:p.N651I, NC_035782.1 34174985  34174985  A T 0 17720 23
 ```
 
 - Useful options:
