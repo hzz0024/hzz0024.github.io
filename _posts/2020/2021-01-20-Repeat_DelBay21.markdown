@@ -13,7 +13,88 @@ categories:
 
 The dataset in this post comes from the repeated adult challenge experiment in summer, 2020. I am starting to trim the raw data and conduct read mapping using the same scripts.
 
- 
+Before data QC, we need to create two files to provide the detailed information of sequenced samples.
+
+sample_list.txt: sample prefix part before *_1.fastq.gz* or *_2.fastq.gz*
+sample_table.txt: a tab deliminated table with the following six columns, strictly in this order:
+
+  - `prefix` the prefix of raw fastq file names
+
+  - `lane_number` lane number; each sequencing lane or batch should be
+    assigned a unique identifier
+
+  - `seq_id` sequence ID; this variable is only relevant when different
+    libraries were prepared out of the same sample and were run in the
+    same lane (e.g. if you wanted to include a replicate). In this case,
+    seq\_id should be used to distinguish these separate libraries. If
+    you only have a single library prepared from each of your samples
+    (even if you sequence that same library across multiple lanes), you
+    can just put 1 for all samples in this column.
+
+  - `sample_id` sample ID; a unique identifier for each individual
+    sequenced
+
+  - `population` population name; the population or other relevant
+    grouping variable that the individual belongs to
+
+  - `data_type` data type; there can only be two possible entries: `pe`
+    (for paired-end data) or `se` (for single end data). We need this in
+    the table because for some of our processing steps, the commands are
+    slightly different for paired-end and single-end data.
+
+These two files are located at 
+`HG_Code_Bay/sample_list/fastq_list.txt`
+`HG_Code_Bay/sample_list/fastq_table.txt`
+
+1) First is to look at the fastqc reports:
+
+```sh
+#!/bin/sh
+FASTQC=/programs/FastQC-0.11.8/fastqc
+BASEDIR=/workdir/hz269/DelBay20
+SAMPLELIST=$BASEDIR/sample_lists/fastq_list.txt
+RAWFASTQSUFFIX1=_1.fq.gz # Suffix to raw fastq files. Use forward reads with paired-end data.
+
+for SAMPLE in `cat $SAMPLELIST`; do
+
+  $FASTQC $BASEDIR'/raw_fastq/'$SAMPLE$RAWFASTQSUFFIX1 -o $BASEDIR'/fastqc/'
+done
+```
+
+2) Adapter clipping
+
+Trimmomatic has lots of different filtering modules. Here I clip sequence that match to our adapter sequence (TruSeq3-PE-2.fa) and remove reads that end up being < 80bp after clipping.
+
+```sh
+cat 2_trim.sh
+BASEDIR=/workdir/hz269/DelBay20
+TRIMMOMATIC=/programs/trimmomatic/trimmomatic-0.39.jar
+SAMPLELIST=$BASEDIR/sample_lists/fastq_list.txt # Path to a list of prefixes of the raw fastq files. It should be a subset of the the 1st column of the sample table.
+SAMPLETABLE=$BASEDIR/sample_lists/fastq_table.txt # Path to a sample table where the 1st column is the prefix of the raw fastq files. The 4th column is the sample ID, the 2nd column is the lane number, and the 3rd column is sequence ID. The combination of these three columns have to be unique. The 6th column should be data type, which is either pe or se.
+RAWFASTQDIR=$BASEDIR/raw_fastq/ # Path to raw fastq files.
+RAWFASTQSUFFIX1=_1.fq.gz # Suffix to raw fastq files. Use forward reads with paired-end data.
+RAWFASTQSUFFIX2=_2.fq.gz # Suffix to raw fastq files. Use reverse reads with paired-end data.
+ADAPTERS=$BASEDIR/reference/TruSeq3-PE-2.fa # Path to a list of adapter/index sequences, copied from /programs/trimmomatic/adapters/TruSeq3-PE-2.fa.
+## Loop over each sample
+for SAMPLEFILE in `cat $SAMPLELIST`; do
+
+    ## Extract relevant values from a table of sample, sequencing, and lane ID (here in columns 4, 3, 2, respectively) for each sequenced library
+    SAMPLE_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 4`
+    POP_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 5`
+    SEQ_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 3`
+    LANE_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 2`
+    SAMPLE_UNIQ_ID=$SAMPLE_ID'_'$POP_ID'_'$SEQ_ID'_'$LANE_ID  # When a sample has been sequenced in multiple lanes, we need to be able to identify the files from each run uniquely
+
+    ## Extract data type from the sample table
+    DATATYPE=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 6`
+
+    ## The input and output path and file prefix
+    RAWFASTQ_ID=$RAWFASTQDIR$SAMPLEFILE
+    SAMPLEADAPT=$BASEDIR'/adapter_clipped/'$SAMPLE_UNIQ_ID
+
+    ## Adapter clip the reads with Trimmomatic
+    # The options for ILLUMINACLIP are: ILLUMINACLIP:<fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip threshold>:<simple clip threshold>:<minAdapterLength>:<keepBothReads>
+```
 
 
 
