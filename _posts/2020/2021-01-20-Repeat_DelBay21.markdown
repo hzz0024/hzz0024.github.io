@@ -42,9 +42,9 @@ sample_table.txt: a tab deliminated table with the following six columns, strict
     the table because for some of our processing steps, the commands are
     slightly different for paired-end and single-end data.
 
-These two files are located at 
-`HG_Code_Bay/sample_list/fastq_list.txt`
-`HG_Code_Bay/sample_list/fastq_table.txt`
+These two files are located at            
+[HG_Code_Bay/sample_list/fastq_list.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/sample_list/fastq_list.txt)        
+[HG_Code_Bay/sample_list/fastq_table.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/sample_list/fastq_table.txt)         
 
 1) First is to look at the fastqc reports:
 
