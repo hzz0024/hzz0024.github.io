@@ -1,7 +1,7 @@
 ---
 comments: true
 title: CVreseq outlier annotation using snpEff and Annovar
-date: '2021-01-12 12:00'
+date: '2021-01-21 12:00'
 tags:
   - CVreseq
   - ouliter
@@ -47,6 +47,7 @@ wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/gtfToGenePred
 gtfToGenePred -genePredExt ref_C_virginica-3.0_top_level.gtf cv30_refGene.txt
 
 # now I renamed the fasta file for Cv genome
+mv sequences.fa cv30.fasta #sequences.fa is the Cv genome from NCBI (including the mtDNA)
 mv sequences.fa cv30.fasta #sequences.fa is the Cv genome from NCBI (including the mtDNA)
 
 # build Annovar annotation .fa file
@@ -201,6 +202,38 @@ line671 nonsynonymous SNV gene10035:rna16990:exon14:c.A1952T:p.N651I, NC_035782.
 
 <img src="https://hzz0024.github.io/images/CVreseq_annovar/CS_HC-HCVA_CLP.outliers.exonic_variant_function.jpg" alt="img" width="800"/>
 
+### A comparison between SNP outlier and its corresponding reference datasets
+
+`Total inversion segments:` 1573 (based on CNV and big inversions)
+
+- Brief summary for number of SNPs
+
+|                                                          | Number of SNPs |
+|----------------------------------------------------------|----------------|
+| Genome-wide SNP within inversions                        | 1125493        |
+| Genome-wide SNP outside inversions                       | 4640654        |
+| SNPs in chromosome 2 and outside the inversions          | 668282         |
+
+- Summery of exonic SNP annotation
+
+| Number of SNPs                                                  | Synonymous | Nonsynonymous | Stopgain | Stoploss | Unknown | Total  |
+|-----------------------------------------------------------------|------------|---------------|----------|----------|---------|--------|
+| Exonic SNP outliers within inversions                           | 18         | 14            | 0        | 0        | 0       | 32     |
+| Exonic SNP outliers outside inversions                          | 203        | 159           | 0        | 0        | 3       | 365    |
+| Exonic SNP outliers in wild Atlantic   contrasts (no inversion) | 23         | 24            | 0        | 0        | 0       | 47     |
+| Exonic SNP outliers in salinity contrast   (no inversion)       | 186        | 30            | 0        | 0        | 0       | 216    |
+| Exonic genome-wide SNPs within inversions                       | 84411      | 39763         | 282      | 34       | 3058    | 127548 |
+| Exonic genome-wide SNPs outside   inversions                    | 380535     | 172795        | 1276     | 157      | 18830   | 573593 |
+| Exonic SNPs in chromosome 2 and outside   inversions            | 54505      | 23054         | 155      | 4        | 5312    | 83030  |
+
+
+- Exonic SNP outliers within inversions vs genome-wide SNPs within inversions
+
+- Exonic SNP outliers outside inversions vs genome-wide SNPs outside inversions
+
+- Exonic SNP outliers in wild Atlantic contrasts (no inversion) vs genome-wide SNPs outside inversions
+
+- Exonic SNP outliers in salinity contrast (no inversion) vs genome-wide SNPs outside inversions
 
 
 
