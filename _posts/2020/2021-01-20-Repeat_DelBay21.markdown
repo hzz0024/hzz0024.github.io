@@ -46,6 +46,8 @@ These two files are located at
 [HG_Code_Bay/sample_list/fastq_list.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/sample_list/fastq_list.txt)        
 [HG_Code_Bay/sample_list/fastq_table.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/sample_list/fastq_table.txt)  
 
+--- 
+
 ### Index-hopping issue
 
 Index hopping occurs when dual indexes contain unmatched or unexpected pairs, and leading a small amount of contamination reads. This is a link to Youtube video explaining this phenomenon [https://www.youtube.com/watch?v=DR_8KbGGIhA&ab_channel=Illumina](https://www.youtube.com/watch?v=DR_8KbGGIhA&ab_channel=Illumina)
@@ -62,6 +64,8 @@ zgrep "@" Cv5785_25_CKDL210000056-1a-AK11419-AK17135_HNMTKDSXY_L4_1.fq.gz | grep
 ```
 
 Code above calculate the number of reads with perfect match (16855590 of 17040229, 98.92%) after using unique dual indexes, and 184639 of 17040229 (1.08%) reads with 1 or 2 bp mismatch (corresponding the 2 bp error wiggle room used during demultiplexing). 
+
+--- 
 
 ### QC and trimming
 
