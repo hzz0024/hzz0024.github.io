@@ -243,9 +243,25 @@ line671 nonsynonymous SNV gene10035:rna16990:exon14:c.A1952T:p.N651I, NC_035782.
 
 <img src="https://hzz0024.github.io/images/CVreseq_annovar/CS_HC-HCVA_CLP_ratio.jpg" alt="img" width="800"/>
 
+- Test for significance
 
+`Exonic genome-wide SNPs outside inversions vs outlier SNPs outside inversions`
 
+|                                           | Synonymous | Nonsynonymous | Marginal Row Totals |
+|-------------------------------------------|------------|---------------|---------------------|
+| Exonic outlier SNPs outside   inversions  | 203        | 159           | 362                 |
+| Expected number based genome-wide data    | 249        | 113           | 362                 |
+| Marginal Column Totals                    | 452        | 272           | 724                 |
 
+The chi-square statistic is 12.4608. The p-value is .000416. Significant at p < .05.
 
+`Exonic outlier SNPs in salinity contrast (no inversion) vs genome-wide SNPs outside inversions`
 
+|                                                         | Synonymous | Nonsynonymous | Marginal Row Totals |
+|---------------------------------------------------------|------------|---------------|---------------------|
+| Exonic outlier SNPs in salinity contrast (no inversion) | 186        | 30            | 216                 |
+| Expected number based genome-wide data                  | 149        | 67            | 216                 |
+| Marginal Column Totals                                  | 335        | 97            | 432                 |
+
+The chi-square statistic is 18.2. The p-value is .00002. Significant at p < .05
 
