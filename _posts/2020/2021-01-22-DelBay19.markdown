@@ -48,25 +48,6 @@ These two files are located at
 
 --- 
 
-### Index-hopping issue
-
-Index hopping occurs when dual indexes contain unmatched or unexpected pairs, and leading a small amount of contamination reads. This is a link to Youtube video explaining this phenomenon [https://www.youtube.com/watch?v=DR_8KbGGIhA&ab_channel=Illumina](https://www.youtube.com/watch?v=DR_8KbGGIhA&ab_channel=Illumina)
-
-Here I checked the potential of index hopping in the sequencing data. 
-
-```sh
-zgrep "@" Cv5785_25_CKDL210000056-1a-AK11419-AK17135_HNMTKDSXY_L4_1.fq.gz | wc -l
-17040229
-zgrep "AATGGAGA+TGCACATA" Cv5785_25_CKDL210000056-1a-AK11419-AK17135_HNMTKDSXY_L4_1.fq.gz | wc -l
-16855590
-zgrep "@" Cv5785_25_CKDL210000056-1a-AK11419-AK17135_HNMTKDSXY_L4_1.fq.gz | grep -v "AATGGAGA+TGCACATA" | wc -l
-184639
-```
-
-Code above calculate the number of reads with perfect match (16855590 of 17040229, 98.92%) after using unique dual indexes, and 184639 of 17040229 (1.08%) reads with 1 or 2 bp mismatch (corresponding the 2 bp error wiggle room used during demultiplexing). 
-
---- 
-
 ### QC and trimming
 
 1) First is to look at the fastqc reports:
@@ -146,24 +127,23 @@ echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
 nohup sh 2_trim.sh > 2_trim.log &
 ```
 
-Runtime: 0:31:0 (hh:mm:ss) on sample Cv5785_25, with 34 M reads
-
-
 3) Build reference index files
 
 ```sh
 cat 3_build_ref.sh
 
+BASEDIR=/workdir/hz269/DelBay20
+PICARD=/programs/picard-tools-2.19.2/picard.jar
 SAMTOOLS=/programs/samtools-1.11/bin/samtools
 BOWTIEBUILD=/programs/bowtie2-2.3.5.1-linux-x86_64/bowtie2-build
-REFERENCE=$BASEDIR/reference/mme_physalia_testdata_chr24.fa   # This is a fasta file with the reference genome sequence we will map to 
+REFERENCE=$BASEDIR/reference/CV30_masked.fasta   # This is a fasta file with the reference genome sequence we will map to
 REFBASENAME="${REFERENCE%.*}"
 $SAMTOOLS faidx $REFERENCE
 
 java -jar $PICARD CreateSequenceDictionary R=$REFERENCE O=$REFBASENAME'.dict'
-
-$BOWTIEBUILD $REFERENCE $REFBASENAME
 ```
+
+4) Map to the reference, sort, and quality filter
 
 
 

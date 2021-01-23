@@ -165,6 +165,8 @@ $SAMTOOLS faidx $REFERENCE
 java -jar $PICARD CreateSequenceDictionary R=$REFERENCE O=$REFBASENAME'.dict'
 ```
 
+4) Map to the reference, sort, and quality filter
+
 
 
 
