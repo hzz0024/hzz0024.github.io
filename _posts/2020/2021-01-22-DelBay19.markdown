@@ -43,19 +43,19 @@ sample_table.txt: a tab deliminated table with the following six columns, strict
     slightly different for paired-end and single-end data.
 
 These files are located at            
-[pool1](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_1.txt)
-[pool2](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_2.txt) 
-[pool3](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_3.txt) 
-[pool4](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_4.txt) 
-[pool5](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_5.txt)         
-[HG_Code_Bay/DelBay19/sample_list/fastq_table.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_table.txt)
+[pool1](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_1.txt)            
+[pool2](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_2.txt)             
+[pool3](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_3.txt)             
+[pool4](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_4.txt)             
+[pool5](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_list_5.txt)                     
+[HG_Code_Bay/DelBay19/sample_list/fastq_table.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay19/sample_lists/fastq_table.txt)            
 
 ---
 
 Steps below share the same script as DelBay20. I just put the locations here,
 
-`QC and trimming` [https://github.com/hzz0024/HG_Code_Bay/tree/master/DelBay19/script/2_trim](https://github.com/hzz0024/HG_Code_Bay/tree/master/DelBay19/script/2_trim)
-`Mapping` [https://github.com/hzz0024/HG_Code_Bay/tree/master/DelBay19/script/4_map](https://github.com/hzz0024/HG_Code_Bay/tree/master/DelBay19/script/4_map)
+`QC and trimming` [https://github.com/hzz0024/HG_Code_Bay/tree/master/DelBay19/script/2_trim](https://github.com/hzz0024/HG_Code_Bay/tree/master/DelBay19/script/2_trim)            
+`Mapping` [https://github.com/hzz0024/HG_Code_Bay/tree/master/DelBay19/script/4_map](https://github.com/hzz0024/HG_Code_Bay/tree/master/DelBay19/script/4_map)            
 
 
 
