@@ -1,6 +1,6 @@
 ---
 comments: true
-title: Repeat challenge sequencing
+title: Repeat challenge sequencing analyses (DelBay20)
 date: '2021-01-20 12:00'
 tags:
   - DelBay
@@ -43,8 +43,8 @@ sample_table.txt: a tab deliminated table with the following six columns, strict
     slightly different for paired-end and single-end data.
 
 These two files are located at            
-[HG_Code_Bay/DelBay20/sample_list/fastq_list.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay20/sample_list/fastq_list.txt)        
-[HG_Code_Bay/DelBay20/sample_list/fastq_table.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay20/sample_list/fastq_table.txt) 
+[HG_Code_Bay/DelBay20/sample_list/fastq_list.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay20/sample_list/fastq_list.txt)                    
+[HG_Code_Bay/DelBay20/sample_list/fastq_table.txt](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay20/sample_list/fastq_table.txt)             
 
 Besides, due to the long sample list, for each of the QC and trimming steps I created subsample lists (19) to reduce the running time. Therefore I have to write 19 scripts for each fo the step run. Thanks for for loop and echo functions, I made some script for that purpose. They are located at [HG_Code_Bay/DelBay20/script](https://github.com/hzz0024/HG_Code_Bay/tree/master/DelBay20/script), with wt_ as the prefix.
 
