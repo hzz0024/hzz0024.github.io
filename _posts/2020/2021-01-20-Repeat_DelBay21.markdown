@@ -11,7 +11,7 @@ categories:
   - WGS data analysis
 --- 
 
-The dataset in this post comes from the repeated adult challenge experiment in summer, 2020. I am starting to trim the raw data and conduct read mapping using the same scripts.
+The dataset in this post comes from the repeated adult challenge experiment in summer, 2020. I am starting to trim the raw data and conduct read mapping using the same scripts. I also borrowed some of the code from Nina Lab [https://github.com/therkildsen-lab/genomic-data-analysis/blob/master/lcwgs_data_analysis.md](https://github.com/therkildsen-lab/genomic-data-analysis/blob/master/lcwgs_data_analysis.md)
 
 Before data QC, we need to create two files to provide the detailed information of sequenced samples.
 
