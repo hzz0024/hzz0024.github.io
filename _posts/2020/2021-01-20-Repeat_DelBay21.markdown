@@ -69,7 +69,7 @@ Code above calculate the number of reads with perfect match (16855590 of 1704022
 
 --- 
 
-### QC and trimming
+### Data process
 
 1) First is to look at the fastqc reports:
 
@@ -282,7 +282,7 @@ echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
 
 # to run the script
 for i in {1..19}; do
-    nohup sh '4_map_'$i'.sh' > '4_map_'$i'.log' &
+    nohup sh '5_map_mtDNA_'$i'.sh' > '5_map_mtDNA_'$i'.log' &
 done
 ```
 
@@ -470,6 +470,22 @@ echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
 10) Estimate read depth
 
 
+
+---
+
+### Analyses summary
+
+| Order | Step                          | Script Name    | Average time (per sample) | Note                                                 |
+|-------|-------------------------------|----------------|---------------------------|------------------------------------------------------|
+| 1     | FastQC                        | 1_fastqc.sh    |                           |                                                      |
+| 2     | Adapter clipping              | 2_trim.sh      |                           |                                                      |
+| 3     | Build reference               | 3_build_ref.sh |                           | Build both mtochondrial and nuclear reference genome |
+| 4     | Trim polyg tails              | 4_polyg.sh     |                           |                                                      |
+| 5     | Map to mtDNA reference        | 5_map_mtDNA.sh |                           |                                                      |
+| 6     | Map to gDNA reference         | 6_map.sh       |                           |                                                      |
+| 7     | Merge bam                     | 7_merge.sh     |                           | Only apply to DelBay19 data                          |
+| 8     | Deduplicate and clip overlaps | 8_dup_clip.sh  |                           |                                                      |
+| 9     | Indel realignment             | 9_realign.sh   |                           |                                                      |
 
 
 
