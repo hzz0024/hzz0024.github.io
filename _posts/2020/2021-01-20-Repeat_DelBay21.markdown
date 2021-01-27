@@ -1,7 +1,7 @@
 ---
 comments: true
 title: Repeat challenge sequencing analyses (DelBay20)
-date: '2021-01-20 12:00'
+date: '2021-01-26 12:00'
 tags:
   - DelBay
   - Challenge
@@ -169,7 +169,124 @@ $SAMTOOLS faidx $REFERENCE
 java -jar $PICARD CreateSequenceDictionary R=$REFERENCE O=$REFBASENAME'.dict'
 ```
 
-4) Map to the reference, sort, and quality filter
+4) Trim polyg tails 
+
+This is an option step in data process but could help trim the poly-G tails in the reads. PolyG is a common issue observed in Illumina NextSeq and NovaSeq series. It happens when a base with no light signal detected and called as "G", therefore poly-Gs is a sequencing artifacts.
+
+```sh
+#!/bin/bash
+start=`date +%s`  ## date at start
+## This script is used to quality filter and trim poly g tails. It can process both paired end and single end data.
+BASEDIR=/workdir/hz269/DelBay19
+SAMPLELIST=$BASEDIR/sample_lists/fastq_list_1.txt # Path to a list of prefixes of the raw fastq files. It should be a subset of the the 1st column of the sample table.
+SAMPLETABLE=$BASEDIR/sample_lists/fastq_table.txt # Path to a sample table where the 1st column is the prefix of the raw fastq files. The 4th column is the sample ID, the 2nd column is the lane number, and the 3rd column is sequence ID. The combination of these three columns have to be unique. The 6th column should be data type, which is either pe or se.
+FILTER=polyg # Type of filtering. Values can be: polyg (forced PolyG trimming only), quality (quality trimming, PolyG will be trimmed as well if processing NextSeq/NovaSeq data), or length (trim all reads to a maximum length)
+THREAD=1 # Number of thread to use. Default is 10
+FASTP=/programs/fastp-0.20.0/bin/fastp ## Path to the fastp program. The default path is /workdir/programs/fastp_0.19.7/fastp
+MAXLENGTH=100 # Maximum length. This input is only relevant when FILTER=length, and its default value is 100.
+
+## Loop over each sample
+for SAMPLEFILE in `cat $SAMPLELIST`; do
+
+  ## Extract relevant values from a table of sample, sequencing, and lane ID (here in columns 4, 3, 2, respectively) for each sequenced library
+  SAMPLE_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 4`
+  POP_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 5`
+  SEQ_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 3`
+  LANE_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 2`
+  SAMPLE_UNIQ_ID=$SAMPLE_ID'_'$POP_ID'_'$SEQ_ID'_'$LANE_ID
+  echo "Sample: $SAMPLE_UNIQ_ID"
+  ## Extract data type from the sample table
+  DATATYPE=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 6`
+  ## The input and output path and file prefix
+  SAMPLEADAPT=$BASEDIR'/adapter_clipped/'$SAMPLE_UNIQ_ID
+  SAMPLEQUAL=$BASEDIR'/qual_filtered/'$SAMPLE_UNIQ_ID
+
+  ## Trim polyg tail or low quality tail with fastp.
+  # --trim_poly_g forces polyg trimming, --cut_right enables cut_right quality trimming
+  # -Q disables quality filter, -L disables length filter, -A disables adapter trimming
+  # Go to https://github.com/OpenGene/fastp for more information
+  if [ $DATATYPE = pe ]; then
+    if [ $FILTER = polyg ]; then
+      $FASTP --trim_poly_g --cut_right -L -A --thread $THREAD -i $SAMPLEADAPT'_adapter_clipped_f_paired.fastq.gz' -I $SAMPLEADAPT'_adapter_clipped_r_paired.fastq.gz' -o $SAMPLEQUAL'_adapter_clipped_qual_filtered_f_paired.fastq.gz' -O $SAMPLEQUAL'_adapter_clipped_qual_filtered_r_paired.fastq.gz' -h $SAMPLEQUAL'_adapter_clipped_fastp.html' -j $SAMPLEQUAL'_adapter_clipped_fastp.json'
+    elif [ $FILTER = quality ]; then
+      $FASTP -L -A --thread $THREAD -i $SAMPLEADAPT'_adapter_clipped_f_paired.fastq.gz' -I $SAMPLEADAPT'_adapter_clipped_r_paired.fastq.gz' -o $SAMPLEQUAL'_adapter_clipped_qual_filtered_f_paired.fastq.gz' -O $SAMPLEQUAL'_adapter_clipped_qual_filtered_r_paired.fastq.gz' -h $SAMPLEQUAL'_adapter_clipped_fastp.html' -j $SAMPLEQUAL'_adapter_clipped_fastp.json'
+    elif [ $FILTER = length ]; then
+      $FASTP --max_len1 $MAXLENGTH -Q -L -A --thread $THREAD -i $SAMPLEADAPT'_adapter_clipped_f_paired.fastq.gz' -I $SAMPLEADAPT'_adapter_clipped_r_paired.fastq.gz' -o $SAMPLEQUAL'_adapter_clipped_qual_filtered_f_paired.fastq.gz' -O $SAMPLEQUAL'_adapter_clipped_qual_filtered_r_paired.fastq.gz' -h $SAMPLEQUAL'_adapter_clipped_fastp.html' -j $SAMPLEQUAL'_adapter_clipped_fastp.json'
+    fi
+  fi
+done
+
+end=`date +%s` ## date at end
+runtime=$((end-start))
+hours=$((runtime / 3600))
+minutes=$(( (runtime % 3600) / 60 ))
+seconds=$(( (runtime % 3600) % 60 ))
+echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
+```
+
+5) Map to the mtochondrial DNA
+
+Map the paired-end reads to the mitochondrial DNA (ref_C_virginica-3.0_mtDNA.fasta.gz, here renamed as cv30_mtDNA) using Bowtie2. The remained reads will be mapped to nuclear DNA in step 6. I used --very-sensitive for reference genome mapping, and --un-conc OPTION to retain the PE reads that failed to align concordantly to the mtDNA genome
+
+```sh
+start=`date +%s` 
+BASEDIR=/workdir/hz269/DelBay20
+BOWTIE=/programs/bowtie2-2.3.5.1-linux-x86_64/bowtie2
+SAMTOOLS=/programs/samtools-1.11/bin/samtools
+SAMPLELIST=$BASEDIR/sample_lists/fastq_list_test.txt # Path to a list of prefixes of the raw fastq files. It should be a subset of the the 1st column of the sample table.
+SAMPLETABLE=$BASEDIR/sample_lists/fastq_table.txt # Path to a sample table where the 1st column is the prefix of the raw fastq files. The 4th column is the sample ID, the 2nd column is the lane number, and the 3rd column is sequence ID. The combination of these three columns have to be unique. The 6th column should be data type, which is either pe or se.
+FASTQDIR=$BASEDIR/qual_filtered/ # Path to the directory where fastq file are stored.
+FASTQSUFFIX1=_adapter_clipped_qual_filtered_f_paired.fastq.gz  # Suffix to fastq files. Use forward reads with paired-end data.
+FASTQSUFFIX2=_adapter_clipped_qual_filtered_r_paired.fastq.gz # Suffix to fastq files. Use reverse reads with paired-end data.
+MAPPINGPRESET=very-sensitive # The pre-set option to use for mapping in bowtie2 (very-sensitive for end-to-end (global) mapping [typically used when we have a full genome reference], very-sensitive-local for partial read mapping that allows soft-clipping [typically used when mapping genomic reads to a transcriptome]
+REFERENCE=$BASEDIR/reference/CV30_mtDNA.fasta # Path to reference fasta file and file name
+REFNAME=CV30_mtDNA # Reference name to add to output files, e.g. gadMor2
+
+## Loop over each sample
+for SAMPLEFILE in `cat $SAMPLELIST`; do
+
+  ## Extract relevant values from a table of sample, sequencing, and lane ID (here in columns 4, 3, 2, respectively) for each sequenced library
+  SAMPLE_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 4`
+  POP_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 5`
+  SEQ_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 3`
+  LANE_ID=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 2`
+  SAMPLE_UNIQ_ID=$SAMPLE_ID'_'$POP_ID'_'$SEQ_ID'_'$LANE_ID  # When a sample has been sequenced in multiple lanes, we need to be able to identify the files from each run uniquely
+
+  ## Extract data type from the sample table
+  DATATYPE=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 6`
+
+  ## The input and output path and file prefix
+  SAMPLETOMAP=$FASTQDIR$SAMPLE_UNIQ_ID
+  SAMPLEBAM=$BASEDIR'/bam_mtDNA/'$SAMPLE_UNIQ_ID
+
+  ## Define platform unit (PU), which is the lane number
+  PU=`grep -P "${SAMPLEFILE}\t" $SAMPLETABLE | cut -f 2`
+
+  ## Define reference base name
+  REFBASENAME="${REFERENCE%.*}"
+
+  ## Map reads to the reference
+  echo $SAMPLE_UNIQ_ID
+
+  # Map the mtDNA
+  $BOWTIE -q --phred33 --$MAPPINGPRESET --un-conc-gz test -p 1 -I 0 -X 1500 --fr --rg-id $SAMPLE_UNIQ_ID --rg SM:$SAMPLE_ID --rg LB:$SAMPLE_ID --rg PU:$PU --rg PL:ILLUMINA -x $REFBASENAME -1 $SAMPLETOMAP$FASTQSUFFIX1 -2 $SAMPLETOMAP$FASTQSUFFIX2 -S $SAMPLEBAM'_'$DATATYPE'_bt2_'$REFNAME'.sam'
+
+done
+
+end=`date +%s` ## date at end
+runtime=$((end-start))
+hours=$((runtime / 3600))
+minutes=$(( (runtime % 3600) / 60 ))
+seconds=$(( (runtime % 3600) % 60 ))
+echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
+
+# to run the script
+for i in {1..19}; do
+    nohup sh '4_map_'$i'.sh' > '4_map_'$i'.log' &
+done
+```
+
+6) Map to the reference, sort, and quality filter
 
 ```sh
 start=`date +%s` 
@@ -245,8 +362,112 @@ for i in {1..19}; do
 done
 ```
 
-Runtime: this process took so long. The rough eastimate for each individual is ~ 8 hours. Currently the sample list was divided into 19 part and ran in parallel, with ~ 10 samples per list. So the total time for the whole sequencing will take ~ 80 hours (3 days). The run started at Saturday and is expected to be end at Monday.
+Runtime: this process took so long. The rough eastimate for each individual is ~ 8 hours. Currently the sample list was divided into 19 part and ran in parallel, with ~ 10 samples per list. So the total time for the whole sequencing will take ~ 80 hours (3 days). 
 
+
+7) Merge samples from different batches or lanes
+
+8) Deduplicate and clip overlapping read pairs
+
+```sh
+#!/bin/bash
+start=`date +%s` 
+## This script is used to deduplicate bam files and clipped overlapping read pairs for paired end data. It can process both paired end and single end data.
+BAMLIST=/workdir/hz269/DelBay_test/sample_lists/XXX # Path to a list of merged, deduplicated, and overlap clipped bam files. Full paths should be included. An example of such a bam list is /workdir/cod/greenland-cod/sample_lists/bam_list_1.tsv
+SAMPLETABLE=$2 # Path to a sample table where the 1st column is the prefix of the MERGED bam files. The 4th column is the sample ID, the 2nd column is the lane number, and the 3rd column is sequence ID. The 5th column is population name and 6th column is the data type. An example of such a sample table is: /workdir/cod/greenland-cod/sample_lists/sample_table_merged.tsv
+JAVA=java # Path to java
+PICARD=/programs/picard-tools-2.19.2/picard.jar # Path to picard tools
+BAMUTIL=/programs/bamUtil/bam # Path to bamUtil
+
+
+## Loop over each sample
+for SAMPLEBAM in `cat $BAMLIST`; do
+  
+  ## Extract the file name prefix for this sample
+  SAMPLESEQID=`echo $SAMPLEBAM | sed 's/_bt2_.*//' | sed -e 's#.*/bam/\(\)#\1#'`
+  SAMPLEPREFIX=`echo ${SAMPLEBAM%.bam}`
+
+  ## Remove duplicates and print dupstat file
+  # We used to be able to just specify picard.jar on the CBSU server, but now we need to specify the path and version
+  $JAVA -Xmx60g -jar $PICARD MarkDuplicates I=$SAMPLEBAM O=$SAMPLEPREFIX'_dedup.bam' M=$SAMPLEPREFIX'_dupstat.txt' VALIDATION_STRINGENCY=SILENT REMOVE_DUPLICATES=true
+  
+  ## Extract data type from the merged sample table
+  DATATYPE=`grep -P "${SAMPLESEQID}\t" $SAMPLETABLE | cut -f 6`
+  
+  if [ $DATATYPE != se ]; then
+    ## Clip overlapping paired end reads (only necessary for paired end data)
+    $BAMUTIL clipOverlap --in $SAMPLEPREFIX'_dedup.bam' --out $SAMPLEPREFIX'_dedup_overlapclipped.bam' --stats
+  fi
+  
+done
+
+end=`date +%s` ## date at end
+runtime=$((end-start))
+hours=$((runtime / 3600))
+minutes=$(( (runtime % 3600) / 60 ))
+seconds=$(( (runtime % 3600) % 60 ))
+echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
+```
+
+9) Indel realignment
+
+```sh
+#!/bin/bash
+start=`date +%s`
+## This script is used to quality filter and trim poly g tails. It can process both paired end and single end data. 
+BAMLIST=BAMLIST=/workdir/hz269/DelBay_test/sample_lists/XXX # Path to a list of merged, deduplicated, and overlap clipped bam files. Full paths should be included. An example of such a bam list is /workdir/cod/greenland-cod/sample_lists/bam_list_1.tsv
+BASEDIR=/workdir/hz269/DelBay_test # Path to the base directory where adapter clipped fastq file are stored in a subdirectory titled "adapter_clipped" and into which output files will be written to separate subdirectories. An example for the Greenland cod data is: /workdir/cod/greenland-cod/
+REFERENCE=$BASEDIR/reference/CV30_masked.fasta # Path to reference fasta file and file name, e.g /workdir/cod/reference_seqs/gadMor2.fasta
+SAMTOOLS=/programs/samtools-1.11/bin/samtools # Path to samtools
+GATK=${6:-/programs/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar} # Path to GATK
+
+## Loop over each sample
+for SAMPLEBAM in `cat $BAMLIST`; do
+
+if [ -e $SAMPLEBAM'.bai' ]; then
+  echo "the file already exists"
+else
+  ## Index bam files
+  $SAMTOOLS index $SAMPLEBAM
+fi
+
+done
+
+## Realign around in-dels
+# This is done across all samples at once
+
+## Use an older version of Java
+export JAVA_HOME=/usr/local/jdk1.8.0_121
+export PATH=$JAVA_HOME/bin:$PATH
+
+## Create list of potential in-dels
+if [ ! -f $BASEDIR'bam/all_samples_for_indel_realigner.intervals' ]; then
+  java -Xmx40g -jar $GATK \
+     -T RealignerTargetCreator \
+     -R $REFERENCE \
+     -I $BAMLIST \
+     -o $BASEDIR'bam/all_samples_for_indel_realigner.intervals' \
+     -drf BadMate
+fi
+
+## Run the indel realigner tool
+java -Xmx40g -jar $GATK \
+   -T IndelRealigner \
+   -R $REFERENCE \
+   -I $BAMLIST \
+   -targetIntervals $BASEDIR'bam/all_samples_for_indel_realigner.intervals' \
+   --consensusDeterminationModel USE_READS  \
+   --nWayOut _realigned.bam
+
+end=`date +%s` ## date at end
+runtime=$((end-start))
+hours=$((runtime / 3600))
+minutes=$(( (runtime % 3600) / 60 ))
+seconds=$(( (runtime % 3600) % 60 ))
+echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
+```
+
+10) Estimate read depth
 
 
 
