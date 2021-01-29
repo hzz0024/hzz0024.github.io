@@ -489,7 +489,9 @@ All processes were conducted on Hare CBSU server, with 48 cores, 256G RAM, and 1
 | 8     | Deduplicate and clip overlaps | 8_dup_clip.sh  |                           |                                                      |
 | 9     | Indel realignment             | 9_realign.sh   |                           |                                                      |
 
-- example results for each step
+---
+
+### Example results for each step
 
 1) adapter clipping: 
 
