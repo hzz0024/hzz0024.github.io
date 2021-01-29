@@ -581,4 +581,4 @@ Sample: Cv104_CHR_1_4
 79.58% overall alignment rate
 ```
 
-So far to good.
+So far so good.
