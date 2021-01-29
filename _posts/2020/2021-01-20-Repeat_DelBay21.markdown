@@ -469,23 +469,114 @@ echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
 
 10) Estimate read depth
 
-
+From Nina's github there are some code for depth estimation with samtools depth option. I previous used this method but confused about what coverage should I report. Perhaps I could adopt her method for sample coverage estimation. Link is [here](https://github.com/nt246/physalia-lcwgs/blob/main/day_1/markdowns/data_processing.md#estimate-read-depth-in-your-bam-files).
 
 ---
 
 ### Analyses summary
 
+All processes were conducted on Hare CBSU server, with 48 cores, 256G RAM, and 144 TB disk space. This batch has 187 samples but divided into 19 groups for parallel running, with 10 samples in each group. To calculate total running time for each step just multiply 10 to average time (per sample). 
+
 | Order | Step                          | Script Name    | Average time (per sample) | Note                                                 |
 |-------|-------------------------------|----------------|---------------------------|------------------------------------------------------|
-| 1     | FastQC                        | 1_fastqc.sh    |                           |                                                      |
-| 2     | Adapter clipping              | 2_trim.sh      |                           |                                                      |
-| 3     | Build reference               | 3_build_ref.sh |                           | Build both mtochondrial and nuclear reference genome |
-| 4     | Trim polyg tails              | 4_polyg.sh     |                           |                                                      |
-| 5     | Map to mtDNA reference        | 5_map_mtDNA.sh |                           |                                                      |
-| 6     | Map to gDNA reference         | 6_map.sh       |                           |                                                      |
+| 1     | FastQC                        | 1_fastqc.sh    |          25 mins          |                                                      |
+| 2     | Adapter clipping              | 2_trim.sh      |          20 mins          |                                                      |
+| 3     | Build reference               | 3_build_ref.sh |          < 5 mins         | Build both mtochondrial and nuclear reference genome |
+| 4     | Trim polyg tails              | 4_polyg.sh     |          9 mins           |                                                      |
+| 5     | Map to mtDNA reference        | 5_map_mtDNA.sh |          20 mins          |                                                      |
+| 6     | Map to gDNA reference         | 6_map.sh       |          8 hours          |                                                      |
 | 7     | Merge bam                     | 7_merge.sh     |                           | Only apply to DelBay19 data                          |
 | 8     | Deduplicate and clip overlaps | 8_dup_clip.sh  |                           |                                                      |
 | 9     | Indel realignment             | 9_realign.sh   |                           |                                                      |
 
+- example results for each step
 
+1) adapter clipping: 
 
+```sh
+Sample: Cv104_CHR_1_4
+Input Read Pairs: 22471817 Both Surviving: 22402666 (99.69%) Forward Only Surviving: 69058 (0.31%) Reverse Only Surviving: 91 (0.00%) Dro
+pped: 2 (0.00%)
+```
+
+2) Trim polyg tails
+
+```sh
+Sample: Cv104_CHR_1_4
+
+Read1 before filtering:
+total reads: 22402666
+total bases: 3360391893
+Q20 bases: 3208650841(95.4844%)
+Q30 bases: 2948308114(87.737%)
+
+Read2 before filtering:
+total reads: 22402666
+total bases: 3360145453
+Q20 bases: 3268116175(97.2612%)
+Q30 bases: 3115230260(92.7112%)
+
+Read1 after filtering:
+total reads: 22301643
+total bases: 3149733393
+Q20 bases: 3050329153(96.844%)
+Q30 bases: 2821412107(89.5762%)
+
+Read2 aftering filtering:
+total reads: 22301643
+total bases: 3237927933
+Q20 bases: 3191294433(98.5598%)
+Q30 bases: 3057357416(94.4233%)
+
+Filtering result:
+reads passed filter: 44603286
+reads failed due to low quality: 9376
+reads failed due to too many N: 48
+
+Duplication rate: 30.8626%
+```
+
+3) Map to mtDNA reference genome
+
+```sh
+Sample: Cv104_CHR_1_4
+
+22301643 reads; of these:
+  22301643 (100.00%) were paired; of these:
+    22288067 (99.94%) aligned concordantly 0 times
+    12027 (0.05%) aligned concordantly exactly 1 time
+    1549 (0.01%) aligned concordantly >1 times
+    ----
+    22288067 pairs aligned concordantly 0 times; of these:
+      142 (0.00%) aligned discordantly 1 time
+    ----
+    22287925 pairs aligned 0 times concordantly or discordantly; of these:
+      44575850 mates make up the pairs; of these:
+        44394533 (99.59%) aligned 0 times
+        11127 (0.02%) aligned exactly 1 time
+        170190 (0.38%) aligned >1 times
+0.47% overall alignment rate
+````
+4) Map to masked reference genome
+
+```sh
+Sample: Cv104_CHR_1_4
+
+22288067 reads; of these:
+  22288067 (100.00%) were paired; of these:
+    6919270 (31.04%) aligned concordantly 0 times
+    9879276 (44.33%) aligned concordantly exactly 1 time
+    5489521 (24.63%) aligned concordantly >1 times
+    ----
+    6919270 pairs aligned concordantly 0 times; of these:
+      115700 (1.67%) aligned discordantly 1 time
+    ----
+    6803570 pairs aligned 0 times concordantly or discordantly; of these:
+      13607140 mates make up the pairs; of these:
+        9102058 (66.89%) aligned 0 times
+        2360489 (17.35%) aligned exactly 1 time
+        2144593 (15.76%) aligned >1 times
+79.58% overall alignment rate
+```
+
+So far to good.
