@@ -1,6 +1,6 @@
 ---
 comments: true
-title: CVreseq outlier annotation using snpEff and Annovar
+title: CVreseq outlier annotation using Annovar
 date: '2021-01-21 12:00'
 tags:
   - CVreseq
@@ -97,7 +97,7 @@ NOTICE: A total of 2269 locus in VCF file passed QC threshold, representing 2269
 NOTICE: Finished writing allele frequencies based on 2269 SNP genotypes (1175 transitions and 1094 transversions) and 0 indels/substitutions for 1 samples
 ```
 
-Great! This is what I want. Now proceed with the annotation step.
+Great! This is what I want. Now proceed to the annotation step.
 
 ### Annotate the SNPs
 
@@ -204,11 +204,13 @@ line671 nonsynonymous SNV gene10035:rna16990:exon14:c.A1952T:p.N651I, NC_035782.
 
 ### A comparison between outlier SNPs and its corresponding reference datasets
 
-`Total inversion segments:` 1573 (based on CNV and big inversions)
+`VCF file used for genome-wide SNP annotation`: [SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.vcf.gz](https://drive.google.com/drive/u/0/folders/18LeVjR78VUs1WkXbwJ6lCVs7W2QixPed). Total SNPs included in this VCF file is 5766147 sites.  
 
+`Total inversion segments:` 1573 (based on CNV and big inversions)   
+   
 - Brief summary for number of SNPs
 
-|                                                           | Number of SNPs |
+| Genome-wide SNP counts                                    | Number of SNPs |
 |-----------------------------------------------------------|----------------|
 | Genome-wide SNPs within inversions                        | 1125493        |
 | Genome-wide SNPs outside inversions                       | 4640654        |
@@ -220,8 +222,8 @@ line671 nonsynonymous SNV gene10035:rna16990:exon14:c.A1952T:p.N651I, NC_035782.
 |-----------------------------------------------------------------|------------|---------------|----------|----------|---------|--------|
 | Exonic outlier SNPs within inversions                           | 18         | 14            | 0        | 0        | 0       | 32     |
 | Exonic outlier SNPs outside inversions                          | 203        | 159           | 0        | 0        | 3       | 365    |
-| Exonic outlier SNPs in wild Atlantic   contrasts (no inversion) | 23         | 24            | 0        | 0        | 0       | 47     |
-| Exonic outlier SNPs in salinity contrast   (no inversion)       | 186        | 30            | 0        | 0        | 0       | 216    |
+| Exonic outlier SNPs in wild Atlantic contrasts (no inversion)   | 23         | 24            | 0        | 0        | 0       | 47     |
+| Exonic outlier SNPs in salinity contrast (no inversion)         | 186        | 30            | 0        | 0        | 0       | 216    |
 | Exonic genome-wide SNPs within inversions                       | 84411      | 39763         | 282      | 34       | 3058    | 127548 |
 | Exonic genome-wide SNPs outside inversions                      | 380535     | 172795        | 1276     | 157      | 18830   | 573593 |
 | Exonic SNPs in chromosome 2 and outside inversions              | 54505      | 23054         | 155      | 4        | 5312    | 83030  |
@@ -245,23 +247,92 @@ line671 nonsynonymous SNV gene10035:rna16990:exon14:c.A1952T:p.N651I, NC_035782.
 
 - Test for significance
 
-`Exonic genome-wide SNPs outside inversions vs outlier SNPs outside inversions`
+The R function is shown below, `.exonic_variant_function` are exonic annotation output from Annovar, 
 
-|                                           | Synonymous | Nonsynonymous | Marginal Row Totals |
-|-------------------------------------------|------------|---------------|---------------------|
-| Exonic outlier SNPs outside   inversions  | 203        | 159           | 362                 |
-| Expected number based genome-wide data    | 249        | 113           | 362                 |
-| Marginal Column Totals                    | 452        | 272           | 724                 |
+```R
+chisq_test <- function(tag_name,ref_name){
+  #tag_name <- "CS_HC-HCVA_CLP.outliers.exonic_variant_function"
+  df1 = read.delim(tag_name, header = FALSE, sep='\t')
+  cnt1 = length(df1$V1)
+  print(paste0("SNP counts in ", tag_name, " is ", cnt1))
+  df1$V13="Target"
+  df1$V14=unlist(lapply(strsplit(df1$V2, " "), `[[`, 1))
+  tmp1 = data.frame(df1$V13, df1$V14)
+  names(tmp1) = c('Data', 'Class')
+  tmp1<- tmp1[which(tmp1$Class %in% "synonymous" | tmp1$Class %in% "nonsynonymous"),]
+  
+  #ref_name <- "Genome-wide.noinvers.exonic_variant_function"
+  df2 = read.delim(ref_name, header = FALSE, sep='\t')
+  cnt2 = length(df2$V1)
+  print(paste0("SNP counts in ", ref_name, " is ", cnt2))
+  df2$V13="Reference"
+  df2$V14=unlist(lapply(strsplit(df2$V2, " "), `[[`, 1))
+  tmp2 = data.frame(df2$V13, df2$V14)
+  names(tmp2) = c('Data', 'Class')
+  tmp2<- tmp2[which(tmp2$Class %in% "synonymous" | tmp2$Class %in% "nonsynonymous"),]
+  # combine the nonsyns and syns counts from two datasets
+  dat <- rbind(tmp1,tmp2) 
+  tab <- table(dat$Data,dat$Class)
+  chi <- chisq.test(tab)
+  print(chi$observed)
+  print(chi$expected)
+  print(paste0("p-value:",chi$p.value, "; chi-square:",chi$statistic, "; df:",chi$parameter))
+}
+```
 
-The chi-square statistic is 12.4608. The p-value is .000416. Significant at p < .05.
+`Exonic outlier SNPs with large signals of elevated FST outside of inversions vs genome-wide SNPs outside inversions`
 
-`Exonic outlier SNPs in salinity contrast (no inversion) vs genome-wide SNPs outside inversions`
+```R
+> chisq_test("95.outlier.SNPs.no_inversion.exonic_variant_function","Genome-wide.noinvers.exonic_variant_function")
+[1] "SNP counts in 95.outlier.SNPs.no_inversion.exonic_variant_function is 365"
+[1] "SNP counts in Genome-wide.noinvers.exonic_variant_function is 573593"
+           
+            nonsynonymous synonymous
+  Reference        172795     380535
+  Target              159        203
+           
+            nonsynonymous  synonymous
+  Reference   172840.9239 380489.0761
+  Target         113.0761    248.9239
+[1] "p-value:2.5632663009072e-07; chi-square:26.5535999378184; df:1"
+```
+`Exonic outlier SNPs with large signals of elevated FST in Atlantic wild populations vs genome-wide SNPs outside inversions`
 
-|                                                         | Synonymous | Nonsynonymous | Marginal Row Totals |
-|---------------------------------------------------------|------------|---------------|---------------------|
-| Exonic outlier SNPs in salinity contrast (no inversion) | 186        | 30            | 216                 |
-| Expected number based genome-wide data                  | 149        | 67            | 216                 |
-| Marginal Column Totals                                  | 335        | 97            | 432                 |
+```R
+> chisq_test("95.outlier.SNPs.wildae.no_inversion.exonic_variant_function","Genome-wide.noinvers.exonic_variant_function")
+[1] "SNP counts in 95.outlier.SNPs.wildae.no_inversion.exonic_variant_function is 47"
+[1] "SNP counts in Genome-wide.noinvers.exonic_variant_function is 573593"
+           
+            nonsynonymous synonymous
+  Reference        172795     380535
+  Target               24         23
+           
+            nonsynonymous   synonymous
+  Reference  172804.32195 380525.67805
+  Target         14.67805     32.32195
+[1] "p-value:0.00548919357372886; chi-square:7.71078304507446; df:1"
+```
 
-The chi-square statistic is 18.2. The p-value is .00002. Significant at p < .05
+`Exonic outlier SNPs identified from salinity contrast (no inversion) vs genome-wide SNPs outside inversions`
+
+```R
+> chisq_test("CS_HC-HCVA_CLP.outliers.exonic_variant_function","Genome-wide.noinvers.exonic_variant_function")
+[1] "SNP counts in CS_HC-HCVA_CLP.outliers.exonic_variant_function is 216"
+[1] "SNP counts in Genome-wide.noinvers.exonic_variant_function is 573593"
+           
+            nonsynonymous synonymous
+  Reference        172795     380535
+  Target               30        186
+           
+            nonsynonymous  synonymous
+  Reference   172757.5617 380572.4383
+  Target          67.4383    148.5617
+[1] "p-value:5.80274233118365e-08; chi-square:29.4281893038807; df:1"
+```
+
+A summary toward the single-SNP annotation is [here](https://docs.google.com/document/d/1iawpvk-fqu8ZknoRK5iU4D2etWWU6NSe9tXRnGD-WNw/edit?usp=sharing).
+
+A reference conducted similar annotation analyses on whole-genome sequencing of tropical Chickens is [here](https://www.sciencedirect.com/science/article/pii/S2589004220308361#:~:text=Here%2C%20by%20conducting%20population%20genomic,tropical%20desert%20and%20tropical%20monsoon)
+
+
 
