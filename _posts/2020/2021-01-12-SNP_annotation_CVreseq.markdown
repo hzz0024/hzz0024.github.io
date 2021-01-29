@@ -286,11 +286,15 @@ chisq_test <- function(tag_name,ref_name){
 > chisq_test("95.outlier.SNPs.no_inversion.exonic_variant_function","Genome-wide.noinvers.exonic_variant_function")
 [1] "SNP counts in 95.outlier.SNPs.no_inversion.exonic_variant_function is 365"
 [1] "SNP counts in Genome-wide.noinvers.exonic_variant_function is 573593"
-           
+
+Observed counts
+        
             nonsynonymous synonymous
   Reference        172795     380535
   Target              159        203
-           
+
+Expected counts
+
             nonsynonymous  synonymous
   Reference   172840.9239 380489.0761
   Target         113.0761    248.9239
@@ -302,11 +306,15 @@ chisq_test <- function(tag_name,ref_name){
 > chisq_test("95.outlier.SNPs.wildae.no_inversion.exonic_variant_function","Genome-wide.noinvers.exonic_variant_function")
 [1] "SNP counts in 95.outlier.SNPs.wildae.no_inversion.exonic_variant_function is 47"
 [1] "SNP counts in Genome-wide.noinvers.exonic_variant_function is 573593"
-           
+
+Observed counts
+
             nonsynonymous synonymous
   Reference        172795     380535
   Target               24         23
-           
+     
+Expected counts
+
             nonsynonymous   synonymous
   Reference  172804.32195 380525.67805
   Target         14.67805     32.32195
@@ -319,11 +327,15 @@ chisq_test <- function(tag_name,ref_name){
 > chisq_test("CS_HC-HCVA_CLP.outliers.exonic_variant_function","Genome-wide.noinvers.exonic_variant_function")
 [1] "SNP counts in CS_HC-HCVA_CLP.outliers.exonic_variant_function is 216"
 [1] "SNP counts in Genome-wide.noinvers.exonic_variant_function is 573593"
-           
+    
+Observed counts
+       
             nonsynonymous synonymous
   Reference        172795     380535
   Target               30        186
-           
+ 
+Expected counts
+
             nonsynonymous  synonymous
   Reference   172757.5617 380572.4383
   Target          67.4383    148.5617
