@@ -12,10 +12,6 @@ categories:
   - WGS data analysis
 --- 
 
-### Workflow
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/workflow.jpg" alt="img" width="800"/>
-
 ### Depth evaluation
 
 Table below summarize the read depth distribution for each dataset. The last column is useful for Angsd -setMaxDepth setting.
@@ -60,3 +56,9 @@ A few questions regarding following steps:
 1) the CNV inversions identifed from high-coverage WGS study is composed of more than thousand regions, should I keep removing them?
 
 2) What is the workaround for batch effect? Using all sample may bring in the batch effect, whereas creating site files seperatly may require common shared loci identification. I prefer the latter method by generating a site file from the DelBay19 samples (including both challenge and wild, given its lower mean depth), and then use this site file to call SNPs for DelBay20 datasets. As DelBay20 challenge samples have higher mean depth, it is expected that I can capture all identifed SNPs. After that, I am going to conduct combined Fisher's exact test among individual population.
+
+### Workflow
+
+According to some pre-analyses above, here is the workflow for following data analyese.
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/workflow.jpg" alt="img" width="800"/>
