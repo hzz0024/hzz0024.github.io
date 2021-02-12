@@ -373,32 +373,27 @@ Runtime: this process took so long. The rough eastimate for each individual is ~
 #!/bin/bash
 start=`date +%s` 
 ## This script is used to deduplicate bam files and clipped overlapping read pairs for paired end data. It can process both paired end and single end data.
-BAMLIST=/workdir/hz269/DelBay_test/sample_lists/XXX # Path to a list of merged, deduplicated, and overlap clipped bam files. Full paths should be included. An example of such a bam list is /workdir/cod/greenland-cod/sample_lists/bam_list_1.tsv
-SAMPLETABLE=$2 # Path to a sample table where the 1st column is the prefix of the MERGED bam files. The 4th column is the sample ID, the 2nd column is the lane number, and the 3rd column is sequence ID. The 5th column is population name and 6th column is the data type. An example of such a sample table is: /workdir/cod/greenland-cod/sample_lists/sample_table_merged.tsv
-JAVA=java # Path to java
+BAMLIST=/workdir/hz269/DelBay20/sample_lists/bam_list_1.txt # Path to a list of merged, deduplicated, and overlap clipped bam files. Full paths should be included.
+SAMPLETABLE=$BASEDIR/sample_lists/fastq_table.txt # Path to a sample table where the 1st column is the prefix of the raw fastq files. The 4th column is the sample ID, the 2nd column is the lane number, and the 3rd column is sequence ID. The combination of these three columns have to be unique. The 6th column should be data type, which is either pe or se.
 PICARD=/programs/picard-tools-2.19.2/picard.jar # Path to picard tools
 BAMUTIL=/programs/bamUtil/bam # Path to bamUtil
 
+cd bam
 
 ## Loop over each sample
 for SAMPLEBAM in `cat $BAMLIST`; do
-  
+
   ## Extract the file name prefix for this sample
   SAMPLESEQID=`echo $SAMPLEBAM | sed 's/_bt2_.*//' | sed -e 's#.*/bam/\(\)#\1#'`
   SAMPLEPREFIX=`echo ${SAMPLEBAM%.bam}`
 
   ## Remove duplicates and print dupstat file
   # We used to be able to just specify picard.jar on the CBSU server, but now we need to specify the path and version
-  $JAVA -Xmx60g -jar $PICARD MarkDuplicates I=$SAMPLEBAM O=$SAMPLEPREFIX'_dedup.bam' M=$SAMPLEPREFIX'_dupstat.txt' VALIDATION_STRINGENCY=SILENT REMOVE_DUPLICATES=true
-  
-  ## Extract data type from the merged sample table
-  DATATYPE=`grep -P "${SAMPLESEQID}\t" $SAMPLETABLE | cut -f 6`
-  
-  if [ $DATATYPE != se ]; then
-    ## Clip overlapping paired end reads (only necessary for paired end data)
-    $BAMUTIL clipOverlap --in $SAMPLEPREFIX'_dedup.bam' --out $SAMPLEPREFIX'_dedup_overlapclipped.bam' --stats
-  fi
-  
+  java -Xmx60g -jar $PICARD MarkDuplicates I=$SAMPLEBAM O=$SAMPLEPREFIX'_dedup.bam' M=$SAMPLEPREFIX'_dupstat.txt' VALIDATION_STRINGENCY=SILENT REMOVE_DUPLICATES=true
+
+  ## Clip overlapping paired end reads (only necessary for paired end data)
+  $BAMUTIL clipOverlap --in $SAMPLEPREFIX'_dedup.bam' --out $SAMPLEPREFIX'_dedup_overlapclipped.bam' --stats
+
 done
 
 end=`date +%s` ## date at end
@@ -407,6 +402,7 @@ hours=$((runtime / 3600))
 minutes=$(( (runtime % 3600) / 60 ))
 seconds=$(( (runtime % 3600) % 60 ))
 echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
+
 ```
 
 9) Indel realignment
@@ -414,12 +410,13 @@ echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
 ```sh
 #!/bin/bash
 start=`date +%s`
-## This script is used to quality filter and trim poly g tails. It can process both paired end and single end data. 
-BAMLIST=BAMLIST=/workdir/hz269/DelBay_test/sample_lists/XXX # Path to a list of merged, deduplicated, and overlap clipped bam files. Full paths should be included. An example of such a bam list is /workdir/cod/greenland-cod/sample_lists/bam_list_1.tsv
-BASEDIR=/workdir/hz269/DelBay_test # Path to the base directory where adapter clipped fastq file are stored in a subdirectory titled "adapter_clipped" and into which output files will be written to separate subdirectories. An example for the Greenland cod data is: /workdir/cod/greenland-cod/
-REFERENCE=$BASEDIR/reference/CV30_masked.fasta # Path to reference fasta file and file name, e.g /workdir/cod/reference_seqs/gadMor2.fasta
+BAMLIST=/workdir/hz269/DelBay20/sample_lists/DelBay20_dedup_overlapclipped.list # Path to a list of merged, deduplicated, and overlap clipped bam files. Full paths should be included.
+BASEDIR=/workdir/hz269/DelBay20
+REFERENCE=$BASEDIR/reference/CV30_masked.fasta # Path to reference fasta file and file name
 SAMTOOLS=/programs/samtools-1.11/bin/samtools # Path to samtools
-GATK=${6:-/programs/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar} # Path to GATK
+GATK=/programs/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar # Path to GATK
+
+cd bam
 
 ## Loop over each sample
 for SAMPLEBAM in `cat $BAMLIST`; do
@@ -430,7 +427,6 @@ else
   ## Index bam files
   $SAMTOOLS index $SAMPLEBAM
 fi
-
 done
 
 ## Realign around in-dels
@@ -441,23 +437,23 @@ export JAVA_HOME=/usr/local/jdk1.8.0_121
 export PATH=$JAVA_HOME/bin:$PATH
 
 ## Create list of potential in-dels
-if [ ! -f $BASEDIR'bam/all_samples_for_indel_realigner.intervals' ]; then
-  java -Xmx40g -jar $GATK \
-     -T RealignerTargetCreator \
-     -R $REFERENCE \
-     -I $BAMLIST \
-     -o $BASEDIR'bam/all_samples_for_indel_realigner.intervals' \
-     -drf BadMate
+if [ ! -f $BASEDIR'/bam/DelBay20_for_indel_realigner.intervals' ]; then
+    java -Xmx120g -jar $GATK \
+      -T RealignerTargetCreator \
+      -R $REFERENCE \
+      -I $BAMLIST \
+      -o $BASEDIR'/bam/DelBay20_for_indel_realigner.intervals' \
+      -drf BadMate
 fi
 
 ## Run the indel realigner tool
-java -Xmx40g -jar $GATK \
-   -T IndelRealigner \
-   -R $REFERENCE \
-   -I $BAMLIST \
-   -targetIntervals $BASEDIR'bam/all_samples_for_indel_realigner.intervals' \
-   --consensusDeterminationModel USE_READS  \
-   --nWayOut _realigned.bam
+java -Xmx120g -jar $GATK \
+  -T IndelRealigner \
+  -R $REFERENCE \
+  -I $BAMLIST \
+  -targetIntervals $BASEDIR'/bam/DelBay20_for_indel_realigner.intervals' \
+  --consensusDeterminationModel USE_READS  \
+  --nWayOut _realigned.bam
 
 end=`date +%s` ## date at end
 runtime=$((end-start))
@@ -580,5 +576,3 @@ Sample: Cv104_CHR_1_4
         2144593 (15.76%) aligned >1 times
 79.58% overall alignment rate
 ```
-
-So far so good.
