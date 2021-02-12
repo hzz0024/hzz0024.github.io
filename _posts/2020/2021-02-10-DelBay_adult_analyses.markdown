@@ -20,9 +20,12 @@ Table below summarize the read depth distribution for each dataset. The last col
 |------------|------|-----------|-----|----------|
 | All_441    | 1222 |   93413   | 306 |   2139   |
 | CH_all_205 | 681  |   42529   | 206 |   1300   |
+| DelBay20   | 440  |   32848   | 181 |   983    |
 
 All_441: dataset include all challenge (DelBay19 and 20, n=205) and wild (n=236) samples.               
 CH_all_205: dataset include all challenge (DelBay19 and 20, n=205) samples.
+DelBay20: dataset include DelBay20 challenge samples (n=102).
+DelBay19: dataset include DelBay19 challenge (n=105) and wild samples (n=236).
 
 ### Global SNP calling using different datasets 
 
@@ -57,6 +60,7 @@ A few questions regarding following steps:
 
 2) What is the workaround for batch effect? Using all sample may bring in the batch effect, whereas creating site files seperatly may require common shared loci identification. I prefer the latter method by generating a site file from the DelBay19 samples (including both challenge and wild, given its lower mean depth), and then use this site file to call SNPs for DelBay20 datasets. As DelBay20 challenge samples have higher mean depth, it is expected that I can capture all identifed SNPs. After that, I am going to conduct combined Fisher's exact test among individual population.
 streage
+
 3) I noticed that PCA patters in DelBay20 challenge samples is slightly different from DelBay19, perhaps due to the different sampling strategy (the control sample in DelBay20 only include dead samples). Need further examination on this.
 
 ### Workflow
