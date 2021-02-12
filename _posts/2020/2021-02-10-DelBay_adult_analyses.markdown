@@ -56,6 +56,8 @@ A few questions regarding following steps:
 1) the CNV inversions identifed from high-coverage WGS study is composed of more than thousand regions, should I keep removing them?
 
 2) What is the workaround for batch effect? Using all sample may bring in the batch effect, whereas creating site files seperatly may require common shared loci identification. I prefer the latter method by generating a site file from the DelBay19 samples (including both challenge and wild, given its lower mean depth), and then use this site file to call SNPs for DelBay20 datasets. As DelBay20 challenge samples have higher mean depth, it is expected that I can capture all identifed SNPs. After that, I am going to conduct combined Fisher's exact test among individual population.
+streage
+3) I noticed that PCA patters in DelBay20 challenge samples is slightly different from DelBay19, perhaps due to the different sampling strategy (the control sample in DelBay20 only include dead samples). Need further examination on this.
 
 ### Workflow
 
