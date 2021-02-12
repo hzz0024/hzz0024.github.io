@@ -43,7 +43,7 @@ CH_all_205 after removing inversions
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/CH_all_maf0.05_minq25_pctind0.7_CV30_masked_noinvers.jpg" alt="img" width="800"/>
 
-All_441 after with inversions
+All_441 with inversions
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/All_maf0.05_minq25_pctind0.7_CV30_masked.jpg" alt="img" width="800"/>
 
