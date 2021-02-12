@@ -55,4 +55,4 @@ A few questions regarding following steps:
 
 1) the CNV inversions identifed from high-coverage WGS study is composed of more than thousand regions, should I keep removing them?
 
-2) How should proceed with site file creation? Using all sample may harbour the batch effect, whereas creating site files seperatly may require common shared loci identification. 
+2) How should I proceed with a shared site file creation? Using all sample may harbour the batch effect, whereas creating site files seperatly may require common shared loci identification. I prefer to use the latter method, and generate a site file from the DelBay19 samples (including both challenge and wild), and then use this site file to call SNPs for DelBay20 datasets. As DelBay20 challenge samples have higher mean depth, it is expected that I can obtain the allele frequency for all these shared SNPs. After that, I am going to conduct Fisher's exact test for outlier identification.
