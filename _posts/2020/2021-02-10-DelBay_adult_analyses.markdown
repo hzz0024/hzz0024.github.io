@@ -20,12 +20,15 @@ Table below summarize the read depth distribution for each dataset. The last col
 |------------|------|-----------|-----|----------|
 | All_441    | 1222 |   93413   | 306 |   2139   |
 | CH_all_205 | 681  |   42529   | 206 |   1300   |
+| DelBay19   | 739  |   42977   | 207 |   1361   |
 | DelBay20   | 440  |   32848   | 181 |   983    |
 
-All_441: dataset include all challenge (DelBay19 and 20, n=205) and wild (n=236) samples.               
-CH_all_205: dataset include all challenge (DelBay19 and 20, n=205) samples.
-DelBay20: dataset include DelBay20 challenge samples (n=102).
-DelBay19: dataset include DelBay19 challenge (n=105) and wild samples (n=236).
+
+All_441: dataset include all challenge (DelBay19 and 20, n=205) and wild (n=236) samples.                  
+CH_all_205: dataset include all challenge (DelBay19 and 20, n=205) samples.                 
+DelBay19: dataset include DelBay19 challenge (n=103) and wild samples (n=236).             
+DelBay20: dataset include DelBay20 challenge samples (n=102).                   
+       
 
 ### Global SNP calling using different datasets 
 
