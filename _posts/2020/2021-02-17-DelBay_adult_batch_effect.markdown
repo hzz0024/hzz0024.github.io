@@ -91,7 +91,7 @@ This is the interesting part. It seems the private alleles are the major cause o
 
 <img src="https://hzz0024.github.io/images/batch_effect/Del_batch_effect_shared_site.jpg" alt="img" width="800"/>
 
-Conclusion: the best solution towards analyses like PCA and combined Fisher'exact test is to use the Angsd results from shared
+Conclusion: the best solution towards analyses like PCA and combined Fisher'exact test is to use the Angsd results from shared site file. This allows the elimination of potential batch effect.
 
 4) Check if coverage differs between the two batches.
 
