@@ -55,13 +55,7 @@ A few questions regarding following steps:
 
 2) What is the workaround for batch effect? Using all sample may bring in the batch effect, whereas creating site files seperatly may require common shared loci identification. I prefer the latter method by generating a site file from the DelBay19 samples (including both challenge and wild, given its lower mean depth), and then use this site file to call SNPs for DelBay20 datasets. As DelBay20 challenge samples have higher mean depth, it is expected that I can capture all identifed SNPs. After that, I am going to conduct combined Fisher's exact test among individual population.
 
-### Workflow
-
-According to some pre-analyses above, here is the workflow for following data analyese.
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/workflow.jpg" alt="img" width="800"/>
-
-A couple of suggestion for diagnostic tests:
+### A couple of suggestion for batch effect diagnostic
 
 1) Evaluate average base composition at each read position using FastQC to detect polyG tails (which may survive polyG trimming and mapping). Here I randomly picked up 3 (CHR + REF) samples from each batch for this test.
 
@@ -73,6 +67,38 @@ Conclusion: the polyG issue is not that obvious to me, although for samples like
 
 2) Calculate the frequencies of different base substitutions in private alleles in each batch of data to detect signs of base calling bias.
 
+<img src="https://hzz0024.github.io/images/batch_effect/base_sub.jpg" alt="img" width="800"/> 
+
+Conclusion: Figure above is generated from the private alleles in each batch of example data (20 samples for each batch, only for chr10). As suggested by Nicolas, `DNA degradation` and `Base calling bias` will both lead to the enrichment of certain types substitutions in batches of data. 
+
+For `DNA degradation`, the enrichment is mostly coming from the C-to-T and G-to-A substitutions, due to the deamination of cytosine (i.e., transition of C bases into U bases, see figure below). In my case, we do see some level of elevated C-to-T and G-to-A substitutions, but the frequency (0.006) is still low. 
+
+<img src="https://hzz0024.github.io/images/batch_effect/deamination_plot.png" alt="img" width="800"/>
+
+For `Base calling bias`, we expect to see the enrichment of A-to-T and T-to-A substitutions in two-dye system (e.g. NextSeq and NovaSeq) but not four-dye sequencers (e.g. HiSeq series). Still the impact level is low. 
+
+Overall, I would not wrrory too much about the degradation or base calling bias between the two batches.
+
 3) Exclude private alleles of each batch of data from the PCA to verify that the PCA pattern is not an artifact.
 
+This is a interesting part. It seems the private alleles are the major cause of PCA patterns shown at the begining of this post. To test this, I generated two datasets that include 40 samples (20 in each batch, only for chr10). A simple comparsion for PCA `with private site` vs `without private sites (i.e. shared global site)` is shown below. 
+
+- with private site
+
+<img src="https://hzz0024.github.io/images/batch_effect/Del_batch_effect_all_site.jpg" alt="img" width="800"/>
+
+- without private sites 
+
+<img src="https://hzz0024.github.io/images/batch_effect/Del_batch_effect_shared_site.jpg" alt="img" width="800"/>
+
+Conclusion: the best solution towards analyses like PCA and combined Fisher'exact test is to use the Angsd results from shared
+
 4) Check if coverage differs between the two batches.
+
+Two do have coverage difference, with Novaseq data has ~ 2 fold higher coverage.
+
+### Workflow
+
+According to some pre-analyses above, here is the workflow for following data analyese.
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/workflow.jpg" alt="img" width="800"/>
