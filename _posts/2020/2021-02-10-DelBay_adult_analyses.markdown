@@ -35,5 +35,9 @@ Global SNPs:
 | Private sites in each batch              | 2957647                 | 187172                |
 | Shared sites                             | 1834429                 |                       |
 
+### Diverstiy estimate
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/Diversity.jpg" alt="img" width="800"/>
+
 ### PCA 
 

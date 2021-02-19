@@ -97,8 +97,13 @@ Conclusion: the best solution towards analyses like PCA and combined Fisher'exac
 
 Two do have coverage difference, with Novaseq data has ~ 2 fold higher coverage.
 
+### Diversity estimate
+
+<img src="https://hzz0024.github.io/images/batch_effect/diversity.jpg" alt="img" width="800"/>
+
 ### Workflow
 
 According to some pre-analyses above, here is the workflow for following data analyese.
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/workflow.jpg" alt="img" width="800"/>
+
