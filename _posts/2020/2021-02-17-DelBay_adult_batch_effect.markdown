@@ -63,7 +63,7 @@ According to some pre-analyses above, here is the workflow for following data an
 
 A couple of suggestion for diagnostic tests:
 
-1) Evaluate average base composition at each read position using FastQC to detect polyG tails (which may survive polyG trimming and mapping)
+1) Evaluate average base composition at each read position using FastQC to detect polyG tails (which may survive polyG trimming and mapping). Here I randomly picked up 3 (CHR + REF) samples from each batch for this test.
 
 <img src="https://hzz0024.github.io/images/batch_effect/DelBay19_base.jpg" alt="img" width="800"/>
 
