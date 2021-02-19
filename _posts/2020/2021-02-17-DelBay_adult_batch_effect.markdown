@@ -81,7 +81,7 @@ Overall, I would not wrrory too much about the degradation or base calling bias 
 
 3) Exclude private alleles of each batch of data from the PCA to verify that the PCA pattern is not an artifact.
 
-This is a interesting part. It seems the private alleles are the major cause of PCA patterns shown at the begining of this post. To test this, I generated two datasets that include 40 samples (20 in each batch, only for chr10). A simple comparsion for PCA `with private site` vs `without private sites (i.e. shared global site)` is shown below. 
+This is the interesting part. It seems the private alleles are the major cause of PCA patterns shown at the begining of this post. To test this, I generated two datasets that include 40 samples (20 in each batch, only for chr10). A simple comparsion for PCA `with private site` vs `without private sites (i.e. shared global site)` is shown below. 
 
 - with private site
 
