@@ -12,7 +12,7 @@ categories:
  
 The previous SNP annotation is conducted with fasta file with haplotig masking but a gtf file without masking from the NCBI. However, the gtf file needs to be parsed to remove masked annotations. 
 
-#### Annovar running
+#### Annovar running steps
 
 1) Prepare the haplotig mask file
 
@@ -164,19 +164,23 @@ perl annotate_variation.pl -geneanno -dbtype refGene -out Genome-wide.noinvers -
 
 #### Intergenic issue
 
-The intergenic ratio is quite low from the current annotation results (table below), which require some further tests.
+The intergenic ratio is quite low from the current annotation results (table 1 below), which require some further tests. Note this dataset is filtered with maf > 0.05
 
-|            | Genome-wide.variant_function |        |         | Genome-wide.noinvers.variant_function |
-|------------|------------------------------|--------|---------|---------------------------------------|
-| upstream   | 248983                       | 4.32%  | 201167  | 4.33%                                 |
-| exonic     | 717720                       | 12.45% | 586665  | 12.64%                                |
-| intronic   | 3089799                      | 53.59% | 2487691 | 53.61%                                |
-| downstream | 290586                       | 5.04%  | 235382  | 5.07%                                 |
-| intergenic | 1108959                      | 19.23% | 880315  | 18.97%                                |
-| total      | 5766147                      |        | 4640654 |                                       |
+Table 1. Genome-wide SNP annotation for VCF files with maf > 0.05, and w/wt inversions.
+
+|            | Genome-wide.variant_function | Percentage | Genome-wide.noinvers.variant_function | Percentage |
+|------------|------------------------------|------------|---------------------------------------|------------|
+| upstream   | 248983                       | 4.32%      | 201167                                | 4.33%      |
+| exonic     | 717720                       | 12.45%     | 586665                                | 12.64%     |
+| intronic   | 3089799                      | 53.59%     | 2487691                               | 53.61%     |
+| downstream | 290586                       | 5.04%      | 235382                                | 5.07%      |
+| intergenic | 1108959                      | 19.23%     | 880315                                | 18.97%     |
+| total      | 5766147                      |            | 4640654                               |            |
 
 Genome-wide.variant_function: masked dataset with MAF > 0.05 (SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.vcf)
 Genome-wide.noinvers.variant_function: same masked dataset but no inversions
+
+Table 2. Detailed explanation for terms used in Annovar. 
 
 | Value      | Default precedence | Explanation                                                                                                           |
 |------------|--------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -190,7 +194,9 @@ Genome-wide.noinvers.variant_function: same masked dataset but no inversions
 | downstream | 5                  | variant overlaps 1-kb region downtream of transcription end site (use -neargene to change this)                       |
 | intergenic | 6                  | variant is in intergenic region                                                                                       |
 
-First I want to count how many SNPs outside the gene bodies.
+#### Count the intergenic SNPs directly
+
+First I want to count how many SNPs outside the gene bodies (i.e. genes).
 
 The total genes number based on NCBI is 39,493. However, we need to remove the genes in the haplotig regions,
 
@@ -219,7 +225,7 @@ python3 merge.py
 ./sed_back.sh
 ```
 
-Now we have a bed file for gene coordinate after masking the haplotigs - Cv30_masked_annovar.bed.merge (29543 genes)
+Now we have a bed file for gene coordinate after masking the haplotigs (with 29543 genes)
 
 ```sh
 # count how many SNPs outside the genes
@@ -255,9 +261,11 @@ After filtering, kept 1240751 out of a possible 4640654 Sites
 Run Time = 145.00 seconds
 ```
 
+- Numbe of SNP count in intergenic regions
+
 The number of SNPs in intergenic regions should be 1556661 out of 5766147 (27.0%) sites across the genome, and 1240751 out of 4640654 (26.7%) sites for SNPs outside the inversions.
 
-What if we annotate the 1240751 sites?
+- What if we annotate the 1240751 sites?
 
 ```sh
 perl convert2annovar.pl -format vcf4 noinvers.intergenic.sites.recode.vcf -outfile noinvers.intergenic.sites.avinput -allsample -withfreq
@@ -271,34 +279,39 @@ annotate_variation.pl -geneanno -dbtype refGene -out noinvers.intergenic.sites -
 
 Now let's take a look at the results.
 
-```sh
-./cnt.sh
+Table 3. Annotation result for intergenic sites only.
 
-noinvers.intergenic.sites.variant_function
-upstream: 198115
-exonic: 19
-intronic: 0
-downstream: 231641
-intergenic: 830467
-total: 1240751
-```
-
-| noinvers.intergenic.sites.variant_function |         |
-|--------------------------------------------|---------|
-| upstream                                   | 198115  |
-| exonic                                     | 19      |
-| intronic                                   | 0       |
-| downstream                                 | 231641  |
-| intergenic                                 | 830467  |
-| total                                      | 1240751 |
+| Annotation                                   | SNP counts | Ratio  |
+|----------------------------------------------|------------|--------|
+|  upstream                                    | 198115     | 15.97% |
+|  exonic                                      | 19         | 0.00%  |
+|  intronic                                    | 0          | 0.00%  |
+|  downstream                                  | 231641     | 18.67% |
+|  intergenic                                  | 830467     | 66.93% |
+|  total                                       | 1240751    |        |
  
 The number of sites in the intergenic regions is 830467, if plus the upstream and downstream of the genes, the total will be 830467+231641+198115=1062108 SNPs. The other classes are upstream;downstream, UTR5, UTR3, and ncRNA_exonic. 
 
+- `what if we use maf>0.01 dataset for annotation`
+
+Table 4. Annoation result for vcf file with maf > 0.01 and inversion removal.
+
+| Annotation                                    | SNP counts | Ratio  |
+|-----------------------------------------------|------------|--------|
+|  upstream                                     | 305450     | 4.30%  |
+|  exonic                                       | 879775     | 12.39% |
+|  intronic                                     | 3837331    | 54.02% |
+|  downstream                                   | 361657     | 5.09%  |
+|  intergenic                                   | 1343274    | 18.91% |
+|  total                                        | 7103085    |        |
+
+The ratio is quite similar to result with maf > 0.05. 
+
 #### Conclusion
 
-In general, the Annovar is accurate in terms of SNP annotation. Some defects of this tool has been discussed in this site [https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/](https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/), but never a tool is perfect.
+1) In general, the Annovar is accurate in terms of SNP annotation. Some defects of this tool has been discussed in this site [https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/](https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/).
 
-In terms of the low level of intergenic site in our SNP list, I think the major issue comes from the vcf file. That is, perhaps some filtering steps has created a vcf dataset biased toward the low intergenic counts. 
+2) In terms of the low level of intergenic site in our SNP list, I think the major issue comes from the vcf file. That is, perhaps some filtering steps has created a vcf dataset biased toward the low intergenic counts. I'd appreciate if someone else in the group do another independ test on this and validate my point. 
 
 
 
