@@ -10,7 +10,7 @@ categories:
   - WGS data analysis
 --- 
  
-The previous SNP annotation is conducted with fasta file with haplotig masking but a gtf file without masking from the NCBI. However, the gtf file needs to be parsed to remove masked annotations. 
+The previous SNP annotation is conducted with fasta file with haplotig masking but a gtf file without masking from the NCBI. However, the gtf file needs to be parsed to remove masked annotations. All codes in this post is located at [https://github.com/hzz0024/HG_Code_Bay/tree/master/SNP_annotation](https://github.com/hzz0024/HG_Code_Bay/tree/master/SNP_annotation)
 
 #### Annovar running steps
 
@@ -177,8 +177,8 @@ Table 1. Genome-wide SNP annotation for VCF files with maf > 0.05, and w/wt inve
 | intergenic | 1108959                      | 19.23%     | 880315                                | 18.97%     |
 | total      | 5766147                      |            | 4640654                               |            |
 
-Genome-wide.variant_function: masked dataset with MAF > 0.05 (SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.vcf)
-Genome-wide.noinvers.variant_function: same masked dataset but no inversions
+Genome-wide.variant_function: masked dataset with MAF > 0.05 (SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.vcf)      
+Genome-wide.noinvers.variant_function: same masked dataset but no inversions     
 
 Table 2. Detailed explanation for terms used in Annovar. 
 
@@ -310,6 +310,8 @@ The ratio is quite similar to result with maf > 0.05.
 #### Conclusion
 
 1) In general, the Annovar is accurate in terms of SNP annotation. Some defects of this tool has been discussed in this site [https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/](https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/).
+
+For example, the author of this post complained that "Annovar instead returns only the most deleterious variant based upon a priority system". However, I found it useful to look at the annotation based on precedence. Kai, who is the author of this Annovar, replied "I am not sure exactly what you mean, but regardless, it is not accurate: (1) if multiple transcripts/genes cover a single variant, they will all be reported in Annovar (2) adding -separate will be able to generate all predictions, not just the most deleterious predictions."
 
 2) In terms of the low level of intergenic site in our SNP list, I think the major issue comes from the vcf file. That is, perhaps some filtering steps has created a vcf dataset biased toward the low intergenic counts. I'd appreciate if someone else in the group do another independ test on this and validate my point. 
 
