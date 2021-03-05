@@ -11,11 +11,11 @@ categories:
 
 ### Levene's paper
 
-<img src="https://hzz0024.github.io/images/paper/0001.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Paper/0001.jpg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/paper/0002.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Paper/0002.jpg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/paper/0003.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/Paper/0003.jpg" alt="img" width="800"/>
 
 
 ### Equation for delta p
