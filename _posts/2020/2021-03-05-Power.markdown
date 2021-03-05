@@ -34,3 +34,28 @@ Levene <- function(s)
   }
 ```
 
+### Correction for initial code
+
+Below is how I obtain the corrected function for Levene model
+
+```sh
+Vi = 1 -s
+Wi= 1+s
+
+Upper part: 
+
+(1-Vi) + (Wi + Vi -2)q 
+= (1-(1-s)) + ((1+s) + (1-s) -2)q 
+= s
+
+Down part:
+
+Vi + 2(1-Vi)q + (Wi + Vi -2)q^ 
+= (1-s) + 2(1-(1-s))q + (1+s + 1-s -2)q^ 
+= 1-s + 2sq
+
+The whole equation will be:
+
+(q*(1-q)*s)/(1 + 2sq -s)
+```
+
