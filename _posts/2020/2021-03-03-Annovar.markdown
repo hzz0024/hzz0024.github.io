@@ -1,0 +1,305 @@
+---
+comments: true
+title: SNP annotation - Annovar
+date: '2021-03-03 12:00'
+tags:
+  - SNP 
+  - Annotation
+  - Annovar
+categories:
+  - WGS data analysis
+--- 
+ 
+The previous SNP annotation is conducted with fasta file with haplotig masking but a gtf file without masking from the NCBI. However, the gtf file needs to be parsed to remove masked annotations. 
+
+#### Annovar running
+
+1) Prepare the haplotig mask file
+
+The haplogtig file is downloaded from [here](https://drive.google.com/drive/u/0/folders/1GJxV-ezMhUN9xaBiCqPYt-IsaOz4i57j)
+
+2) Extract the regions without haplotig masking with a customized python script
+
+Python code:
+
+```python
+"""
+infile = haplotig bed file 
+outfile = bed file for regions without haplotig masking
+
+Note input file should not have header 
+Important: the last coordinate in each chromosome need further edits, 
+		   for example, add 
+		   "NC_035789.1	32278115	32650044"
+		   after line 
+		   "NC_035789.1	32128115	32278115	0	haplotig"
+		   The length of each chromosome is estimted by bash scrip "Annovar_cnt_length.sh", the estimated length minus 1 is the coordinate for bed file
+"""
+infile = 'haplotigs.bed'
+outfile = 'non_haplotig_masking.bed'
+HEADER = False
+delimiter = '\t'
+
+pre_chr = 'NULL'
+pre_pos = 0
+with open(infile, 'r') as f, open(outfile, 'w') as w:
+    #HEADER = True
+    for l in f.readlines():
+        if HEADER:
+            HEADER = False
+            continue
+        ss = l.strip().split('\t')
+        chr = ss[0]
+        if ss[1] == '0': # first pos is 0, skip
+            pre_pos = ss[2]
+            pre_chr = chr
+            continue
+        #ss[1] = str(int(ss[1]) - 1) # haplogit range [a, b) 
+        print(chr)
+        if pre_chr != chr and pre_chr != 'NULL': # not the first one, end of a chrom
+            outline = pre_chr + delimiter + pre_pos + delimiter + '\n'
+            w.write(outline)
+            outline = chr + delimiter + '0' + delimiter + ss[1] + '\n'
+            w.write(outline)
+        elif pre_chr == 'NULL': # first line
+            outline = chr + delimiter + '0' + delimiter + ss[1] + '\n'
+            w.write(outline)
+        else:
+            outline = chr + delimiter + pre_pos + delimiter + ss[1] + '\n'
+            w.write(outline)
+        pre_chr = chr
+        pre_pos = ss[2] 
+        
+```
+
+3) Using bedtools to extract non-haplotigs regions
+
+The gtf file is downloaded from NCBI [https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/6565/100/GCF_002022765.2_C_virginica-3.0/](https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/6565/100/GCF_002022765.2_C_virginica-3.0/)
+
+`GCF_002022765.2_C_virginica-3.0_genomic.gtf.gz (2019-12-10 20:15)`
+
+Bedtools command for region extraction is [here](https://www.biostars.org/p/298751/). Note using the `intersect` command without -wa option will return only the interval part that partially matches bedfile coordinate, which is what we need. Below is an example,
+
+```sh
+
+bedtools intersect -wa -a GCF_002022765.2_C_virginica-3.0_genomic.gtf -b non_haplotigs.bed > test.gtf
+grep "LOC111117126" test.gtf
+# NC_035789.1	Gnomon	exon	32277624	32278182	.	-	.	gene_id "LOC111117126"; transcript_id "XR_002637198.1"; db_xref "GeneID:111117126"; gbkey "ncRNA"; gene "LOC111117126"; model_evidence "Supporting evidence includes similarity to: 100% coverage of the annotated genomic feature by RNAseq alignments, including 8 samples with support for all annotated introns"; product "uncharacterized LOC111117126"; exon_number "1";
+bedtools intersect -a GCF_002022765.2_C_virginica-3.0_genomic.gtf -b non_haplotigs.bed > test_wt_wa.gtf
+grep "LOC111117126" test_wt_wa.gtf
+# NC_035789.1     Gnomon  exon    32278116        32278182        .       -       .       gene_id "LOC111117126"; transcript_id "XR_002637198.1"; db_xref "GeneID:111117126"; gbkey "ncRNA"; gene "LOC111117126"; model_evidence "Supporting evidence includes similarity to: 100% coverage of the annotated genomic feature by RNAseq alignments, including 8 samples with support for all annotated introns"; product "uncharacterized LOC111117126"; exon_number "1";
+```
+
+In this example, betools result without -wa option (test_wt_wa.gtf) only shows interval part of the gene "LOC111117126", whereas file test.gtf has shown the complete interval range for this gene. Because we have masked the haplotig regions, we will only consider the latter outcome for downstream Annovar analysis.
+
+- snapshot for example
+
+<img src="https://hzz0024.github.io/images/CVreseq_annovar/igv_snapshot.png" alt="img" width="800"/>
+
+4) Get refGene table
+
+```sh
+# Cv30_masked_annovar.gtf is the gtf after haplogtig masking
+./gtfToGenePred -genePredExt Cv30_masked_annovar.gtf Cv30_masked_refGene.txt
+
+#or
+#gff3ToGenePred  genome.gff  genome_refGene.txt
+
+head Cv30_masked_refGene.txt
+#XR_002636969.1	NC_035780.1	+	13577	14594	14594	14594	3	13577,14236,14556,	13603,14290,14594,	0	LOC111116054	none	none	-1,-1,-1,
+#XM_022471938.1	NC_035780.1	+	28960	33324	30534	33204	5	28960,30523,31735,31976,32958,	29073,31557,31887,32565,33324,	0	LOC111126949	cmpl	cmpl	-1,0,0,2,0,
+#XM_022447324.1	NC_035780.1	-	43110	66897	43261	64219	3	43110,64122,66868,	44358,64334,66897,	0	LOC111110729	cmpl	cmpl	1,0,-1,
+#XM_022447333.1	NC_035780.1	-	43110	46506	43261	45997	2	43110,45912,	44358,46506,	0	LOC111110729	cmpl	cmpl	1,0,
+#XM_022449924.1	NC_035780.1	-	85605	95254	85615	95042	3	85605,88422,94570,	85777,88589,95254,	0	LOC111112434	cmpl	cmpl	0,1,0,
+#XM_022461698.1	NC_035780.1	+	99839	106460	99876	106120	5	99839,100553,104928,105527,106003,	100122,100661,105063,105614,106460,	0LOC111120752	cmpl	cmpl	0,0,0,0,0,
+#XM_022474921.1	NC_035780.1	-	108304	110077	108304	110077	1	108304,	110077,	0	LOC111128944	cmpl	cmpl	0,
+#XM_022474931.1	NC_035780.1	+	151858	157536	151858	157536	2	151858,156763,	153368,157536,	0	LOC111128953	cmpl	cmpl	0,1,
+#XM_022440054.1	NC_035780.1	-	163808	183798	163834	164266	2	163808,183731,	164341,183798,	0	LOC111105691	cmpl	cmpl	0,-1,
+#XM_022440042.1	NC_035780.1	+	164819	166793	165745	166681	2	164819,165619,	164941,166793,	0	LOC111105685	cmpl	cmpl	-1,0,
+```
+
+5） Get reference seq file
+
+```sh
+perl retrieve_seq_from_fasta.pl --format refGene --seqfile haplotig_masked_genome.fasta Cv30_masked_refGene.txt --out Cv30_masked_refGeneMrna.fa
+
+#NOTICE: Reading region file Cv30_masked_refGene.txt ... Done with 56594 regions from 10 chromosomes
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished reading 11 sequences from haplotig_masked_genome.fasta
+#NOTICE: Finished writting FASTA for 56594 genomic regions to cv30_masked_refGeneMrna.fa
+#WARNING: 583 gene regions do not have complete ORF (for example, XM_022458989.1NC_035781.1:16634302, XM_022477509.1NC_035783.1:42604388, XM_022478151.1NC_035783.1:2637626, XM_022466669.1NC_035782.1:61522397, XM_022457070.1NC_035789.1:22809997)
+```
+
+6) Annotation vcf
+
+```sh
+#format the vcf file. Genome-wide.noinvers.recode.vcf is the file without inversion.
+perl convert2annovar.pl -format vcf4 Genome-wide.noinvers.recode.vcf -outfile Genome-wide.noinvers.avinput -allsample -withfreq
+
+#NOTICE: Finished reading 4640750 lines from VCF file
+#NOTICE: A total of 4640654 locus in VCF file passed QC threshold, representing 4640654 SNPs (2480300 transitions and 2160354 transversions) and 0 indels/substitutions
+#NOTICE: Finished writing allele frequencies based on 4640654 SNP genotypes (2480300 transitions and 2160354 transversions) and 0 indels/substitutions for 1 samples
+
+# annotation
+perl annotate_variation.pl -geneanno -dbtype refGene -out Genome-wide.noinvers -build Cv30_masked Genome-wide.noinvers.avinput ./
+
+#NOTICE: Output files are written to Genome-wide.noinvers.variant_function, Genome-wide.noinvers.exonic_variant_function
+#NOTICE: Reading gene annotation from ./Cv30_masked_refGene.txt ... Done with 56594 transcripts (including 6193 without coding sequence annotation) for 32730 unique genes
+#NOTICE: Processing next batch with 4640654 unique variants in 4640654 input lines
+#NOTICE: Finished analyzing 1000000 query variants
+#NOTICE: Finished analyzing 2000000 query variants
+#NOTICE: Finished analyzing 3000000 query variants
+#NOTICE: Finished analyzing 4000000 query variants
+#NOTICE: Reading FASTA sequences from ./Cv30_masked_refGeneMrna.fa ... Done with 27934 sequences
+#WARNING: A total of 583 sequences will be ignored due to lack of correct ORF annotation
+```
+
+#### Intergenic issue
+
+The intergenic ratio is quite low from the current annotation results (table below), which require some further tests.
+
+|            | Genome-wide.variant_function |        |         | Genome-wide.noinvers.variant_function |
+|------------|------------------------------|--------|---------|---------------------------------------|
+| upstream   | 248983                       | 4.32%  | 201167  | 4.33%                                 |
+| exonic     | 717720                       | 12.45% | 586665  | 12.64%                                |
+| intronic   | 3089799                      | 53.59% | 2487691 | 53.61%                                |
+| downstream | 290586                       | 5.04%  | 235382  | 5.07%                                 |
+| intergenic | 1108959                      | 19.23% | 880315  | 18.97%                                |
+| total      | 5766147                      |        | 4640654 |                                       |
+
+Genome-wide.variant_function: masked dataset with MAF > 0.05 (SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.vcf)
+Genome-wide.noinvers.variant_function: same masked dataset but no inversions
+
+| Value      | Default precedence | Explanation                                                                                                           |
+|------------|--------------------|-----------------------------------------------------------------------------------------------------------------------|
+| exonic     | 1                  | variant overlaps a coding                                                                                             |
+| splicing   | 1                  | variant is within 2-bp of a splicing junction (use -splicing_threshold to change this)                                |
+| ncRNA      | 2                  | variant overlaps a transcript without coding annotation in the gene definition (see Notes below for more explanation) |
+| UTR5       | 3                  | variant overlaps a 5' untranslated region                                                                             |
+| UTR3       | 3                  | variant overlaps a 3' untranslated region                                                                             |
+| intronic   | 4                  | variant overlaps an intron                                                                                            |
+| upstream   | 5                  | variant overlaps 1-kb region upstream of transcription start site                                                     |
+| downstream | 5                  | variant overlaps 1-kb region downtream of transcription end site (use -neargene to change this)                       |
+| intergenic | 6                  | variant is in intergenic region                                                                                       |
+
+First I want to count how many SNPs outside the gene bodies.
+
+The total genes number based on NCBI is 39,493. However, we need to remove the genes in the haplotig regions,
+
+```sh
+# extract the gene coordinate from gtf file
+cut -d$'\t' -f 1,4-5 Cv30_masked_annovar.gtf > Cv30_masked_annovar.bed
+
+NC_035780.1	13578	14594
+NC_035780.1	13578	13603
+NC_035780.1	14237	14290
+NC_035780.1	14557	14594
+NC_035780.1	28961	33324
+NC_035780.1	28961	29073
+NC_035780.1	30524	31557
+NC_035780.1	31736	31887
+NC_035780.1	31977	32565
+NC_035780.1	32959	33324
+
+# replace the chr ID
+./sed.sh
+
+# merge overlap regions for genes
+python3 merge.py
+
+# replace the chr ID with NC.... again
+./sed_back.sh
+```
+
+Now we have a bed file for gene coordinate after masking the haplotigs - Cv30_masked_annovar.bed.merge (29543 genes)
+
+```sh
+# count how many SNPs outside the genes
+vcftools --vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.subset.vcf --exclude-bed Cv30_masked_annovar.bed.merge --recode --recode-INFO-all --out intergenic.sites
+
+VCFtools - 0.1.17
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf SNP.MASKED.TRSdp5g75.nDNA.g1.maf05.max2alleles.FIL.subset.vcf
+	--recode-INFO-all
+	--out intergenic.sites
+	--recode
+	--exclude-bed Cv30_masked_annovar.bed.merge
+
+Outputting VCF file...
+	Read 29542 BED file entries.
+After filtering, kept 1556661 out of a possible 5766147 Sites
+Run Time = 184.00 seconds
+
+vcftools --vcf Genome-wide.noinvers.recode.vcf --exclude-bed Cv30_masked_annovar.bed.merge --recode --recode-INFO-all --out noinvers.intergenic.sites
+
+Parameters as interpreted:
+	--vcf Genome-wide.noinvers.recode.vcf
+	--recode-INFO-all
+	--out noinvers.intergenic.sites
+	--recode
+	--exclude-bed Cv30_masked_annovar.bed.merge
+
+Outputting VCF file...
+	Read 29542 BED file entries.
+After filtering, kept 1240751 out of a possible 4640654 Sites
+Run Time = 145.00 seconds
+```
+
+The number of SNPs in intergenic regions should be 1556661 out of 5766147 (27.0%) sites across the genome, and 1240751 out of 4640654 (26.7%) sites for SNPs outside the inversions.
+
+What if we annotate the 1240751 sites?
+
+```sh
+perl convert2annovar.pl -format vcf4 noinvers.intergenic.sites.recode.vcf -outfile noinvers.intergenic.sites.avinput -allsample -withfreq
+
+NOTICE: Finished reading 1240847 lines from VCF file
+NOTICE: A total of 1240751 locus in VCF file passed QC threshold, representing 1240751 SNPs (635096 transitions and 605655 transversions) and 0 indels/substitutions
+NOTICE: Finished writing allele frequencies based on 1240751 SNP genotypes (635096 transitions and 605655 transversions) and 0 indels/substitutions for 1 samples
+
+annotate_variation.pl -geneanno -dbtype refGene -out noinvers.intergenic.sites -build Cv30_masked noinvers.intergenic.sites.avinput ./
+```
+
+Now let's take a look at the results.
+
+```sh
+./cnt.sh
+
+noinvers.intergenic.sites.variant_function
+upstream: 198115
+exonic: 19
+intronic: 0
+downstream: 231641
+intergenic: 830467
+total: 1240751
+```
+
+| noinvers.intergenic.sites.variant_function |         |
+|--------------------------------------------|---------|
+| upstream                                   | 198115  |
+| exonic                                     | 19      |
+| intronic                                   | 0       |
+| downstream                                 | 231641  |
+| intergenic                                 | 830467  |
+| total                                      | 1240751 |
+ 
+The number of sites in the intergenic regions is 830467, if plus the upstream and downstream of the genes, the total will be 830467+231641+198115=1062108 SNPs. The other classes are upstream;downstream, UTR5, UTR3, and ncRNA_exonic. 
+
+#### Conclusion
+
+In general, the Annovar is accurate in terms of SNP annotation. Some defects of this tool has been discussed in this site [https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/](https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/), but never a tool is perfect.
+
+In terms of the low level of intergenic site in our SNP list, I think the major issue comes from the vcf file. That is, perhaps some filtering steps has created a vcf dataset with low level of intergenic loci. 
+
+
+
+
