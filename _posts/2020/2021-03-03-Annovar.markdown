@@ -298,7 +298,7 @@ The number of sites in the intergenic regions is 830467, if plus the upstream an
 
 In general, the Annovar is accurate in terms of SNP annotation. Some defects of this tool has been discussed in this site [https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/](https://blog.goldenhelix.com/the-sate-of-variant-annotation-a-comparison-of-annovar-snpeff-and-vep/), but never a tool is perfect.
 
-In terms of the low level of intergenic site in our SNP list, I think the major issue comes from the vcf file. That is, perhaps some filtering steps has created a vcf dataset with low level of intergenic loci. 
+In terms of the low level of intergenic site in our SNP list, I think the major issue comes from the vcf file. That is, perhaps some filtering steps has created a vcf dataset biased toward the low intergenic counts. 
 
 
 
