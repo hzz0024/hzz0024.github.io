@@ -1,0 +1,36 @@
+---
+comments: true
+title: Levene's model for within-generation selection deltap
+date: '2021-03-05 12:00'
+tags:
+  - Power
+  - Deltap
+categories:
+  - WGS data analysis
+--- 
+
+### Levene's paper
+
+<img src="https://hzz0024.github.io/images/paper/0001.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/paper/0002.jpg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/paper/0003.jpg" alt="img" width="800"/>
+
+
+### Equation for delta p
+
+We calculate the value of delta P after selection in one generation under Levene's moldel, as a function of initial allele frequency before selection and the strength of selection. The fitness of AA is 1+s, the fitness of Aa is 1 and the fitness of aa is 1-s. Therefore, allele A determines genotypes' fitness. Additively, and selection has an antagonistic and symmetrical effect on the fitness of homozygotes.
+
+Levene is a function to calculate the delta_p with specified selection coefficient. For each s, it will return the delta_p with p ranging from 0-1. -P is a internal parameter that produce the vector of allele frequencies in the generation (i.e. in the larval pool) before selection 
+
+```R
+Levene <- function(s)
+  {
+  P <- seq(0,1,0.01)
+  DpLev <- (s*(P-(P^2)))/(1-(2*s*P)+s) # original code
+  
+  DpLev <- s*P*(1-P)/(1 + 2*s*P - s) # code modified by HG
+  }
+```
+
