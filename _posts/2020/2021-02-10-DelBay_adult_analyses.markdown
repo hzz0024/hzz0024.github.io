@@ -53,6 +53,8 @@ DelBay20: dataset include DelBay20 challenge samples (n=101).
        
 ### Sample coverage
 
+[DelBay19_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay19_summary_final.xlsx)
+[DelBay20_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay20_summary_final.xlsx)
 
 ### Downsampling
 
