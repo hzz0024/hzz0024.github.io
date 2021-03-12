@@ -12,7 +12,8 @@ categories:
   - WGS data analysis
 --- 
 
-`Downsampling 2020 data to account for batch effect`     
+- Downsampling 2020 data to account for batch effect
+
 1) Calculate the individual downsampling scale (p) for different relative coverages ratios (0.5x, 0.8x, 1x, 1.2x, and 1.5x relative to 2019 average realized coverage, 2.49). The different ratio settings should be useful for batch effect evaluation - done.            
 2) Determine -setMaxDepth for each datasets - done.            
 3) Call SNP for each 2020 challenge dataset with different coverage settings - under running.            
@@ -20,7 +21,8 @@ categories:
 5) Calling SNP again using a global SNP list and a combined 2019 (both challenge and wild, n=331) & 2020 (with different coverage settings - 0.5x, 0.8x, 1x, 1.2x, and 1.5x ) dataset.     
 6) Perform PCA on combined datasets with different coverage settings.          
 
-`Combined Fisher’s exact tests (after addressing batch effect issue)`    
+- Combined Fisher’s exact tests (after addressing batch effect issue)
+
 1) Update the depth for both Del19 (n=97) and Del20 (n=101) - done      
 2) Rerun SNP calling for Del19 and Del20     
 3) Generate a global SNP list by extracting the common shared SNPs       
@@ -29,14 +31,15 @@ categories:
 6) Examine common shared SNPs      
 7) SNP annotation and functional gene exploration       
 
-`SGS test (not restricted by the shared global SNP list)`     
+- SGS test (not restricted by the shared global SNP list) 
+
 1) Determine the global theta value for each population (REF19, REF20, wild?) - need discuss with Matt      
 2) Determine -setMaxDepth for each population (CHR19, REF19, CHR20, REF20, HC, NB, SR) - done.      
 3) Produce global SNP list for each of the population contrasts (CHR19 vs REF19, CHR20 vs REF20, HC vs. NB, HC vs SR)       
 4) Generate allele frequency data for each of the population (with global SNP list, set as -site)      
 5) Perform SGS tests on each of the contrast      
 
-`Map a GIS map for DelBay project`
+- Map a GIS map for DelBay project
 
 
 ### Depth evaluation
