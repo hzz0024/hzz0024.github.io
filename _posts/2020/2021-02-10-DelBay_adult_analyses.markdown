@@ -17,7 +17,7 @@ categories:
 2) Determine -setMaxDepth for each datasets - done.            
 3) Call SNP for each 2020 challenge dataset with different coverage settings - under running.            
 4) Produce a global SNP list by checking the shared SNPs between 2020 (with different coverage settings) and 2019 datasets.           
-5) Calling SNP again using a global SNP list and a combined 2019 (both challenge and wild, n=331) & 2020 (with different coverage settings - 0.5x, 0.8x, 1x, 1.2x, and 1.5x ) dataset.          
+5) Calling SNP again using a global SNP list and a combined 2019 (both challenge and wild, n=331) & 2020 (with different coverage settings - 0.5x, 0.8x, 1x, 1.2x, and 1.5x ) dataset.     
 6) Perform PCA on combined datasets with different coverage settings.          
 
 `Combined Fisher’s exact tests (after addressing batch effect issue)`    
@@ -35,6 +35,9 @@ categories:
 3) Produce global SNP list for each of the population contrasts (CHR19 vs REF19, CHR20 vs REF20, HC vs. NB, HC vs SR)       
 4) Generate allele frequency data for each of the population (with global SNP list, set as -site)      
 5) Perform SGS tests on each of the contrast      
+
+`Map a GIS map for DelBay project`
+
 
 ### Depth evaluation
 
