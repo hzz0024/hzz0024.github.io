@@ -75,7 +75,7 @@ Tool used for downsampling: [https://gatk.broadinstitute.org/hc/en-us/articles/3
 
 Note Relative Coverage is determined as the coverage of Del20 samples relative to the Del19 realized coverage: 2.49 (set as 1)
 
-|                                            |  Del19                  | Ratio (%) |  Del20                                      | Ratio (%) |
+|                                            |  Del19                  | Ratio     |  Del20                                      | Ratio     |
 |--------------------------------------------|-------------------------|-----------|---------------------------------------------|-----------|
 |                                            |  Del19                  |           |  Del20 (no downsampling)                    |           |
 | Total number of sites analyzed             | 512960891               |           | 501510962                                   |           |
@@ -186,14 +186,6 @@ Global SNPs (need edits):
 ### MDS
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/All_maf0.05_minq20_minmq25_pctind0.7_CV30_masked_noinvers_shared_sites.jpg" alt="img" width="800"/>
-
-### PCA 
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/All_maf0.05_minq20_minmq25_pctind0.7_CV30_masked_noinvers_shared_sites_PC1-2.jpg" alt="img" width="800"/>
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/All_maf0.05_minq20_minmq25_pctind0.7_CV30_masked_noinvers_shared_sites_PC2-3.jpg" alt="img" width="800"/>
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/All_maf0.05_minq20_minmq25_pctind0.7_CV30_masked_noinvers_shared_sites_PC3-4.jpg" alt="img" width="800"/>
 
 ### Combined Fisher's exact test
 
