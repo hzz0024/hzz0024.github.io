@@ -26,10 +26,10 @@ categories:
 - Combined Fisher’s exact tests (after addressing batch effect issue)
 
 1) Update the depth for both Del19 (n=97) and Del20 (n=101) - done      
-2) Rerun SNP calling for Del19 and Del20     
-3) Generate a global SNP list by extracting the common shared SNPs       
-4) Calling allele frequency for each individual population using the global SNP list      
-5) Perform Fisher’s exact tests      
+2) Rerun SNP calling for Del19 and Del20 - done    
+3) Generate a global SNP list by extracting the common shared SNPs - done    
+4) Calling allele frequency for each individual population using the global SNP list - done    
+5) Perform Fisher’s exact tests - almost done
 6) Examine common shared SNPs      
 7) SNP annotation and functional gene exploration       
 
@@ -188,5 +188,16 @@ Global SNPs (need edits):
 <img src="https://hzz0024.github.io/images/DelBay_adult/All_maf0.05_minq20_minmq25_pctind0.7_CV30_masked_noinvers_shared_sites.jpg" alt="img" width="800"/>
 
 ### Combined Fisher's exact test
+
+
+### SGS 
+
+- Del19
+
+No. outliers (FDR < 0.05): 122473 
+
+Note: p-value distribution is odd, may need consult with statistician.
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/ps_plot.jpeg" alt="img" width="800"/>
 
 
