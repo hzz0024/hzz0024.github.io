@@ -63,6 +63,8 @@ DelBay20: dataset include DelBay20 challenge samples (n=101).
 
 ### Downsampling
 
+Tool used for downsampling: [https://gatk.broadinstitute.org/hc/en-us/articles/360037056792-DownsampleSam-Picard-#--RANDOM_SEED](https://gatk.broadinstitute.org/hc/en-us/articles/360037056792-DownsampleSam-Picard-#--RANDOM_SEED)
+
 | Relative Coverage   | Mean | Deviation |  SD | Mean+3SD |
 |---------------------|------|-----------|-----|----------|
 | 0.5x                | 158  |   1603    | 40  |   278    |
@@ -166,12 +168,16 @@ The example above shows that simple count of SNP difference between the two shar
 
 Global SNPs (need edits):
 
-|                                          | Del20                   | Del19                 |
-|------------------------------------------|-------------------------|-----------------------|
-| Total number of sites analyzed           | 501510962               | 514216357             |
-| Number of sites retained after filtering | 5328491                 | 2505019               |
-| Private sites in each batch              | 3400996 (59.93%)        | 230762 (9.21%)        |
-| Shared sites                             | 2274257 (40.07%)        | 2274257 (90.79%)      |
+|                                          | Del19                 | Del20                   |
+|------------------------------------------|-----------------------|-------------------------|
+| Total number of sites analyzed           | 512960891             | 489141910               |
+| Number of sites retained after filtering | 2322712               | 3600633                 |
+| Private sites in each batch              | 290599 (12.51%)       | 1568520 (43.56%)        |
+| Shared sites                             | 2032113 (87.49%)      | 2032113 (56.44%)        |
+
+### Relatedness
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/relatedness_wtoutlier.jpg" alt="img" width="800"/> 
 
 ### Diverstiy estimate
 
