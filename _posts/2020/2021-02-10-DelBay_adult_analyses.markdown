@@ -1,7 +1,7 @@
 ---
 comments: true
 title: DelBay adult challenge & wild transects data summary
-date: '2021-03-12 12:00'
+date: '2021-03-25 12:00'
 tags:
   - DelBay
   - Challenge
@@ -14,14 +14,8 @@ categories:
 
 - Downsampling 2020 data to account for batch effect
 
-1) Calculate the individual downsampling scale (p) for different relative coverages ratios (0.5x, 0.8x, 1x, 1.2x, and 1.5x relative to 2019 average realized coverage, 2.49). The different ratio settings should be useful for batch effect evaluation - done.            
-2) Determine -setMaxDepth for each datasets - done.            
-3) Call SNP for each 2020 challenge dataset with different coverage settings - done.            
-4) Produce a global SNP list by checking the shared SNPs between 2020 (with different coverage settings) and 2019 datasets - done       
-5) Calling SNP again using a global SNP list and a combined 2019 (both challenge and wild, n=331) & 2020 (with different coverage settings - 0.5x, 0.8x, 1x, 1.2x, and 1.5x ) dataset - done    
-6) Perform PCA on combined datasets with different coverage settings - done
-7) Conclusion: it seems the relative converage below 1.5x could largely eliminate the batch effect. 
-8) Check why small number of SNPs could cause batch effect         
+
+        
 
 - Combined Fisher’s exact tests (after addressing batch effect issue)
 
@@ -46,7 +40,7 @@ categories:
 
 ### Depth evaluation
 
-Table below summarize the read depth distribution for each dataset. The last column is useful for Angsd -setMaxDepth setting.
+Table 1。 Summary of the read depth distribution for each dataset. The last column is useful for Angsd -setMaxDepth setting.
 
 | Data       | Mean | Deviation |  SD | Mean+3SD |
 |------------|------|-----------|-----|----------|
@@ -63,7 +57,19 @@ DelBay20: dataset include DelBay20 challenge samples (n=101).
 
 ### Downsampling
 
+- Steps
+
+1) Calculate the individual downsampling scale (p) for different relative coverages ratios (0.5x, 0.8x, 1x, 1.2x, and 1.5x relative to 2019 average realized coverage, 2.49). The different ratio settings should be useful for batch effect evaluation - done.            
+2) Determine -setMaxDepth for each datasets - done.            
+3) Call SNP for each 2020 challenge dataset with different coverage settings - done.            
+4) Produce a global SNP list by checking the shared SNPs between 2020 (with different coverage settings) and 2019 datasets - done       
+5) Calling SNP again using a global SNP list and a combined 2019 (both challenge and wild, n=331) & 2020 (with different coverage settings - 0.5x, 0.8x, 1x, 1.2x, and 1.5x ) dataset - done    
+6) Perform PCA on combined datasets with different coverage settings - done
+7) Conclusion: it seems the relative converage below 1.5x could largely eliminate the batch effect. 
+
 Tool used for downsampling: [https://gatk.broadinstitute.org/hc/en-us/articles/360037056792-DownsampleSam-Picard-#--RANDOM_SEED](https://gatk.broadinstitute.org/hc/en-us/articles/360037056792-DownsampleSam-Picard-#--RANDOM_SEED)
+
+Table 2. Summary of SNP depth for Angsd -setMaxDepth setting
 
 | Relative Coverage   | Mean | Deviation |  SD | Mean+3SD |
 |---------------------|------|-----------|-----|----------|
@@ -73,40 +79,39 @@ Tool used for downsampling: [https://gatk.broadinstitute.org/hc/en-us/articles/3
 | 1.5x                | 318  |   14972   | 122 |   685    |
 | 1x                  | 239  |   6351    | 80  |   478    |
 
-Note Relative Coverage is determined as the coverage of Del20 samples relative to the Del19 realized coverage: 2.49 (set as 1)
+Table 3. Summary of total SNPs analyzed, sites retained after filtering, private sites, and shared sites during downsampling processing. Note Relative Coverage is determined as the coverage of Del20 samples relative to the Del19 (all samples) realized coverage: 2.49 (set as 1)
 
-|                                            |  Del19                  | Ratio     |  Del20                                      | Ratio     |
-|--------------------------------------------|-------------------------|-----------|---------------------------------------------|-----------|
-|                                            |  Del19                  |           |  Del20 (no downsampling)                    |           |
-| Total number of sites analyzed             | 512960891               |           | 501510962                                   |           |
-| Number of sites retained after filtering   | 2322712                 |           | 5289614                                     |           |
-| Private sites                              | 273099                  | 11.76%    | 3240001                                     | 60.81%    |
-| Shared sites                               | 2049613                 | 88.24%    | 2049613                                     | 38.47%    |
-|                                            |  Del19                  |           |  Del20 (0.5x)                               |           |
-| Total number of sites analyzed             | 512960891               |           | 472421980                                   |           |
-| Number of sites retained after filtering   | 2322712                 |           | 1370058                                     |           |
-| Private sites                              | 1231793                 | 53.03%    | 279139                                      | 20.37%    |
-| Shared sites                               | 1090919                 | 46.97%    | 1090919                                     | 79.63%    |
-|                                            |  Del19                  |           |  Del20 (0.8x)                               |           |
-| Total number of sites analyzed             | 512960891               |           | 484548529                                   |           |
-| Number of sites retained after filtering   | 2322712                 |           | 2963811                                     |           |
-| Private sites                              | 372380                  | 16.03%    | 1013479                                     | 34.20%    |
-| Shared sites                               | 1950332                 | 83.97%    | 1950332                                     | 65.80%    |
-|                                            |  Del19                  |           |  Del20 (1x)                                 |           |
-| Total number of sites analyzed             | 512960891               |           | 489141910                                   |           |
-| Number of sites retained after filtering   | 2322712                 |           | 3600633                                     |           |
-| Private sites                              | 290599                  | 12.51%    | 1568520                                     | 43.56%    |
-| Shared sites                               | 2032113                 | 87.49%    | 2032113                                     | 56.44%    |
-|                                            |  Del19                  |           |  Del20 (1.2x)                               |           |
-| Total number of sites analyzed             | 512960891               |           | 492505988                                   |           |
-| Number of sites retained after filtering   | 2322712                 |           | 4068394                                     |           |
-| Private sites                              | 274375                  | 11.81%    | 2020057                                     | 49.65%    |
-| Shared sites                               | 2048337                 | 88.19%    | 2048337                                     | 50.35%    |
-|                                            |  Del19                  |           |  Del20 (1.5x)                               |           |
-| Total number of sites analyzed             | 512960891               |           | 496183649                                   |           |
-| Number of sites retained after filtering   | 2322712                 |           | 4576585                                     |           |
-| Private sites                              | 269986                  | 11.62%    | 2523859                                     | 55.15%    |
-| Shared sites                               | 2052726                 | 88.38%    | 2052726                                     | 44.85%    |
+|                                                 |  Total   SNPs | SNPs after filtering    |  Private | Ratio  | Shared  | Ratio  |
+|-------------------------------------------------|---------------|-------------------------|----------|--------|---------|--------|
+| Del19 (all sample)                              | 512960891     | 2322712                 | 273099   | 11.76% | 2049613 | 88.24% |
+|     Del20 (original)                            | 501510962     | 5289614                 | 3240001  | 60.81% | 2049613 | 38.47% |
+| Del19 (all sample)                              | 512960891     | 2322712                 | 1231793  | 53.03% | 1090919 | 46.97% |
+|     Del20 (0.5x)                                | 472421980     | 1370058                 | 279139   | 20.37% | 1090919 | 79.63% |
+| Del19 (all sample)                              | 512960891     | 2322712                 | 372380   | 16.03% | 1950332 | 83.97% |
+|     Del20 (0.8x)                                | 484548529     | 2963811                 | 1013479  | 34.20% | 1950332 | 65.80% |
+| Del19 (all sample)                              | 512960891     | 2322712                 | 290599   | 12.51% | 2032113 | 87.49% |
+|     Del20 (1x)                                  | 489141910     | 3600633                 | 1568520  | 43.56% | 2032113 | 56.44% |
+| Del19 (all sample)                              | 512960891     | 2322712                 | 274375   | 11.81% | 2048337 | 88.19% |
+|     Del20 (1.2x)                                | 492505988     | 4068394                 | 2020057  | 49.65% | 2048337 | 50.35% |
+| Del19 (all sample)                              | 512960891     | 2322712                 | 269986   | 11.62% | 2052726 | 88.38% |
+|     Del20 (1.5x)                                | 496183649     | 4576585                 | 2523859  | 55.15% | 2052726 | 44.85% |
+
+Table 4. Summary of total SNPs analyzed, sites retained after filtering, private sites, and shared sites during downsampling processing, with Del19 dataset constrained to challenge samples only. Note Relative Coverage is determined as the coverage of Del20 samples relative to the Del19 (all samples) realized coverage: 2.49 (set as 1)
+
+|                                                 |  Total   SNPs | SNPs after filtering    |  Private | Ratio  | Shared  | Ratio  |
+|-------------------------------------------------|---------------|-------------------------|----------|--------|---------|--------|
+| Del19 (only challenge)                          | 482669010     | 2140437                 | 380304   | 17.77% | 1760133 | 82.23% |
+|     Del20 (original)                            | 501510962     | 5289614                 | 3529481  | 66.72% | 1760133 | 33.28% |
+| Del19 (only challenge)                          | 482669010     | 2140437                 | 1087430  | 50.80% | 1053007 | 49.20% |
+|     Del20 (0.5x)                                | 472421980     | 1370058                 | 317051   | 23.14% | 1053007 | 76.86% |
+| Del19 (only challenge)                          | 482669010     | 2140437                 | 430595   | 20.12% | 1709842 | 79.88% |
+|     Del20 (0.8x)                                | 484548529     | 2963811                 | 1253969  | 42.31% | 1709842 | 57.69% |
+| Del19 (only challenge)                          | 482669010     | 2140437                 | 379531   | 17.73% | 1760906 | 82.27% |
+|     Del20 (1x)                                  | 489141910     | 3600633                 | 1839727  | 51.09% | 1760906 | 48.91% |
+| Del19 (only challenge)                          | 482669010     | 2140437                 | 370648   | 17.32% | 1769789 | 82.68% |
+|     Del20 (1.2x)                                | 492505988     | 4068394                 | 2298605  | 56.50% | 1769789 | 43.50% |
+| Del19 (only challenge)                          | 482669010     | 2140437                 | 371884   | 17.37% | 1768553 | 82.63% |
+|     Del20 (1.5x)                                | 496183649     | 4576585                 | 2808032  | 61.36% | 1768553 | 38.64% |
 
 Next, I am wondering how many identical SNPs among the shared files: Del19_20_global_share_snps.list - no downsampling treatman and Del19_20_1x_share_snps.list - downsampling Del20 for 1x relative coverage. 
 
@@ -137,7 +142,7 @@ Private SNPs in Del19_20_global_share_snps.list: 86373
 Private SNPs in Del19_20_1x_share_snps.list: 68873
 ```
 
-The example above shows that simple count of SNP difference between the two shared SNP lists is smaller (2049613-2032113=17500) than the private SNP sites in each file (86373 and 68873), suggesting that downsampling processes may create distinct datasets with non-overlapping SNPs. From the PCA plots, starting from 1.2x I no longer observe the distinct clusters from two sequencing batches. Perhaps checking the non-overlapping SNPs between 1.5x and 1.2x datasets may give me some hints about where the batch effect come from.
+The example above shows that simple count of SNP difference between the two shared SNP lists is smaller (2049613-2032113=17500) than the private SNP sites in each file (86373 and 68873), suggesting that downsampling processes may create distinct datasets with non-overlapping SNPs. From the PCA plots, starting from 1.2x I no longer observe the divergent clusters from two sequencing batches. Perhaps checking the non-overlapping SNPs between 1.5x and 1.2x datasets may give me some hints about where the batch effect come from, but I will proceed with 1x SNP list for downstream analysis.
 
 - PCA result without downsampling
 
@@ -166,14 +171,14 @@ The example above shows that simple count of SNP difference between the two shar
 
 ### Global SNP calling using different datasets 
 
-Global SNPs (need edits):
+Table 5. Summary of SNPs used as a global SNP list (2032113 SNPs). Note that private and shared SNP number and the ratio are not the same between two datasets. I am working on other downsampling schemes (0.6 and 0.7x) to balance these numbers.
 
-|                                          | Del19                 | Del20                   |
-|------------------------------------------|-----------------------|-------------------------|
-| Total number of sites analyzed           | 512960891             | 489141910               |
-| Number of sites retained after filtering | 2322712               | 3600633                 |
-| Private sites in each batch              | 290599 (12.51%)       | 1568520 (43.56%)        |
-| Shared sites                             | 2032113 (87.49%)      | 2032113 (56.44%)        |
+|                                          | Del19 (all samples)   | Del19 (only challenge)| Del20 (1x)              |
+|------------------------------------------|-----------------------|-----------------------|-------------------------|
+| Total number of sites analyzed           | 512960891             | 482669010             | 489141910               |
+| Number of sites retained after filtering | 2322712               | 2140437               | 3600633                 |
+| Private sites in each batch              | 290599 (12.51%)       | 379531 (17.73%)       | 1568520 (43.56%)        |
+| Shared sites                             | 2032113 (87.49%)      | 1760906 (82.27%)      | 2032113 (56.44%)        |
 
 ### Relatedness
 
@@ -190,14 +195,45 @@ Global SNPs (need edits):
 ### Combined Fisher's exact test
 
 
-### SGS 
 
-- Del19
+### Single-generation selection (SGS) 
 
-No. outliers (FDR < 0.05): 122473 
+Table 6. Summary of SNP depth for Angsd -setMaxDepth settings. Note CHR19-REF19, CHR20-REF20, HC-SR, and HC-NB are contrasts used for SGS tests.
 
-Note: p-value distribution is odd, may need consult with statistician.
+|     Contrasts       | Mean | Deviation |  SD | Mean+3SD |
+|---------------------|------|-----------|-----|----------|
+| CHR19-REF19         | 189  |   2966    | 54  |   352    |
+| CHR20-REF20         | 433  |   33698   | 184 |   983    |
+| HC-SR               | 216  |   4487    | 67  |   417    |
+| HC_NB               | 210  |   3994    | 63  |   400    |
+
+Note: p-value distribution is initially odd, probably due the usage of quantile-based p-value. After consulting with CSCU, now I switched to 2-sides p-value estimation with naive exterme delta-p counts.
+
+p-value distribution for CHR19-REF19 contrast using quantile-based p-value
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/ps_plot.jpeg" alt="img" width="800"/>
+
+p-value distribution for CHR19-REF19 contrast using 2-side p-value
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/ps_2side.jpeg" alt="img" width="800"/>
+
+Table 6. Number of outliers identifed from SGS test for each population contrast (FDR < 0.05).
+
+|     Contrasts       | Outliers | Global theta |
+|---------------------|----------|--------------|
+| CHR19-REF19         | 3006     |              |
+| CHR20-REF20         |          |              |
+| HC-SR               |          |              |
+| HC_NB               |          |              |
+
+### Probabilistic Random Forest
+
+Following the paper by Reis et al. 2018. [Probabilistic Random Forest: A machine learning algorithm for noisy datasets](https://arxiv.org/pdf/1811.05994.pdf). I am trying to incorporate the genotype likelihood into random forest test.
+
+The initial trial is performed on 3006 outliers SNPs identified from SGS CHR19-REF19 contrasts.
+
+
+
+### Genotype-environment association
 
 
