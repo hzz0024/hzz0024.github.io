@@ -12,32 +12,6 @@ categories:
   - WGS data analysis
 --- 
 
-- Downsampling 2020 data to account for batch effect
-
-
-        
-
-- Combined Fisher’s exact tests (after addressing batch effect issue)
-
-1) Update the depth for both Del19 (n=97) and Del20 (n=101) - done      
-2) Rerun SNP calling for Del19 and Del20 - done    
-3) Generate a global SNP list by extracting the common shared SNPs - done    
-4) Calling allele frequency for each individual population using the global SNP list - done    
-5) Perform Fisher’s exact tests - almost done
-6) Examine common shared SNPs      
-7) SNP annotation and functional gene exploration       
-
-- SGS test (not restricted by the shared global SNP list) 
-
-1) Determine the global theta value for each population (REF19, REF20, wild?) - REF19 done, the other two under running   
-2) Determine -setMaxDepth for each population (CHR19, REF19, CHR20, REF20, HC, NB, SR) - done.      
-3) Produce global SNP list for each of the population contrasts (CHR19 vs REF19, CHR20 vs REF20, HC vs. NB, HC vs SR)       
-4) Generate allele frequency data for each of the population (with global SNP list, set as -site)       
-5) Perform SGS tests on each of the contrast      
-
-- Map a GIS map for DelBay project
-
-
 ### Depth evaluation
 
 Table 1。 Summary of the read depth distribution for each dataset. The last column is useful for Angsd -setMaxDepth setting.
@@ -194,9 +168,67 @@ Table 5. Summary of SNPs used as a global SNP list (2032113 SNPs). Note that pri
 
 ### Combined Fisher's exact test
 
+1) Update the depth for both Del19 (n=97) and Del20 (n=101) - done      
+2) Rerun SNP calling for Del19 and Del20 - done    
+3) Generate a global SNP list by extracting the common shared SNPs - done    
+4) Calling allele frequency for each individual population using the global SNP list - done    
+5) Perform Fisher’s exact tests - done
+6) Examine common shared SNPs - done     
+7) SNP annotation and functional gene exploration  
 
+In the p-value combination step, because the weighted Z-test (also called ‘Stouffer’s method) is more power and more precision than does Fisher’s test ([Whitlock 2005](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1420-9101.2005.00917.x)), I used Z method to combine the p-values from the parallel tests. It favours symmetric rejection and is less sensitive to a single low p-value, requiring more consistently low p-values to yield a low combined p-value. 
+
+The combinePValues function in the [scran R package](https://rdrr.io/bioc/scran/man/combinePValues.html) was used to perform Z method.
+
+Results:
+
+| Contrasts                  | No. outliers |
+|----------------------------|--------------|
+| REF19_CHR19_NB_HC          | 13           |
+| REF19_CHR19_SR_HC          | 4            |
+| Shared                     | 1            |
+| REF19_SR_ARN_COH (control) | 0            |
+| REF20_CHR20_NB_HC          | 7            |
+| REF20_CHR20_SR_HC          | 0            |
+| Shared                     | 0            |
+| REF20_SR_ARN_COH (control) | 3            |
+| REF19_REF20_CHR19_CHR20    | 696          |
+
+The detailed SNP lists are [here](https://docs.google.com/spreadsheets/d/1hDH_lp_BQC9grGAK2vbZZBW-tzpiZCvMvajyMe-rYUo/edit?usp=sharing)
+
+Now take a look at the allele frequency changes at these potential outliers.
+
+- REF19_CHR19_NB_HC (13 outliers)
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_REF19_CHR19_NB_HC.jpg" alt="img" width="800"/>
+
+One of them, SNP NC_035784.1_16552716 is shared between REF19_CHR19_NB_HC and REF19_CHR19_SR_HC. This SNPs is located in the geneActin-depolymerizing factor 1-like (LOC111134891). Below is the delta_p patterns for this SNP
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_NC_035784.1_16552716.jpg" alt="img" width="800"/>
+
+- REF20_CHR20_NB_HC (7 outliers)
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_REF20_CHR20_NB_HC.jpg" alt="img" width="800"/>
+
+- REF19_REF20_CHR19_CHR20 (696 outlies)
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_control.jpg" alt="img" width="800"/>
+
+Zoom in on some SNPs at chromosome 5
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_control_chr5.jpg" alt="img" width="800"/>
+
+Zoom in on some SNPs at chromosome 1
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_control_chr1.jpg" alt="img" width="800"/>
 
 ### Single-generation selection (SGS) 
+
+1) Determine the global theta value for each population (REF19, REF20, wild?) - REF19 done, the other two under running   
+2) Determine -setMaxDepth for each population (CHR19, REF19, CHR20, REF20, HC, NB, SR) - done.      
+3) Produce global SNP list for each of the population contrasts (CHR19 vs REF19, CHR20 vs REF20, HC vs. NB, HC vs SR) - done      
+4) Generate allele frequency data for each of the population (with global SNP list, set as -site) - done      
+5) Perform SGS tests on each of the contrast 
 
 Table 6. Summary of SNP depth for Angsd -setMaxDepth settings. Note CHR19-REF19, CHR20-REF20, HC-SR, and HC-NB are contrasts used for SGS tests.
 
