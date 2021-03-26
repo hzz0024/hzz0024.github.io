@@ -202,7 +202,7 @@ Now take a look at the allele frequency changes at these potential outliers.
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_REF19_CHR19_NB_HC.jpg" alt="img" width="800"/>
 
-One of them, SNP NC_035784.1_16552716 is shared between REF19_CHR19_NB_HC and REF19_CHR19_SR_HC. This SNPs is located in the geneActin-depolymerizing factor 1-like (LOC111134891). Below is the delta_p patterns for this SNP
+One of them, SNP NC_035784.1_16552716 is shared between REF19_CHR19_NB_HC and REF19_CHR19_SR_HC. This SNPs is located in the gene Actin-depolymerizing factor 1-like (LOC111134891). Below is the delta_p patterns for this SNP
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_NC_035784.1_16552716.jpg" alt="img" width="800"/>
 
@@ -258,13 +258,33 @@ Table 6. Number of outliers identifed from SGS test for each population contrast
 | HC-SR               |          |              |
 | HC_NB               |          |              |
 
+<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_SGS.jpg" alt="img" width="800"/>
+
 ### Probabilistic Random Forest
 
 Following the paper by Reis et al. 2018. [Probabilistic Random Forest: A machine learning algorithm for noisy datasets](https://arxiv.org/pdf/1811.05994.pdf). I am trying to incorporate the genotype likelihood into random forest test.
 
-The initial trial is performed on 3006 outliers SNPs identified from SGS CHR19-REF19 contrasts.
+The initial trial is performed on 3006 outliers SNPs identified from SGS CHR19-REF19 contrasts (total 2032113 SNPS).
 
+<img src="https://hzz0024.github.io/images/DelBay_adult/PRF_accuracy.jpg" alt="img" width="800"/>
 
+- shared SNPs among repeat runs (1000, 500, 100, 50 are top SNPs based on importance)
+
+1000
+NC_035780.1_50001008 NC_035782.1_45223277 NC_035784.1_10248759 *NC_035784.1_16552962* NC_035784.1_18676441 NC_035784.1_83138159 NC_035786.1_33698717
+
+500
+NC_035780.1_50001008 NC_035782.1_45223277 *NC_035784.1_16552962* NC_035784.1_18676441 NC_035786.1_33698717
+
+100
+*NC_035784.1_16552962*
+
+50
+*NC_035784.1_16552962*
+
+- Zoom-in for NC_035784.1_16552962 (red) and NC_035784.1_16552716 (lightgreen), which both located in Actin-depolymerizing factor 1-like (LOC111134891).
+
+<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_PRF.jpg" alt="img" width="800"/>
 
 ### Genotype-environment association
 
