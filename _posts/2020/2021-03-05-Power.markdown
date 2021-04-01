@@ -18,44 +18,51 @@ categories:
 <img src="https://hzz0024.github.io/images/Paper/0003.jpg" alt="img" width="800"/>
 
 
-### Equation for delta p
+### Levene's equation for delta_p
 
-We calculate the value of delta P after selection in one generation under Levene's moldel, as a function of initial allele frequency before selection and the strength of selection. The fitness of AA is 1+s, the fitness of Aa is 1 and the fitness of aa is 1-s. Therefore, allele A determines genotypes' fitness. Additively, and selection has an antagonistic and symmetrical effect on the fitness of homozygotes.
-
-Levene is a function to calculate the delta_p with specified selection coefficient. For each s, it will return the delta_p with p ranging from 0-1. -P is a internal parameter that produce the vector of allele frequencies in the generation (i.e. in the larval pool) before selection 
+We calculate the value of delta P after selection in one generation under Levene's model, as a function of initial allele frequency (P) and the strength of selection (s). For each s, it will return the delta_p with P ranging from 0-1. Here P is a the vector of allele frequencies before within-generation selection. 
 
 ```R
 Levene <- function(s)
   {
   P <- seq(0,1,0.01)
-  DpLev <- (s*(P-(P^2)))/(1-(2*s*P)+s) # original code
-  
-  DpLev <- s*P*(1-P)/(1 + 2*s*P - s) # code modified by HG
+  DpLev <- (s*(P-(P^2)))/(1-(2*s*P)+s) # original code provided by Dr. Gagnaire
   }
 ```
 
-### Correction for initial code
+### Modification of original code
 
-Below is how I obtain the corrected function for Levene model
+However, when I went through the code, I found a potential bug in this function. 
+
+As indicated by Howard Levene in the paper, Wi and Vi are the adaptive values of AA and A'A' individuals relative to AA' in the i-th inche. With that, we assume fitness of AA as 1+s, the fitness of Aa as 1, and the fitness of aa as 1-s. With this assumption, the selection has an antagonistic and symmetrical effect on the fitness of homozygotes.
+
+Below is how I obtain the modified function for Levene's model
 
 ```sh
-Vi = 1 -s
-Wi= 1+s
+Wi= 1+s # adaptive values of AA
+Vi = 1-s # adaptive values of A'A' 
+
+# Substitute Wi and Vi into equation 1 in Levene's paper
 
 Upper part: 
 
-(1-Vi) + (Wi + Vi -2)q 
-= (1-(1-s)) + ((1+s) + (1-s) -2)q 
+  (1-Vi) + (Wi+Vi-2)q 
+= (1-(1-s)) + ((1+s) + (1-s)-2)q 
 = s
 
 Down part:
 
-Vi + 2(1-Vi)q + (Wi + Vi -2)q^ 
-= (1-s) + 2(1-(1-s))q + (1+s + 1-s -2)q^ 
+  Vi + 2(1-Vi)q + (Wi+Vi-2)q^ 
+= (1-s) + 2(1-(1-s))q + (1+s+1-s-2)q^ 
 = 1-s + 2sq
 
 The whole equation will be:
 
 (q*(1-q)*s)/(1 + 2sq -s)
+
+or 
+
+DpLev <- (s*(P-(P^2)))/(1+(2*s*P)-s)
 ```
 
+Not sure if I am right or not. I need to ask Dr. Gagnaire for help.

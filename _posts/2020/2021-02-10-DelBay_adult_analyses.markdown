@@ -48,6 +48,8 @@ Table 2. Summary of SNP depth for Angsd -setMaxDepth setting
 | Relative Coverage   | Mean | Deviation |  SD | Mean+3SD |
 |---------------------|------|-----------|-----|----------|
 | 0.5x                | 158  |   1603    | 40  |   278    |
+| 0.6x                | 173  |   2144    | 46  |   312    |
+| 0.7x                | 189  |   2931    | 54  |   352    |
 | 0.8x                | 206  |   3933    | 63  |   395    |
 | 1.2x                | 271  |   9378    | 97  |   562    |
 | 1.5x                | 318  |   14972   | 122 |   685    |
@@ -61,6 +63,10 @@ Table 3. Summary of total SNPs analyzed, sites retained after filtering, private
 |     Del20 (original)                            | 501510962     | 5289614                 | 3240001  | 60.81% | 2049613 | 38.47% |
 | Del19 (all sample)                              | 512960891     | 2322712                 | 1231793  | 53.03% | 1090919 | 46.97% |
 |     Del20 (0.5x)                                | 472421980     | 1370058                 | 279139   | 20.37% | 1090919 | 79.63% |
+| Del19 (all sample)                              | 512960891     | 2322712                 | 787759   |      % | 1534953 |      % |
+|     Del20 (0.6x)                                | 477337821     | 1996167                 | 461214   |      % | 1534953 |      % |
+| Del19 (all sample)                              | 512960891     | 2322712                 | 511985   |      % | 1810727 |      % |
+|     Del20 (0.7x)                                | 481289979     | 2519717                 | 708990   |      % | 1810727 |      % |
 | Del19 (all sample)                              | 512960891     | 2322712                 | 372380   | 16.03% | 1950332 | 83.97% |
 |     Del20 (0.8x)                                | 484548529     | 2963811                 | 1013479  | 34.20% | 1950332 | 65.80% |
 | Del19 (all sample)                              | 512960891     | 2322712                 | 290599   | 12.51% | 2032113 | 87.49% |
@@ -253,9 +259,9 @@ Table 6. Number of outliers identifed from SGS test for each population contrast
 
 |     Contrasts       | Outliers | Global theta |
 |---------------------|----------|--------------|
-| CHR19-REF19         | 3006     |              |
+| CHR19-REF19         | 3006     |              | 
 | CHR20-REF20         |          |              |
-| HC-SR               |          |              |
+| HC-SR               |          |              |       
 | HC_NB               |          |              |
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_SGS.jpg" alt="img" width="800"/>
