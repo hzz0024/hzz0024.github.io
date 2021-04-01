@@ -20,7 +20,7 @@ categories:
 
 ### Levene's equation for delta_p
 
-We calculate the value of delta P after selection in one generation under Levene's model, as a function of initial allele frequency (P) and the strength of selection (s). For each s, it will return the delta_p with P ranging from 0-1. Here P is a the vector of allele frequencies before within-generation selection. 
+In power analysis, the delta_p for within-generation selection is obtained using Levene's model, which is function of starting allele frequency (P, before selection) and the strength of selection (s). For each s, it will return the delta_p with P ranging from 0-1. 
 
 ```R
 Levene <- function(s)
@@ -44,19 +44,19 @@ Vi = 1-s # adaptive values of A'A'
 
 # Substitute Wi and Vi into equation 1 in Levene's paper
 
-Upper part: 
+# numerator part: 
 
   (1-Vi) + (Wi+Vi-2)q 
 = (1-(1-s)) + ((1+s) + (1-s)-2)q 
 = s
 
-Down part:
+# denominator part:
 
   Vi + 2(1-Vi)q + (Wi+Vi-2)q^ 
 = (1-s) + 2(1-(1-s))q + (1+s+1-s-2)q^ 
 = 1-s + 2sq
 
-The whole equation will be:
+The whole equation will then be:
 
 (q*(1-q)*s)/(1 + 2sq -s)
 
@@ -65,4 +65,4 @@ or
 DpLev <- (s*(P-(P^2)))/(1+(2*s*P)-s)
 ```
 
-Not sure if I am right or not. I need to ask Dr. Gagnaire for help.
+Not sure if I am right or not， need help from Dr. Gagnaire.

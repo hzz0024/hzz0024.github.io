@@ -83,7 +83,7 @@
               <article class="markdown-body entry-content" itemprop="text" id="grip-content">
                 <hr>
 <p>comments: true
-title: Levene's model for within-generation selection deltap
+title: Levene's model for power test
 date: '2021-03-05 12:00'
 tags:</p>
 <ul>
@@ -100,7 +100,7 @@ categories:</li>
 <p><a href="https://camo.githubusercontent.com/2d179939e7da7f098682e6e748006e1f7ed589f90db102f1735e5f827c0e92c2/68747470733a2f2f687a7a303032342e6769746875622e696f2f696d616765732f50617065722f303030332e6a7067" target="_blank" rel="nofollow"><img src="https://camo.githubusercontent.com/2d179939e7da7f098682e6e748006e1f7ed589f90db102f1735e5f827c0e92c2/68747470733a2f2f687a7a303032342e6769746875622e696f2f696d616765732f50617065722f303030332e6a7067" alt="img" width="800" data-canonical-src="https://hzz0024.github.io/images/Paper/0003.jpg" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-levenes-equation-for-delta_p" class="anchor" href="#levenes-equation-for-delta_p" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Levene's equation for delta_p</h3>
-<p>We calculate the value of delta P after selection in one generation under Levene's model, as a function of initial allele frequency (P) and the strength of selection (s). For each s, it will return the delta_p with P ranging from 0-1. Here P is a the vector of allele frequencies before within-generation selection.</p>
+<p>In power analysis, the delta_p for within-generation selection is obtained using Levene's model, which is function of starting allele frequency (P, before selection) and the strength of selection (s). For each s, it will return the delta_p with P ranging from 0-1.</p>
 <div class="highlight highlight-source-r"><pre><span class="pl-en">Levene</span> <span class="pl-k">&lt;-</span> <span class="pl-k">function</span>(<span class="pl-smi">s</span>)
   {
   <span class="pl-smi">P</span> <span class="pl-k">&lt;-</span> seq(<span class="pl-c1">0</span>,<span class="pl-c1">1</span>,<span class="pl-c1">0.01</span>)
@@ -116,26 +116,26 @@ Vi = 1-s <span class="pl-c"><span class="pl-c">#</span> adaptive values of A'A' 
 
 <span class="pl-c"><span class="pl-c">#</span> Substitute Wi and Vi into equation 1 in Levene's paper</span>
 
-Upper part: 
+<span class="pl-c"><span class="pl-c">#</span> numerator part: </span>
 
   (1-Vi) + (Wi+Vi-2)q 
 = (1-(1-s)) + <span class="pl-s"><span class="pl-pds">((</span><span class="pl-c1">1</span><span class="pl-k">+</span>s) <span class="pl-k">+</span> (<span class="pl-c1">1</span><span class="pl-k">-</span>s)<span class="pl-k">-</span><span class="pl-c1">2</span>)q </span>
 <span class="pl-s">= s</span>
 <span class="pl-s"></span>
-<span class="pl-s">Down part:</span>
+<span class="pl-s"># denominator part:</span>
 <span class="pl-s"></span>
 <span class="pl-s">  Vi + <span class="pl-c1">2</span>(<span class="pl-c1">1</span>-Vi)q + (Wi+Vi-<span class="pl-c1">2</span>)q^ </span>
 <span class="pl-s">= (<span class="pl-c1">1</span>-s) + <span class="pl-c1">2</span>(<span class="pl-c1">1</span>-(<span class="pl-c1">1</span>-s<span class="pl-pds">))</span></span>q + (1+s+1-s-2)q^ 
 = 1-s + 2sq
 
-The whole equation will be:
+The whole equation will <span class="pl-k">then</span> be:
 
 (q<span class="pl-k">*</span>(1-q)<span class="pl-k">*</span>s)/(1 + 2sq -s)
 
 or 
 
 DpLev <span class="pl-k">&lt;</span>- (s<span class="pl-k">*</span>(P-(P^2)))/(1<span class="pl-k">+</span>(2<span class="pl-k">*</span>s<span class="pl-k">*</span>P)-s)</pre></div>
-<p>Not sure if I am right or not. I need to ask Dr. Gagnaire for help.</p>
+<p>Not sure if I am right or not， need help from Dr. Gagnaire.</p>
 
               </article>
             </div>
