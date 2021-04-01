@@ -1,6 +1,6 @@
 ---
 comments: true
-title: Levene's model for within-generation selection deltap
+title: Levene's model for power test
 date: '2021-03-05 12:00'
 tags:
   - Power
