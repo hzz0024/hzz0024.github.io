@@ -256,24 +256,28 @@ Table 6. Summary of SNP depth for Angsd -setMaxDepth settings. Note CHR19-REF19,
 
 Note: p-value distribution is initially odd, probably due the usage of quantile-based p-value. After consulting with CSCU, now I switched to 2-sides p-value estimation with naive exterme delta-p counts.
 
-p-value distribution for CHR19-REF19 contrast using quantile-based p-value
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/ps_plot.jpeg" alt="img" width="800"/>
-
 p-value distribution for CHR19-REF19 contrast using 2-side p-value
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/ps_2side.jpeg" alt="img" width="800"/>
 
 Table 6. Number of outliers identifed from SGS test for each population contrast (FDR < 0.05).
 
-|     Contrasts       | Outliers | Global theta |
-|---------------------|----------|--------------|
-| CHR19-REF19         | 3006     |              | 
-| CHR20-REF20         |          |              |
-| HC-SR               |          |              |       
-| HC_NB               |          |              |
+|     Contrasts       | Outliers |
+|---------------------|----------|
+| CHR19-REF19         | 3265     |
+| CHR20-REF20         | 202      |              
+| HC-SR               | 2444     |                     
+| HC_NB               | 2869     |              
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_SGS.jpg" alt="img" width="800"/>
+
+Shared SNPs:
+
+CHR20-REF20 & HC_NB: NC_035782.1_62395550
+
+CHR19-REF19 & HC_NB or HC_SR: 12 SNPS
+
+CHR19-REF19 & HC_NB & HC_SR: NC_035786.1_8772371
 
 ### Probabilistic Random Forest
 
