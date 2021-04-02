@@ -26,8 +26,13 @@ DelBay20: dataset include DelBay20 challenge samples (n=101).
        
 ### Sample coverage
 
-[DelBay19_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay19_summary_final.xlsx)           
-[DelBay20_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay20_summary_final.xlsx)     
+[DelBay19_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay19_summary_final.xlsx)    
+
+Mean realized depth:2.49 (SD = 0.68)      
+
+[DelBay20_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay20_summary_final.xlsx)  
+
+Mean realized depth:5.17 (SD = 1.40) 
 
 ### Downsampling
 
@@ -92,6 +97,10 @@ Table 4. Summary of total SNPs analyzed, sites retained after filtering, private
 |     Del20 (1.2x)                                | 492505988     | 4068394                 | 2298605  | 56.50% | 1769789 | 43.50% |
 | Del19 (only challenge)                          | 482669010     | 2140437                 | 371884   | 17.37% | 1768553 | 82.63% |
 |     Del20 (1.5x)                                | 496183649     | 4576585                 | 2808032  | 61.36% | 1768553 | 38.64% |
+
+- Screenshot of different depth in IGV
+
+<img src="https://hzz0024.github.io/images/batch_effect/igv_chr5_16552962.png" alt="img" width="800"/>
 
 Next, I am wondering how many identical SNPs among the shared files: Del19_20_global_share_snps.list - no downsampling treatman and Del19_20_1x_share_snps.list - downsampling Del20 for 1x relative coverage. 
 
