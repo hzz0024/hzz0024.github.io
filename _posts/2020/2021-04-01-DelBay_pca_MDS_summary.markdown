@@ -73,5 +73,9 @@ Angsd-MDS for shared SNPs (downsampling to 0.7x, 1810727 SNPs)
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/angsd_MDS_0.7x.jpeg" alt="img" width="800"/>
 
+### Conclusion
 
+1. PCAngsd is more susceptible to batch effect caused by coverage difference than ANGSD.       
+2. Angsd-PCA and Angsd-MDS found no batch effects in no downsampling, downsampling to 1x relative coverage, and 0.7x relative coverage datasets.              
+3. It would be interesting to see how option of -doIBS 2 (Concensus base) change the Angsd-PCA and Angsd-MDS results (under running).
 
