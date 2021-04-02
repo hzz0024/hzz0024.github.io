@@ -73,9 +73,35 @@ Angsd-MDS for shared SNPs (downsampling to 0.7x, 1810727 SNPs)
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/angsd_MDS_0.7x.jpeg" alt="img" width="800"/>
 
-### Conclusion
+### Conclusion for PCA
 
-1. PCAngsd is more susceptible to batch effect caused by coverage difference than ANGSD.       
-2. Angsd-PCA and Angsd-MDS found no batch effects in no downsampling, downsampling to 1x relative coverage, and 0.7x relative coverage datasets.              
-3. It would be interesting to see how option of -doIBS 2 (Concensus base) change the Angsd-PCA and Angsd-MDS results (under running).
+1. PCAngsd is more susceptible to batch effect caused by coverage difference than ANGSD.              
+2. Angsd-PCA and Angsd-MDS found no batch effects in 1) no downsampling; 2) downsampling to 1x relative coverage, or 3) 0.7x relative coverage datasets.       
+3. Homogenizing genetic differentiation was found among the populations.                    
+4. It would be interesting to see how option of -doIBS 2 (Concensus base) change the Angsd-PCA and Angsd-MDS results (under running).       
+
+
+### Global pairwise Fst
+
+Question: Del19 and Del20 challenge group is souced from the same locale but at different years. Why did I identify so many outliers between two years?
+
+To answer this question, I want to take a look at the pairwise global Fst among population contrasts.
+
+Table 3 Pairwise global Fst among population contrasts using 2032113 SNPs (shared SNPs from 1x downsampling dataset). The weighted Fst for a region is the ratio between the sum of As and the sum of B. The unweighted is the mean of the persite ratios. A is the alpha from the reynolds 1983 (or Bhatia) and B is the alpha + beta.
+
+| Pop_pair    |    Fst.Unweight     | Fst.Weight |
+|-------------|---------------------|------------|
+| Sur19_Ref19 | 2.42E-04            | 3.52E-04   |
+| Sur20_Ref20 | 1.87E-04            | 2.72E-04   |
+| HC_NB       | 3.67E-04            | 5.10E-04   |
+| HC_SR       | 2.33E-04            | 3.19E-04   |
+| ARN_COH     | 6.30E-05            | 1.85E-04   |
+| Ref19_Ref20 | 1.00E-03            | 1.50E-03   |
+| Sur19_Sur20 | 1.98E-03            | 2.62E-03   |
+
+The global Fst among wild contrasts make sense. The smaller Fst in Sur20-Ref20 relative to Sur19-Ref19 is surprising to me, as we only used non-survivals as the reference, whereas both survivals and non-survivals were grouped as 2019 reference samples.
+
+The Fst values between Sur19-Sur20 and Ref19-Ref20 show elevated Fst due to Temporal genetic structure.  
+
+
 
