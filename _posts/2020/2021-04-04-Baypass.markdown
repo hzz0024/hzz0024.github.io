@@ -40,7 +40,7 @@ COH_maf0.05_pctind0.7_maxdepth3.mafs
 NB_maf0.05_pctind0.7_maxdepth3.mafs
 HC_maf0.05_pctind0.7_maxdepth3.mafs
 SR_maf0.05_pctind0.7_maxdepth3.mafs
-
+										
 ###ANALYSING_MAF_SELECTION_TESTS_ETC
 
 #############################################################################
@@ -144,5 +144,23 @@ write.table(BayPass_matrix, paste0("06_baypass/by_",pop_group,"_",MIN_MAF,"_pcti
 
 ##I have somewhere a script to prepare the maf matrix for bayescan but bayescan is just too long to run on so many snps.
 ```
+
+### run baypass basic
+
+```sh
+cat 06_baypass.sh
+
+#!/bin/bash
+
+# no control
+/workdir/hz269/DelBay_all_angsd/13_env_gen_association/baypass_2.2/sources/g_baypass -npop 5 -gfile 06_baypass/by_pop_0.05_pctind0.7_maxdepth3.mafs.baypass -outprefix 06_baypass/by_pop_0.05_pctind0.7_maxdepth3.mafs.baypass.output -nthreads 8
+```
+
+### run baypass with control on population structure
+
+Best practices suggest to first run baypass on the LD-pruned vcf and to extract the covariance matrix between population (mat_omega), and then use it as a covariate in the baypass model.
+
+
+
 
 
