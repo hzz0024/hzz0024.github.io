@@ -156,9 +156,20 @@ cat 06_baypass.sh
 /workdir/hz269/DelBay_all_angsd/13_env_gen_association/baypass_2.2/sources/g_baypass -npop 5 -gfile 06_baypass/by_pop_0.05_pctind0.7_maxdepth3.mafs.baypass -outprefix 06_baypass/by_pop_0.05_pctind0.7_maxdepth3.mafs.baypass.output -nthreads 8
 ```
 
-### run baypass with control on population structure
+### Baypass with control on population structure
 
-Best practices suggest to first run baypass on the LD-pruned vcf and to extract the covariance matrix between population (mat_omega), and then use it as a covariate in the baypass model.
+Best practices suggest to first run baypass on the LD-pruned SNP list and to extract the covariance matrix between population (mat_omega), and then use it as a covariate in the baypass model.
+
+To obtain the LD-pruned SNP list, we need to use ngsLD tool [https://github.com/fgvieira/ngsLD](https://github.com/fgvieira/ngsLD).
+
+#### Baypass with LD-pruned SNP list
+
+The workflow is listed below:
+
+1. Run Angsd on all wild populaitons and obtain the beagle file (with -doGlf 2 option).     
+2. Run ngsLD on beagle file / Run Plink on called genotype and do the pruning        
+3. Run BayPass again on pruned SNP list (need to generate the .mafs file on each subpopulation)
+
 
 
 
