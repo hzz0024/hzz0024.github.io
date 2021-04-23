@@ -1,4 +1,4 @@
----
+---hg111111111žq    
 comments: true
 title: DelBay adult challenge & wild transects data summary
 date: '2021-03-25 12:00'
@@ -60,6 +60,13 @@ Table 2. Summary of SNP depth for Angsd -setMaxDepth setting
 | 1.5x                | 318  |   14972   | 122 |   685    |
 | 1x                  | 239  |   6351    | 80  |   478    |
 
+```sh
+cat All_1x_maf0.05_minmapq30_minq20_pctind0.7_CV30_masked_mean_sd.log
+
+Mean  Deviation SD
+962.438872709503  75772.7262815195  275.268462199213
+```
+
 Table 3. Summary of total SNPs analyzed, sites retained after filtering, private sites, and shared sites during downsampling processing. Note Relative Coverage is determined as the coverage of Del20 samples relative to the Del19 (all samples) realized coverage: 2.49 (set as 1)
 
 |                                                 |  Total   SNPs | SNPs after filtering    |  Private | Ratio  | Shared  | Ratio  |
@@ -68,10 +75,6 @@ Table 3. Summary of total SNPs analyzed, sites retained after filtering, private
 |     Del20 (original)                            | 501510962     | 5289614                 | 3240001  | 60.81% | 2049613 | 38.47% |
 | Del19 (all sample)                              | 512960891     | 2322712                 | 1231793  | 53.03% | 1090919 | 46.97% |
 |     Del20 (0.5x)                                | 472421980     | 1370058                 | 279139   | 20.37% | 1090919 | 79.63% |
-| Del19 (all sample)                              | 512960891     | 2322712                 | 787759   |      % | 1534953 |      % |
-|     Del20 (0.6x)                                | 477337821     | 1996167                 | 461214   |      % | 1534953 |      % |
-| Del19 (all sample)                              | 512960891     | 2322712                 | 511985   |      % | 1810727 |      % |
-|     Del20 (0.7x)                                | 481289979     | 2519717                 | 708990   |      % | 1810727 |      % |
 | Del19 (all sample)                              | 512960891     | 2322712                 | 372380   | 16.03% | 1950332 | 83.97% |
 |     Del20 (0.8x)                                | 484548529     | 2963811                 | 1013479  | 34.20% | 1950332 | 65.80% |
 | Del19 (all sample)                              | 512960891     | 2322712                 | 290599   | 12.51% | 2032113 | 87.49% |
@@ -265,9 +268,9 @@ Table 6. Number of outliers identifed from SGS test for each population contrast
 |     Contrasts       | Outliers |
 |---------------------|----------|
 | CHR19-REF19         | 3265     |
-| CHR20-REF20         | 202      |              
+| CHR20-REF20         | 180      |              
 | HC-SR               | 2444     |                     
-| HC_NB               | 2869     |              
+| HC-NB               | 2559     |              
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_SGS.jpg" alt="img" width="800"/>
 

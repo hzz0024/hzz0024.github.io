@@ -166,10 +166,97 @@ To obtain the LD-pruned SNP list, we need to use ngsLD tool [https://github.com/
 
 The workflow is listed below:
 
-1. Run Angsd on all wild populaitons and obtain the beagle file (with -doGlf 2 option).     
-2. Run ngsLD on beagle file / Run Plink on called genotype and do the pruning        
+1. Run Angsd on all wild populaitons and obtain the beagle file (with -doGlf 2 option).  
+
+Wild population:
+
+```sh
+cat 02_depth_WILD.sh
+
+$angsd -P $NB_CPU \
+-doMaf 1 -GL 1 -doGlf 2 -doDepth 1 -doMajorMinor 1 -doCounts 1 $REGIONS \
+-anc $ANC -ref $ANC -remove_bads 1 -skipTriallelic 1 -doQsDist 1 -minMapQ 30 -minQ 20 -SNP_pval 1e-6 -rmTriallelic 1e-6  \
+-minInd $MIN_IND -minMaf $MIN_MAF -maxDepth 5000 -setMinDepth $MIN_DEP \
+-b $WILD_all -out "/local/workdir/hz269/DelBay_all_angsd/02_depth/"$target"_maf"$MIN_MAF"_minmapq30_minq20_pctind"$PERCENT_IND"_CV30_masked"
+
+Number of samples: 234          
+SNP depth: mean is 527, SD is 156, maxdepth 994 
+
+cat 03_global_WILD.sh
+
+$angsd -P $NB_CPU \
+ -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 \
+ -doDepth 1 -doIBS 2 -makeMatrix 1 -doCov 1 $REGIONS \
+ -doPlink 2 -doGeno 4 -doPost 1 -postCutoff 0.8 \
+ -maxDepth 2000 -dumpCounts 2 -anc $ANC -remove_bads 1 -rmTriallelic 1e-6 \
+ -minMapQ 30 -minQ 20 -minInd $MIN_IND -minMaf $MIN_MAF \
+ -setMinDepth 78 -setMaxDepth 994 -SNP_pval 1e-6 -b $WILD_all \
+ -out "/local/workdir/hz269/DelBay_all_angsd/03_global/"$target"_maf"$MIN_MAF"_minq20_minmq30_pctind"$PERCENT_IND"_CV30_masked_noinvers"
+
+zcat WILD_all_maf0.05_minq20_minmq30_pctind0.7_CV30_masked_noinvers.mafs.gz | wc -l
+1680986 
+
+cat wt_script_15_ngsLD_WILD.sh
+#!/bin/bash
+# Read a string with spaces using for loop
+for i in {1..10}
+do
+    echo -e '#!/bin/bash\ntarget="WILD_all"\nNB_CPU=20 #change accordingly\nREGIONS="-rf chr_list_chr'$i'.txt" \nsource /local/workdir/hz269/DelBay_all_angsd/01_scripts/01_config.sh\nN_IND=$(wc -l $WILD_all | cut -d " " -f 1)\nMIN_IND=$(($N_IND*7/10))\n\necho "Ouput can be used for depth evaluation with all individuals listed in $WILD_all"\necho "keep loci with at leat one read for n individuals = $MIN_IND, which is 70% of total $N_IND individuals"\necho "filter on allele frequency = $MIN_MAF"\n\n$angsd -P $NB_CPU \\\n -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 \\\n -doDepth 1 -doIBS 2 -makeMatrix 1 -doCov 1 $REGIONS \\\n -doPlink 2 -doGeno 4 -doPost 1 -postCutoff 0.8 \\\n -maxDepth 2000 -dumpCounts 2 -anc $ANC -remove_bads 1 -rmTriallelic 1e-6 \\\n -minMapQ 30 -minQ 20 -minInd $MIN_IND -minMaf $MIN_MAF \\\n -setMinDepth 78 -setMaxDepth 994 -SNP_pval 1e-6 -b $WILD_all \\\n -out "/local/workdir/hz269/DelBay_all_angsd/15_LD_prunning/"$target"_maf"$MIN_MAF"_minq20_minmq30_pctind"$PERCENT_IND"_CV30_masked_noinvers_chr'$i'"' >> formal/'15_ngsLD_WILD_chr'$i'.sh'
+done
+```
+
+2. Run ngsLD on beagle file / Run Plink on called genotype and do the pruning 
+
+
+```sh
+cat 15_1_ngsLD_WILD.sh
+for i in {1..10}; do
+    zcat 'WILD_all_maf0.05_minq20_minmq30_pctind0.7_CV30_masked_noinvers_chr'$i'.mafs.gz' | cut -f 1,2 | tail -n +2 > 'WILD_chr'$i'.pos.txt'
+    cat 'WILD_chr'$i'.pos.txt' | wc -l
+done
+
+cat 15_2_ngsLD_WILD.sh
+#!/bin/sh
+
+for i in {1..10}; do
+ NUM_SITES=$(cat 'WILD_chr'$i'.pos.txt' | wc -l)
+ /programs/ngsLD/ngsLD \
+    --geno 'WILD_all_maf0.05_minq20_minmq30_pctind0.7_CV30_masked_noinvers_chr'$i'.beagle.gz' \
+    --pos 'WILD_chr'$i'.pos.txt' \
+    --n_ind 234 \
+    --n_sites $NUM_SITES \
+    --out 'WILD_chr'$i'.ngsld.output' \
+    --probs \
+    --max_kb_dist 10 \ #--rnd_sample 0.1 \
+    --seed 1000 \
+    --min_maf 0.05 \
+    --n_threads 8
+done
+
+cat wt_15_3_ngsLD_WILD_by_chr.sh
+#!/bin/sh
+
+export PERL5LIB=/programs/PERL/lib/perl5
+export PATH=/programs/ngsLD-1.1.1:/programs/ngsLD-1.1.1/scripts:$PATH
+
+for i in {1..10}; do
+echo -e '#!/bin/sh\nexport PERL5LIB=/programs/PERL/lib/perl5\nexport PATH=/programs/ngsLD-1.1.1:/programs/ngsLD-1.1.1/scripts:$PATH\n\nprune_graph.pl \\\n --in_file WILD_chr'$i'.ngsld.output \\\n --max_kb_dist 10 --min_weight 0.2 \\\n --out WILD_chr'$i'.unlinked.id' >> "15_3_LD_prunning_WILD_"$i".sh"
+echo -e 'sbatch --job-name=WILD_chr'$i' --output=/workdir/hz269/DelBay_all_angsd/15_LD_prunning/log/15_3_LD_prunning_WILD_'$i'.log --nodes=1 --ntasks=10 --mem=80000 15_3_LD_prunning_WILD_'$i'.sh' >> run_15_3_LD_prunning.sh
+done
+```
+
 3. Run BayPass again on pruned SNP list (need to generate the .mafs file on each subpopulation)
 
+```sh
+cp WILD_all_1680985.snplist.txt sites_all_maf0.05_pctind0.7_maxdepth3
+[hz269@cbsuhare 02_raw_data]$ cp WILD_pruned_723274.snplist.txt sites_all_pruned_maf0.05_pctind0.7
+[hz269@cbsuhare 02_raw_data]$ cat sites_all_maf0.05_pctind0.7_maxdepth3 | wc -l
+1680985
+[hz269@cbsuhare 02_raw_data]$ cat sites_all_pruned_maf0.05_pctind0.7 | wc -;
+ 723274 2893096 17969611 -
+[hz269@cbsuhare 02_raw_data]$ cat sites_all_pruned_maf0.05_pctind0.7 | wc -l
+723274    
+```
 
 
 
