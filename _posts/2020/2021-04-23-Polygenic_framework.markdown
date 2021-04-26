@@ -235,4 +235,22 @@ Delta_p distribution and trends for 396 common shared outliers is
 
 <img src="https://hzz0024.github.io/images/polygenic/Comb_shared_657.jpg" alt="img" width="800"/>
 
+It looks that the p-values combination is not very accurate, as the Pearson correlation is low here,
+
+<img src="https://hzz0024.github.io/images/polygenic/Del19_pearson.jpg" alt="img" width="800"/>
+
+Some potentials,
+
+1. Perhaps from the "0" p-value from SGS test. A slight replace might help this.
+
+```sh
+dat1 = read.delim("ps_Del19_challenge.txt", header = FALSE, sep='\t')
+length(dat1[which(dat1$V6==0),]$V1)
+dat1$V6[dat1$V6 == 0 ] <- 1e-5 
+```
+
+2. Something wrong with the combination process, need to extract those combination with low correlations and check what is going on.
+
+
+
 
