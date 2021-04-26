@@ -42,7 +42,7 @@ SNPs from coverage equalized dataset: 2032113 SNPs
 4. check the combined p-value and Spearman's rank correlation coefficient             
 5. calculate the C-score metric to quantify redundancy            
 6. perform Cochran-Mantel_haenszel (CMH) test to assess the degree of concordance            
-7. perform random forest on significant outliers in each contrast (perhaps SNPs with combined p-value < 0.05)            
+7. perform random forest on potential outliers in each contrast (perhaps SNPs with combined p-value < 0.05?) or the combined populations.         
 8. perform gene annotation for potential candidates            
 
 --- 
@@ -252,5 +252,47 @@ dat1$V6[dat1$V6 == 0 ] <- 1e-5
 2. Something wrong with the combination process, need to extract those combination with low correlations and check what is going on.
 
 
+#### 5. calculate the C-score metric to quantify redundancy 
+
+#### 6. perform Cochran-Mantel_haenszel (CMH) test              
+
+#### 7. perform random forest        
+
+I followed the tutorial on [Brieuc et al 2015](https://onlinelibrary.wiley.com/doi/abs/10.1111/1755-0998.12773) for random forest.
+
+This analyses may be computational intensive - "However, the method may require extended computational time if purging includes a large number of loci and many trees per forest (e.g., a complete RF analysis that included the generalized purging approach described here for 400 individuals, 9,000 loci, and a continuous trait took approximately 3 weeks to run on a desktop computer with 24 GB of RAM and a processor speed of 3.47 GHz)."
+
+```sh
+# Import the example data set, which comprises 402 individuals genotyped at 1000 biallelic loci, where 0=homozygote 1, 1=heterozygote, 2=homozygote 2
+# Each individual also has a binary phenotype - resistance to a disease - where 0=did not survive and 1=survived
+# The objective is to identify loci associated with disease resistance
+```
+
+Key factors in random forest,
+
+ntree -- number of trees
+
+mtry -- number of features (i.e. SNPs)
+
+OOB_ER -- out-of-poctet error rate.
+
+key figures:
+
+```sh
+# Plot error rates as well
+par(mar=c(5,6,3,3))
+plot(All_initial_err.rate$Number_loci,All_initial_err.rate$Average,log="x", pch=19,xlab="Number of Loci", ylab="OOB Error Rate",cex.lab=1.5,cex.axis=1.5)
+```
+
+<img src="https://hzz0024.github.io/images/polygenic/RF_1.jpeg" alt="img" width="800"/>
 
 
+<img src="https://hzz0024.github.io/images/polygenic/RF_2.jpeg" alt="img" width="800"/>
+
+Things to consider:
+
+1. previous probabilistic random forest (PRF) test using ~ 3000 FDR outliers in Del19 challenge samples has a accuracy of 100%. May need include more SNPs for parameter optimization.
+
+2. PRF only support classifization analysis but not linear test, perhaps need to switch to classicial RF.
+
+3. If switched to RF, need genotypes without missing data.
