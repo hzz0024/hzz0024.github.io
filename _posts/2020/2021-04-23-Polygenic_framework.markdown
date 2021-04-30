@@ -37,9 +37,9 @@ SNPs from coverage equalized dataset: 2032113 SNPs
 ---
 
 1. perform single-generation selection (SGS) on each of the population contrast     
-2. perform Barnard's exact test              
-3. combine p-value from the tests above for each of the SNP using Z-method, retain SNPs with p-value < 0.05, and SNPs with FDR < 0.05                          
-4. check the combined p-value and Spearman's rank correlation coefficient             
+2. <s>perform Barnard's exact test</s>              
+3. <s>combine p-value from the tests above for each of the SNP using Z-method, retain SNPs with p-value < 0.05, and SNPs with FDR < 0.05 </s>                         
+4. <s>check the combined p-value and Spearman's rank correlation coefficient</s>               
 5. calculate the C-score metric to quantify redundancy            
 6. perform Cochran-Mantel_haenszel (CMH) test to assess the degree of concordance            
 7. perform random forest on potential outliers in each contrast (perhaps SNPs with combined p-value < 0.05?) or the combined populations.         
@@ -133,10 +133,6 @@ Table 2. Number of outlier overlaps among the contrasts. Left diagonal: outliers
 | HC-SR       | 21706       | 13199       | -     | 3     |
 | HC-NB       | 22365       | 13906       | 50494 | -     |
 
-Figure 2. Delta_p distribution (left) and trends (right) for CHR19-REF19 outliers with FDR < 0.05, n=266).
-
-<img src="https://hzz0024.github.io/images/polygenic/B_Del19_FDR_266.jpg" alt="img" width="800"/>
-
 Again, I checked the overlaps in outliers with p<0.05, below are the results:
 
 ```sh
@@ -169,10 +165,6 @@ Again, I checked the overlaps in outliers with p<0.05, below are the results:
 [1] 396
 ```
 
-Delta_p distribution and trends for 396 common shared outliers is 
-
-<img src="https://hzz0024.github.io/images/polygenic/B_shared_396.jpg" alt="img" width="800"/>
-
 #### 3&4. check the combined p-value and Spearman's rank correlation coefficient     
 
 | Populations | Combined (p<0.05) | Positive deltap | Negative deltap | Combined (FDR<0.05) | Positive deltap | Negative deltap |
@@ -194,10 +186,6 @@ Table 2. Number of outlier overlaps among the contrasts. Left diagonal: outliers
 | CHR20-REF20 | 14509       | -           | 5     | 5     |
 | HC-SR       | 21706       | 13199       | -     | 275   |
 | HC-NB       | 22365       | 13906       | 50494 | -     |
-
-Figure 2. Delta_p distribution (left) and trends (right) for CHR19-REF19 outliers with FDR < 0.05, n=5870).
-
-<img src="https://hzz0024.github.io/images/polygenic/Comb_Del19_FDR_5870.jpg" alt="img" width="800"/>
 
 Shared outliers with p<0.05:
 
@@ -231,10 +219,6 @@ Shared outliers with p<0.05:
 [1] 657
 ```
 
-Delta_p distribution and trends for 396 common shared outliers is 
-
-<img src="https://hzz0024.github.io/images/polygenic/Comb_shared_657.jpg" alt="img" width="800"/>
-
 It looks that the p-values combination is not very accurate, as the Pearson correlation is low here,
 
 <img src="https://hzz0024.github.io/images/polygenic/Del19_pearson.jpg" alt="img" width="800"/>
@@ -252,47 +236,48 @@ dat1$V6[dat1$V6 == 0 ] <- 1e-5
 2. Something wrong with the combination process, need to extract those combination with low correlations and check what is going on.
 
 
-#### 5. calculate the C-score metric to quantify redundancy 
+#### 5. calculate the C-score metric to quantify redundancy
 
-#### 6. perform Cochran-Mantel_haenszel (CMH) test              
+#### 6. perform Cochran-Mantel_haenszel (CMH) test           
 
-#### 7. perform random forest        
+### 7. perform random forest        
 
 I followed the tutorial on [Brieuc et al 2015](https://onlinelibrary.wiley.com/doi/abs/10.1111/1755-0998.12773) for random forest.
 
-This analyses may be computational intensive - "However, the method may require extended computational time if purging includes a large number of loci and many trees per forest (e.g., a complete RF analysis that included the generalized purging approach described here for 400 individuals, 9,000 loci, and a continuous trait took approximately 3 weeks to run on a desktop computer with 24 GB of RAM and a processor speed of 3.47 GHz)."
+One important thing is that analyses may be computational intensive - "the method may require extended computational time if purging includes a large number of loci and many trees per forest (e.g., a complete RF analysis that included the generalized purging approach described here for 400 individuals, 9,000 loci, and a continuous trait took approximately 3 weeks to run on a desktop computer with 24 GB of RAM and a processor speed of 3.47 GHz)."
 
-```sh
-# Import the example data set, which comprises 402 individuals genotyped at 1000 biallelic loci, where 0=homozygote 1, 1=heterozygote, 2=homozygote 2
-# Each individual also has a binary phenotype - resistance to a disease - where 0=did not survive and 1=survived
-# The objective is to identify loci associated with disease resistance
-```
+Below is the summary from tutorial and Brieuc et al 2015
 
-Key factors in random forest,
+---
 
-ntree -- number of trees
-
-mtry -- number of features (i.e. SNPs)
-
-OOB_ER -- out-of-poctet error rate.
-
-key figures:
-
-```sh
-# Plot error rates as well
-par(mar=c(5,6,3,3))
-plot(All_initial_err.rate$Number_loci,All_initial_err.rate$Average,log="x", pch=19,xlab="Number of Loci", ylab="OOB Error Rate",cex.lab=1.5,cex.axis=1.5)
-```
+1. Two types of random forest are available from package randomForest: classification and regression random forest.        
+2. The predictive ability of classification trees is measured by the out-of-bag (OOB) error rate.  An error rate is calculated for each tree within a forest. The OOB error rate from the last tree in the forest is usually reported. It takes all previous trees into account and thus represents the error rate after the model stabilizes/converges.        
+3. Regression randon forest works on data with a continuous response variable. The proportion variation explained (PVE) will be used to measure the predictive ability of regression trees.   
+4. The locus importance values measures how important the SNPs are. It is a key value to estimate the effect size.    
+5. Some other key parameters are:    
+    
+ntree -- number of trees    
+mtry -- number of features (i.e. SNPs)    
+ 
+Figures from tutorial (classification forest):
 
 <img src="https://hzz0024.github.io/images/polygenic/RF_1.jpeg" alt="img" width="800"/>
 
-
 <img src="https://hzz0024.github.io/images/polygenic/RF_2.jpeg" alt="img" width="800"/>
 
-Things to consider:
+---
 
-1. previous probabilistic random forest (PRF) test using ~ 3000 FDR outliers in Del19 challenge samples has a accuracy of 100%. May need include more SNPs for parameter optimization.
+#### Things keep in mind:
 
-2. PRF only support classifization analysis but not linear test, perhaps need to switch to classicial RF.
+1. Previous probabilistic random forest (PRF) test using ~ 3000 FDR outliers in Del19 challenge samples has a accuracy of 100%. May need include more SNPs for parameter optimization.        
+2. Probabilistic random forest can only support classifization forest but not Regression one, perhaps need to switch to classicial RF if necessary.      
+3. If switched to RF, need genotypes without missing data (could use the resequencing data).      
 
-3. If switched to RF, need genotypes without missing data.
+#### Preliminary tests using probabilistic random forest (PRF)
+
+- test with SGS outliers
+
+
+
+
+
