@@ -141,8 +141,7 @@ Table 6. Number of outliers identifed from SGS test for each population contrast
 
 |     Contrasts       | Outliers |
 |---------------------|----------|
-| CHR19-REF19         |          |
-| CHR20-REF20         |          |              
+| CHR19-REF19         |          |             
 | HC-SR               |          |                     
 | HC-NB               |          |              
 
