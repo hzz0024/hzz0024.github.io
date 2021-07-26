@@ -193,9 +193,151 @@ head -n 1001 by_pop_0.05_pctind0.7_maxdepth3.mafs.rda.bak > by_pop_0.05_pctind0.
 
 ````
 
-### Annotation
+### SNP Annotation
 
 Here I am planning to update the reference database for SNP annotation and following enrichment analyses. A detailed protocal to build the whole reference dataset from scratch is [here](https://biohpc.cornell.edu/lab/userguide.aspx?a=software&i=73#c), which includes three major steps: Diamond, InterproScan, and Blast2GO. However, to obtain this annotation database more efficiently (and more consistently with the current *Crassostrea virginica* genome manuscript), I just did some updates on the protein and gene description in original "Proestou_and_Sullivan_B2G_oyster_annotation" file. A full description about the this file is listed below,
 
 - `  We used the NCBI protein sequence file, GCF00202275_2_c_virginica-3_0_protein.faa_gz, with the standard workflow and default parameters except we increased the GO weight parameter from 5 to 15.  We also used Kevin Johnson’s InterProScan results to supplement the blast results. The “Sequence Name” column is the protein product ID from the original NCBI protein sequence file used to run B2G.  The “Sequence Description” is from the B2G annotation run.  The columns that begin with “Annotation” contain the information on the GO terms that passed the annotation criteria AND were merged with Kevin’s InterProSCan inB2G (note: Part of the merging process is a validation step that removes redundant, more general functions based on the true path rule, only the most specific GO terms are assigned).  The columns that begin with “InterPro” contain only information imported from Kevin’s InterProScan.`
+
+Below are some scripts for this update process:
+
+1. python command to extrac the protein and gene description from faa and gtf files
+
+```bash
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/022/765/GCF_002022765.2_C_virginica-3.0/GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz
+#subset the feature table (done by Excel), the file name is /Users/HG/Documents/HG/DelBay_adult/16_annotation/Data_base/GCF_002022765.2_C_virginica-3.0_feature_table.txt
+
+# below is python3 command
+# to delete the isoform X from orthologs
+filename = 'GCF_002022765.2_C_virginica-3.0_feature_table_edit.txt'
+outfile = 'isoform_deleted_GCF_002022765.2_C_virginica-3.0_feature_table.txt'
+
+HEADER = True
+with open(filename, 'r') as f, open(outfile, 'w') as w:
+    for l in f:
+        if HEADER:
+            HEADER = False
+            continue
+        items = l.strip().split('\t') 
+        protein_name = items[5]
+        if 'isoform' in protein_name:
+            items[5] = protein_name.split('isoform')[0].strip()
+            w.write('\t'.join(items) + '\n')
+        else:
+            w.write(l)
+# The results file is located in /Users/HG/Documents/HG/DelBay_adult/16_annotation/Data_base/deleted_GCF_002022765.2_C_virginica-3.0_feature_table.txt
+```
+```python
+# download the protein fasta: 
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/022/765/GCF_002022765.2_C_virginica-3.0/GCF_002022765.2_C_virginica-3.0_protein.faa.gz
+# below is python3 command
+filename = 'GCF_002022765.2_C_virginica-3.0_protein.faa' # this is the most recent protein fasta
+outfile = 'GCF_002022765.2_C_virginica-3.0_protein_annotation.txt'
+with open(filename, 'r') as f, open(outfile, 'w') as w:
+    i = 0
+    for l in f:
+        if l.startswith('>'):
+            i += 1
+            l = l.strip().strip('>')
+            items = l.split('[')[0].split(' ', 1)
+            w.write('\t'.join(items) + '\n')
+        else:
+            continue
+# note there is still some error in the processed file, contents from GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz is more accurate.
+```
+
+Then combine everthing into a central database (done by Excel). There are some discrepancies between the updated and old (Dina's version) databases. For example, although the protein accession shared the same ID, the protein description is differed by **34747/60201(57.72%)**. I also observed **37 discrepancies** in gene ID (i.e. LOCXXXXXX). 
+
+Currently I create a database with updated gene ID, protein and gene names (named GO_data_rm_dup.csv in /Users/HG/Documents/HG/DelBay_adult/16_annotation/Gene_annotation/). It includes 41928 records for SNP annotation.
+
+2. python command to extract the gene description
+
+A python script is created for annotation:
+
+```python
+import sys
+import argparse
+parser = argparse.ArgumentParser()
+
+parser.add_argument("-i", "--input", help="Input file.", default='XXX.bed')
+parser.add_argument("-t", "--outlier", help="outlier file.", default='XXX.gene.txt')
+parser.add_argument("-o", "--output", help="Output", default='GO_target.csv')
+args = parser.parse_args()
+
+infile = args.input
+outlier_file = args.outlier
+outfile = args.output
+
+import csv
+from io import StringIO
+# read outliers
+lists = []
+with open(infile, 'r') as f:
+    HEADER = False
+    for l in f:
+        if not HEADER:
+            HEADER = True
+            continue
+        reader = csv.reader(StringIO(l), delimiter=',')
+        for r in reader:
+            items = r
+        #items = l.split(',')
+        #lists.append((items[3], items[4], items[5], items[7].replace('\"',''), items[2])) # for protein annotation 
+        lists.append((items[3], items[4], items[5], items[8].replace('\"',''), items[2])) # for gene annotation 
+
+with open(outlier_file, 'r') as f, open(outfile, 'w') as w:
+
+    for l in f:
+        OVERLAP = False
+        #if not HEADER:
+        #    HEADER = True
+        #    continue
+        items = l.split()
+        chr = items[0]
+        st = int(items[1])
+        ed = int(items[2])
+        annos = []
+        geneIDs = []
+        for _chr, _st, _ed, _anno, _GeneID in lists:
+            _st = int(_st)
+            _ed = int(_ed)
+            if _chr == chr and st <= _ed and ed >= _st:
+                OVERLAP = True
+                annos.append(_anno)
+                geneIDs.append(_GeneID)
+
+        if OVERLAP:
+             annos = list(set(annos))
+             geneIDs = list(set(geneIDs))
+             outline = chr + '\t' + str(st) + '\t' + str(ed) + '\t' + str(len(geneIDs)) + '\t' + ';'.join(annos) + '\t' + ';'.join(geneIDs)
+             w.write(outline + '\n') 
+        else:
+             outline = chr + '\t' + str(st) + '\t' + str(ed) + '\t' + 'No mapped genes'
+             w.write(outline + '\n') 
+
+
+usage example
+python3 extract_gene_V2.py -i GO_data_rm_dup.csv -t GEA_BF_20_Del19_FDR_2K.intersect -o GEA_BF_20_Del19_FDR_2K.intersect.gene.txt        
+
+cat GEA_BF_20_Del19_FDR_2K.intersect # it only looks at the first three columns. Anything that overlaps with this regions will be recorded in the output file.
+NC_035780.1 37977798    37979798    NC_035780.1_37978798    NC_035780.1 37977204    37979204    NC_035780.1_37978204    1406
+NC_035783.1 14089954    14091954    NC_035783.1_14090954    NC_035783.1 14091394    14093394    NC_035783.1_14092394    560
+NC_035784.1 41760936    41762936    NC_035784.1_41761936    NC_035784.1 41761900    41763900    NC_035784.1_41762900    1036
+NC_035784.1 58317052    58319052    NC_035784.1_58318052    NC_035784.1 58316342    58318342    NC_035784.1_58317342    1290
+NC_035786.1 8771371 8773371 NC_035786.1_8772371 NC_035786.1 87713718773371  NC_035786.1_8772371 2000
+```
+
+### Enrichment analysis using Gowinda
+
+Gowinda is a multi-threaded Java application that allows unbiased analysis of gene set enrichment for Genome Wide Association Studies. Classical analysis of gene set (e.g.: Gene Ontology) enrichment assumes that all genes are sampled independently from each other with the same probability. These assumptions are violated in Genome Wide Association (GWA) studies since (i) longer genes typically have more SNPs resulting in a higher probability of being sampled and (ii) overlapping genes are sampled in clusters. Gowinda has been specifically designed to test for enrichment of gene sets in GWA studies. We show that Gene Ontology (GO) tests on GWA data could result in a substantial number of false positive GO terms. Permutation tests implemented in Gowinda eliminate these biases, but maintain sufficient power to detect enrichment of GO terms.
+
+`Requirement`
+
+Java 6 or higher.    
+Furthermore the following input files are required    
+a file containing the annotation of the genome in .gtf        
+a gene set file, containing for every gene set (e.g.: GO category) a list of the associated gene IDs        
+a file containing the total set of SNPs        
+a file containing the candidate SNPs       
+
 
