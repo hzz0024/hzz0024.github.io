@@ -158,7 +158,7 @@ Following the paper by Reis et al. 2018. [Probabilistic Random Forest: A machine
 RDA is a method combining regression and principal component analysis (PCA). It is a direct extension of multiple regression analysis to model multivariate response
 data. It output two major parts: linear combinations of constraining variables and unconstrained ordination of the residuals. For the first result part,
 
-***RDA computes axes that are linear combinations of the explanatory variables. In other words, this method seeks, in successive order, a series of linear combinations of the explanatory variables that best explain the variation of the response data. The axes defined in the space of the explanatory variables are orthogonal to one another. RDA is therefore a constrained ordination procedure.Furthermore, a global hypothesis (H0) of absence of linear relationship between Y and X can be tested in RDA. ***
+***RDA computes axes that are linear combinations of the explanatory variables. In other words, this method seeks, in successive order, a series of linear combinations of the explanatory variables that best explain the variation of the response data. The axes defined in the space of the explanatory variables are orthogonal to one another. RDA is therefore a constrained ordination procedure.Furthermore, a global hypothesis (H0) of absence of linear relationship between Y and X can be tested in RDA.***
 
 ***In vegan’s rda() function, the variation of the data matrix that cannot be explained by the environmental variables (i.e., the residuals of the regressions) is expressed by unconstrained PCA eigenvectors, which are given after the canonical eigenvectors.***
 
