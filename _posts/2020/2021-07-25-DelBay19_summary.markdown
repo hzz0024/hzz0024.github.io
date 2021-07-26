@@ -155,6 +155,47 @@ Following the paper by Reis et al. 2018. [Probabilistic Random Forest: A machine
 
 - RDA
 
+RDA is a method combining regression and principal component analysis (PCA). It is a direct extension of multiple regression analysis to model multivariate response
+data. It output two major parts: linear combinations of constraining variables and unconstrained ordination of the residuals. For the first result part,
+
+***RDA computes axes that are linear combinations of the explanatory variables. In other words, this method seeks, in successive order, a series of linear combinations of the explanatory variables that best explain the variation of the response data. The axes defined in the space of the explanatory variables are orthogonal to one another. RDA is therefore a constrained ordination procedure.Furthermore, a global hypothesis (H0) of absence of linear relationship between Y and X can be tested in RDA. ***
+
+***In vegan’s rda() function, the variation of the data matrix that cannot be explained by the environmental variables (i.e., the residuals of the regressions) is expressed by unconstrained PCA eigenvectors, which are given after the canonical eigenvectors.***
+
+***The statistical significance of an RDA (global model) and that of individual canonical axes can be tested by permutations. These tests will be introduced in
+due course.***
+
+#### Data input
+
+1. SNP allele frequency for each population (2335739 SNPs from global calling)
+
+```sh
+head by_pop_0.05_pctind0.7_maxdepth3.mafs.rda
+
+HC ARN COH SR NB
+NC_035780.1_927 0.132336 0.096831 0.219057 0.168731 0.13661
+NC_035780.1_930 0.111361 0.128045 0.171739 0.13612 0.149634
+NC_035780.1_1669 0.458708 0.521035 0.463114 0.455466 0.422996
+NC_035780.1_1673 0.100391 0.133388 0.175129 0.153884 0.129964
+NC_035780.1_1916 0.044045 0.054398 0.072586 0.086124 0.041582
+NC_035780.1_1919 0.430196 0.394937 0.418661 0.366308 0.353289
+NC_035780.1_1924 0.367517 0.347606 0.359012 0.277483 0.253518
+NC_035780.1_1928 0.439469 0.482596 0.3976 0.551047 0.464268
+NC_035780.1_2182 0.149659 0.070832 0.046021 0.061342 0.087668
+```
+
+2. Salinity index data
+
+| Station    | Days < 5  | **Days < 10**| Days < 15  |
+|------------|-----------|--------------|------------|
+| Hope Creek | 29        | **394**      | 394        |
+| Arnold     | 17        | **99**       | 394        |
+| Cohansey   | 2         | **23**       | 281        |
+| Shell Rock | 0         | **20**       | 99         |
+| New Bed    | 0         | **14**       | 95         |
+
+
+
 ```sh
 # prepare the test data
 head -n 1001 by_pop_0.05_pctind0.7_maxdepth3.mafs.rda.bak > by_pop_0.05_pctind0.7_maxdepth3.mafs.rda # only take the first 1000 SNPs
