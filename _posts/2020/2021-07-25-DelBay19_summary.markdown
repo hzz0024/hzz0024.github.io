@@ -22,7 +22,7 @@ categories:
 
 ### Depth evaluation
 
-Table 1。 Summary of the read depth distribution for each dataset. The last column is useful for Angsd -setMaxDepth setting.
+Table 1 Summary of the read depth distribution for each dataset. The last column is useful for Angsd -setMaxDepth setting.
 
 | Data       | Mean | Deviation |  SD | Mean+3SD |
 |------------|------|-----------|-----|----------|
@@ -97,127 +97,60 @@ Number of sites retained after filtering: 2335739
 
 ### Combined Fisher's exact test
 
-1) Update the depth for both Del19 (n=97) and Del20 (n=101) - done      
-2) Rerun SNP calling for Del19 and Del20 - done    
-3) Generate a global SNP list by extracting the common shared SNPs - done    
-4) Calling allele frequency for each individual population using the global SNP list - done    
-5) Perform Fisher’s exact tests - done
-6) Examine common shared SNPs - done     
-7) SNP annotation and functional gene exploration  
-
 In the p-value combination step, because the weighted Z-test (also called ‘Stouffer’s method) is more power and more precision than does Fisher’s test ([Whitlock 2005](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1420-9101.2005.00917.x)), I used Z method to combine the p-values from the parallel tests. It favours symmetric rejection and is less sensitive to a single low p-value, requiring more consistently low p-values to yield a low combined p-value. 
 
 The combinePValues function in the [scran R package](https://rdrr.io/bioc/scran/man/combinePValues.html) was used to perform Z method.
 
-Results:
+Table 2. Number of outliers identified from Combined Fisher's exact tests
 
 | Contrasts                  | No. outliers |
 |----------------------------|--------------|
-| REF19_CHR19_NB_HC          | 13           |
-| REF19_CHR19_SR_HC          | 4            |
-| Shared                     | 1            |
+| REF19_CHR19_NB_HC          | 14           |
+| REF19_CHR19_SR_HC          | 2            |
 | REF19_SR_ARN_COH (control) | 0            |
-| REF20_CHR20_NB_HC          | 7            |
-| REF20_CHR20_SR_HC          | 0            |
-| Shared                     | 0            |
-| REF20_SR_ARN_COH (control) | 3            |
-| REF19_REF20_CHR19_CHR20    | 696          |
 
-The detailed SNP lists are [here](https://docs.google.com/spreadsheets/d/1hDH_lp_BQC9grGAK2vbZZBW-tzpiZCvMvajyMe-rYUo/edit?usp=sharing)
+```sh
+REF19_CHR19_NB_HC
 
-Now take a look at the allele frequency changes at these potential outliers.
+Chr         Pos         FDR
+NC_035780.1 32280239    0.0226267419768242
+NC_035780.1 32280271    0.00619489033076895
+NC_035780.1 32280434    0.0426028880831897
+NC_035780.1 60393516    0.00712679900189333
+NC_035781.1 9414163 0.0426028880831897
+NC_035782.1 20837869    0.00619489033076895
+NC_035782.1 52585426    0.0125720154898366
+NC_035782.1 64973955    0.0426028880831897
+NC_035783.1 21759426    0.0336992963444214
+NC_035784.1 8259087 0.0277699666160299
+NC_035784.1 12625526    0.00619489033076895
+NC_035784.1 16552716    0.0153521094632856
+NC_035787.1 56354987    0.0495691913205949
+NC_035788.1 77750634    0.0495390925369287
 
-- REF19_CHR19_NB_HC (13 outliers)
+REF19_CHR19_SR_HC 
 
-<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_REF19_CHR19_NB_HC.jpg" alt="img" width="800"/>
-
-One of them, SNP NC_035784.1_16552716 is shared between REF19_CHR19_NB_HC and REF19_CHR19_SR_HC. This SNPs is located in the gene Actin-depolymerizing factor 1-like (LOC111134891). Below is the delta_p patterns for this SNP
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_NC_035784.1_16552716.jpg" alt="img" width="800"/>
-
-- REF20_CHR20_NB_HC (7 outliers)
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_REF20_CHR20_NB_HC.jpg" alt="img" width="800"/>
-
-- REF19_REF20_CHR19_CHR20 (696 outlies)
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_control.jpg" alt="img" width="800"/>
-
-Zoom in on some SNPs at chromosome 5
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_control_chr5.jpg" alt="img" width="800"/>
-
-Zoom in on some SNPs at chromosome 1
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_control_chr1.jpg" alt="img" width="800"/>
+Chr         Pos         FDR
+NC_035784.1 16552716    0.00364825643068336
+NC_035784.1 52873868    0.0340724704124944
+```
 
 ### Single-generation selection (SGS) 
-
-1) Determine the global theta value for each population (REF19, REF20, wild?) - REF19 done, the other two under running   
-2) Determine -setMaxDepth for each population (CHR19, REF19, CHR20, REF20, HC, NB, SR) - done.      
-3) Produce global SNP list for each of the population contrasts (CHR19 vs REF19, CHR20 vs REF20, HC vs. NB, HC vs SR) - done      
-4) Generate allele frequency data for each of the population (with global SNP list, set as -site) - done      
-5) Perform SGS tests on each of the contrast 
-
-Table 6. Summary of SNP depth for Angsd -setMaxDepth settings. Note CHR19-REF19, CHR20-REF20, HC-SR, and HC-NB are contrasts used for SGS tests.
-
-|     Contrasts       | Mean | Deviation |  SD | Mean+3SD |
-|---------------------|------|-----------|-----|----------|
-| CHR19-REF19         | 189  |   2966    | 54  |   352    |
-| CHR20-REF20         | 433  |   33698   | 184 |   983    |
-| HC-SR               | 216  |   4487    | 67  |   417    |
-| HC_NB               | 210  |   3994    | 63  |   400    |
-
-Note: p-value distribution is initially odd, probably due the usage of quantile-based p-value. After consulting with CSCU, now I switched to 2-sides p-value estimation with naive exterme delta-p counts.
-
-p-value distribution for CHR19-REF19 contrast using 2-side p-value
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/ps_2side.jpeg" alt="img" width="800"/>
 
 Table 6. Number of outliers identifed from SGS test for each population contrast (FDR < 0.05).
 
 |     Contrasts       | Outliers |
 |---------------------|----------|
-| CHR19-REF19         | 3265     |
-| CHR20-REF20         | 180      |              
-| HC-SR               | 2444     |                     
-| HC-NB               | 2559     |              
+| CHR19-REF19         |          |
+| CHR20-REF20         |          |              
+| HC-SR               |          |                     
+| HC-NB               |          |              
 
-<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_SGS.jpg" alt="img" width="800"/>
-
-Shared SNPs:
-
-CHR20-REF20 & HC_NB: NC_035782.1_62395550
-
-CHR19-REF19 & HC_NB or HC_SR: 12 SNPS
-
-CHR19-REF19 & HC_NB & HC_SR: NC_035786.1_8772371
 
 ### Probabilistic Random Forest
 
 Following the paper by Reis et al. 2018. [Probabilistic Random Forest: A machine learning algorithm for noisy datasets](https://arxiv.org/pdf/1811.05994.pdf). I am trying to incorporate the genotype likelihood into random forest test.
 
-The initial trial is performed on 3006 outliers SNPs identified from SGS CHR19-REF19 contrasts (total 2032113 SNPS).
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/PRF_accuracy.jpg" alt="img" width="800"/>
-
-- shared SNPs among repeat runs (1000, 500, 100, 50 are top SNPs based on importance)
-
-1000
-NC_035780.1_50001008 NC_035782.1_45223277 NC_035784.1_10248759 *NC_035784.1_16552962* NC_035784.1_18676441 NC_035784.1_83138159 NC_035786.1_33698717
-
-500
-NC_035780.1_50001008 NC_035782.1_45223277 *NC_035784.1_16552962* NC_035784.1_18676441 NC_035786.1_33698717
-
-100
-*NC_035784.1_16552962*
-
-50
-*NC_035784.1_16552962*
-
-- Zoom-in for NC_035784.1_16552962 (red) and NC_035784.1_16552716 (lightgreen), which both located in Actin-depolymerizing factor 1-like (LOC111134891).
-
-<img src="https://hzz0024.github.io/images/DelBay_adult/Mahattan_PRF.jpg" alt="img" width="800"/>
 
 ### Genotype-environment association
 
