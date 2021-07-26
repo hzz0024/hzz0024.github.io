@@ -12,52 +12,88 @@ categories:
   - WGS data analysis
 --- 
 
+### Sample coverage
+
+[DelBay19_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay19_summary_final.xlsx)    
+
+| Data       | Mean coverage |   SD |Relealized coverage |  SD | 
+|------------|---------------|------|--------------------|-----|
+| DelBay19   | 0.91          | 0.38 |    2.49            | 0.68|
+
 ### Depth evaluation
 
 Table 1。 Summary of the read depth distribution for each dataset. The last column is useful for Angsd -setMaxDepth setting.
 
 | Data       | Mean | Deviation |  SD | Mean+3SD |
 |------------|------|-----------|-----|----------|
-| DelBay19   | 719  |   36664   | 191 |   1294   |
-| DelBay20   | 190  |   2815    | 53  |   349    |
-| DelBay19&20| 922  |   37462   | 194 |   1502   |
+| DelBay19   | 721  |   41946   | 205 |   1335   |
                  
-DelBay19: dataset include DelBay19 challenge (n=97) and wild samples (n=234).             
-DelBay20: dataset include DelBay20 challenge samples (n=101). 
-DelBay19&20: dataset include DelBay19 and 20 samples (n=432)                  
-       
-### Sample coverage
+DelBay19: dataset include DelBay19 challenge (n=97) and wild samples (n=234).
 
-[DelBay19_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay19_summary_final.xlsx)    
+```sh
+angsd command for global SNP calling
+#!/bin/sh
 
-Mean depth (challenge): 0.78 (SD = 1.37)      
+###this script will work on bamfiles by population and calculate saf & maf
+# maybe edit
+target="Del19_final"
+NB_CPU=24 #change accordingly
+REGIONS="-rf chr_list.txt" #optional
+#REGIONS="" # to remove the options to focus on a limited number of regions
 
-[DelBay20_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay20_summary_final.xlsx)  
+#prepare variables - avoid to modify
+source /local/workdir/hz269/DelBay19_angsd/01_scripts/01_config.sh
+N_IND=$(wc -l $Del19_final | cut -d " " -f 1)
+MIN_IND=$(($N_IND*7/10))
 
-Mean depth: 0.77 (SD = 1.34) 
+echo "Ouput can be used for depth evaluation with all individuals listed in $Del19_final"
+echo "keep loci with at leat one read for n individuals = $MIN_IND, which is 70% of total $N_IND individuals"
+echo "filter on allele frequency = $MIN_MAF"
 
-### Global SNP calling using different datasets 
+$angsd -P $NB_CPU \
+ -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 \
+ -doDepth 1 -doIBS 2 -makeMatrix 1 -doCov 1 $REGIONS \
+ -maxDepth 2000 -dumpCounts 2 -anc $ANC -remove_bads 1 -rmTriallelic 1e-6 \
+ -doPlink 2 -doGeno 4 -doPost 1 \
+ -minMapQ 30 -minQ 20 -minInd $MIN_IND -minMaf $MIN_MAF \
+ -setMinDepth 110 -setMaxDepth 1335 -SNP_pval 1e-6 -b $Del19_final \
+ -out "/local/workdir/hz269/DelBay19_angsd/03_global/"$target"_maf"$MIN_MAF"_minq20_minmq30_pctind"$PERCENT_IND"_CV30_masked_noinvers"
 
-Table 5. Summary of SNPs used as a global SNP list (2032113 SNPs). Note that private and shared SNP number and the ratio are not the same between two datasets. I am working on other downsampling schemes (0.6 and 0.7x) to balance these numbers.
+ #main features
+# -P nb of threads
+# -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 1 samtools method - export GL in beagle format  -doGLF2)
+# -doMajorMinor 1 use the most frequent allele as major
+# -anc provide a ancestral sequence = reference in our case
+# -rf (file with the region written) work on a defined region : OPTIONAL
+# -b (bamlist) input file
+# -out  output file
 
-|                                          | Del19 (all samples)   | Del19 (only challenge)| Del20 (1x)              |
-|------------------------------------------|-----------------------|-----------------------|-------------------------|
-| Total number of sites analyzed           | 512960891             | 482669010             | 489141910               |
-| Number of sites retained after filtering | 2322712               | 2140437               | 3600633                 |
-| Private sites in each batch              | 290599 (12.51%)       | 379531 (17.73%)       | 1568520 (43.56%)        |
-| Shared sites                             | 2032113 (87.49%)      | 1760906 (82.27%)      | 2032113 (56.44%)        |
+#main filters
+#filter on bam files -remove_bads (remove files with flag above 255) -minMapQ minimum mapquality -minQ minimum quality of reads
+#filter on frequency -minInd (minimum number of individuals with at least one read at this locus) we set it to 70%
+#filter on allele frequency -minMaf, set to 0.05
+
+#output
+
+Total number of sites analyzed: 513108070
+Number of sites retained after filtering: 2335739
+[ALL done] cpu-time used =  221301.02 sec
+[ALL done] walltime used =  53024.00 sec
+```                            
 
 ### Relatedness
 
-<img src="https://hzz0024.github.io/images/DelBay_adult/relatedness_wtoutlier.jpg" alt="img" width="800"/> 
+<img src="https://hzz0024.github.io/images/MDS/relatedness_wtoutlier.jpg" alt="img" width="800"/> 
 
 ### Diverstiy estimate
 
 <img src="https://hzz0024.github.io/images/DelBay_adult/Diversity.jpg" alt="img" width="800"/>
 
-### MDS
+### PCA & MDS
 
-<img src="https://hzz0024.github.io/images/DelBay_adult/All_maf0.05_minq20_minmq25_pctind0.7_CV30_masked_noinvers_shared_sites.jpg" alt="img" width="800"/>
+<img src="https://hzz0024.github.io/images/MDS/pca1.jpeg" alt="img" width="800"/>
+
+<img src="https://hzz0024.github.io/images/MDS/pca2.jpeg" alt="img" width="800"/>
 
 ### Combined Fisher's exact test
 
@@ -195,60 +231,59 @@ head -n 1001 by_pop_0.05_pctind0.7_maxdepth3.mafs.rda.bak > by_pop_0.05_pctind0.
 
 ### SNP Annotation
 
-Here I am planning to update the reference database for SNP annotation and following enrichment analyses. A detailed protocal to build the whole reference dataset from scratch is [here](https://biohpc.cornell.edu/lab/userguide.aspx?a=software&i=73#c), which includes three major steps: Diamond, InterproScan, and Blast2GO. However, to obtain this annotation database more efficiently (and more consistently with the current *Crassostrea virginica* genome manuscript), I just did some updates on the protein and gene description in original "Proestou_and_Sullivan_B2G_oyster_annotation" file. A full description about the this file is listed below,
+NCBI recently released some tools to retrieve gene sequence and metadata. Based on NCBI, currently ***Crassostrea virginica*** genome has 39,493 genes and pseudogenes, which includes 34,596 protein-coding genes, 4,230 non-coding genes, and 667 pseudogenes. All these gene_id can be obtained from the [GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/022/765/GCF_002022765.2_C_virginica-3.0/GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz) file. 
 
-- `  We used the NCBI protein sequence file, GCF00202275_2_c_virginica-3_0_protein.faa_gz, with the standard workflow and default parameters except we increased the GO weight parameter from 5 to 15.  We also used Kevin Johnson’s InterProScan results to supplement the blast results. The “Sequence Name” column is the protein product ID from the original NCBI protein sequence file used to run B2G.  The “Sequence Description” is from the B2G annotation run.  The columns that begin with “Annotation” contain the information on the GO terms that passed the annotation criteria AND were merged with Kevin’s InterProSCan inB2G (note: Part of the merging process is a validation step that removes redundant, more general functions based on the true path rule, only the most specific GO terms are assigned).  The columns that begin with “InterPro” contain only information imported from Kevin’s InterProScan.`
+There are some discrepancies between the updated and old (Dina's version) databases. For example, although the protein accession shared the same ID, the protein description is differed by **34747/60201(57.72%)**. I also observed **37 discrepancies** in gene_id (note the gene_id means the numbers after LOC). 
 
-Below are some scripts for this update process:
+Currently I create a database with updated gene ID and gene names (named Gene_annotation_all.csv in /Users/HG/Documents/HG/DelBay_adult/16_annotation/Gene_annotation//Users/HG/Documents/HG/DelBay_adult/16_annotation/Gene_annotation_all.csv). It includes 39,493 records.
 
-1. python command to extrac the protein and gene description from faa and gtf files
+Below are the details for Gene_annotation_all.csv creation:
+
+Download the NCBI tools
+
+NCBI Datasets command line tools are datasets and dataformat [link](https://www.ncbi.nlm.nih.gov/datasets/docs/command-line/).
+
+- datasets to download biological sequence data across all domains of life from NCBI.
+
+- dataformat to convert metadata from JSON Lines format to other formats.
 
 ```bash
-wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/022/765/GCF_002022765.2_C_virginica-3.0/GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz
-#subset the feature table (done by Excel), the file name is /Users/HG/Documents/HG/DelBay_adult/16_annotation/Data_base/GCF_002022765.2_C_virginica-3.0_feature_table.txt
 
-# below is python3 command
-# to delete the isoform X from orthologs
-filename = 'GCF_002022765.2_C_virginica-3.0_feature_table_edit.txt'
-outfile = 'isoform_deleted_GCF_002022765.2_C_virginica-3.0_feature_table.txt'
+1. R script to create the bash command
+setwd("/Users/HG/Documents/HG/DelBay_adult/16_annotation/Data_base_format/test")
+file = 'dataset_39493.txt' 
+d = read.delim(file, header = T, sep='')
+dt = as.vector(t(d))
+# split into 800 entries per run
+max <- 800
+x <- seq_along(dt)
+dd <- split(dt, ceiling(x/max))
+dd
+length(dd[[1]])
+paste(as.character(dd[[1]]), collapse=",")
 
-HEADER = True
-with open(filename, 'r') as f, open(outfile, 'w') as w:
-    for l in f:
-        if HEADER:
-            HEADER = False
-            continue
-        items = l.strip().split('\t') 
-        protein_name = items[5]
-        if 'isoform' in protein_name:
-            items[5] = protein_name.split('isoform')[0].strip()
-            w.write('\t'.join(items) + '\n')
-        else:
-            w.write(l)
-# The results file is located in /Users/HG/Documents/HG/DelBay_adult/16_annotation/Data_base/deleted_GCF_002022765.2_C_virginica-3.0_feature_table.txt
+vv = c()
+for(i in 1:50) {
+  v = paste(as.character(dd[[i]]), collapse=",")
+  v_c = paste0("./datasets download gene gene-id ",v, " --filename ", i, ".zip" )
+  vv = c(vv, v_c)
+}
+
+write.table(vv, "./process.sh", row.names=F, quote=F, sep="\n")
+
+# format
+kk = c()
+for(i in 1:50) {
+  k = paste0("./dataformat tsv gene --package ",i, ".zip --fields chromosomes,common-name,description,ensembl-geneids,gene-id,gene-type,genomic-range-range-orientation,genomic-range-range-start,genomic-range-range-stop,genomic-region-gene-range-range-start,genomic-region-gene-range-range-stop,genomic-region-genomic-region-type,tax-id > ", i, ".tsv" )
+  kk = c(kk, k)
+}
+write.table(kk, "./format.sh", row.names=F, quote=F, sep="\n")
+
+2. ./process.sh and ./format.sh
+
+3. cat *.tsv > total.tsv | mv total.tsv Gene_annotation_all.csv
+
 ```
-```python
-# download the protein fasta: 
-wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/022/765/GCF_002022765.2_C_virginica-3.0/GCF_002022765.2_C_virginica-3.0_protein.faa.gz
-# below is python3 command
-filename = 'GCF_002022765.2_C_virginica-3.0_protein.faa' # this is the most recent protein fasta
-outfile = 'GCF_002022765.2_C_virginica-3.0_protein_annotation.txt'
-with open(filename, 'r') as f, open(outfile, 'w') as w:
-    i = 0
-    for l in f:
-        if l.startswith('>'):
-            i += 1
-            l = l.strip().strip('>')
-            items = l.split('[')[0].split(' ', 1)
-            w.write('\t'.join(items) + '\n')
-        else:
-            continue
-# note there is still some error in the processed file, contents from GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz is more accurate.
-```
-
-Then combine everthing into a central database (done by Excel). There are some discrepancies between the updated and old (Dina's version) databases. For example, although the protein accession shared the same ID, the protein description is differed by **34747/60201(57.72%)**. I also observed **37 discrepancies** in gene ID (i.e. LOCXXXXXX). 
-
-Currently I create a database with updated gene ID, protein and gene names (named GO_data_rm_dup.csv in /Users/HG/Documents/HG/DelBay_adult/16_annotation/Gene_annotation/). It includes 41928 records for SNP annotation.
 
 2. python command to extract the gene description
 
@@ -259,8 +294,8 @@ import sys
 import argparse
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", help="Input file.", default='XXX.bed')
-parser.add_argument("-t", "--outlier", help="outlier file.", default='XXX.gene.txt')
+parser.add_argument("-i", "--input", help="Input file.", default='GO_data_format.csv')
+parser.add_argument("-t", "--outlier", help="outlier file.", default='CS_HC_noinvers.sliding.zfst.outlier.merged.igv')
 parser.add_argument("-o", "--output", help="Output", default='GO_target.csv')
 args = parser.parse_args()
 
@@ -281,9 +316,8 @@ with open(infile, 'r') as f:
         reader = csv.reader(StringIO(l), delimiter=',')
         for r in reader:
             items = r
-        #items = l.split(',')
-        #lists.append((items[3], items[4], items[5], items[7].replace('\"',''), items[2])) # for protein annotation 
-        lists.append((items[3], items[4], items[5], items[8].replace('\"',''), items[2])) # for gene annotation 
+        #items = l.split(',') 
+        lists.append((items[1], items[2], items[3], items[4].replace('\"',''), items[5])) # for gene annotation 
 
 with open(outlier_file, 'r') as f, open(outfile, 'w') as w:
 
@@ -319,15 +353,35 @@ with open(outlier_file, 'r') as f, open(outfile, 'w') as w:
 usage example
 python3 extract_gene_V2.py -i GO_data_rm_dup.csv -t GEA_BF_20_Del19_FDR_2K.intersect -o GEA_BF_20_Del19_FDR_2K.intersect.gene.txt        
 
+# input example
 cat GEA_BF_20_Del19_FDR_2K.intersect # it only looks at the first three columns. Anything that overlaps with this regions will be recorded in the output file.
 NC_035780.1 37977798    37979798    NC_035780.1_37978798    NC_035780.1 37977204    37979204    NC_035780.1_37978204    1406
 NC_035783.1 14089954    14091954    NC_035783.1_14090954    NC_035783.1 14091394    14093394    NC_035783.1_14092394    560
 NC_035784.1 41760936    41762936    NC_035784.1_41761936    NC_035784.1 41761900    41763900    NC_035784.1_41762900    1036
 NC_035784.1 58317052    58319052    NC_035784.1_58318052    NC_035784.1 58316342    58318342    NC_035784.1_58317342    1290
 NC_035786.1 8771371 8773371 NC_035786.1_8772371 NC_035786.1 87713718773371  NC_035786.1_8772371 2000
+
+# output example
+cat GEA_BF_20_Del19_FDR_2K.intersect.gene.txt
+NC_035780.1 37977798    37979798    1   disks large-associated protein 4-like   111123126
+NC_035783.1 14089954    14091954    1   tubulin polyglutamylase ttll6-like  111130353
+NC_035784.1 41760936    41762936    2   carbohydrate sulfotransferase 3-like;brevican core protein-like 111135454;111135457
+NC_035784.1 58317052    58319052    1   cholecystokinin receptor-like   111132944
+NC_035786.1 8771371 8773371 1   neuron navigator 2-like 111103516
 ```
 
 ### Enrichment analysis using Gowinda
+
+#### 1. Data description
+
+A detailed protocal to build the whole GO reference dataset from scratch is [here](https://biohpc.cornell.edu/lab/userguide.aspx?a=software&i=73#c), which includes three major steps: Diamond, InterproScan, and Blast2GO. 
+
+Here I only did some updates on the protein and gene description in original "Proestou_and_Sullivan_B2G_oyster_annotation" file. This GO reference is build by Dina's team and a full description about the this file is listed below,
+
+
+- `  We used the NCBI protein sequence file, GCF00202275_2_c_virginica-3_0_protein.faa_gz, with the standard workflow and default parameters except we increased the GO weight parameter from 5 to 15.  We also used Kevin Johnson’s InterProScan results to supplement the blast results. The “Sequence Name” column is the protein product ID from the original NCBI protein sequence file used to run B2G.  The “Sequence Description” is from the B2G annotation run.  The columns that begin with “Annotation” contain the information on the GO terms that passed the annotation criteria AND were merged with Kevin’s InterProSCan inB2G (note: Part of the merging process is a validation step that removes redundant, more general functions based on the true path rule, only the most specific GO terms are assigned).  The columns that begin with “InterPro” contain only information imported from Kevin’s InterProScan.`
+
+#### 2. Gowinda
 
 Gowinda is a multi-threaded Java application that allows unbiased analysis of gene set enrichment for Genome Wide Association Studies. Classical analysis of gene set (e.g.: Gene Ontology) enrichment assumes that all genes are sampled independently from each other with the same probability. These assumptions are violated in Genome Wide Association (GWA) studies since (i) longer genes typically have more SNPs resulting in a higher probability of being sampled and (ii) overlapping genes are sampled in clusters. Gowinda has been specifically designed to test for enrichment of gene sets in GWA studies. We show that Gene Ontology (GO) tests on GWA data could result in a substantial number of false positive GO terms. Permutation tests implemented in Gowinda eliminate these biases, but maintain sufficient power to detect enrichment of GO terms.
 
@@ -335,9 +389,181 @@ Gowinda is a multi-threaded Java application that allows unbiased analysis of ge
 
 Java 6 or higher.    
 Furthermore the following input files are required    
-a file containing the annotation of the genome in .gtf        
-a gene set file, containing for every gene set (e.g.: GO category) a list of the associated gene IDs        
-a file containing the total set of SNPs        
-a file containing the candidate SNPs       
 
+- a file containing the annotation of the genome in .gtf   
 
+```sh
+# process the gtf file
+# gene id
+cat GCF_002022765.2_C_virginica-3.0_genomic.gtf |awk -F "\t" '{print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7"\t"$8}' | tail -n +5 > tmp1.txt
+cat GCF_002022765.2_C_virginica-3.0_genomic.gtf |awk -F "\t" '{print $9}'|awk -F " " '{print $1" "$2}' | tail -n +5 > tmp2.txt
+paste -d "\t" tmp1.txt tmp2.txt > tmp.gtf
+grep -v "NC_007175.2" tmp.gtf > annotation.gtf
+rm tmp*
+# delete any residual content in the annotation.gtf file (e.g. the ### at the bottom)
+```
+
+- a gene set file, containing for every gene set (e.g.: GO category) a list of the associated gene IDs  
+
+```python
+filename = 'GO_all_need_format.txt'
+outfile = 'GO_format.txt'
+
+GO_map = {}
+GO_term_map = {}
+i = 0
+HEADER = True
+with open(filename, 'r') as f:
+    for l in f:
+        if HEADER:
+            HEADER = False
+            continue
+        i += 1
+        items = l.strip().split('\t')
+        if len(items) < 3:
+            continue
+        assert len(items) == 3
+        Gene_ID = items[0]
+        GO_IDs = items[1].strip('\"').split(';')
+        GO_terms = items[2].strip('\"').split(';')
+        assert len(GO_IDs) == len(GO_terms)
+        for GO_ID, GO_term in zip(GO_IDs, GO_terms):
+            if GO_ID in GO_term_map:
+                assert GO_term == GO_term_map[GO_ID]
+            else:
+                GO_term_map[GO_ID] = GO_term
+
+        if GO_ID in GO_map:
+            GO_map[GO_ID].append(Gene_ID)
+        else:
+            GO_map[GO_ID] = [Gene_ID]
+
+GO_IDs = list(GO_map.keys())
+GO_IDs = sorted(GO_IDs, key=lambda x: int(x.split(':')[-1]))
+with open(outfile, 'w') as w:
+    for GO_ID in GO_IDs:
+        w.write(GO_ID + '\t' + GO_term_map[GO_ID] + '\t' + ' '.join(GO_map[GO_ID]) + '\n')   
+
+head GO_all_need_format.txt
+
+Gene_ID GO_ID   GO_term
+LOC111138521    GO:0004731;GO:0009116   purine-nucleoside phosphorylase activity;nucleoside metabolic process
+LOC111099031
+LOC111099031
+LOC111099031
+LOC111099032    GO:0004930;GO:0007186;GO:0016021    G protein-coupled receptor activity;G protein-coupled receptor signaling pathway;integral component of membrane
+LOC111099034
+LOC111099035
+LOC111099035
+LOC111099033    GO:0016021;GO:0022857;GO:0055085    integral component of membrane;transmembrane transporter activity;transmembrane transport
+
+head GO_format.txt
+GO:0000062  fatty-acyl-CoA binding  LOC111130021 LOC111130071
+GO:0000123  histone acetyltransferase complex   LOC111127833
+GO:0000166  nucleotide binding  LOC111105732 LOC111105732 LOC111105954 LOC111106157 LOC111106157 LOC111107229 LOC111108558 LOC111108558 LOC111109807 LOC111111648 LOC111113560 LOC111116119 LOC111116119 LOC111116494 LOC111118596 LOC111118742 LOC111120214 LOC111120886 LOC111123184 LOC111123885 LOC111123885 LOC111124351 LOC111125312 LOC111125389 LOC111125389 LOC111127527 LOC111129267 LOC111129267 LOC111129337 LOC111129337 LOC111132062 LOC111132328 LOC111132330 LOC111132455 LOC111132974 LOC111133887 LOC111133906 LOC111134584 LOC111135002 LOC111136494 LOC111136669 LOC111136669 LOC111136669 LOC111136669 LOC111136669 LOC111137206 LOC111137464 LOC111137734
+GO:0000184  nuclear-transcribed mRNA catabolic process, nonsense-mediated decay LOC111136887 LOC111136887 LOC111138487
+GO:0000226  microtubule cytoskeleton organization   LOC111132121 LOC111132123
+GO:0000290  deadenylation-dependent decapping of nuclear-transcribed mRNA   LOC111100321 LOC111100321 LOC111101096 LOC111101096
+GO:0000350  generation of catalytic spliceosome for second transesterification step LOC111121655
+GO:0000398  mRNA splicing, via spliceosome  LOC111131404
+GO:0000422  autophagy of mitochondrion  LOC111118945 LOC111118945
+GO:0000462  maturation of SSU-rRNA from tricistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, LSU-rRNA)    LOC111110205
+```
+
+- a file containing the total set of SNPs
+
+```sh
+# process the total SNPs
+total_file=CHR19_all_minq20_minmq30_CV30_masked.mafs
+cat $total_file |awk -F "\t" '{print $1"\t"$2}' | tail -n +2 > total_snps.txt
+```
+
+- a file containing the candidate SNPs       
+
+```sh
+# Process the candidate SNPs
+cand_file=salinity2_env2.txt_candidate_SNP_2_sd.txt
+cat $cand_file |awk '{print $2}'|awk -F "_" '{print $1"_"$2"\t"$3}' | tail -n +2 > cand_snps.txt
+```
+
+Note: need to replace the chromosome name with numbers
+
+```sh
+for i in annotation.gtf cand_snps.txt total_snps.txt; do
+sed -i .bak 's/NC_035780.1/1/g;s/NC_035781.1/2/g;s/NC_035782.1/3/g;s/NC_035783.1/4/g;s/NC_035784.1/5/g;s/NC_035785.1/6/g;s/NC_035786.1/7/g;s/NC_035787.1/8/g;s/NC_035788.1/9/g;s/NC_035789.1/10/g' $i
+done
+
+./sed_chr.sh
+rm *.bak
+```
+
+The files are located in /Users/HG/Documents/HG/DelBay_adult/16_annotation/GO_enrichment. Now run the script below
+
+```sh
+# Basic analysis
+java -Xmx4g -jar ./Gowinda-1.12.jar --snp-file total_snps.txt --candidate-snp-file cand_snps.txt --gene-set-file GO_format.txt --annotation-file annotation.gtf --simulations 100000 --min-significance 1 --gene-definition gene --threads 8 --output-file results_gene_gene.txt --mode gene --min-genes 1
+# Including regulatory regions
+java -Xmx4g -jar ./Gowinda-1.12.jar --snp-file total_snps.txt --candidate-snp-file cand_snps.txt --gene-set-file GO_format.txt --annotation-file annotation.gtf --simulations 100000 --min-significance 1 --gene-definition updownstream5000 --threads 8 --output-file results_gene_5000ud.txt --mode gene --min-genes 1
+# high resolution GO term enrichment
+java -Xmx4g -jar ./Gowinda-1.12.jar --snp-file total_snps.txt --candidate-snp-file cand_snps.txt --gene-set-file GO_format.txt --annotation-file annotation.gtf --simulations 100000 --min-significance 1 --gene-definition updownstream5000 --threads 8 --output-file results_snp_5000ud.txt --mode snp --min-genes 1
+```
+
+Check [https://code.google.com/archive/p/gowinda/wikis/Manual.wiki](https://code.google.com/archive/p/gowinda/wikis/Manual.wiki) for data preparation and result interpretation [https://sourceforge.net/p/gowinda/wiki/Tutorial/](https://sourceforge.net/p/gowinda/wiki/Tutorial/)
+
+#### 3. Enrichment tests
+
+- outliers in RDA analysis
+
+RDA has identifed a total of 
+
+---
+
+Other useful command:
+
+1. python command to extract the protein description from C_virginica-3.0_feature_table file. 
+
+```bash
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/022/765/GCF_002022765.2_C_virginica-3.0/GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz
+#subset the feature table (done by Excel), the file name is /Users/HG/Documents/HG/DelBay_adult/16_annotation/Data_base/GCF_002022765.2_C_virginica-3.0_feature_table.txt
+
+# below is python3 command
+# to delete the isoform X from orthologs
+filename = 'GCF_002022765.2_C_virginica-3.0_feature_table_edit.txt'
+outfile = 'isoform_deleted_GCF_002022765.2_C_virginica-3.0_feature_table.txt'
+
+HEADER = True
+with open(filename, 'r') as f, open(outfile, 'w') as w:
+    for l in f:
+        if HEADER:
+            HEADER = False
+            continue
+        items = l.strip().split('\t') 
+        protein_name = items[5]
+        if 'isoform' in protein_name:
+            items[5] = protein_name.split('isoform')[0].strip()
+            w.write('\t'.join(items) + '\n')
+        else:
+            w.write(l)
+# The results file is located in /Users/HG/Documents/HG/DelBay_adult/16_annotation/Data_base/isoform_deleted_GCF_002022765.2_C_virginica-3.0_feature_table.txt
+```
+
+1. python command to extract the protein description from faa files. 
+
+```python
+# download the protein fasta: 
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/022/765/GCF_002022765.2_C_virginica-3.0/GCF_002022765.2_C_virginica-3.0_protein.faa.gz
+# below is python3 command
+filename = 'GCF_002022765.2_C_virginica-3.0_protein.faa' # this is the most recent protein fasta
+outfile = 'GCF_002022765.2_C_virginica-3.0_protein_annotation.txt'
+with open(filename, 'r') as f, open(outfile, 'w') as w:
+    i = 0
+    for l in f:
+        if l.startswith('>'):
+            i += 1
+            l = l.strip().strip('>')
+            items = l.split('[')[0].split(' ', 1)
+            w.write('\t'.join(items) + '\n')
+        else:
+            continue
+# note there is still some error in the processed file, contents from GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz is more accurate.
+```
