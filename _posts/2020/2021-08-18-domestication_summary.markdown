@@ -1,296 +1,60 @@
 ---
 comments: true
-title: DelBay 2019 summary
-date: '2021-07-25 12:00'
+title: 600K Domestication Project summary
+date: '2021-08-18 12:00'
 tags:
-  - DelBay19
-  - PCA
-  - Challenge
-  - Wild 
+  - 600K
+  - SNP array
+  - oyster
+  - domestication 
   - WGS
-  - QC
+  - summary
 categories:
   - WGS data analysis
 --- 
 
-### Sample coverage
+### 1. VCF process
 
-[DelBay19_summary](https://github.com/hzz0024/HG_Code_Bay/blob/master/DelBay_summary/DelBay19_summary_final.xlsx)    
+Filtering parameters: --maf 0.05, --max-missing 0.7, --chr 1-10
 
-| Data       | Mean coverage |   SD |Relealized coverage |  SD | 
-|------------|---------------|------|--------------------|-----|
-| DelBay19   | 0.91          | 0.38 |    2.49            | 0.68|
+Number of SNPs in the original vcf: 300,446  
+Number of total samples: 842    
+Number of SNPs after filtering: 159,849      
+Number of total samples: 514
 
-### Depth evaluation
+#### 1.1 Vcf file evaluation
 
-Table 1 Summary of the read depth distribution for each dataset. The last column is useful for Angsd -setMaxDepth setting.
 
-| Data       | Mean | Deviation |  SD | Mean+3SD |
-|------------|------|-----------|-----|----------|
-| DelBay19   | 721  |   41946   | 205 |   1335   |
-                 
-DelBay19: dataset include DelBay19 challenge (n=97) and wild samples (n=234).
+
+Figure 1. SNP missingness density plot
+
+<img src="https://hzz0024.github.io/images/dom/SNP_missing_rate.jpeg" alt="img" width="800"/>
 
 ```sh
-angsd command for global SNP calling
-#!/bin/sh
+summary(var_miss$fmiss)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.000000 0.003891 0.009728 0.022035 0.019455 0.299611 
+```
 
-###this script will work on bamfiles by population and calculate saf & maf
-# maybe edit
-target="Del19_final"
-NB_CPU=24 #change accordingly
-REGIONS="-rf chr_list.txt" #optional
-#REGIONS="" # to remove the options to focus on a limited number of regions
-
-#prepare variables - avoid to modify
-source /local/workdir/hz269/DelBay19_angsd/01_scripts/01_config.sh
-N_IND=$(wc -l $Del19_final | cut -d " " -f 1)
-MIN_IND=$(($N_IND*7/10))
-
-echo "Ouput can be used for depth evaluation with all individuals listed in $Del19_final"
-echo "keep loci with at leat one read for n individuals = $MIN_IND, which is 70% of total $N_IND individuals"
-echo "filter on allele frequency = $MIN_MAF"
-
-$angsd -P $NB_CPU \
- -doMaf 1 -dosaf 1 -GL 1 -doGlf 2 -doMajorMinor 1 -doCounts 1 \
- -doDepth 1 -doIBS 2 -makeMatrix 1 -doCov 1 $REGIONS \
- -maxDepth 2000 -dumpCounts 2 -anc $ANC -remove_bads 1 -rmTriallelic 1e-6 \
- -doPlink 2 -doGeno 4 -doPost 1 \
- -minMapQ 30 -minQ 20 -minInd $MIN_IND -minMaf $MIN_MAF \
- -setMinDepth 110 -setMaxDepth 1335 -SNP_pval 1e-6 -b $Del19_final \
- -out "/local/workdir/hz269/DelBay19_angsd/03_global/"$target"_maf"$MIN_MAF"_minq20_minmq30_pctind"$PERCENT_IND"_CV30_masked_noinvers"
-
- #main features
-# -P nb of threads
-# -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 1 samtools method - export GL in beagle format  -doGLF2)
-# -doMajorMinor 1 use the most frequent allele as major
-# -anc provide a ancestral sequence = reference in our case
-# -rf (file with the region written) work on a defined region : OPTIONAL
-# -b (bamlist) input file
-# -out  output file
-
-#main filters
-#filter on bam files -remove_bads (remove files with flag above 255) -minMapQ minimum mapquality -minQ minimum quality of reads
-#filter on frequency -minInd (minimum number of individuals with at least one read at this locus) we set it to 70%
-#filter on allele frequency -minMaf, set to 0.05
-
-#output
-
-Total number of sites analyzed: 513108070
-Number of sites retained after filtering: 2335739
-[ALL done] cpu-time used =  221301.02 sec
-[ALL done] walltime used =  53024.00 sec
-```                            
-
-### Relatedness
+### 2. Fst and ZFst
 
 
-
-### Diverstiy estimate
-
+### 3. Diverstiy estimate
 
 
-### PCA & MDS
+### 4. PCA & MDS
 
 <img src="https://hzz0024.github.io/images/MDS/pca1.jpeg" alt="img" width="800"/>
 
 <img src="https://hzz0024.github.io/images/MDS/pca2.jpeg" alt="img" width="800"/>
 
-### Combined Fisher's exact test
+### 5. Combined Fisher's exact test
 
-In the p-value combination step, because the weighted Z-test (also called ‘Stouffer’s method) is more power and more precision than does Fisher’s test ([Whitlock 2005](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1420-9101.2005.00917.x)), I used Z method to combine the p-values from the parallel tests. It favours symmetric rejection and is less sensitive to a single low p-value, requiring more consistently low p-values to yield a low combined p-value. 
-
-The combinePValues function in the [scran R package](https://rdrr.io/bioc/scran/man/combinePValues.html) was used to perform Z method.
-
-Table 2. Number of outliers identified from Combined Fisher's exact tests
-
-| Contrasts                  | No. outliers |
-|----------------------------|--------------|
-| REF19_CHR19_NB_HC          | 14           |
-| REF19_CHR19_SR_HC          | 2            |
-| REF19_SR_ARN_COH (control) | 0            |
-
-```sh
-REF19_CHR19_NB_HC
-
-Chr         Pos         FDR
-NC_035780.1 32280239    0.0226267419768242
-NC_035780.1 32280271    0.00619489033076895
-NC_035780.1 32280434    0.0426028880831897
-NC_035780.1 60393516    0.00712679900189333
-NC_035781.1 9414163 0.0426028880831897
-NC_035782.1 20837869    0.00619489033076895
-NC_035782.1 52585426    0.0125720154898366
-NC_035782.1 64973955    0.0426028880831897
-NC_035783.1 21759426    0.0336992963444214
-NC_035784.1 8259087 0.0277699666160299
-NC_035784.1 12625526    0.00619489033076895
-NC_035784.1 16552716    0.0153521094632856
-NC_035787.1 56354987    0.0495691913205949
-NC_035788.1 77750634    0.0495390925369287
-
-REF19_CHR19_SR_HC 
-
-Chr         Pos         FDR
-NC_035784.1 16552716    0.00364825643068336
-NC_035784.1 52873868    0.0340724704124944
-```
-
-### Single-generation selection (SGS) 
-
-Table 6. Number of outliers identifed from SGS test for each population contrast (FDR < 0.05).
-
-|     Contrasts       | Outliers |
-|---------------------|----------|
-| CHR19-REF19         |          |             
-| HC-SR               |          |                     
-| HC-NB               |          |              
-
-
-### Probabilistic Random Forest
+### 6. Random Forest
 
 Following the paper by Reis et al. 2018. [Probabilistic Random Forest: A machine learning algorithm for noisy datasets](https://arxiv.org/pdf/1811.05994.pdf). I am trying to incorporate the genotype likelihood into random forest test.
 
-
-### Genotype-environment association
-
-- RDA
-
-RDA is a method combining regression and principal component analysis (PCA). It is a direct extension of multiple regression analysis to model multivariate response
-data. It output two major parts: linear combinations of constraining variables and unconstrained ordination of the residuals. For the first result part,
-
-***RDA computes axes that are linear combinations of the explanatory variables. In other words, this method seeks, in successive order, a series of linear combinations of the explanatory variables that best explain the variation of the response data. The axes defined in the space of the explanatory variables are orthogonal to one another. RDA is therefore a constrained ordination procedure.Furthermore, a global hypothesis (H0) of absence of linear relationship between Y and X can be tested in RDA.***
-
-***In vegan’s rda() function, the variation of the data matrix that cannot be explained by the environmental variables (i.e., the residuals of the regressions) is expressed by unconstrained PCA eigenvectors, which are given after the canonical eigenvectors.***
-
-***The statistical significance of an RDA (global model) and that of individual canonical axes can be tested by permutations. These tests will be introduced in
-due course.***
-
-***In summary, Redundancy Analysis (RDA) is a highly effective genotype-environment association method, which can identify unique haplotypes associated with the multivariate environment. In a simulation study, RDA showed a superior combination of low false positive and high true positive rates across weak, moderate, and strong multilocus selection. These results were robust across the levels of population structure, demographic histories, sampling designs, and sample sizes tested (Forester et al., 2018).***
-
-#### Data input
-
-1. SNP allele frequency for each population (2335739 SNPs from global calling)
-
-```sh
-head by_pop_0.05_pctind0.7_maxdepth3.mafs.rda
-
-HC ARN COH SR NB
-NC_035780.1_927 0.132336 0.096831 0.219057 0.168731 0.13661
-NC_035780.1_930 0.111361 0.128045 0.171739 0.13612 0.149634
-NC_035780.1_1669 0.458708 0.521035 0.463114 0.455466 0.422996
-NC_035780.1_1673 0.100391 0.133388 0.175129 0.153884 0.129964
-NC_035780.1_1916 0.044045 0.054398 0.072586 0.086124 0.041582
-NC_035780.1_1919 0.430196 0.394937 0.418661 0.366308 0.353289
-NC_035780.1_1924 0.367517 0.347606 0.359012 0.277483 0.253518
-NC_035780.1_1928 0.439469 0.482596 0.3976 0.551047 0.464268
-NC_035780.1_2182 0.149659 0.070832 0.046021 0.061342 0.087668
-```
-
-2. Salinity index (SI) data
-
-| Station    | Days < 5  | **Days < 10**| Days < 15  |
-|------------|-----------|--------------|------------|
-| Hope Creek | 29        | **394**      | 394        |
-| Arnold     | 17        | **99**       | 394        |
-| Cohansey   | 2         | **23**       | 281        |
-| Shell Rock | 0         | **20**       | 99         |
-| New Bed    | 0         | **14**       | 95         |
-
-3. Run RDA
-
-```sh
-rda(formula = data_freq ~ SI, data = data_env, scale = T)
-
-Call: rda(formula = data_freq ~ SI, data = data_env, scale = T)
-
-                Inertia Proportion Rank
-Total         2.336e+06  1.000e+00
-Constrained   5.828e+05  2.495e-01    1
-Unconstrained 1.753e+06  7.505e-01    3
-Inertia is correlations
-
-Eigenvalues for constrained axes:
-  RDA1
-582765
-
-Eigenvalues for unconstrained axes:
-   PC1    PC2    PC3
-596416 583976 572581
-
-$r.squared
-[1] 0.2494993
-
-$adj.r.squared
-[1] -0.0006675606
-
-[1] "no SNP outlier with 3 sd, re-run with 2 sd"
-[1] "1645 SNP outlier with 2 sd"
-
-  axis                 snp    loading         SI predictor correlation
-1    1   NC_035780.1_27710 0.03597829 -0.9945615        SI   0.9945615
-2    1  NC_035780.1_226258 0.03598556 -0.9947623        SI   0.9947623
-3    1  NC_035780.1_606196 0.03569512 -0.9867335        SI   0.9867335
-4    1  NC_035780.1_625550 0.03567386 -0.9861460        SI   0.9861460
-5    1  NC_035780.1_750522 0.03612935 -0.9987372        SI   0.9987372
-6    1 NC_035780.1_1126925 0.03606324 -0.9969096        SI   0.9969096
-
-Permutation test for rda under reduced model
-Forward tests for axes
-Permutation: free
-Number of permutations: 119 # why this is only 119, the default should be 
-
-Model: rda(formula = data_freq ~ SI, data = data_env, scale = T)
-         Df Variance      F Pr(>F)
-RDA1      1   582765 0.9973 0.5167
-Residual  3  1752974
-````
-
-| Inertia        | Proportion  | Rank      |   |
-|----------------|-------------|-----------|---|
-| Total          | 2.336e+06   | 1.000e+00 |   |
-| Constrained    | 5.828e+05   | 2.495e-01 | 1 |
-| Unconstrained  | 1.753e+06   | 7.505e-01 | 3 |
-
-An important output: the canonical (RDA) eigenvalue measure amounts of variance explained by the RDA model (Constrained), whereas the residual (PCx) eigenvalues measures amounts of variance represented by the residual axes, but not explained by any model (Unconstrained). From the result above, the salinity index (< 10) explains 24.95% variance in the RDA model.
-
-Here the R2 of a RDA is biased like the ordinary R2 of multiple regression, and for the same reason (Peres-Neto et al. 2006). On the one hand, any
-variable included in an explanatory matrix X increases the R2, irrespective of it being related, or not, to the response data. This problem can be cured by adjusting the R2 using Ezekiel’s formula (Ezekiel 1930), which is also valid in the multivariate case:
-
-R2(adj) = 1-(1-R2)(n-1)/(n-m-1)
-
-n = the number of objects 
-m = number of degrees of freedom of the model (i.e., the rank of the explanatory matrix, which is in many cases the number of quantitative explanatory variables plus, if present, the degrees of freedom associated with each factor: k – 1 d. f. for a factor with k levels). 
-
-As a rule of thumb, this adjustment may be overly conservative when m > n/2. 
-
-An adjusted R2 near 0 indicates that X does not explain more of the variation of Y than random normal deviates would do. Adjusted R2 values can be negative, indicating that the explanatory variables X do worse than a set of m random normal deviates would.
-
-In our case, I do not think adjustment makes sense because we only have 1 explaining variable in the model.
-
-#### Ouput
-
-Here, the SNPs are in red (in the center of each plot), and the populations are the black circles (with population names nearby). The blue vector is the environmental predictor -- salinity index. The relative arrangement of these items in the ordination space reflects their relationship with the ordination axes, which are linear combinations of the predictor variables.
-
-Figure 1. RDA1 vs PC1
-
-<img src="https://hzz0024.github.io/images/RDA/salinity2_env2.txt_rda_1-2.jpg" alt="img" width="800"/>
-
-Figure 2. RDA1 vs PC2
-
-<img src="https://hzz0024.github.io/images/RDA/salinity2_env2.txt_rda_1-3.jpg" alt="img" width="800"/>
-
-Now that the population are black cycles with population name nearby, we can identify some interesting relationships. As shown in the figure 1 and 2, populations in the low salinity are positively related to salinity index (SI). This is what I expected.
-
-Figure 3. Color code the SNPs based on the predictor variable that they are most strongly correlated with
-
-<img src="https://hzz0024.github.io/images/RDA/salinity2_env2.txt_rda_SNP.jpg" alt="img" width="800"/>
-
-Some interesting relationships are also shown in this SNP plot. SNPs most strongly correlated with salinity index (SI) have strong loadings in the right hand SNP cluster between RDA axes 1 and PC1 along the SI vector, accounting 1645 SNP outlier outside the 2 sd of RDA1 loadings. 
-
 #### delta_p patterns
-
-
 
 ### SNP Annotation
 
