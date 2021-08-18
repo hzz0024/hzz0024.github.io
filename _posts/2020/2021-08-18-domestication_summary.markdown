@@ -46,8 +46,6 @@ Our vcf data has a very promising profile for downstream analyses - 1) clearly m
 
 ### 4. PCA 
 
-<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA1.jpeg" alt="img" width="800"/>
-
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA2.jpeg" alt="img" width="800"/>
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA3.jpeg" alt="img" width="800"/>
