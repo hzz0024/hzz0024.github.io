@@ -13,6 +13,12 @@ categories:
   - WGS data analysis
 --- 
 
+### 0. Overall population information
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/pop_info.jpeg" alt="img" width="800"/>
+
+UMFS are selected groups from LIW+MEW+NEH, NYH is selected group from LIW, NEHs are selected groups from LIW, DBX1 is selected groups from DBW F1, DBX2 is highly inbred group many generations from DBW, DBX3 is from mixture of DBW and NEH. VIMS families are selected groups from DBW, Golf oysters and CBW. UNC groups are selected from NCW. The groups whose has “W” at the last in their names should be wild group.
+
 ### 1. VCF process
 
 Filtering parameters: --maf 0.05, --max-missing 0.7, --chr 1-10
@@ -38,11 +44,17 @@ Our vcf data has a very promising profile for downstream analyses - 1) clearly m
 
 
 
-### 4. PCA & MDS
+### 4. PCA 
 
-<img src="https://hzz0024.github.io/images/MDS/pca1.jpeg" alt="img" width="800"/>
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA1.jpeg" alt="img" width="800"/>
 
-<img src="https://hzz0024.github.io/images/MDS/pca2.jpeg" alt="img" width="800"/>
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA2.jpeg" alt="img" width="800"/>
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA3.jpeg" alt="img" width="800"/>
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA4.jpeg" alt="img" width="800"/>
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA5.jpeg" alt="img" width="800"/>
 
 ### 5. Combined Fisher's exact test
 
