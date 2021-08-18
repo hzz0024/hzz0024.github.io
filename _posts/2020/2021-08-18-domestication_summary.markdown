@@ -24,17 +24,11 @@ Number of total samples: 514
 
 #### 1.1 Vcf file evaluation
 
+Figure 1. SNP summary for vcf file. From top to bottom: Proportion of missing data per SNP; Proportion of missing data per individual; distribution of minor allele frequencies
 
+<img src="https://hzz0024.github.io/images/dom/vcf_summary.jpg" alt="img" width="800"/>
 
-Figure 1. SNP missingness density plot
-
-<img src="https://hzz0024.github.io/images/dom/SNP_missing_rate.jpeg" alt="img" width="800"/>
-
-```sh
-summary(var_miss$fmiss)
-    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-0.000000 0.003891 0.009728 0.022035 0.019455 0.299611 
-```
+Our vcf data has a very promising profile for downstream analyses - 1) clearly most individuals have a call at almost every site; 2) the proportion of missing data per individual is low; 3) it is clear that a large number of variants have low frequency alleles.
 
 ### 2. Fst and ZFst
 
