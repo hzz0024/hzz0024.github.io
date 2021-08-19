@@ -58,12 +58,6 @@ Figure 2. Window-based Fst for each wild vs. selected line. Fst was calculated w
 
 ### 5. Combined Fisher's exact test
 
-### 6. Random Forest
-
-Following the paper by Reis et al. 2018. [Probabilistic Random Forest: A machine learning algorithm for noisy datasets](https://arxiv.org/pdf/1811.05994.pdf). I am trying to incorporate the genotype likelihood into random forest test.
-
-#### delta_p patterns
-
 ### SNP Annotation
 
 NCBI recently released some tools to retrieve gene sequence and metadata. Based on NCBI, currently ***Crassostrea virginica*** genome has 39,493 genes and pseudogenes, which includes 34,596 protein-coding genes, 4,230 non-coding genes, and 667 pseudogenes. All these gene_id can be obtained from the [GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/022/765/GCF_002022765.2_C_virginica-3.0/GCF_002022765.2_C_virginica-3.0_feature_table.txt.gz) file. 
