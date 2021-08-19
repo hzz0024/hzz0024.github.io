@@ -42,19 +42,19 @@ Figure 2. Window-based *F*<sub>ST</sub> for each wild vs. selected line. *F*<sub
 
 ### 3. Diverstiy estimate
 
-Figure 3.1 Heterozygosity comparison between wild (left four) and selected (right four) lines. Heterozygosity was estimated for each individual using the same amount SNPs. Solid Line represents the median value.
+Figure 3.1 Heterozygosity comparison between wild (left four) and selected (right four) lines. Heterozygosity was estimated for each individual. Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Het_ind_plot.jpg" alt="img" width="800"/>
 
-Figure 3.2 Nucleotide diversity (*pi*) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 150 SNPs per non-overlapping windows. Solid Line represents the median value.
+Figure 3.2 Nucleotide diversity (*pi*) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 150 SNPs per non-overlapping windows using Simon martin's script (https://github.com/simonhmartin/genomics_general). Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Pi_150snp_per_window_plot.jpg" alt="img" width="800"/>
 
-Figure 3.3 Nucleotide diversity (*pi*) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 500K bp per non-overlapping windows. Solid Line represents the median value.
+Figure 3.3 Nucleotide diversity (*pi*) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 500K bp per non-overlapping windows using VCFtools. Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/pi_vcftools_ind_plot.jpg" alt="img" width="800"/>
 
-Note Figure 3.2 and 3.3 both measure the *pi* but their absolute values differences is over an order of magnitude. This is because VCFtools (results in Figure 3.2) underestimates the pi by dividing the total length of the window (that is 500K), whereas Simon martin's script (https://github.com/simonhmartin?tab=repositories) only takes vcf input sites into account (see [https://github.com/simonhmartin/genomics_general/issues/22](https://github.com/simonhmartin/genomics_general/issues/22)). An third approach, e.g. Angsd is needed to calculate the *pi* .
+Note Figure 3.2 and 3.3 both measure the *pi* but their absolute values differences is over an order of magnitude. This is because VCFtools (results in Figure 3.2) underestimates the pi by dividing the total length of the window (that is 500K), whereas Simon martin's script (https://github.com/simonhmartin/genomics_general) only takes vcf input sites into account (see [https://github.com/simonhmartin/genomics_general/issues/22](https://github.com/simonhmartin/genomics_general/issues/22)). A third approach like Angsd is needed to calculate the *pi* .
 
 ### 4. Inbreeding coefficient
 
