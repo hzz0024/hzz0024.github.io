@@ -109,3 +109,20 @@ Among them only Long Island Sound contrast and Delaware contrast have common sha
 7. PCAdapt for outlier candidate
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Mahattan_Ind514_best_practice_outlier_no_chr156invers_PC1-2_10K.jpg" alt="img" width="800"/>
+
+Below are candidate list across all wild-selected contrasts.
+
+|     Chr       |   Start   |    End    | No. mapped genes  |                          Gene                           |  Gene ID    |
+|:-----------:  |:--------: |:--------: |:----------------: |:------------------------------------------------------: |:---------:  |
+| NC_035780.1   | 30746230  | 30746230  | 1                 | regulating synaptic membrane exocytosis protein 2-like  | 111129693   |
+| NC_035780.1   | 30795439  | 30795439  | 1                 | uncharacterized LOC111123169                            | 111123169   |
+| NC_035780.1   | 30796897  | 30796897  | 1                 | uncharacterized LOC111123169                            | 111123169   |
+| NC_035780.1   | 31900324  | 31900324  | No mapped genes   |                                                         |             |
+| NC_035780.1   | 32743318  | 32743318  | 1                 | heat shock cognate 71 kDa protein                       | 111127289   |
+| NC_035780.1   | 33925222  | 33925222  | 1                 | meprin A subunit beta-like                              | 111134528   |
+| NC_035780.1   | 57895422  | 57895422  | 1                 | G-protein coupled receptor GRL101-like                  | 111108229   |
+| NC_035783.1   | 15932992  | 15932992  | No mapped genes   |                                                         |             |
+| NC_035784.1   | 53650223  | 53650223  | No mapped genes   |                                                         |             |
+
+
+
