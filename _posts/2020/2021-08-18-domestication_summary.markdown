@@ -36,7 +36,7 @@ Figure 1. SNP summary for vcf file. From top to bottom: Proportion of missing da
 
 Our vcf data has a very promising profile for downstream analyses - 1) clearly most individuals have a call at almost every site; 2) the proportion of missing data per individual is low; 3) it is clear that a large number of variants have low frequency alleles.
 
-### 2. Global Fst
+### 2. Population divergence based on global Fst
 
 Figure 2. Window-based Fst for each wild vs. selected line. Fst was calculated with 150 SNPs per non-overlapping windows.
 
@@ -58,7 +58,7 @@ Figure 3. Heterozygosity comparison between wild (left four) and selected (right
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA5.jpeg" alt="img" width="800"/>
 
-### 5. Combined Fisher's exact test
+### 5. Pairwise Fst contrasts
 
 ### SNP Annotation
 
