@@ -50,6 +50,11 @@ Figure 3.2 Nucleotide diversity (*pi*) comparison between wild (left four) and s
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Pi_150snp_per_window_plot.jpg" alt="img" width="800"/>
 
+Figure 3.3 Nucleotide diversity (*pi*) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 500K bp per non-overlapping windows. Solid Line represents the median value.
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/pi_vcftools_ind_plot.jpg" alt="img" width="800"/>
+
+
 ### 4. Inbreeding coefficient
 
 Figure 4 Inbreeding coefficient comparison between wild (left four) and selected (right four) lines. Inbreeding coefficient was estimated for each individual using the same amount of SNPs. Solid Line represents the median value.
