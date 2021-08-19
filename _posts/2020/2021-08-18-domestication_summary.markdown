@@ -46,7 +46,7 @@ Figure 3.1 Heterozygosity comparison between wild (left four) and selected (righ
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Het_ind_plot.jpg" alt="img" width="800"/>
 
-Figure 3.2 Nucleotide diversity (\Pi) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 150 SNPs per non-overlapping windows. Solid Line represents the median value.
+Figure 3.2 Nucleotide diversity ($\Phi$) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 150 SNPs per non-overlapping windows. Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Pi_150snp_per_window_plot.jpg" alt="img" width="800"/>
 
