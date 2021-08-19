@@ -38,13 +38,13 @@ Our vcf data has a very promising profile for downstream analyses - 1) clearly m
 
 ### 2. Population divergence based on global Fst
 
-Figure 2. Window-based Fst for each wild vs. selected line. Fst was calculated with 150 SNPs per non-overlapping windows.
+Figure 2. Window-based Fst for each wild vs. selected line. Fst was calculated with 150 SNPs per non-overlapping windows. Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Fst_violin_plot.jpg" alt="img" width="800"/>
 
 ### 3. Diverstiy estimate
 
-Figure 3. Heterozygosity comparison between wild (left four) and selected (right four) lines. Heterozygosity was estimated for each individual using the same SNPs across all populations.
+Figure 3. Heterozygosity comparison between wild (left four) and selected (right four) lines. Heterozygosity was estimated for each individual using the same SNPs across all populations. Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Het_ind_plot.jpg" alt="img" width="800"/>
 
