@@ -44,9 +44,15 @@ Figure 2. Window-based Fst for each wild vs. selected line. Fst was calculated w
 
 ### 3. Diverstiy estimate
 
-Figure 3. Heterozygosity comparison between wild (left four) and selected (right four) lines. Heterozygosity was estimated for each individual using the same SNPs across all populations. Solid Line represents the median value.
+Figure 3.1 Heterozygosity comparison between wild (left four) and selected (right four) lines. Heterozygosity was estimated for each individual using the same amount SNPs. Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Het_ind_plot.jpg" alt="img" width="800"/>
+
+### 4. Inbreeding coefficient
+
+Figure 4 Inbreeding coefficient comparison between wild (left four) and selected (right four) lines. Inbreeding coefficient was estimated for each individual using the same amount of SNPs. Solid Line represents the median value.
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Fis_ind_plot.jpg" alt="img" width="800"/>
 
 ### 4. PCA 
 
