@@ -90,3 +90,18 @@ Figure 4 Inbreeding coefficient comparison between wild (left four) and selected
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/NCW_NCS_noinvers.sliding.zfst.hudson.jpg" alt="img" width="800"/>
 
+Among them only Long Island Sound contrast and Delaware contrast have common shared ZFst window outliers, 
+
+| Chromosome    | Start     | End       | No. genes   | Gene                                                                                              | Gene Id               |
+|-------------  |---------- |---------- |-----------  |-------------------------------------------------------------------------------------------------- |---------------------  |
+| NC_035784.1   | 90424000  | 90434000  | 2           | uncharacterized LOC111135324;uncharacterized LOC111135206                                         | 111135324;111135206   |
+| NC_035784.1   | 91382000  | 91392000  | 1           | uncharacterized LOC111135518                                                                      | 111135518             |
+| NC_035784.1   | 93210000  | 93226000  | 2           | WD repeat-containing protein 11-like;eukaryotic translation initiation   factor 3 subunit A-like  | 111134227;111134217   |
+| NC_035784.1   | 93430000  | 93448000  | 1           | inositol 1,4,5-trisphosphate receptor type 3-like                                                 | 111138112             |
+| NC_035784.1   | 94242000  | 94258000  | 1           | uncharacterized LOC111135873                                                                      | 111135873             |
+| NC_035784.1   | 94682000  | 94692000  | 2           | F-box/WD repeat-containing protein 4-like; cilia- and flagella-associated   protein 43-like       | 111137357;111134972   |
+| NC_035784.1   | 95324000  | 95340000  | 1           | uncharacterized LOC111134781                                                                      | 111134781             |
+| NC_035784.1   | 95722000  | 95736000  | 2           | degenerin mec-10-like;uncharacterized LOC111132886                                                | 111132886;111132885   |
+| NC_035784.1   | 95876000  | 95894000  | 2           | protein MAK16 homolog A-like;lymphocyte cytosolic protein 2-like                                  | 111136220;111099040   |
+| NC_035784.1   | 98636000  | 98646000  | 1           | uncharacterized LOC111132793                                                                      | 111132793             |
+| NC_035788.1   | 57378000  | 57386000  | 1           | multiple epidermal growth factor-like domains protein 10                                          | 111113010             |
