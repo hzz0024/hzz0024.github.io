@@ -28,8 +28,6 @@ Number of total samples: 842
 Number of SNPs after filtering: 159,849      
 Number of total samples: 514
 
-#### 1.1 Vcf file evaluation
-
 Figure 1. SNP summary for vcf file. From top to bottom: Proportion of missing data per SNP; Proportion of missing data per individual; distribution of minor allele frequencies
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/vcf_summary.jpg" alt="img" width="800"/>
@@ -48,13 +46,17 @@ Figure 3.1 Heterozygosity comparison between wild (left four) and selected (righ
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Het_ind_plot.jpg" alt="img" width="800"/>
 
+Figure 3.2 Nucleotide diversity (\Pi) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 150 SNPs per non-overlapping windows. Solid Line represents the median value.
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Pi_150snp_per_window_plot.jpg" alt="img" width="800"/>
+
 ### 4. Inbreeding coefficient
 
 Figure 4 Inbreeding coefficient comparison between wild (left four) and selected (right four) lines. Inbreeding coefficient was estimated for each individual using the same amount of SNPs. Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Fis_ind_plot.jpg" alt="img" width="800"/>
 
-### 4. PCA 
+### 5. PCA 
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA2.jpeg" alt="img" width="800"/>
 
@@ -64,7 +66,7 @@ Figure 4 Inbreeding coefficient comparison between wild (left four) and selected
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA5.jpeg" alt="img" width="800"/>
 
-### 5. Pairwise Fst contrasts
+### 6. Pairwise Fst contrasts
 
 ### SNP Annotation
 
