@@ -34,9 +34,9 @@ Figure 1. SNP summary for vcf file. From top to bottom: Proportion of missing da
 
 Our vcf data has a very promising profile for downstream analyses - 1) clearly most individuals have a call at almost every site; 2) the proportion of missing data per individual is low; 3) it is clear that a large number of variants have low frequency alleles.
 
-### 2. Population divergence based on global Fst
+### 2. Population divergence based on global *F*<sub>ST</sub>
 
-Figure 2. Window-based Fst for each wild vs. selected line. Fst was calculated with 150 SNPs per non-overlapping windows. Solid Line represents the median value.
+Figure 2. Window-based *F*<sub>ST</sub> for each wild vs. selected line. *F*<sub>ST</sub> was calculated with 150 SNPs per non-overlapping windows. Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Fst_violin_plot.jpg" alt="img" width="800"/>
 
@@ -46,7 +46,7 @@ Figure 3.1 Heterozygosity comparison between wild (left four) and selected (righ
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Het_ind_plot.jpg" alt="img" width="800"/>
 
-Figure 3.2 Nucleotide diversity ($\Phi$) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 150 SNPs per non-overlapping windows. Solid Line represents the median value.
+Figure 3.2 Nucleotide diversity (*pi*) comparison between wild (left four) and selected (right four) lines. Pi was estimated with 150 SNPs per non-overlapping windows. Solid Line represents the median value.
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Pi_150snp_per_window_plot.jpg" alt="img" width="800"/>
 
@@ -66,7 +66,7 @@ Figure 4 Inbreeding coefficient comparison between wild (left four) and selected
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA5.jpeg" alt="img" width="800"/>
 
-### 6. Pairwise Fst contrasts
+### 6. Pairwise *F*<sub>ST</sub> contrasts
 
 ### SNP Annotation
 
