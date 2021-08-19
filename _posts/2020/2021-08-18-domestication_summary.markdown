@@ -105,3 +105,7 @@ Among them only Long Island Sound contrast and Delaware contrast have common sha
 | NC_035784.1   | 95876000  | 95894000  | 2           | protein MAK16 homolog A-like;lymphocyte cytosolic protein 2-like                                  | 111136220;111099040   |
 | NC_035784.1   | 98636000  | 98646000  | 1           | uncharacterized LOC111132793                                                                      | 111132793             |
 | NC_035788.1   | 57378000  | 57386000  | 1           | multiple epidermal growth factor-like domains protein 10                                          | 111113010             |
+
+7. PCAdapt for outlier candidate
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Mahattan_Ind514_best_practice_outlier_no_chr156invers_PC1-2_10K.jpg" alt="img" width="800"/>
