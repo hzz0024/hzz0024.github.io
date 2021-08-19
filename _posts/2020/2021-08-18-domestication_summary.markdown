@@ -38,7 +38,9 @@ Our vcf data has a very promising profile for downstream analyses - 1) clearly m
 
 ### 2. Fst and ZFst
 
+Figure 2. Window-based Fst for wild-selection contrast. Fst was calculated with 150 SNPs per non-overlapping windows.
 
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/Fst_violin_plot.jpg" alt="img" width="800"/>
 
 ### 3. Diverstiy estimate
 
