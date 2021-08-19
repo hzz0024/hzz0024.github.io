@@ -72,5 +72,21 @@ Figure 4 Inbreeding coefficient comparison between wild (left four) and selected
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/PCA5.jpeg" alt="img" width="800"/>
 
-### 6. Pairwise *F*<sub>ST</sub> contrasts
+### 6. Pairwise *ZF*<sub>ST</sub> contrasts
+
+- contrast between Maine wild and selected line
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/MEW_MES_noinvers.sliding.zfst.hudson.jpg" alt="img" width="800"/>
+
+- contrast between Long Island Sound wild and selected line
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/LIW_LIS_noinvers.sliding.zfst.hudson.jpg" alt="img" width="800"/>
+
+- contrast between Delaware wild and selected line
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/DBW_DBS_noinvers.sliding.zfst.hudson.jpg" alt="img" width="800"/>
+
+- contrast between North Carolina wild and selected line
+
+<img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/NCW_NCS_noinvers.sliding.zfst.hudson.jpg" alt="img" width="800"/>
 
