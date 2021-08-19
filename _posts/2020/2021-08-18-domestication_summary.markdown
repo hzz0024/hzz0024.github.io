@@ -54,7 +54,7 @@ Figure 3.3 Nucleotide diversity (*pi*) comparison between wild (left four) and s
 
 <img src="https://github.com/hzz0024/hzz0024.github.io/blob/master/images/Dom/pi_vcftools_ind_plot.jpg" alt="img" width="800"/>
 
-Note Figure 3.2 and 3.3 both measure the *pi* but their absolute values differences is over an order of magnitude. This is because VCFtools (results in Figure 3.2) underestimates the pi by dividing the total length of the window (that is 500K), whereas Simon martin's script (https://github.com/simonhmartin/genomics_general) only takes vcf input sites into account (see [https://github.com/simonhmartin/genomics_general/issues/22](https://github.com/simonhmartin/genomics_general/issues/22)). A third approach like Angsd is needed to calculate the *pi* .
+Note Figure 3.2 and 3.3 both measure the *pi* but their absolute values differences is over an order of magnitude. This is because VCFtools (results in Figure 3.2) underestimates the pi by dividing the total length of the window (that is 500K), whereas Simon martin's script (https://github.com/simonhmartin/genomics_general) only takes vcf input sites into account (see [https://github.com/simonhmartin/genomics_general/issues/22](https://github.com/simonhmartin/genomics_general/issues/22)). A third approach like Angsd is needed to calculate the *pi* using both polymorphic and monomorphic sites.
 
 ### 4. Inbreeding coefficient
 
