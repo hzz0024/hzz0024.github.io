@@ -19,7 +19,7 @@ categories:
 
 UMFS are selected groups from LIW+MEW+NEH, NYH is selected group from LIW, NEHs are selected groups from LIW, DBX1 is selected groups from DBW F1, DBX2 is highly inbred group many generations from DBW, DBX3 is from mixture of DBW and NEH. VIMS families are selected groups from DBW, Golf oysters and CBW. UNC groups are selected from NCW. The groups whose has “W” at the last in their names should be wild group.
 
-Because we are mainly focus on the wild vs selected lines, I grouped the wild populations together for *F*<sub>ST</sub> each location, and did the same for selected lines. Now we have four major locations and eight populations. They are:
+Because we are mainly focus on the wild vs selected lines, I grouped the wild populations together for *F*<sub>ST</sub> each location, and did the same for selected lines. Now we have four major locations and eight populations. The populations used for domestication study are shown in the table column "ID for domestication study",
 
 | ID for domestication study | Abbreviation |                  Population                  | Latitude | Longitude  |    Salinity   | Collectors | Date   received |
 |:--------------------------:|:------------:|:--------------------------------------------:|:--------:|:----------:|:-------------:|------------|:---------------:|
