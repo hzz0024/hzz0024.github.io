@@ -19,6 +19,28 @@ categories:
 
 UMFS are selected groups from LIW+MEW+NEH, NYH is selected group from LIW, NEHs are selected groups from LIW, DBX1 is selected groups from DBW F1, DBX2 is highly inbred group many generations from DBW, DBX3 is from mixture of DBW and NEH. VIMS families are selected groups from DBW, Golf oysters and CBW. UNC groups are selected from NCW. The groups whose has “W” at the last in their names should be wild group.
 
+Because we are mainly focus on the wild vs selected lines, I grouped the wild populations together for *F*<sub>ST</sub> each location, and did the same for selected lines. Now we have four major locations and eight populations. They are:
+
+| ID for domestication study | Abbreviation |                  Population                  | Latitude | Longitude  |    Salinity   | Collectors | Date   received |
+|:--------------------------:|:------------:|:--------------------------------------------:|:--------:|:----------:|:-------------:|------------|:---------------:|
+|              MEW           |     MEW1     |            Hog   Island, ME wild 1           |  44.0133 |  -69.54169 |               | Paul       |     10/23/20    |
+|                            |     MEW2     |            Sheepscot,   ME wild 2            | 44.01416 |   -69.595  |               | Paul       |     9/22/20     |
+|              MES           |     UMFS     |                   UMFS, UME                  | 43.99814 |  -69.54243 |    High, 30   | Paul       |     10/15/20    |
+|                            |     MEH2     |           Maine   Hatchery Stock 2           |          |            |               | Paul       |     9/22/20     |
+|              LIW           |     LIW1     | Lloyd   harbor, NY, Long Island Sound wild 1 | 40.89652 |  -73.21207 |      High     | Ximing     |     6/17/20     |
+|                            |     LIW2     |  Niantic   Bay, CT, Long Island Sound wild 2 | 41.30254 |  -72.2262  |      High     | Ximing     |      7/7/20     |
+|              LIS           |     NEH1     |             Rutgers   NEH 19N1357            | 38.96747 |  -74.96212 | High,   18-23 | Ximing     |     10/8/20     |
+|                            |     NEH2     |              Rutgers   NEH 20N1              | 38.96747 |  -74.96212 | High,   18-23 | Ximing     |     10/8/20     |
+|              DBW           |     DBW1     |       Cape   Shore, Delaware Bay wild 1      | 38.96747 |  -74.96212 | High,   18-23 | Ximing     |     10/8/20     |
+|                            |     DBW2     |       Hope   Creek, Delaware Bay wild 2      | 39.44722 |  -75.51944 |   Low, 8-12   | Ximing     |     10/19/20    |
+|              DBS           |     DBX1     |              Rutgers   DBX WDB16             | 38.96747 |  -74.96212 | High,   18-23 | Ximing     |     10/8/20     |
+|                            |     DBX2     |              Rutgers   DBX 20D1              | 38.96747 |  -74.96212 | High,   18-23 | Ximing     |     10/8/20     |
+|                            |     DBX3     |              Rutgers   DBX 20D4              | 38.96747 |  -74.96212 | High,   18-23 | Ximing     |     10/8/20     |
+|              NCW           |     NCW1     |      Crab   Hole, North Carolina wild 1      |          |            |               | Ami        |     10/2/20     |
+|                            |     NCW2     |   Hewlett's   Creek, North Carolina wild 2   |          |            |               | Ami        |     10/2/20     |
+|              NCS           |     UNC1     |        2018 Crab   Hole, UNC selected        |          |            |               | Ami        |     10/2/20     |
+|                            |     UNC2     |      2018   Hewletts Creek, UNC selected     |          |            |               | Ami        |     10/2/20     |
+
 ### 1. VCF process
 
 Filtering parameters: --maf 0.05, --max-missing 0.7, --chr 1-10
